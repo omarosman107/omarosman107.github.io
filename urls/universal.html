@@ -1,20 +1,24 @@
 
-<body onload="start_viblast()">
+<body onload="start_vilast()">
 
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <link href="//cdn.jsdelivr.net/videojs/5.9.2/video-js.min.css" rel="stylesheet">
-  </head>
-  <body>
-  <video id=LS preload=metadata class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls>
-  <source src=".21" type="application/x-mpegURL">
-  </video>
-  <script  src="http://vjs.zencdn.net/5.11/video.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/3.5.3/videojs-contrib-hls.min.js"></script>
-  <script>var player=videojs('LS');</script>
-  </body>
-  </html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.6.2-2/hls.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video-js.min.css" /></head>
+<body>
+<video id=LS x-webkit-airplay="allow" preload=metadata class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls>
+<source src="http://abclive.abcnews.com/i/abc_live4@136330/index_1200_av-b.m3u8" type="application/x-mpegURL">
+</video>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video.min.js"></script>
+<script src="https://cdn.rawgit.com/Peer5/videojs-contrib-hls.js/master/src/videojs5.hlsjs.js"></script>
+<script>var player=videojs('LS');</script>
+</body>
+</html>
+
 
 <script>
 function jsonCallback(json){
@@ -24,28 +28,21 @@ var weather = new XMLHttpRequest();
 weather.open("GET", "https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/universalsomalitv/viewing_info.json", false);
 weather.send(null);
 var r = JSON.parse(weather.response);
-var temp = r.streamInfo.m3u8_url+ "  <p>";
-function getWeather(id,res) {
-  document.getElementById(id).innerHTML=res;
-}
 
-player.load();
-setInterval(start_vilast, 60000);
+
+
 
 function start_vilast() {
     videojs('#LS',{});
     videojs('#LS').src(r.streamInfo.m3u8_url);
-    player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.streamInfo.m3u8_url)});
-    console.log(r.streamInfo.m3u8_url)
+    player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)});
 
-  function fetchdata() {
-    weather.open("GET", "https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/universalsomalitv/viewing_info.json", false);
-    weather.send(null);
-    var r = JSON.parse(weather.response);
- }
+
 
 
 }
 </script>
+<script>var url = r.streamInfo.secure_m3u8_url </script>
+
 
 </body>
