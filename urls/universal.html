@@ -21,9 +21,7 @@
 
 
 <script>
-function jsonCallback(json){
-  console.log(json);
-}
+
 var weather = new XMLHttpRequest();
 weather.open("GET", "https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/universalsomalitv/viewing_info.json", false);
 weather.send(null);
