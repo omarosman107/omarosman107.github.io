@@ -1,5 +1,4 @@
-
-<body onload="start_vilast()">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
 
 
 
@@ -11,7 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video-js.min.css" /></head>
 <body>
 <video id=LS x-webkit-airplay="allow" preload=metadata class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls>
-<source src="http://abclive.abcnews.com/i/abc_live4@136330/index_1200_av-b.m3u8" type="application/x-mpegURL">
+<source src="#" type="application/x-mpegURL">
 </video>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video.min.js"></script>
 <script src="https://cdn.rawgit.com/Peer5/videojs-contrib-hls.js/master/src/videojs5.hlsjs.js"></script>
@@ -22,25 +21,23 @@
 
 <script>
 
-var weather = new XMLHttpRequest();
-weather.open("GET", "https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/universalsomalitv/viewing_info.json", false);
-weather.send(null);
-var r = JSON.parse(weather.response);
 
 
+fetch('https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/universalsomalitv/viewing_info.json').then(function(response) { 
+  // Convert to JSON
+  return response.json();
+}).then(function(r) {
+  // Yay, `j` is a JavaScript object
+  console.log(r); 
 
-
-function start_vilast() {
-    videojs('#LS',{});
-    videojs('#LS').src(r.streamInfo.m3u8_url);
     player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)});
+    var url = r.streamInfo.secure_m3u8_url 
+
+});
 
 
 
-
-}
 </script>
-<script>var url = r.streamInfo.secure_m3u8_url </script>
 
 
 </body>
