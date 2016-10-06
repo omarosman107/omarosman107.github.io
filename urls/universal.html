@@ -35,9 +35,25 @@ fetch('https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/
 
 });
 
+function reload() {
+    fetch('https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/universalsomalitv/viewing_info.json').then(function(response) { 
+  // Convert to JSON
+  return response.json();
+}).then(function(r) {
+  // Yay, `j` is a JavaScript object
+  console.log(r); 
 
+    player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)});
+    var url = r.streamInfo.secure_m3u8_url 
+
+});
+}
+
+
+ setInterval(reload,1680000);
 
 </script>
 
 
 </body>
+
