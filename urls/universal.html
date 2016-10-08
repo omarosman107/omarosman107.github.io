@@ -32,6 +32,7 @@ fetch('https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/
 
     player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)});
     var url = r.streamInfo.secure_m3u8_url 
+   
 
 });
 
@@ -45,6 +46,7 @@ function reload() {
 
     player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)});
     var url = r.streamInfo.secure_m3u8_url 
+
 
 });
 }
