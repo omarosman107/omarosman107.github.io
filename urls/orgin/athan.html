@@ -70,7 +70,7 @@
           Asr
         </th>
         <td id="a">
-          Not
+          Time
         </td>
         <td>
           Hello
@@ -100,7 +100,6 @@
       </tr>
     </tbody>
   </table>
-</div>
 
 
 
@@ -126,7 +125,7 @@ fetch('https://api.ipify.org?format=json').then(function(response) {
     var i = document.getElementById('i');
     div.innerHTML = r.ip;
     fetch(
-        'http://api.aladhan.com/timingsByCity?city=Dubai&country=AE&method=2'
+        'http://api.aladhan.com/timingsByCity?city=Lansing&country=USmethod=3'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -135,9 +134,11 @@ fetch('https://api.ipify.org?format=json').then(function(response) {
         console.log(a.data.timings.Asr);
         f.innerHTML = a.data.timings.Fajr;
         d.innerHTML = a.data.timings.Dhuhr;
-        a.innerHTML = a.data.timings.Asr;
         m.innerHTML = a.data.timings.Maghrib;
         i.innerHTML = a.data.timings.Isha;
+        a.innerHTML = a.data.timings.Asr;
+
+
 
     });
 });

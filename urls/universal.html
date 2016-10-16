@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video-js.min.css" /></head>
 <body>
 <video id=LS x-webkit-airplay="allow" preload=metadata class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls>
-<source src="#" type="application/x-mpegURL">
+<source  src="#" type="application/x-mpegURL">
 </video>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video.min.js"></script>
 <script src="https://cdn.rawgit.com/Peer5/videojs-contrib-hls.js/master/src/videojs5.hlsjs.js"></script>
@@ -21,7 +21,7 @@
 
 <script>
 
-
+http://anyorigin.com/get?url=http%3A//cablecentral.tk/urls/cnn.m3u8&callback=?
 
 fetch('https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/universalsomalitv/viewing_info.json').then(function(response) { 
   // Convert to JSON
@@ -30,8 +30,11 @@ fetch('https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/
   // Yay, `j` is a JavaScript object
   console.log(r); 
 
-    player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)});
     var url = r.streamInfo.secure_m3u8_url 
+    var finalurl = ("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)
+
+     player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)});
+     player.play()
    
 
 });
@@ -42,15 +45,17 @@ function reload() {
   return response.json();
 }).then(function(r) {
   // Yay, `j` is a JavaScript object
-  console.log(r); 
+  console.log("reloaded"); 
+
+    var url = r.streamInfo.secure_m3u8_url
 
     player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)});
-    var url = r.streamInfo.secure_m3u8_url 
+    player.play()
 
 
 });
 }
-
+ 
 
  setInterval(reload,1680000);
 
