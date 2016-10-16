@@ -50,6 +50,8 @@ td {
 
 
 <div class="jumbotron">
+
+
   <h1 id="div" class="display-3">
     Loading...
   </h1>
@@ -272,10 +274,12 @@ function reloadsubs () {
        
 
     });
+    var subnum = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1)
+     console.log(subnum);
 
     console.log((f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1));
 
-    var finalsubcount =  ("The Sub Count For All Of these channels is ") + (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1)
+    var finalsubcount =  ("The Sub Count For All Of these channels is ") + subnum
 
 
     console.log(finalsubcount);
@@ -289,7 +293,7 @@ function reloadsubs () {
           div.innerHTML = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1);
 
     }
-     setInterval(finalsubload,2);
+     setInterval(finalsubload,20);
           setInterval(reloadsubs,900);
 
 
