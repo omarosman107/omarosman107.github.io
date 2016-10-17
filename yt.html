@@ -2,12 +2,34 @@
 <html>
 <head>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/themes/odometer-theme-car.min.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/themes/odometer-theme-minimal.min.css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <style>
 
+@media (max-width: 600px) {
+table.table.table-hover {
+    text-decoration: none;
+    padding-left: 19%;
+      font-size: 3.4vw;
+
+}
+}
+
+.odometer.odometer-auto-theme, .odometer.odometer-auto-theme .odometer-digit, .odometer.odometer-theme-minimal, .odometer.odometer-theme-minimal .odometer-digit {
+    -moz-box-orient: vertical;
+    display: initial;
+    vertical-align: middle;
+    position: relative;
+        font-size: 250%;
+
+}
+
+
+
+
 .odometer {
-    font-size: 4.5rem;
+    font-size: 250%;
     font-weight: 300;
     text-align: center;
     display: run-in;
@@ -16,6 +38,7 @@
 body {
 
   font-family: 'Roboto', sans-serif;
+  color: grey ;
 
 }
 .navbar-brand {
@@ -25,6 +48,7 @@ body {
     margin-right: 1rem;
     font-size: 1.25rem;
     text-align: center;
+
 }
 
 .display-3 {
@@ -35,11 +59,14 @@ body {
 p.lead {
     text-align: center;
 }
+
+@media (min-width: 601px) {
 table.table.table-hover {
 
   text-decoration: none;
-  font-size: 6.2vw;
-  padding-left: 15%
+  font-size: 3.2vw;
+  padding-left: 24%
+}
 }
 td {
 
@@ -51,7 +78,7 @@ td {
   padding-left: 23%;
 }
 </style>
-<meta name=viewport content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+<meta name=viewport content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
 	<title>YT sub</title>
@@ -65,8 +92,14 @@ td {
   <h1 id="div" class="odometer">
     Loading...
   </h1>
+<p class="lead">
+    This is the A Real-Time Total Subcount for the channels listed below.
+  </p>
+  <h1 id="tview" class="odometer">
+    Loading...
+  </h1>
   <p class="lead">
-    This is the A Real-Time Subcount for the channels listed below.
+    This is the A Real-Time Total Views for all of the channels listed below.
   </p>
   <hr class="m-y-2" />
   <p>
@@ -83,6 +116,10 @@ td {
         <th id"subs">
           Subs
         </th>
+        </th>
+        <th id"tviews"="" style="padding-left:6%;">
+        views
+        </th>
         
       </tr>
     </thead>
@@ -95,6 +132,9 @@ td {
         <td id="f">
           Subs
         </td>
+        <td id="mdview">
+          views
+        </td>
         
       </tr><tr>
         <th scope="row">
@@ -103,13 +143,20 @@ td {
         <td id="d">
           Subs
         </td>
+        <td id="bmxview">
+          views
+        </td>
         
-      </tr><tr>
+      </tr>
+      <tr>
         <th scope="row">
-          FaceOffGaming
+          AdeeTheGamer
         </th>
         <td id="a">
           Subs
+        </td>
+        <td id="fogview">
+          views
         </td>
         
       </tr><tr>
@@ -117,6 +164,19 @@ td {
           K1d_Sh4rk
         </th>
         <td id="m">
+          Subs
+        </td>
+        <td id="ksview">
+          Subs
+        </td>
+        <tr>
+        <th scope="row">
+          Tysk Agario
+        </th>
+        <td id="i">
+          Subs
+        </td>
+        <td id="taview">
           Subs
         </td>
         
@@ -143,89 +203,32 @@ var div = document.getElementById('div');
 function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
 loadCSS("");
 
-fetch('https://api.ipify.org?format=json').then(function(response) {
-    // Convert to JSON
-    return response.json();
-}).then(function(r) {
-    // Yay, `j` is a JavaScript object
-    
 
-    fetch(
-        'https://chronos.socialblade.com/realtime-lookup.php?c=UC5uDqiEEXm_3Vsrl-5F2V7g'
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(md) {
-
-        // Yay, `j` is a JavaScript object
-        console.log(md);
-                f.innerHTML = md;
-
-
-
-
-    });
-    fetch(
-        'https://chronos.socialblade.com/realtime-lookup.php?c=UC8R0KPxDEQSj_OBzQ6Xqz_Q'
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(bmx) {
-
-        // Yay, `j` is a JavaScript object
-        console.log(bmx);
-        d.innerHTML = bmx;
-       
-
-
-
-    });
-    fetch(
-        'https://chronos.socialblade.com/realtime-lookup.php?c=UCCs75eiciLbzwew0ukOaDZQ'
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(fog) {
-
-        // Yay, `j` is a JavaScript object
-        console.log(fog);
-        
-        a.innerHTML = fog;
-       
-
-
-    });
-
-    fetch(
-        'https://chronos.socialblade.com/realtime-lookup.php?c=UCol2LuK5wkUQlS_fhS8KgUA'
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(ks) {
-
-        // Yay, `j` is a JavaScript object
-        console.log(ks);
-        
-        m.innerHTML = ks;
-       
-
-    });
-
-    console.log((f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1));
-
-    var finalsubcount =  ("The Sub Count For All Of these channels is ") + (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1)
-
-
-    console.log(finalsubcount);
-
-    
-});
+https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC5uDqiEEXm_3Vsrl-5F2V7g&fields=items/statistics&key=AIzaSyDEoLUnWe9oL-3jyscdTg-gQd4DLRx72mo
 
 function reloadsubs () {
 
+  fetch(
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCvn6blqSVKRoioUVO4XwUCA&fields=items/statistics&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
+    ).then(function(response) {
+        // Convert to JSON
+        return response.json();
+    }).then(function(tysk) {
+
+        // Yay, `j` is a JavaScript object
+        console.log(tysk);
+                i.innerHTML = tysk.items[0].statistics.subscriberCount;
+                                taview.innerHTML = tysk.items[0].statistics.viewCount;
+
+
+
+
+
+    });
+
 
   fetch(
-        'https://chronos.socialblade.com/realtime-lookup.php?c=UC5uDqiEEXm_3Vsrl-5F2V7g'
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC5uDqiEEXm_3Vsrl-5F2V7g&fields=items/statistics&key=AIzaSyDEoLUnWe9oL-3jyscdTg-gQd4DLRx72mo'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -233,14 +236,16 @@ function reloadsubs () {
 
         // Yay, `j` is a JavaScript object
         console.log(md);
-                f.innerHTML = md;
+                f.innerHTML = md.items[0].statistics.subscriberCount;
+                                mdview.innerHTML = md.items[0].statistics.viewCount;
+
 
 
 
 
     });
     fetch(
-        'https://chronos.socialblade.com/realtime-lookup.php?c=UC8R0KPxDEQSj_OBzQ6Xqz_Q'
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC8R0KPxDEQSj_OBzQ6Xqz_Q&fields=items/statistics&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -248,30 +253,34 @@ function reloadsubs () {
 
         // Yay, `j` is a JavaScript object
         console.log(bmx);
-        d.innerHTML = bmx;
+        d.innerHTML = bmx.items[0].statistics.subscriberCount;
+                        bmxview.innerHTML = bmx.items[0].statistics.viewCount;
+
        
 
 
 
     });
     fetch(
-        'https://chronos.socialblade.com/realtime-lookup.php?c=UCCs75eiciLbzwew0ukOaDZQ'
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCd-nTzK6eK-LKGz3OUWfZ5Q&fields=items/statistics&key=AIzaSyDaNQf62XxKaHnPRnub6FASIIudvk7n608'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
-    }).then(function(fog) {
+    }).then(function(adee) {
 
         // Yay, `j` is a JavaScript object
-        console.log(fog);
+        console.log(adee);
         
-        a.innerHTML = fog;
+        a.innerHTML = adee.items[0].statistics.subscriberCount;
+                        fogview.innerHTML = adee.items[0].statistics.viewCount;
+
        
 
 
     });
 
     fetch(
-        'https://chronos.socialblade.com/realtime-lookup.php?c=UCol2LuK5wkUQlS_fhS8KgUA'
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCol2LuK5wkUQlS_fhS8KgUA&fields=items/statistics&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -280,31 +289,36 @@ function reloadsubs () {
         // Yay, `j` is a JavaScript object
         console.log(ks);
         
-        m.innerHTML = ks;
+        m.innerHTML = ks.items[0].statistics.subscriberCount;
+                        ksview.innerHTML = ks.items[0].statistics.viewCount;
+
        
 
     });
     var subnum = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1)
-     console.log(subnum);
 
-    console.log((f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1));
 
     var finalsubcount =  ("The Sub Count For All Of these channels is ") + subnum
 
 
-    console.log(finalsubcount);
 
     
 
 }
+var tviews = document.getElementById('tview');
+
     function finalsubload() {
 
 
-          div.innerHTML = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1);
+          div.innerHTML = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1) + (i.innerHTML*1);
+          tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1) +(fogview.innerHTML*1) + (ksview.innerHTML*1) + (bmxview.innerHTML*1);
 
     }
+              
+finalsubload();
+reloadsubs();
      setInterval(finalsubload,20);
-          setInterval(reloadsubs,900);
+          setInterval(reloadsubs,800);
 
 
 
