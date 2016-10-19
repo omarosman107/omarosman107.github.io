@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/themes/odometer-theme-minimal.min.css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
+
 <style>
+
+td, th {
+border-style: none;
+border-collapse:collapse;
+}
+
 span.odometer-formatting-mark {
     font-size: -webkit-xxx-large;
     vertical-align: -webkit-baseline-middle;
@@ -14,8 +21,7 @@ span.odometer-formatting-mark {
 @media (max-width: 600px) {
 table.table.table-hover {
     text-decoration: none;
-    padding-left: 19%;
-      font-size: 3.4vw;
+    font-size: 5.4vw;
 
 }
 }
@@ -40,12 +46,11 @@ table.table.table-hover {
 }
 
 body {
-
-  font-family: 'Roboto', sans-serif;
-  color: white ;
-  background: black;
-
+    font-family: 'Roboto', sans-serif;
+    color: #2b2b2b;
+    background: #d2d2d2;
 }
+
 .navbar-brand {
     float: none;
     padding-top: .25rem;
@@ -63,14 +68,15 @@ body {
 }
 p.lead {
     text-align: center;
+    font-size: x-large;
 }
 
 @media (min-width: 601px) {
 table.table.table-hover {
 
   text-decoration: none;
-  font-size: 3.2vw;
-  padding-left: 24%
+  font-size: 5.2vw;
+  /**padding-left: 24% **/
 }
 }
 td {
@@ -81,6 +87,14 @@ td {
 #subs {
 
   padding-left: 23%;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+#header {
+
+  padding-bottom: 10px;
 }
 </style>
 <meta name=viewport content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -114,7 +128,7 @@ td {
 </div>
   <table class="table table-hover">
     <thead>
-      <tr>
+      <tr id="header">
         <th>
           Name
         </th>
@@ -132,7 +146,19 @@ td {
       
      <tr>
         <th scope="row">
-          MangoDirt
+                <a  href="https://www.youtube.com/channel/UC5uDqiEEXm_3Vsrl-5F2V7g">
+
+            <img id='mangodirtprofile' src = ""/>
+
+        <br >
+        <div id="mangoname">
+        MangoDirt
+        </div>
+          
+                  <a>
+
+          </br>
+          </a>
         </th>
         <td id="f">
           Subs
@@ -143,7 +169,18 @@ td {
         
       </tr><tr>
         <th scope="row">
-          THE BMX BOYS
+                        <a href="https://www.youtube.com/channel/UC8R0KPxDEQSj_OBzQ6Xqz_Q">
+
+            <img id='bmxprofile' src = ""/>
+
+        <br>
+
+<div id="bmxname">
+        THE BMX BOYS
+        </div>                          </a>
+
+          </br>
+          </th>
         </th>
         <td id="d">
           Subs
@@ -155,7 +192,17 @@ td {
       </tr>
       <tr>
         <th scope="row">
-          AdeeTheGamer
+                        <a href="https://www.youtube.com/channel/TheGrayStone1">
+
+            <img id='adeeprofile' src = ""/>
+
+
+        <br>
+
+<div id="adeename">
+        AdeeTheGamer
+        </div>          </br>
+          </a>
         </th>
         <td id="a">
           Subs
@@ -166,7 +213,15 @@ td {
         
       </tr><tr>
         <th scope="row">
-          K1d_Sh4rk
+                        <a href="https://www.youtube.com/channel/UCol2LuK5wkUQlS_fhS8KgUA">
+
+    <img id='kidsharkprofile' src = ""/>
+
+        <br >
+
+<div id="kidname">
+        k1d_sh4rk
+        </div>          </br>          </a>
         </th>
         <td id="m">
           Subs
@@ -176,12 +231,56 @@ td {
         </td>
         <tr>
         <th scope="row">
-          Tysk Agario
+                        <a href="https://www.youtube.com/channel/UCiDKBr-h_v2JzAme_l-Rxhw">
+
+    <img id='brysonprofile' src = ""/>
+
+        <br><div id="brysonname">MangoDirt</div></br>          </a>
+        </th>
+        <td id="brysonsubs">
+          Subs
+        </td>
+        <td id="brysonview">
+          Views
+        </td>
+        <tr>
+        <th scope="row">
+                        <a href="https://www.youtube.com/channel/UCvn6blqSVKRoioUVO4XwUCA">
+
+            <img id='tyskprofile' src = ""/>
+
+
+        <br >
+
+<div id="tyskname">
+        Tysk Agario
+        </div>          </br>          
+          </a>
         </th>
         <td id="i">
           Subs
         </td>
         <td id="taview">
+          Subs
+        </td>
+        <tr>
+        <th scope="row">
+                        <a href="https://www.youtube.com/channel/UCCs75eiciLbzwew0ukOaDZQ">
+
+            <img id='faceoffprofile' src = ""/>
+
+
+        <br>
+
+<div id="faceoffname">
+        FaceOffGaming
+        </div>          </br> 
+          </a>
+        </th>
+        <td id="fasubs">
+          Subs
+        </td>
+        <td id="faceview">
           Subs
         </td>
         
@@ -203,6 +302,34 @@ var div = document.getElementById('div');
     var a = document.getElementById('a');
     var m = document.getElementById('m');
     var i = document.getElementById('i');
+    var faceoffsubs = document.getElementById('fasubs');
+    var kidsharkprofile =  document.getElementById('kidsharkprofile');
+    var mangodirtprofile = document.getElementById('mangodirtprofile');
+    var bmxprofile = document.getElementById('bmxprofile');
+
+    var adeeprofile = document.getElementById('adeeprofile');
+
+    var tyskprofile = document.getElementById('tyskprofile');
+
+    var faceoffprofile = document.getElementById('faceoffprofile');
+
+
+    var mangoname = document.getElementById('mangoname');
+    var bmxname = document.getElementById('bmxname');
+    var faceoffname = document.getElementById('faceoffname');
+    var adeename = document.getElementById('adeename');
+    var kidname = document.getElementById('kidname');
+    var tyskname = document.getElementById('tyskname');
+
+
+        var brysonname = document.getElementById('brysonname');
+    var brysonsubs = document.getElementById('brysonsubs');
+    var brysonview = document.getElementById('brysonview');
+    var brysonprofile = document.getElementById('brysonprofile');
+
+
+
+
 
 
 function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
@@ -214,16 +341,19 @@ https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC5uDqiEEXm_3V
 function reloadsubs () {
 
   fetch(
-        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCvn6blqSVKRoioUVO4XwUCA&fields=items/statistics&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCvn6blqSVKRoioUVO4XwUCA&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
     }).then(function(tysk) {
 
         // Yay, `j` is a JavaScript object
-        console.log(tysk);
                 i.innerHTML = tysk.items[0].statistics.subscriberCount;
                                 taview.innerHTML = tysk.items[0].statistics.viewCount;
+                                                tyskprofile.src =   tysk.items[0].snippet.thumbnails.default.url;
+                                              tyskname.innerHTML =   tysk.items[0].snippet.title;
+
+
 
 
 
@@ -233,16 +363,18 @@ function reloadsubs () {
 
 
   fetch(
-        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC5uDqiEEXm_3Vsrl-5F2V7g&fields=items/statistics&key=AIzaSyDEoLUnWe9oL-3jyscdTg-gQd4DLRx72mo'
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UC5uDqiEEXm_3Vsrl-5F2V7g&key=AIzaSyDEoLUnWe9oL-3jyscdTg-gQd4DLRx72mo'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
     }).then(function(md) {
 
         // Yay, `j` is a JavaScript object
-        console.log(md);
                 f.innerHTML = md.items[0].statistics.subscriberCount;
                                 mdview.innerHTML = md.items[0].statistics.viewCount;
+                                mangodirtprofile.src =   md.items[0].snippet.thumbnails.default.url;
+                                mangoname.innerHTML =   md.items[0].snippet.title;
+
 
 
 
@@ -250,16 +382,17 @@ function reloadsubs () {
 
     });
     fetch(
-        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC8R0KPxDEQSj_OBzQ6Xqz_Q&fields=items/statistics&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UC8R0KPxDEQSj_OBzQ6Xqz_Q&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
     }).then(function(bmx) {
 
         // Yay, `j` is a JavaScript object
-        console.log(bmx);
         d.innerHTML = bmx.items[0].statistics.subscriberCount;
                         bmxview.innerHTML = bmx.items[0].statistics.viewCount;
+                        bmxprofile.src =   bmx.items[0].snippet.thumbnails.default.url;
+                                              bmxname.innerHTML =   bmx.items[0].snippet.title;
 
        
 
@@ -267,17 +400,18 @@ function reloadsubs () {
 
     });
     fetch(
-        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCd-nTzK6eK-LKGz3OUWfZ5Q&fields=items/statistics&key=AIzaSyDaNQf62XxKaHnPRnub6FASIIudvk7n608'
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCd-nTzK6eK-LKGz3OUWfZ5Q&key=AIzaSyDaNQf62XxKaHnPRnub6FASIIudvk7n608'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
     }).then(function(adee) {
 
         // Yay, `j` is a JavaScript object
-        console.log(adee);
         
         a.innerHTML = adee.items[0].statistics.subscriberCount;
                         fogview.innerHTML = adee.items[0].statistics.viewCount;
+                        adeeprofile.src =   adee.items[0].snippet.thumbnails.default.url;
+                                              adeename.innerHTML =   adee.items[0].snippet.title;
 
        
 
@@ -285,17 +419,60 @@ function reloadsubs () {
     });
 
     fetch(
-        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCol2LuK5wkUQlS_fhS8KgUA&fields=items/statistics&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCol2LuK5wkUQlS_fhS8KgUA&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc+'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
     }).then(function(ks) {
 
         // Yay, `j` is a JavaScript object
-        console.log(ks);
         
         m.innerHTML = ks.items[0].statistics.subscriberCount;
                         ksview.innerHTML = ks.items[0].statistics.viewCount;
+                                             kidsharkprofile.src =  ks.items[0].snippet.thumbnails.default.url;
+                                              kidname.innerHTML =   ks.items[0].snippet.title;
+
+
+
+       
+
+    });
+
+
+fetch(
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCiDKBr-h_v2JzAme_l-Rxhw&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc+'
+    ).then(function(response) {
+        // Convert to JSON
+        return response.json();
+    }).then(function(bryson) {
+
+        // Yay, `j` is a JavaScript object
+        
+        brysonsubs.innerHTML = bryson.items[0].statistics.subscriberCount;
+                        brysonview.innerHTML = bryson.items[0].statistics.viewCount;
+                                             brysonprofile.src =  bryson.items[0].snippet.thumbnails.default.url;
+                                              brysonname.innerHTML =   bryson.items[0].snippet.title;
+
+
+
+       
+
+    });
+
+
+    fetch(
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCCs75eiciLbzwew0ukOaDZQ&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
+    ).then(function(response) {
+        // Convert to JSON
+        return response.json();
+    }).then(function(face) {
+
+        // Yay, `j` is a JavaScript object
+        
+        faceoffsubs.innerHTML = face.items[0].statistics.subscriberCount;
+                        faceview.innerHTML = face.items[0].statistics.viewCount;
+                        faceoffprofile.src =   face.items[0].snippet.thumbnails.default.url;
+                                              faceoffname.innerHTML =   face.items[0].snippet.title;
 
        
 
@@ -315,8 +492,8 @@ var tviews = document.getElementById('tview');
     function finalsubload() {
 
 
-          div.innerHTML = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1) + (i.innerHTML*1);
-          tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1) +(fogview.innerHTML*1) + (ksview.innerHTML*1) + (bmxview.innerHTML*1);
+          div.innerHTML = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1) + (i.innerHTML*1) + (faceoffsubs.innerHTML*1) + (brysonsubs.innerHTML*1);
+          tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1) +(fogview.innerHTML*1) + (ksview.innerHTML*1) + (bmxview.innerHTML*1) + (faceview.innerHTML*1 + (brysonview.innerHTML*1));
 
     }
               

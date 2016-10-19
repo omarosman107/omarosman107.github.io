@@ -1,66 +1,61 @@
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
-
-
-
 <!DOCTYPE html>
-<html>
+<html lang=en>
 <head>
-  <script  src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.6.2-2/hls.min.js"></script>
+  <link  rel=stylesheet  href="../css/style.css" >
+  <link rel="stylesheet" media='screen  and (max-width: 950px)' href='../css/mobile.css' />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video-js.min.css" /></head>
+
+<link  rel=stylesheet  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" >
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-66082501-2','auto');ga('send','pageview');</script>
+
+<link rel="icon" href="../images/faviconlogohead.png" height="16px" width="16px">
+<meta name="viewport" content="width=device-width">
+
+<title>Universal Somali</title>
+
+
+
+</head>
+</head>
 <body>
-<video id=LS x-webkit-airplay="allow" preload=metadata class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls>
-<source  src="#" type="application/x-mpegURL">
-</video>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video.min.js"></script>
-<script src="https://cdn.rawgit.com/Peer5/videojs-contrib-hls.js/master/src/videojs5.hlsjs.js"></script>
-<script>var player=videojs('LS');</script>
-</body>
-</html>
+<nav class="navbar navbar-light bg-faded" id=navbar>
+<button class="navbar-toggler hidden-sm-up" href="http://google.com"type=button >
+<a href="../index.html">
+<img class="navbar-brand" src="../images/back.svg"  onclick=""href="#" alt="Cable Central"  height="48px" width="48px" >
+</a>
+</button>
+<div class="collapse navbar-toggleable-xs" id=exCollapsingNavbar2>
+<a href="../index.html">
+<img class="navbar-brand" src="../images/back.svg"  onclick=""href="#" alt="Cable Central"  height="48px" width="48px" >
+</a>
+<ul class="nav navbar-nav">
+</ul>
+</div>
+</nav>
+<div class=jumbotron>
+<h1>Universal Somali</h1>
 
+<div class='embed-container'>
+  <iframe allowfullscreen src='orgin/universal.html' max-width="75%" scrolling=no style='border:0'></iframe></div>
+</div>
+</div>
+</div>
 
 <script>
-
-http://anyorigin.com/get?url=http%3A//cablecentral.tk/urls/cnn.m3u8&callback=?
-
-fetch('https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/universalsomalitv/viewing_info.json').then(function(response) { 
-  // Convert to JSON
-  return response.json();
-}).then(function(r) {
-  // Yay, `j` is a JavaScript object
-  console.log(r); 
-
-    var url = r.streamInfo.secure_m3u8_url 
-    var finalurl = ("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)
-
-     player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)});
-     player.play()
-   
-
-});
-
-function reload() {
-    fetch('https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/universalsomalitv/viewing_info.json').then(function(response) { 
-  // Convert to JSON
-  return response.json();
-}).then(function(r) {
-  // Yay, `j` is a JavaScript object
-  console.log("reloaded"); 
-
-    var url = r.streamInfo.secure_m3u8_url
-
-    player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)});
-    player.play()
-
-
-});
+function goBack() {
+    window.history.back();
 }
- 
-
- setInterval(reload,1680000);
-
 </script>
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-66082501-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </body>
-
+</html>
