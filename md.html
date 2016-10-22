@@ -21,12 +21,12 @@
         font-size: 250%;
 
 }
- 
- body {
+
+.mdl-data-table mdl-js-data-table {
 
   text-align: center;
- }
-
+  margin: auto;
+}
 
 </style>
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -64,230 +64,222 @@
   </p>
   
 </div>
-  <ul class="demo-list-three mdl-list">
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <img id='mangodirtprofile' src = ""/>
-            <span id="mangoname">MangoDirt</span>
-      </span>
-        <span id="mangosubs" class="mdl-list__item-secondary-action">
-   subs
-    </span>
-    
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">Subs</span>
-
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">subscriptions</i></a>
-    </span>
+  
+<table class="mdl-data-table mdl-js-data-table">
+    <thead>
+      <tr id="header">
+        <th>
+          Name
+        </th>
+        <th id"subs">
+          Subs
+        </th>
+        </th>
+        <th id"tviews"="" style="padding-left:6%;">
+        views
+        </th>
+        
+      </tr>
+    </thead>
+    <tbody class="searchable">
       
-    </span>
-        <span  id="mdview" class="mdl-list__item-secondary-action">
-   Views
-    </span>
-    
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">Views</span>
+     <tr>
+        <th  id="mdl-data-table__cell--non-numeric" scope="row">
 
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">pageview</i></a>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons  mdl-list__item-avatar">person</i>
-      <span id="bmxname">THE BMX BOYS</span>
-      </span>
-        <span id="bmxsubs" class="mdl-list__item-secondary-action">
-   subs
-    </span>
-    
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">Subs</span>
+                <a  href="https://www.youtube.com/channel/UC5uDqiEEXm_3Vsrl-5F2V7g">
 
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">subscriptions</i></a>
-    </span>
-      
-    </span>
-    <span  id="bmxview" class="mdl-list__item-secondary-action">
-   views
-    </span>
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">views</span>
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">pageview</i></a>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons  mdl-list__item-avatar">person</i>
-      <span id="kidname">k1d_sh4rk</span>
-      </span>
-        <span id="kssubs" class="mdl-list__item-secondary-action">
-   subs
-    </span>
-    
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">Subs</span>
+            <img id='mangodirtprofile' src = ""/>
 
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">subscriptions</i></a>
-    </span>
-      
-    </span>
-    <span  id="ksview" class="mdl-list__item-secondary-action">
-   views
-    </span>
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">views</span>
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">pageview</i></a>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons  mdl-list__item-avatar">person</i>
-      <span id="tyskname">Tysk Agario</span>
-      </span>
-        <span id="tysksubs" class="mdl-list__item-secondary-action">
-   subs
-    </span>
-    
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">Subs</span>
+        <br>
+        <div id="mangoname">
+        MangoDirt
+        </div>
+          
+                  <a>
 
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">subscriptions</i></a>
-    </span>
-      
-    </span>
-    <span  id="tviews" class="mdl-list__item-secondary-action">
-   views
-    </span>
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">Views</span>
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">pageview</i></a>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons  mdl-list__item-avatar">person</i>
-      <span id="xavname">Xavier</span>
-      </span>
-        <span id="xavsubs" class="mdl-list__item-secondary-action">
-   subs
-    </span>
-    
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">Subs</span>
+          </br>
+          </a>
+        </th>
+        <td id="mangosubs">
+          Subs
+        </td>
+        <td id="mdview">
+          views
+        </td>
+        
+      </tr><tr>
+        <th scope="row">
+                        <a href="https://www.youtube.com/channel/UC8R0KPxDEQSj_OBzQ6Xqz_Q">
 
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">subscriptions</i></a>
-    </span>
-      
-    </span>
-    <span  id="xavview" class="mdl-list__item-secondary-action">
-   views
-    </span>
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">views</span>
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">pageview</i></a>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons  mdl-list__item-avatar">person</i>
-      <span id="brysonname">BrysonGoCray</span>
-      </span>
-        <span id="brysonsubs" class="mdl-list__item-secondary-action">
-   subs
-    </span>
-    
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">Subs</span>
+            <img id='bmxprofile' src = ""/>
 
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">subscriptions</i></a>
-    </span>
-      
-    </span>
-    <span id="brysonview" class="mdl-list__item-secondary-action">
-   views
-    </span>
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">views</span>
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">pageview</i></a>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons  mdl-list__item-avatar">person</i>
-      <span id="faceoffname">FaceOffGaming</span>
-      </span>
-        <span id="fasubs" class="mdl-list__item-secondary-action">
-   subs
-    </span>
-    
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">Subs</span>
+        <br>
 
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">subscriptions</i></a>
-    </span>
-      
-    </span>
-    <span  id="faceview" class="mdl-list__item-secondary-action">
-   views
-    </span>
-    <span class="mdl-list__item-secondary-content">
-        <span class="mdl-list__item-secondary-info">views</span>
+<div id="bmxname">
+        THE BMX BOYS
+        </div>                          </a>
 
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">pageview</i></a>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons  mdl-list__item-avatar">person</i>
-      <span id="sajinname">Sajin</span>
-      </span>
-        <span id="sajinsubs" class="mdl-list__item-secondary-action">
-   subs
-    </span>
-    
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">Subs</span>
+          </br>
+          </th>
+        </th>
+        <td >
+          <p id="bmxsubs"></p>
+          <i class="material-icons">subscriptions</i>
+        </td>
+        <td id="bmxview">
+          views
+        </td>
+        
+      </tr>
 
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">subscriptions</i></a>
-    </span>
-      
-    </span>
-    <span id="sajinview" class="mdl-list__item-secondary-action">
-   views
-    </span>
-    <span class="mdl-list__item-secondary-content">
-        <span  class="mdl-list__item-secondary-info">views</span>
 
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">pageview</i></a>
-    </span>
-  </li>
-  <li class="mdl-list__item mdl-list__item--three-line">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons  mdl-list__item-avatar">person</i>
-      <span id="adeename">AdeeTheGamer</span>
-      </span>
-        <span id="adeesubs" class="mdl-list__item-secondary-action">
-   subs
-    </span>
-    
-    <span class="mdl-list__item-secondary-content">
-    <span class="mdl-list__item-secondary-info">Subs</span>
+<tr>
+        <th scope="row">
+                        <a href="https://www.youtube.com/channel/UCWi-PdEHG8YofbhsK2o76DA">
 
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">subscriptions</i></a>
-    </span>
-      
-    </span>
-    <span  id="adeeview" class="mdl-list__item-secondary-action">
-   views
-    </span>
-    <span class="mdl-list__item-secondary-content">
-        <span  class="mdl-list__item-secondary-info">views</span>
+            <img id='sajinprofile' src = ""/>
 
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">pageview</i></a>
-    </span>
-  </li>
-</ul>
+        <br>
 
+<div id="sajinname">
+        Sajin
+        </div>                          </a>
+
+          </br>
+          </th>
+        </th>
+        <td id="sajinsubs">
+          Subs
+        </td>
+        <td id="sajinview">
+          views
+        </td>
+        
+      </tr>
+
+
+      <tr>
+        <th scope="row">
+                        <a href="https://www.youtube.com/user/TheGrayStone1">
+
+            <img id='adeeprofile' src = ""/>
+
+
+        <br>
+
+<div id="adeename">
+        AdeeTheGamer
+        </div>          </br>
+          </a>
+        </th>
+        <td id="adeesubs">
+          Subs
+        </td>
+        <td id="fogview">
+          views
+        </td>
+        
+      </tr><tr>
+        <th scope="row">
+                        <a href="https://www.youtube.com/channel/UCol2LuK5wkUQlS_fhS8KgUA">
+
+    <img id='kidsharkprofile' src = ""/>
+
+        <br >
+
+<div id="kidname">
+        k1d_sh4rk
+        </div>          </br>          </a>
+        </th>
+        <td id="kssubs">
+          Subs
+
+        </td>
+
+        <td id="ksview">
+          Subs
+
+        </td>
+
+
+<tr>
+        <th scope="row">
+                        <a href="https://www.youtube.com/channel/UCgW-EIsK_8vjF66s1HIchpA">
+
+    <img id='xavprofile' src = ""/>
+
+        <br >
+
+<div id="xavname">
+        Xavier daman99
+        </div>          </br>          </a>
+        </th>
+        <td id="xavsubs">
+          Subs
+        </td>
+        <td id="xavview">
+          Views
+        </td>
+
+
+        <tr>
+        <th scope="row">
+                        <a href="https://www.youtube.com/channel/UCiDKBr-h_v2JzAme_l-Rxhw">
+
+    <img id='brysonprofile' src = ""/>
+
+        <br><div id="brysonname">MangoDirt</div></br>          </a>
+        </th>
+        <td id="brysonsubs">
+          Subs
+        </td>
+        <td id="brysonview">
+          Views
+        </td>
+        <tr>
+        <th scope="row">
+                        <a href="https://www.youtube.com/channel/UCvn6blqSVKRoioUVO4XwUCA">
+
+            <img id='tyskprofile' src = ""/>
+
+
+        <br >
+
+<div id="tyskname">
+        Tysk Agario
+        </div>          </br>          
+          </a>
+        </th>
+        <td id="tysksubs">
+          Subs
+        </td>
+        <td id="taview">
+          Subs
+        </td>
+        <tr>
+        <th scope="row">
+                        <a href="https://www.youtube.com/channel/UCCs75eiciLbzwew0ukOaDZQ">
+
+            <img id='faceoffprofile' src = ""/>
+
+
+        <br>
+
+<div id="faceoffname">
+        FaceOffGaming
+        </div>          </br> 
+          </a>
+        </th>
+        <td id="fasubs">
+          Subs
+        </td>
+        <td id="faceview">
+          Subs
+        </td>
+        
+      </tr>
+    </tbody>
+  </table>
 
 
 
@@ -340,14 +332,6 @@ var div = document.getElementById('div');
     var xavsubs = document.getElementById('xavsubs');
     var xavview = document.getElementById('xavview');
     var xavprofile = document.getElementById('xavprofile');
-
-    var adeeview = document.getElementById('adeeview');
-    var ksview = document.getElementById('ksview');
-    var mdview = document.getElementById('mdview');
-    var taview = document.getElementById('tviews');
-    var bmxview = document.getElementById('bmxview');
-    var faceview = document.getElementById('faceview');
-
 
 
 
@@ -502,7 +486,7 @@ fetch(
         // Yay, `j` is a JavaScript object
         
         adeesubs.innerHTML = adee.items[0].statistics.subscriberCount;
-                        adeeview.innerHTML = adee.items[0].statistics.viewCount;
+                        fogview.innerHTML = adee.items[0].statistics.viewCount;
                         adeeprofile.src =   adee.items[0].snippet.thumbnails.default.url;
                                               adeename.innerHTML =   adee.items[0].snippet.title;
 
@@ -582,8 +566,10 @@ fetch(
 
 
     });
+    var subnum = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1)
 
 
+    var finalsubcount =  ("The Sub Count For All Of these channels is ") + subnum
 
 
 
@@ -597,7 +583,7 @@ var tviews = document.getElementById('tview');
 
            div.innerHTML = (mangosubs.innerHTML*1) + (bmxsubs.innerHTML*1) +(tysksubs.innerHTML*1) + (adeesubs.innerHTML*1) + (kssubs.innerHTML*1) + (fasubs.innerHTML*1) + (brysonsubs.innerHTML*1) + (sajinsubs.innerHTML*1) + (xavsubs.innerHTML*1);
 
-          tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1) +(adeeview.innerHTML*1) + (ksview.innerHTML*1) + (bmxview.innerHTML*1) + (faceview.innerHTML*1 + (brysonview.innerHTML*1) + (sajinview.innerHTML*1) + (xavview.innerHTML*1));
+          tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1) +(fogview.innerHTML*1) + (ksview.innerHTML*1) + (bmxview.innerHTML*1) + (faceview.innerHTML*1 + (brysonview.innerHTML*1) + (sajinview.innerHTML*1) + (xavview.innerHTML*1));
 
     }
               
