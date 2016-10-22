@@ -264,6 +264,28 @@ a {
         <td id="ksview">
           Subs
         </td>
+
+
+<tr>
+        <th scope="row">
+                        <a href="https://www.youtube.com/channel/UCgW-EIsK_8vjF66s1HIchpA">
+
+    <img id='xavprofile' src = ""/>
+
+        <br >
+
+<div id="xavname">
+        Xavier daman99
+        </div>          </br>          </a>
+        </th>
+        <td id="xavsubs">
+          Subs
+        </td>
+        <td id="xavview">
+          Views
+        </td>
+
+
         <tr>
         <th scope="row">
                         <a href="https://www.youtube.com/channel/UCiDKBr-h_v2JzAme_l-Rxhw">
@@ -370,6 +392,11 @@ var div = document.getElementById('div');
     var sajinview = document.getElementById('sajinview');
     var sajinprofile = document.getElementById('sajinprofile');
 
+    var xavname = document.getElementById('xavname');
+    var xavsubs = document.getElementById('xavsubs');
+    var xavview = document.getElementById('xavview');
+    var xavprofile = document.getElementById('xavprofile');
+
 
 
 
@@ -398,7 +425,7 @@ function reloadsubs () {
                                               tyskname.innerHTML =   tysk.items[0].snippet.title;
 
 
- if (screen.width >= 1680) {
+ if (screen.width >= 1800) {
     tyskprofile.src = tysk.items[0].snippet.thumbnails.medium.url
     }
 
@@ -407,6 +434,38 @@ function reloadsubs () {
 
 
     });
+
+
+
+
+
+fetch(
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCgW-EIsK_8vjF66s1HIchpA&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
+    ).then(function(response) {
+        // Convert to JSON
+        return response.json();
+    }).then(function(xav) {
+
+        // Yay, `j` is a JavaScript object
+                xavsubs.innerHTML = xav.items[0].statistics.subscriberCount;
+                                xavview.innerHTML = xav.items[0].statistics.viewCount;
+                                                xavprofile.src =   xav.items[0].snippet.thumbnails.default.url;
+                                              xavname.innerHTML =   xav.items[0].snippet.title;
+
+
+ if (screen.width >= 1800) {
+    xavprofile.src = xav.items[0].snippet.thumbnails.medium.url
+    }
+
+
+
+
+
+    });
+
+
+
+
 
 
 
@@ -425,7 +484,7 @@ fetch(
 
 
 
- if (screen.width >= 1680) {
+ if (screen.width >= 1800) {
     sajinprofile.src = sajin.items[0].snippet.thumbnails.medium.url
     }
 
@@ -450,7 +509,7 @@ fetch(
                                 mangodirtprofile.src =   md.items[0].snippet.thumbnails.default.url;
                                 mangoname.innerHTML =   md.items[0].snippet.title;
 
-                                if (screen.width >= 1680) {
+                                if (screen.width >= 1800) {
     mangodirtprofile.src = md.items[0].snippet.thumbnails.medium.url
     }
 
@@ -474,7 +533,7 @@ fetch(
                                               bmxname.innerHTML =   bmx.items[0].snippet.title;
 
        
- if (screen.width >= 1680) {
+ if (screen.width >= 1800) {
     bmxprofile.src = bmx.items[0].snippet.thumbnails.medium.url
     }
 
@@ -495,7 +554,7 @@ fetch(
                         adeeprofile.src =   adee.items[0].snippet.thumbnails.default.url;
                                               adeename.innerHTML =   adee.items[0].snippet.title;
 
-        if (screen.width >= 1680) {
+        if (screen.width >= 1800) {
     adeeprofile.src = adee.items[0].snippet.thumbnails.medium.url
     }
 
@@ -517,7 +576,7 @@ fetch(
                                              kidsharkprofile.src =  ks.items[0].snippet.thumbnails.default.url;
                                               kidname.innerHTML =   ks.items[0].snippet.title;
 
- if (screen.width >= 1680) {
+ if (screen.width >= 1800) {
     kidsharkprofile.src = ks.items[0].snippet.thumbnails.medium.url
     }
 
@@ -541,7 +600,7 @@ fetch(
                                              brysonprofile.src =  bryson.items[0].snippet.thumbnails.default.url;
                                               brysonname.innerHTML =   bryson.items[0].snippet.title;
 
- if (screen.width >= 1680) {
+ if (screen.width >= 1800) {
     brysonprofile.src = bryson.items[0].snippet.thumbnails.medium.url
     }
 
@@ -565,7 +624,7 @@ fetch(
                         faceoffprofile.src =   face.items[0].snippet.thumbnails.default.url;
                                               faceoffname.innerHTML =   face.items[0].snippet.title;
 
-        if (screen.width >= 1680) {
+        if (screen.width >= 1800) {
     faceoffprofile.src = face.items[0].snippet.thumbnails.medium.url
     }
 
@@ -586,8 +645,8 @@ var tviews = document.getElementById('tview');
     function finalsubload() {
 
 
-          div.innerHTML = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1) + (i.innerHTML*1) + (faceoffsubs.innerHTML*1) + (brysonsubs.innerHTML*1) + (sajinsubs.innerHTML*1);
-          tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1) +(fogview.innerHTML*1) + (ksview.innerHTML*1) + (bmxview.innerHTML*1) + (faceview.innerHTML*1 + (brysonview.innerHTML*1) + (sajinview.innerHTML*1));
+          div.innerHTML = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1) + (i.innerHTML*1) + (faceoffsubs.innerHTML*1) + (brysonsubs.innerHTML*1) + (sajinsubs.innerHTML*1) + (xavsubs.innerHTML*1);
+          tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1) +(fogview.innerHTML*1) + (ksview.innerHTML*1) + (bmxview.innerHTML*1) + (faceview.innerHTML*1 + (brysonview.innerHTML*1) + (sajinview.innerHTML*1) + (xavview.innerHTML*1));
 
     }
               
