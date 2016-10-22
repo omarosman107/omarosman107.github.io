@@ -1,5 +1,14 @@
+function includeJs(jsFilePath) {
+    var js = document.createElement("script");
 
-import  'https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js';
+    js.type = "text/javascript";
+    js.src = jsFilePath;
+
+    document.body.appendChild(js);
+}
+
+includeJs("https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js");
+
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
