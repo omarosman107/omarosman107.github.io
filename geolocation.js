@@ -1,3 +1,6 @@
+    var div = document.getElementById('div');
+
+
 if (fetch) {
 
 	console.log("its working!")
@@ -36,7 +39,7 @@ function showPosition(position) {
     }).then(function(tysk) {
 
         // Yay, `j` is a JavaScript object
-document.write("You Are EXTREMELY! near OR at " + tysk.results[0].formatted_address)
+        div.innerHTML = "You Are EXTREMELY! near OR at " + tysk.results[0].formatted_address
 console.log(tysk)
 console.log(finishlocation)
 console.log("You Are EXTREMELY! near OR at " + tysk.results[0].formatted_address)
