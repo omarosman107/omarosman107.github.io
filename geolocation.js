@@ -1,13 +1,20 @@
-function includeJs(jsFilePath) {
-    var js = document.createElement("script");
+if (fetch) {
 
-    js.type = "text/javascript";
-    js.src = jsFilePath;
+	console.log("its working!")
+} else {
+	console.log("fetch isn't on your browser so i am going to install it...")
 
-    document.body.appendChild(js);
+var firstScript = document.getElementsByTagName('script')[0],
+      js = document.createElement('script');
+  js.src = 'https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js';
+  js.onload = function () {
+    // do stuff with your dynamically loaded script
+  };
+  firstScript.parentNode.insertBefore(js, firstScript);
+
 }
 
-includeJs("https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js");
+
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -29,10 +36,10 @@ function showPosition(position) {
     }).then(function(tysk) {
 
         // Yay, `j` is a JavaScript object
-
+document.write("You Are EXTREMELY! near OR at " + tysk.results[0].formatted_address)
 console.log(tysk)
 console.log(finishlocation)
-console.log("You Are at " + tysk.results[0].formatted_address)
+console.log("You Are EXTREMELY! near OR at " + tysk.results[0].formatted_address)
 
 
 
