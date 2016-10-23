@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/themes/odometer-theme-minimal.min.css" />
@@ -8,7 +8,6 @@
 
 
 <meta charset="utf-8">
-<html lang="en">
 
 
 
@@ -281,8 +280,25 @@
 
 <script>
 
-var custHeight=screen.height;
-var custWidth=screen.width;
+if (fetch) {
+
+  console.log("fetch is  working!")
+} else {
+  console.log("fetch isn't on your browser so i am going to install it...")
+
+var firstScript = document.getElementsByTagName('script')[0],
+      js = document.createElement('script');
+  js.src = 'https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js';
+  js.onload = function () {
+    // do stuff with your dynamically loaded script
+  };
+  firstScript.parentNode.insertBefore(js, firstScript);
+
+}
+
+
+
+
 
 var div = document.getElementById('div');
     var f = document.getElementById('f');
@@ -553,6 +569,5 @@ reloadsubs();
 
 </script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
 </body>
 </html>
