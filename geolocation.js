@@ -3,7 +3,7 @@
 
 if (fetch) {
 
-	console.log("its working!")
+	console.log("fetch is  working!")
 } else {
 	console.log("fetch isn't on your browser so i am going to install it...")
 
