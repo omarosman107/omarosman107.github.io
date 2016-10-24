@@ -4,7 +4,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/themes/odometer-theme-minimal.min.css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
 <link href="style.css" rel="stylesheet">
 
 
@@ -22,7 +21,7 @@
 <meta name=viewport content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-	<title>YoungYT || YouTube Subcount made by @MangoDirt</title>
+  <title>YoungYT || YouTube Subcount made by @MangoDirt</title>
   <meta name="description" content="YoungYT is a subcount made my @MangoDirt that shows individuals YouTube statistics from The YouTube V3 API.">
   <meta name="author" content="@MangDirt">
 
@@ -281,9 +280,6 @@
 
 <script>
 
-var link1 = ("https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=");
-var link2 = ("&fields=items/statistics/subscriberCount,items/snippet/localized/title,items/statistics/viewCount&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY")
-
 if (fetch) {
 
   console.log("fetch is  working!")
@@ -360,7 +356,7 @@ https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC5uDqiEEXm_3V
 function reloadsubs () {
 
   fetch(
-         link1 + "UCvn6blqSVKRoioUVO4XwUCA" + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCvn6blqSVKRoioUVO4XwUCA&fields=items&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -369,7 +365,6 @@ function reloadsubs () {
         // Yay, `j` is a JavaScript object
                 i.innerHTML = tysk.items[0].statistics.subscriberCount;
                                 taview.innerHTML = tysk.items[0].statistics.viewCount;
-                                tyskname.innerHTML = tysk.items[0].snippet.localized.title;
                                              
                                              
 
@@ -386,7 +381,7 @@ function reloadsubs () {
 
 
 fetch(
-        link1 +'UCgW-EIsK_8vjF66s1HIchpA'+ link2
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCgW-EIsK_8vjF66s1HIchpA&fields=items&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -395,7 +390,6 @@ fetch(
         // Yay, `j` is a JavaScript object
                 xavsubs.innerHTML = xav.items[0].statistics.subscriberCount;
                                 xavview.innerHTML = xav.items[0].statistics.viewCount;
-                                xavname.innerHTML = xav.items[0].snippet.localized.title;
 
 
 
@@ -411,7 +405,7 @@ fetch(
 
 
 fetch(
-        link1 +'UCWi-PdEHG8YofbhsK2o76DA' + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCWi-PdEHG8YofbhsK2o76DA&fields=items&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -420,8 +414,6 @@ fetch(
         // Yay, `j` is a JavaScript object
                 sajinsubs.innerHTML = sajin.items[0].statistics.subscriberCount;
                                 sajinview.innerHTML = sajin.items[0].statistics.viewCount;
-                                                                sajinname.innerHTML = sajin.items[0].snippet.localized.title;
-
 
 
 
@@ -434,7 +426,7 @@ fetch(
 
 
   fetch(
-        link1 + 'UC5uDqiEEXm_3Vsrl-5F2V7g' + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC5uDqiEEXm_3Vsrl-5F2V7g&fields=items&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -443,8 +435,6 @@ fetch(
         // Yay, `j` is a JavaScript object
                 f.innerHTML = md.items[0].statistics.subscriberCount;
                                 mdview.innerHTML = md.items[0].statistics.viewCount;
-                                                                mangoname.innerHTML = md.items[0].snippet.localized.title;
-
 
                             
 
@@ -454,7 +444,7 @@ fetch(
 
     });
     fetch(
-        link1 +'UC8R0KPxDEQSj_OBzQ6Xqz_Q' + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC8R0KPxDEQSj_OBzQ6Xqz_Q&fields=items&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -463,15 +453,13 @@ fetch(
         // Yay, `j` is a JavaScript object
         d.innerHTML = bmx.items[0].statistics.subscriberCount;
                         bmxview.innerHTML = bmx.items[0].statistics.viewCount;
-                                                        bmxname.innerHTML = bmx.items[0].snippet.localized.title;
-
 
 
 
 
     });
     fetch(
-        link1 + 'UCd-nTzK6eK-LKGz3OUWfZ5Q' + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCd-nTzK6eK-LKGz3OUWfZ5Q&fields=items&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -481,8 +469,6 @@ fetch(
         
         a.innerHTML = adee.items[0].statistics.subscriberCount;
                         fogview.innerHTML = adee.items[0].statistics.viewCount;
-                                                        adeename.innerHTML = adee.items[0].snippet.localized.title;
-
 
 
 
@@ -490,7 +476,7 @@ fetch(
     });
 
     fetch(
-       link1 + 'UCol2LuK5wkUQlS_fhS8KgUA' + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCol2LuK5wkUQlS_fhS8KgUA&fields=items&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -500,8 +486,6 @@ fetch(
         
         m.innerHTML = ks.items[0].statistics.subscriberCount;
                         ksview.innerHTML = ks.items[0].statistics.viewCount;
-                                                        kidname.innerHTML = ks.items[0].snippet.localized.title;
-
 
 
 
@@ -511,7 +495,7 @@ fetch(
 
 
 fetch(
-      link1 +  'UCiDKBr-h_v2JzAme_l-Rxhw' + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCiDKBr-h_v2JzAme_l-Rxhw&fields=items&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -521,8 +505,6 @@ fetch(
         
         brysonsubs.innerHTML = bryson.items[0].statistics.subscriberCount;
                         brysonview.innerHTML = bryson.items[0].statistics.viewCount;
-                                                        brysonname.innerHTML = bryson.items[0].snippet.localized.title;
-
 
 
 
@@ -532,7 +514,7 @@ fetch(
 
 
     fetch(
-        link1 + "UCCs75eiciLbzwew0ukOaDZQ" + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCCs75eiciLbzwew0ukOaDZQ&fields=items&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -542,8 +524,6 @@ fetch(
         
         faceoffsubs.innerHTML = face.items[0].statistics.subscriberCount;
                         faceview.innerHTML = face.items[0].statistics.viewCount;
-                                                        faceoffname.innerHTML = face.items[0].snippet.localized.title;
-
 
      
 
