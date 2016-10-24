@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/themes/odometer-theme-minimal.min.css" />
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link rel="stylesheet" href="https://akshatmittal.com/youtube-realtime/assets/css/odometer-theme.css" />
+<link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
 <link href="style.css" rel="stylesheet">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
 
 
 <meta charset="utf-8">
@@ -283,21 +285,7 @@
 var link1 = ("https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=");
 var link2 = ("&fields=items/statistics/subscriberCount,items/snippet/localized/title,items/statistics/viewCount&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY")
 
-if (fetch) {
 
-  console.log("fetch is  working!")
-} else {
-  console.log("fetch isn't on your browser so i am going to install it...")
-
-var firstScript = document.getElementsByTagName('script')[0],
-      js = document.createElement('script');
-  js.src = 'https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js';
-  js.onload = function () {
-    // do stuff with your dynamically loaded script
-  };
-  firstScript.parentNode.insertBefore(js, firstScript);
-
-}
 
 
 
