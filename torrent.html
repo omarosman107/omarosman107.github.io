@@ -1,0 +1,40 @@
+<div id="video"></div>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.6.2-2/hls.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video-js.min.css" /></head>
+<body>
+<video id=LS x-webkit-airplay="allow" preload=metadata class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls>
+<source src="" >
+</video>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video.min.js"></script>
+<script src="https://cdn.rawgit.com/Peer5/videojs-contrib-hls.js/master/src/videojs5.hlsjs.js"></script>
+<script>var player=videojs('LS');</script>
+</body>
+</html>
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/webtorrent/0.96.4/webtorrent.min.js"></script>
+	<script>
+		var CONFIG = {
+			container: 'LS',
+			magnet: 'magnet:?dn=index.html&tr=udp%3A%2F%2Fexodus.desync.com%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=wss%3A%2F%2Ftracker.webtorrent.io&xt=urn:btih:9747f302b4daec7b1cab7a99c6317d084aed9ca5'
+		}
+		var client = new WebTorrent()
+		client.add(CONFIG.magnet, function (torrent) {
+			var file = torrent.files[0]
+					    player.src({"src":(file.getBlobURL)});
+
+			file.appendTo(document.getElementById(CONFIG.container))
+			stream = file.createReadStream([opts])
+
+
+			console.log(file.getBlobURL);
+		})
+
+
+	</script>

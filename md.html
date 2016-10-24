@@ -1,34 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/themes/odometer-theme-minimal.min.css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
-<link href="style.css" rel="stylesheet">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
 
-
-<meta charset="utf-8">
-
+<style>
 
 
 
-<meta name="apple-mobile-web-app-status-bar-style" content="white" />
+.odometer.odometer-auto-theme, .odometer.odometer-auto-theme .odometer-digit, .odometer.odometer-theme-minimal, .odometer.odometer-theme-minimal .odometer-digit {
+    -moz-box-orient: vertical;
+    display: initial;
+    vertical-align: middle;
+    position: relative;
+        font-size: 250%;
+
+}
+
+.mdl-data-table mdl-js-data-table {
+
+  text-align: center;
+  margin: auto;
+}
+
+</style>
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 
-<meta name="apple-mobile-web-app-title" content="YoungYT" />
+<meta name="apple-mobile-web-app-title" content="YT SubCount" />
 
 <meta name=viewport content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-	<title>YoungYT || YouTube Subcount made by @MangoDirt</title>
-  <meta name="description" content="YoungYT is a subcount made my @MangoDirt that shows individuals YouTube statistics from The YouTube V3 API.">
-  <meta name="author" content="@MangDirt">
-
-
+  <title>YT sub</title>
 </head>
-<body>
+<body onload="finalsubload()">
 
 
 <div class="jumbotron">
@@ -52,7 +64,8 @@
   </p>
   
 </div>
-  <table class="table table-hover">
+  
+<table class="mdl-data-table mdl-js-data-table">
     <thead>
       <tr id="header">
         <th>
@@ -71,12 +84,11 @@
     <tbody class="searchable">
       
      <tr>
-        <th scope="row">
+        <th  id="mdl-data-table__cell--non-numeric" scope="row">
 
                 <a  href="https://www.youtube.com/channel/UC5uDqiEEXm_3Vsrl-5F2V7g">
 
-<div class="profiles">
-            <img id='mangodirtprofile' src = "https://yt3.ggpht.com/-rfEcaU9UDtc/AAAAAAAAAAI/AAAAAAAAAAA/pKX3JNXF0wI/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"/> </div>
+            <img id='mangodirtprofile' src = ""/>
 
         <br>
         <div id="mangoname">
@@ -88,7 +100,7 @@
           </br>
           </a>
         </th>
-        <td id="f">
+        <td id="mangosubs">
           Subs
         </td>
         <td id="mdview">
@@ -98,9 +110,8 @@
       </tr><tr>
         <th scope="row">
                         <a href="https://www.youtube.com/channel/UC8R0KPxDEQSj_OBzQ6Xqz_Q">
-<div class="profiles">
 
-            <img id='bmxprofile' src = "https://yt3.ggpht.com/-in5AMaREHg4/AAAAAAAAAAI/AAAAAAAAAAA/WmHSsbh8Olw/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"/> </div>
+            <img id='bmxprofile' src = ""/>
 
         <br>
 
@@ -111,8 +122,9 @@
           </br>
           </th>
         </th>
-        <td id="d">
-          Subs
+        <td >
+          <p id="bmxsubs"></p>
+          <i class="material-icons">subscriptions</i>
         </td>
         <td id="bmxview">
           views
@@ -124,9 +136,8 @@
 <tr>
         <th scope="row">
                         <a href="https://www.youtube.com/channel/UCWi-PdEHG8YofbhsK2o76DA">
-<div class="profiles">
 
-            <img id='sajinprofile' src = "https://yt3.ggpht.com/-hseVQHBLMdA/AAAAAAAAAAI/AAAAAAAAAAA/IJvcHO6RhD4/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"/> </div>
+            <img id='sajinprofile' src = ""/>
 
         <br>
 
@@ -150,9 +161,8 @@
       <tr>
         <th scope="row">
                         <a href="https://www.youtube.com/user/TheGrayStone1">
-<div class="profiles">
 
-            <img id='adeeprofile' src = "https://yt3.ggpht.com/-2mi11RibXrY/AAAAAAAAAAI/AAAAAAAAAAA/k1lXZIW4D-A/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"/> </div>
+            <img id='adeeprofile' src = ""/>
 
 
         <br>
@@ -162,7 +172,7 @@
         </div>          </br>
           </a>
         </th>
-        <td id="a">
+        <td id="adeesubs">
           Subs
         </td>
         <td id="fogview">
@@ -172,9 +182,8 @@
       </tr><tr>
         <th scope="row">
                         <a href="https://www.youtube.com/channel/UCol2LuK5wkUQlS_fhS8KgUA">
-<div class="profiles">
 
-    <img id='kidsharkprofile' src = "https://yt3.ggpht.com/-jMyHLeeznFY/AAAAAAAAAAI/AAAAAAAAAAA/mD3K6IMIxI8/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"/> </div>
+    <img id='kidsharkprofile' src = ""/>
 
         <br >
 
@@ -182,20 +191,22 @@
         k1d_sh4rk
         </div>          </br>          </a>
         </th>
-        <td id="m">
+        <td id="kssubs">
           Subs
+
         </td>
+
         <td id="ksview">
           Subs
+
         </td>
 
 
 <tr>
         <th scope="row">
                         <a href="https://www.youtube.com/channel/UCgW-EIsK_8vjF66s1HIchpA">
-<div class="profiles">
 
-    <img id='xavprofile' src = "https://yt3.ggpht.com/-4c8otL-f3Xk/AAAAAAAAAAI/AAAAAAAAAAA/rsCZ_8u-2Tc/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"/> </div>
+    <img id='xavprofile' src = ""/>
 
         <br >
 
@@ -214,11 +225,10 @@
         <tr>
         <th scope="row">
                         <a href="https://www.youtube.com/channel/UCiDKBr-h_v2JzAme_l-Rxhw">
-<div class="profiles">
 
-    <img id='brysonprofile' src = "https://yt3.ggpht.com/-FMaicYxulFw/AAAAAAAAAAI/AAAAAAAAAAA/LBS0TN4J8Es/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"/> </div>
+    <img id='brysonprofile' src = ""/>
 
-        <br><div id="brysonname">Bryson</div></br>          </a>
+        <br><div id="brysonname">MangoDirt</div></br>          </a>
         </th>
         <td id="brysonsubs">
           Subs
@@ -229,9 +239,8 @@
         <tr>
         <th scope="row">
                         <a href="https://www.youtube.com/channel/UCvn6blqSVKRoioUVO4XwUCA">
-<div class="profiles">
 
-            <img id='tyskprofile' src = "https://yt3.ggpht.com/-RBRAQHZeauo/AAAAAAAAAAI/AAAAAAAAAAA/ACS2lJG-Q5c/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"/> </div>
+            <img id='tyskprofile' src = ""/>
 
 
         <br >
@@ -241,7 +250,7 @@
         </div>          </br>          
           </a>
         </th>
-        <td id="i">
+        <td id="tysksubs">
           Subs
         </td>
         <td id="taview">
@@ -250,9 +259,8 @@
         <tr>
         <th scope="row">
                         <a href="https://www.youtube.com/channel/UCCs75eiciLbzwew0ukOaDZQ">
-<div class="profiles">
 
-            <img id='faceoffprofile' src = "https://yt3.ggpht.com/-gQXjW7I55-Y/AAAAAAAAAAI/AAAAAAAAAAA/2BB1uH8YwRo/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"/> </div>
+            <img id='faceoffprofile' src = ""/>
 
 
         <br>
@@ -278,39 +286,19 @@
 
 
 
-
 <script>
 
-var link1 = ("https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=");
-var link2 = ("&fields=items/statistics/subscriberCount,items/snippet/localized/title,items/statistics/viewCount&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY")
-
-if (fetch) {
-
-  console.log("fetch is  working!")
-} else {
-  console.log("fetch isn't on your browser so i am going to install it...")
-
-var firstScript = document.getElementsByTagName('script')[0],
-      js = document.createElement('script');
-  js.src = 'https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js';
-  js.onload = function () {
-    // do stuff with your dynamically loaded script
-  };
-  firstScript.parentNode.insertBefore(js, firstScript);
-
-}
-
-
-
-
+var custHeight=screen.height;
+var custWidth=screen.width;
 
 var div = document.getElementById('div');
-    var f = document.getElementById('f');
-    var d = document.getElementById('d');
-    var a = document.getElementById('a');
-    var m = document.getElementById('m');
-    var i = document.getElementById('i');
-    var faceoffsubs = document.getElementById('fasubs');
+    var mangosubs = document.getElementById('mangosubs');
+    var bmxsubs = document.getElementById('bmxsubs');
+    var adeesubs = document.getElementById('adeesubs');
+    var tysksubs = document.getElementById('tysksubs');
+    var kssubs = document.getElementById('kssubs');
+    var fasubs = document.getElementById('fasubs');
+
     var kidsharkprofile =  document.getElementById('kidsharkprofile');
     var mangodirtprofile = document.getElementById('mangodirtprofile');
     var bmxprofile = document.getElementById('bmxprofile');
@@ -360,20 +348,22 @@ https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC5uDqiEEXm_3V
 function reloadsubs () {
 
   fetch(
-         link1 + "UCvn6blqSVKRoioUVO4XwUCA" + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCvn6blqSVKRoioUVO4XwUCA&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
     }).then(function(tysk) {
 
         // Yay, `j` is a JavaScript object
-                i.innerHTML = tysk.items[0].statistics.subscriberCount;
+                tysksubs.innerHTML = tysk.items[0].statistics.subscriberCount;
                                 taview.innerHTML = tysk.items[0].statistics.viewCount;
-                                tyskname.innerHTML = tysk.items[0].snippet.localized.title;
-                                             
-                                             
+                                                tyskprofile.src =   tysk.items[0].snippet.thumbnails.default.url;
+                                              tyskname.innerHTML =   tysk.items[0].snippet.title;
 
 
+ if (screen.width >= 1800) {
+    tyskprofile.src = tysk.items[0].snippet.thumbnails.medium.url
+    }
 
 
 
@@ -386,7 +376,7 @@ function reloadsubs () {
 
 
 fetch(
-        link1 +'UCgW-EIsK_8vjF66s1HIchpA'+ link2
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCgW-EIsK_8vjF66s1HIchpA&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -395,8 +385,13 @@ fetch(
         // Yay, `j` is a JavaScript object
                 xavsubs.innerHTML = xav.items[0].statistics.subscriberCount;
                                 xavview.innerHTML = xav.items[0].statistics.viewCount;
-                                xavname.innerHTML = xav.items[0].snippet.localized.title;
+                                                xavprofile.src =   xav.items[0].snippet.thumbnails.default.url;
+                                              xavname.innerHTML =   xav.items[0].snippet.title;
 
+
+ if (screen.width >= 1800) {
+    xavprofile.src = xav.items[0].snippet.thumbnails.medium.url
+    }
 
 
 
@@ -411,7 +406,7 @@ fetch(
 
 
 fetch(
-        link1 +'UCWi-PdEHG8YofbhsK2o76DA' + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCWi-PdEHG8YofbhsK2o76DA&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -420,10 +415,14 @@ fetch(
         // Yay, `j` is a JavaScript object
                 sajinsubs.innerHTML = sajin.items[0].statistics.subscriberCount;
                                 sajinview.innerHTML = sajin.items[0].statistics.viewCount;
-                                                                sajinname.innerHTML = sajin.items[0].snippet.localized.title;
+                                                sajinprofile.src =   sajin.items[0].snippet.thumbnails.default.url;
+                                              sajinname.innerHTML =   sajin.items[0].snippet.title;
 
 
 
+ if (screen.width >= 1800) {
+    sajinprofile.src = sajin.items[0].snippet.thumbnails.medium.url
+    }
 
 
 
@@ -434,19 +433,22 @@ fetch(
 
 
   fetch(
-        link1 + 'UC5uDqiEEXm_3Vsrl-5F2V7g' + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UC5uDqiEEXm_3Vsrl-5F2V7g&key=AIzaSyDEoLUnWe9oL-3jyscdTg-gQd4DLRx72mo'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
     }).then(function(md) {
 
         // Yay, `j` is a JavaScript object
-                f.innerHTML = md.items[0].statistics.subscriberCount;
+                mangosubs.innerHTML = md.items[0].statistics.subscriberCount;
                                 mdview.innerHTML = md.items[0].statistics.viewCount;
-                                                                mangoname.innerHTML = md.items[0].snippet.localized.title;
+                                mangodirtprofile.src =   md.items[0].snippet.thumbnails.default.url;
+                                mangoname.innerHTML =   md.items[0].snippet.title;
 
+                                if (screen.width >= 1800) {
+    mangodirtprofile.src = md.items[0].snippet.thumbnails.medium.url
+    }
 
-                            
 
 
 
@@ -454,24 +456,28 @@ fetch(
 
     });
     fetch(
-        link1 +'UC8R0KPxDEQSj_OBzQ6Xqz_Q' + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UC8R0KPxDEQSj_OBzQ6Xqz_Q&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
     }).then(function(bmx) {
 
         // Yay, `j` is a JavaScript object
-        d.innerHTML = bmx.items[0].statistics.subscriberCount;
+        bmxsubs.innerHTML = bmx.items[0].statistics.subscriberCount;
                         bmxview.innerHTML = bmx.items[0].statistics.viewCount;
-                                                        bmxname.innerHTML = bmx.items[0].snippet.localized.title;
+                        bmxprofile.src =   bmx.items[0].snippet.thumbnails.default.url;
+                                              bmxname.innerHTML =   bmx.items[0].snippet.title;
 
-
+       
+ if (screen.width >= 1800) {
+    bmxprofile.src = bmx.items[0].snippet.thumbnails.medium.url
+    }
 
 
 
     });
     fetch(
-        link1 + 'UCd-nTzK6eK-LKGz3OUWfZ5Q' + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCd-nTzK6eK-LKGz3OUWfZ5Q&key=AIzaSyDaNQf62XxKaHnPRnub6FASIIudvk7n608'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -479,18 +485,21 @@ fetch(
 
         // Yay, `j` is a JavaScript object
         
-        a.innerHTML = adee.items[0].statistics.subscriberCount;
+        adeesubs.innerHTML = adee.items[0].statistics.subscriberCount;
                         fogview.innerHTML = adee.items[0].statistics.viewCount;
-                                                        adeename.innerHTML = adee.items[0].snippet.localized.title;
+                        adeeprofile.src =   adee.items[0].snippet.thumbnails.default.url;
+                                              adeename.innerHTML =   adee.items[0].snippet.title;
 
-
+        if (screen.width >= 1800) {
+    adeeprofile.src = adee.items[0].snippet.thumbnails.medium.url
+    }
 
 
 
     });
 
     fetch(
-       link1 + 'UCol2LuK5wkUQlS_fhS8KgUA' + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCol2LuK5wkUQlS_fhS8KgUA&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc+'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -498,11 +507,14 @@ fetch(
 
         // Yay, `j` is a JavaScript object
         
-        m.innerHTML = ks.items[0].statistics.subscriberCount;
+        kssubs.innerHTML = ks.items[0].statistics.subscriberCount;
                         ksview.innerHTML = ks.items[0].statistics.viewCount;
-                                                        kidname.innerHTML = ks.items[0].snippet.localized.title;
+                                             kidsharkprofile.src =  ks.items[0].snippet.thumbnails.default.url;
+                                              kidname.innerHTML =   ks.items[0].snippet.title;
 
-
+ if (screen.width >= 1800) {
+    kidsharkprofile.src = ks.items[0].snippet.thumbnails.medium.url
+    }
 
 
        
@@ -511,7 +523,7 @@ fetch(
 
 
 fetch(
-      link1 +  'UCiDKBr-h_v2JzAme_l-Rxhw' + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCiDKBr-h_v2JzAme_l-Rxhw&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc+'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -521,9 +533,12 @@ fetch(
         
         brysonsubs.innerHTML = bryson.items[0].statistics.subscriberCount;
                         brysonview.innerHTML = bryson.items[0].statistics.viewCount;
-                                                        brysonname.innerHTML = bryson.items[0].snippet.localized.title;
+                                             brysonprofile.src =  bryson.items[0].snippet.thumbnails.default.url;
+                                              brysonname.innerHTML =   bryson.items[0].snippet.title;
 
-
+ if (screen.width >= 1800) {
+    brysonprofile.src = bryson.items[0].snippet.thumbnails.medium.url
+    }
 
 
        
@@ -532,7 +547,7 @@ fetch(
 
 
     fetch(
-        link1 + "UCCs75eiciLbzwew0ukOaDZQ" + link2
+        'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCCs75eiciLbzwew0ukOaDZQ&key=AIzaSyDApB_SxncSbtLGauez4CLmh7iJdiy5rGc'
     ).then(function(response) {
         // Convert to JSON
         return response.json();
@@ -540,12 +555,14 @@ fetch(
 
         // Yay, `j` is a JavaScript object
         
-        faceoffsubs.innerHTML = face.items[0].statistics.subscriberCount;
+        fasubs.innerHTML = face.items[0].statistics.subscriberCount;
                         faceview.innerHTML = face.items[0].statistics.viewCount;
-                                                        faceoffname.innerHTML = face.items[0].snippet.localized.title;
+                        faceoffprofile.src =   face.items[0].snippet.thumbnails.default.url;
+                                              faceoffname.innerHTML =   face.items[0].snippet.title;
 
-
-     
+        if (screen.width >= 1800) {
+    faceoffprofile.src = face.items[0].snippet.thumbnails.medium.url
+    }
 
 
     });
@@ -564,7 +581,8 @@ var tviews = document.getElementById('tview');
     function finalsubload() {
 
 
-          div.innerHTML = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1) + (i.innerHTML*1) + (faceoffsubs.innerHTML*1) + (brysonsubs.innerHTML*1) + (sajinsubs.innerHTML*1) + (xavsubs.innerHTML*1);
+           div.innerHTML = (mangosubs.innerHTML*1) + (bmxsubs.innerHTML*1) +(tysksubs.innerHTML*1) + (adeesubs.innerHTML*1) + (kssubs.innerHTML*1) + (fasubs.innerHTML*1) + (brysonsubs.innerHTML*1) + (sajinsubs.innerHTML*1) + (xavsubs.innerHTML*1);
+
           tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1) +(fogview.innerHTML*1) + (ksview.innerHTML*1) + (bmxview.innerHTML*1) + (faceview.innerHTML*1 + (brysonview.innerHTML*1) + (sajinview.innerHTML*1) + (xavview.innerHTML*1));
 
     }
@@ -588,6 +606,5 @@ reloadsubs();
   ga('send', 'pageview');
 
 </script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"></script>
 </body>
 </html>
