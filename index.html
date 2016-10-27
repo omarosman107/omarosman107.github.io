@@ -121,6 +121,30 @@
         
       </tr>
 
+<tr>
+        <th scope="row">
+                        <a href="https://www.youtube.com/channel/UCPJxs7FsMnB6Use209YyQPw">
+<div class="profiles">
+
+            <img id='boyprofile' src = "https://yt3.ggpht.com/-RZZfIXebcRM/AAAAAAAAAAI/AAAAAAAAAAA/AfQuUXlIf_E/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"/> </div>
+
+        <br>
+
+<div id="boyname">
+        YOUNG BOY ISAIAH
+        </div>                          </a>
+
+          </br>
+          </th>
+        </th>
+        <td id="boysubs">
+          Subs
+        </td>
+        <td id="boyview">
+          views
+        </td>
+        
+      </tr>
 
 <tr>
         <th scope="row">
@@ -333,6 +357,11 @@ var div = document.getElementById('div');
     var xavprofile = document.getElementById('xavprofile');
 
 
+    var boyname = document.getElementById('boyname');
+    var boysubs = document.getElementById('boysubs');
+    var boyview = document.getElementById('boyview');
+    var boyprofile = document.getElementById('boyprofile');
+
 
 
 
@@ -357,6 +386,31 @@ function reloadsubs () {
                 i.innerHTML = tysk.items[0].statistics.subscriberCount;
                                 taview.innerHTML = tysk.items[0].statistics.viewCount;
                                 tyskname.innerHTML = tysk.items[0].snippet.localized.title;
+                                             
+                                             
+
+
+
+
+
+
+
+    });
+
+
+
+
+    fetch(
+         link1 + "UCPJxs7FsMnB6Use209YyQPw" + link2
+    ).then(function(response) {
+        // Convert to JSON
+        return response.json();
+    }).then(function(boy) {
+
+        // Yay, `j` is a JavaScript object
+                boysubs.innerHTML = boy.items[0].statistics.subscriberCount;
+                                boyview.innerHTML = boy.items[0].statistics.viewCount;
+                                boyname.innerHTML = boy.items[0].snippet.localized.title;
                                              
                                              
 
@@ -551,8 +605,8 @@ var tviews = document.getElementById('tview');
     function finalsubload() {
 
 
-          div.innerHTML = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1) + (i.innerHTML*1) + (faceoffsubs.innerHTML*1) + (brysonsubs.innerHTML*1) + (sajinsubs.innerHTML*1) + (xavsubs.innerHTML*1);
-          tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1) +(fogview.innerHTML*1) + (ksview.innerHTML*1) + (bmxview.innerHTML*1) + (faceview.innerHTML*1 + (brysonview.innerHTML*1) + (sajinview.innerHTML*1) + (xavview.innerHTML*1));
+          div.innerHTML = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1) + (i.innerHTML*1) + (faceoffsubs.innerHTML*1) + (brysonsubs.innerHTML*1) + (sajinsubs.innerHTML*1) + (xavsubs.innerHTML*1 + (boysubs.innerHTML*1));
+          tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1) +(fogview.innerHTML*1) + (ksview.innerHTML*1) + (bmxview.innerHTML*1) + (faceview.innerHTML*1 + (brysonview.innerHTML*1) + (sajinview.innerHTML*1) + (xavview.innerHTML*1) + (boyview.innerHTML*1));
 
     }
               
