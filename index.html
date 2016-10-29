@@ -272,29 +272,7 @@
 
       </tr>
 
-      <tr>
-        <th scope="row">
-                        <a href="https://www.youtube.com/user/TheGrayStone1">
-<div class="profiles">
 
-            <img id='adeeprofile' src = "https://yt3.ggpht.com/-2mi11RibXrY/AAAAAAAAAAI/AAAAAAAAAAA/k1lXZIW4D-A/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"/> </div>
-
-
-        <br>
-
-<div id="adeename">
-        AdeeTheGamer
-        </div>          </br>
-          </a>
-        </th>
-        <td id="a">
-          Subs
-        </td>
-        <td id="fogview">
-          views
-        </td>
-
-      </tr>
 
 
 
@@ -569,24 +547,7 @@ fetch(
 
 
     });
-    fetch(
-        link1 + 'UCd-nTzK6eK-LKGz3OUWfZ5Q' + link2
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(adee) {
 
-        // Yay, `j` is a JavaScript object
-
-        a.innerHTML = adee.items[0].statistics.subscriberCount;
-                        fogview.innerHTML = adee.items[0].statistics.viewCount;
-                                                        adeename.innerHTML = adee.items[0].snippet.localized.title;
-
-
-
-
-
-    });
 
     fetch(
        link1 + 'UCol2LuK5wkUQlS_fhS8KgUA' + link2
@@ -648,10 +609,8 @@ fetch(
 
 
     });
-    var subnum = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1)
 
 
-    var finalsubcount =  ("The Sub Count For All Of these channels is ") + subnum
 
 
 
@@ -663,8 +622,8 @@ var tviews = document.getElementById('tview');
     function finalsubload() {
 
 
-          div.innerHTML = (f.innerHTML*1) + (a.innerHTML*1) +(d.innerHTML*1) + (m.innerHTML*1) + (i.innerHTML*1) + (faceoffsubs.innerHTML*1) + (brysonsubs.innerHTML*1) + (sajinsubs.innerHTML*1) + (xavsubs.innerHTML*1 + (boysubs.innerHTML*1));
-          tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1) +(fogview.innerHTML*1) + (ksview.innerHTML*1) + (bmxview.innerHTML*1) + (faceview.innerHTML*1 + (brysonview.innerHTML*1) + (sajinview.innerHTML*1) + (xavview.innerHTML*1) + (boyview.innerHTML*1));
+          div.innerHTML = (f.innerHTML*1)  +(d.innerHTML*1) + (m.innerHTML*1) + (i.innerHTML*1) + (faceoffsubs.innerHTML*1) + (brysonsubs.innerHTML*1) + (sajinsubs.innerHTML*1) + (xavsubs.innerHTML*1 + (boysubs.innerHTML*1));
+          tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1)  + (ksview.innerHTML*1) + (bmxview.innerHTML*1) + (faceview.innerHTML*1 + (brysonview.innerHTML*1) + (sajinview.innerHTML*1) + (xavview.innerHTML*1) + (boyview.innerHTML*1));
 
     }
 
