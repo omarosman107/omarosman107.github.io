@@ -76,9 +76,9 @@ div#channelimg {
     <tr>
 
       <th scope="row"><div id="channelimg">
-        <a id="link" href="https://www.youtube.com/channel/UCCs75eiciLbzwew0ukOaDZQ">
+        <a id="link" href="#">
 
-        <img height="100%" width="100%" id="channelprofile" src=""></div></th>
+        <img height="100%" width="100%" id="channelprofile" src="#"></div></th>
       <td><div id="channeln"></div>    </a>
 </td>
       <td><div id="channelsub"></div></td>
@@ -86,6 +86,19 @@ div#channelimg {
 </td>
     </tr>
 
+
+    <tr>
+
+      <th scope="row"><div id="channelimg">
+        <a id="link2" href="https://www.youtube.com/channel/UCCs75eiciLbzwew0ukOaDZQ">
+
+        <img height="100%" width="100%" id="channelprofile2" src="#"></div></th>
+      <td><div id="channeln2"></div>    </a>
+    </td>
+      <td><div id="channelsub2"></div></td>
+      <td><div id="channelview2"></div>
+    </td>
+    </tr>
   </tbody>
 </table>
 <script>
@@ -107,6 +120,14 @@ var ytid =  document.getElementById('ytchannelid');
 
 var link =  document.getElementById('link');
 
+var profile2 =  document.getElementById('channelprofile2');
+var name2 =  document.getElementById('channeln2');
+var subs2 =  document.getElementById('channelsub2');
+var views2 =  document.getElementById('channelview2');
+var ytid2 =  document.getElementById('ytchannelid2');
+
+var href2 =  document.getElementById('link2');
+
 
 
 
@@ -121,8 +142,16 @@ fetch(
       // Convert to JSON
       return response.json();
   }).then(function(convert) {
+    document.getElementById('channeln').innerHTML = convert.items[0].snippet.title;
+    profile.src = convert.items[0].snippet.thumbnails.high.url;
 
 link.href = "https://youtube.com/channel/" + convert.items[0].snippet.channelId;
+
+
+document.getElementById('channeln2').innerHTML = convert.items[1].snippet.title;
+profile2.src = convert.items[1].snippet.thumbnails.high.url;
+
+href2.href = "https://youtube.com/channel/" + convert.items[1].snippet.channelId;
 
 
 
@@ -135,11 +164,9 @@ fetch(
   }).then(function(data) {
 
 
-           document.getElementById('channeln').innerHTML = data.items[0].snippet.localized.title;
 
               subs.innerHTML = data.items[0].statistics.subscriberCount;
                               views.innerHTML = data.items[0].statistics.viewCount;
-                          profile.src = data.items[0].snippet.thumbnails.high.url;
 
 
 
@@ -151,6 +178,31 @@ fetch(
 
 
   });
+
+console.log(link1 + convert.items[1].snippet.channelId + link2);
+
+  fetch(
+         link1 + convert.items[1].snippet.channelId + link2
+    ).then(function(response) {
+        // Convert to JSON
+        return response.json();
+    }).then(function(data2) {
+
+
+
+                subs2.innerHTML = data2.items[0].statistics.subscriberCount;
+                                views2.innerHTML = data2.items[0].statistics.viewCount;
+
+
+
+
+
+
+
+
+
+
+    });
 
 });
 
