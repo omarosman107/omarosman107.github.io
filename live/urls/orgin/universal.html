@@ -24,7 +24,7 @@
 
 
 function reload() {
-    fetch('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Flivestream.com%2Fapi%2Faccounts%2F2058831%2Fevents%2Funiversalsomalitv%2Fviewing_info.json%22%20and%20itemPath%3D%22json%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys').then(function(response) {
+    fetch('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Flivestream.com%2Fapi%2Faccounts%2F2058831%2Fevents%2Funiversalsomalitv%2Fviewing_info.json%22%20and%20itemPath%3D%22json%22&format=json').then(function(response) {
   // Convert to JSON
   return response.json();
 }).then(function(r) {
