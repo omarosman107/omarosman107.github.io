@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
 
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
 <style>
 
@@ -23,6 +25,23 @@ h1 {
 }
 div#channelimg {
     width: 50%;
+}
+@media (max-width: 600px) {
+div#channelimg {
+    width: 150%;
+}
+}
+
+.mdl-data-table {
+
+    width: 100%;
+    text-align: center;
+}
+.mdl-textfield {
+
+    width: 90%;
+    max-width: 100%;
+
 }
 </style>
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -58,12 +77,26 @@ div#channelimg {
   <hr class="m-y-2" />
 
   <div class="form-group">
-    <input type="text" class="form-control" value="" id="ytchannelid" oninput="loadsub();" placeholder="Enter Channel Name">
+
+    <!-- Textfield with Floating Label -->
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input id="ytchannelid" oninput="loadsub();" class="mdl-textfield__input" type="text" >
+        <label class="mdl-textfield__label" for="sample3">Enter Channel Name here</label>
+      </div>
+
   </div>
 
-  <button onclick=loadsub() type="button" class="btn btn-primary">Load Info</button>
+  <!-- Colored FAB button with ripple -->
+<button  onclick=loadsub() class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+  <i class="material-icons">add</i>
+</button>
 </div>
-<table class="table table-hover">
+
+
+
+
+<table class="mdl-data-table mdl-js-data-table mdl-data-table">
   <thead>
     <tr>
       <th>Profile</th>
@@ -78,7 +111,7 @@ div#channelimg {
       <th scope="row"><div id="channelimg">
         <a id="link" href="#">
 
-        <img height="100%" width="100%" id="channelprofile" src="#"></div></th>
+        <img height="100%" width="100%" id="channelprofile" ></div></th>
       <td><div id="channeln"></div>    </a>
 </td>
       <td><div id="channelsub"></div></td>
@@ -92,7 +125,7 @@ div#channelimg {
       <th scope="row"><div id="channelimg">
         <a id="link2" href="https://www.youtube.com/channel/UCCs75eiciLbzwew0ukOaDZQ">
 
-        <img height="100%" width="100%" id="channelprofile2" src="#"></div></th>
+        <img height="100%" width="100%" id="channelprofile2"></div></th>
       <td><div id="channeln2"></div>    </a>
     </td>
       <td><div id="channelsub2"></div></td>
@@ -104,12 +137,13 @@ div#channelimg {
 <script>
 
 var namelink1 = ("https://www.googleapis.com/youtube/v3/search?part=snippet&q=");
-var namelink2 = ("&type=channel&maxResults=50&key=AIzaSyCrIMmwqmqGYvrOV-AgFBoLPxrTRRfqkY4")
+var namelink2 = ("&type=channel&maxResults=2&key=AIzaSyCrIMmwqmqGYvrOV-AgFBoLPxrTRRfqkY4")
 
 var link1 = ("https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=");
 var link2 = ("&fields=items/snippet/thumbnails/high/url,items/statistics/subscriberCount,items/snippet/localized/title,items/statistics/viewCount&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY")
 
 
+var table =  document.getElementById('table');
 
 
 var profile =  document.getElementById('channelprofile');
@@ -142,18 +176,6 @@ fetch(
       // Convert to JSON
       return response.json();
   }).then(function(convert) {
-    document.getElementById('channeln').innerHTML = convert.items[0].snippet.title;
-    profile.src = convert.items[0].snippet.thumbnails.high.url;
-
-link.href = "https://youtube.com/channel/" + convert.items[0].snippet.channelId;
-
-
-document.getElementById('channeln2').innerHTML = convert.items[1].snippet.title;
-profile2.src = convert.items[1].snippet.thumbnails.high.url;
-
-href2.href = "https://youtube.com/channel/" + convert.items[1].snippet.channelId;
-
-
 
 
 fetch(
@@ -162,6 +184,9 @@ fetch(
       // Convert to JSON
       return response.json();
   }).then(function(data) {
+
+
+
 
 
 
@@ -195,6 +220,18 @@ console.log(link1 + convert.items[1].snippet.channelId + link2);
 
 
 
+
+
+                                document.getElementById('channeln').innerHTML = convert.items[0].snippet.title;
+                                profile.src = convert.items[0].snippet.thumbnails.high.url;
+
+                                link.href = "https://youtube.com/channel/" + convert.items[0].snippet.channelId;
+
+
+                                document.getElementById('channeln2').innerHTML = convert.items[1].snippet.title;
+                                profile2.src = convert.items[1].snippet.thumbnails.high.url;
+
+                                href2.href = "https://youtube.com/channel/" + convert.items[1].snippet.channelId;
 
 
 

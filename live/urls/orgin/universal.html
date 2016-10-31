@@ -21,36 +21,29 @@
 
 <script>
 
-http://anyorigin.com/get?url=http%3A//cablecentral.tk/urls/cnn.m3u8&callback=?
 
 
 function reload() {
-    fetch('https://crossorigin.me/http://livestream.com/api/accounts/2058831/events/universalsomalitv/viewing_info.json').then(function(response) { 
+    fetch('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Flivestream.com%2Fapi%2Faccounts%2F2058831%2Fevents%2Funiversalsomalitv%2Fviewing_info.json%22%20and%20itemPath%3D%22json%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys').then(function(response) {
   // Convert to JSON
   return response.json();
 }).then(function(r) {
   // Yay, `j` is a JavaScript object
 
-  console.log(r); 
+  console.log(r);
 
-    var finalurl = ("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)
 
-     player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.streamInfo.secure_m3u8_url)});
-     player.play;
+     player.src({"type":"application/x-mpegURL", "src":("https://crossorigin.me/"+r.query.results.json.streamInfo.secure_m3u8_url)});
+     player.play();
 
-     
-   
-    console.log(r.streamInfo);
 
-if (r.streamInfo = null) 
-{
 
-  console.log("NOT LIVE")
-}  
+
+
 
 });
 }
- 
+
  reload();
 
  setInterval(reload,1680000);
@@ -59,4 +52,3 @@ if (r.streamInfo = null)
 
 
 </body>
-
