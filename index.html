@@ -54,11 +54,11 @@
         <th>
           Name
         </th>
-        <th id"subs">
+        <th id="subs" style="padding-left:6%;">
           Subs
         </th>
         </th>
-        <th id"tviews"="" style="padding-left:6%;">
+        <th style="padding-left:10%;" >
         views
         </th>
 
@@ -305,350 +305,77 @@
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
 
-<script>
-
+<script async>
 var link1 = ("https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=");
 var link2 = ("&fields=items/statistics/subscriberCount,items/snippet/localized/title,items/statistics/viewCount&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY")
-
-
-
 function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
 loadCSS("https://fonts.googleapis.com/css?family=Roboto:700");
 function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
 loadCSS("css/style.css");
-
-
-
-
-
-
-
 var div = document.getElementById('div');
-    var f = document.getElementById('f');
-    var d = document.getElementById('d');
-    var a = document.getElementById('a');
-    var m = document.getElementById('m');
-    var i = document.getElementById('i');
-    var faceoffsubs = document.getElementById('fasubs');
-    var kidsharkprofile =  document.getElementById('kidsharkprofile');
-    var mangodirtprofile = document.getElementById('mangodirtprofile');
-    var bmxprofile = document.getElementById('bmxprofile');
-
-    var adeeprofile = document.getElementById('adeeprofile');
-
-    var tyskprofile = document.getElementById('tyskprofile');
-
-    var faceoffprofile = document.getElementById('faceoffprofile');
-
-
-    var mangoname = document.getElementById('mangoname');
-    var bmxname = document.getElementById('bmxname');
-    var faceoffname = document.getElementById('faceoffname');
-    var adeename = document.getElementById('adeename');
-    var kidname = document.getElementById('kidname');
-    var tyskname = document.getElementById('tyskname');
-
-
-        var brysonname = document.getElementById('brysonname');
-    var brysonsubs = document.getElementById('brysonsubs');
-    var brysonview = document.getElementById('brysonview');
-    var brysonprofile = document.getElementById('brysonprofile');
-
-        var sajinname = document.getElementById('sajinname');
-    var sajinsubs = document.getElementById('sajinsubs');
-    var sajinview = document.getElementById('sajinview');
-    var sajinprofile = document.getElementById('sajinprofile');
-
-    var xavname = document.getElementById('xavname');
-    var xavsubs = document.getElementById('xavsubs');
-    var xavview = document.getElementById('xavview');
-    var xavprofile = document.getElementById('xavprofile');
-
-
-    var boyname = document.getElementById('boyname');
-    var boysubs = document.getElementById('boysubs');
-    var boyview = document.getElementById('boyview');
-    var boyprofile = document.getElementById('boyprofile');
-
-
-		var anesaname = document.getElementById('anesaname');
-    var anesasubs = document.getElementById('anesasubs');
-    var anesaview = document.getElementById('anesaview');
-    var anesaprofile = document.getElementById('anesaprofile');
-
-
-
-
-
-
-function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
-loadCSS("");
-
-
-https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC5uDqiEEXm_3Vsrl-5F2V7g&fields=items/statistics&key=AIzaSyDEoLUnWe9oL-3jyscdTg-gQd4DLRx72mo
-
-function reloadsubs () {
-
-
-	fetch(
-				 link1 + "UCkCtz2jM4nIXEbU7y1tYXkQ" + link2
-		).then(function(response) {
-				// Convert to JSON
-				return response.json();
-		}).then(function(anesa) {
-
-				// Yay, `j` is a JavaScript object
-								anesasubs.innerHTML = anesa.items[0].statistics.subscriberCount;
-																anesaview.innerHTML = anesa.items[0].statistics.viewCount;
-																anesaname.innerHTML = anesa.items[0].snippet.localized.title;
-
-
-
-
-
-
-
-
-
-		});
-
-
-
-  fetch(
-         link1 + "UCvn6blqSVKRoioUVO4XwUCA" + link2
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(tysk) {
-
-        // Yay, `j` is a JavaScript object
-                i.innerHTML = tysk.items[0].statistics.subscriberCount;
-                                taview.innerHTML = tysk.items[0].statistics.viewCount;
-                                tyskname.innerHTML = tysk.items[0].snippet.localized.title;
-
-
-
-
-
-
-
-
-
-    });
-
-
-
-
-    fetch(
-         link1 + "UCPJxs7FsMnB6Use209YyQPw" + link2
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(boy) {
-
-        // Yay, `j` is a JavaScript object
-                boysubs.innerHTML = boy.items[0].statistics.subscriberCount;
-                                boyview.innerHTML = boy.items[0].statistics.viewCount;
-                                boyname.innerHTML = boy.items[0].snippet.localized.title;
-
-
-
-
-
-
-
-
-
-    });
-
-
-
-
-
-fetch(
-        link1 +'UCgW-EIsK_8vjF66s1HIchpA'+ link2
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(xav) {
-
-        // Yay, `j` is a JavaScript object
-                xavsubs.innerHTML = xav.items[0].statistics.subscriberCount;
-                                xavview.innerHTML = xav.items[0].statistics.viewCount;
-                                xavname.innerHTML = xav.items[0].snippet.localized.title;
-
-
-
-
-
-
-    });
-
-
-
-
-
-
-
-fetch(
-        link1 +'UCWi-PdEHG8YofbhsK2o76DA' + link2
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(sajin) {
-
-        // Yay, `j` is a JavaScript object
-                sajinsubs.innerHTML = sajin.items[0].statistics.subscriberCount;
-                                sajinview.innerHTML = sajin.items[0].statistics.viewCount;
-                                                                sajinname.innerHTML = sajin.items[0].snippet.localized.title;
-
-
-
-
-
-
-
-    });
-
-
-
-
-  fetch(
-        link1 + 'UC5uDqiEEXm_3Vsrl-5F2V7g' + link2
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(md) {
-
-        // Yay, `j` is a JavaScript object
-                f.innerHTML = md.items[0].statistics.subscriberCount;
-                                mdview.innerHTML = md.items[0].statistics.viewCount;
-                                                                mangoname.innerHTML = md.items[0].snippet.localized.title;
-
-
-
-
-
-
-
-
-    });
-    fetch(
-        link1 +'UC8R0KPxDEQSj_OBzQ6Xqz_Q' + link2
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(bmx) {
-
-        // Yay, `j` is a JavaScript object
-        d.innerHTML = bmx.items[0].statistics.subscriberCount;
-                        bmxview.innerHTML = bmx.items[0].statistics.viewCount;
-                                                        bmxname.innerHTML = bmx.items[0].snippet.localized.title;
-
-
-
-
-
-    });
-
-
-    fetch(
-       link1 + 'UCol2LuK5wkUQlS_fhS8KgUA' + link2
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(ks) {
-
-        // Yay, `j` is a JavaScript object
-
-        m.innerHTML = ks.items[0].statistics.subscriberCount;
-                        ksview.innerHTML = ks.items[0].statistics.viewCount;
-                                                        kidname.innerHTML = ks.items[0].snippet.localized.title;
-
-
-
-
-
-
-    });
-
-
-fetch(
-      link1 +  'UCiDKBr-h_v2JzAme_l-Rxhw' + link2
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(bryson) {
-
-        // Yay, `j` is a JavaScript object
-
-        brysonsubs.innerHTML = bryson.items[0].statistics.subscriberCount;
-                        brysonview.innerHTML = bryson.items[0].statistics.viewCount;
-                                                        brysonname.innerHTML = bryson.items[0].snippet.localized.title;
-
-
-
-
-
-
-    });
-
-
-    fetch(
-        link1 + "UCCs75eiciLbzwew0ukOaDZQ" + link2
-    ).then(function(response) {
-        // Convert to JSON
-        return response.json();
-    }).then(function(face) {
-
-        // Yay, `j` is a JavaScript object
-
-        faceoffsubs.innerHTML = face.items[0].statistics.subscriberCount;
-                        faceview.innerHTML = face.items[0].statistics.viewCount;
-                                                        faceoffname.innerHTML = face.items[0].snippet.localized.title;
-
-
-
-
-
-    });
-
-
-
-
-
-
-
-}
+var f = document.getElementById('f');
+var d = document.getElementById('d');
+var a = document.getElementById('a');
+var m = document.getElementById('m');
+var i = document.getElementById('i');
 var tviews = document.getElementById('tview');
-
-    function finalsubload() {
-
-
-          div.innerHTML = (f.innerHTML*1)  +(d.innerHTML*1) + (m.innerHTML*1) + (i.innerHTML*1) + (faceoffsubs.innerHTML*1) + (brysonsubs.innerHTML*1) + (sajinsubs.innerHTML*1) + (xavsubs.innerHTML*1 + (boysubs.innerHTML*1));
-          tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1)  + (ksview.innerHTML*1) + (bmxview.innerHTML*1) + (faceview.innerHTML*1 + (brysonview.innerHTML*1) + (sajinview.innerHTML*1) + (xavview.innerHTML*1) + (boyview.innerHTML*1));
-
-    }
-
-finalsubload();
-reloadsubs();
-     setInterval(finalsubload,30);
-          setInterval(reloadsubs,900);
-
-
-
-</script>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-66082501-4', 'auto');
-  ga('send', 'pageview');
-
-</script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"></script>
-</body>
-</html>
+var faceoffsubs = document.getElementById('fasubs');
+var kidsharkprofile =  document.getElementById('kidsharkprofile');
+var mangodirtprofile = document.getElementById('mangodirtprofile');
+var bmxprofile = document.getElementById('bmxprofile');
+var adeeprofile = document.getElementById('adeeprofile');
+var tyskprofile = document.getElementById('tyskprofile');
+var faceoffprofile = document.getElementById('faceoffprofile');
+var mangoname = document.getElementById('mangoname');
+var bmxname = document.getElementById('bmxname');
+var faceoffname = document.getElementById('faceoffname');
+var adeename = document.getElementById('adeename');
+var kidname = document.getElementById('kidname');
+var tyskname = document.getElementById('tyskname');
+var brysonname = document.getElementById('brysonname');
+var brysonsubs = document.getElementById('brysonsubs');
+var brysonview = document.getElementById('brysonview');
+var brysonprofile = document.getElementById('brysonprofile');
+var sajinname = document.getElementById('sajinname');
+var sajinsubs = document.getElementById('sajinsubs');
+var sajinview = document.getElementById('sajinview');
+var sajinprofile = document.getElementById('sajinprofile');
+var xavname = document.getElementById('xavname');
+var xavsubs = document.getElementById('xavsubs');
+var xavview = document.getElementById('xavview');
+var xavprofile = document.getElementById('xavprofile');
+var boyname = document.getElementById('boyname');
+var boysubs = document.getElementById('boysubs');
+var boyview = document.getElementById('boyview');
+var boyprofile = document.getElementById('boyprofile');
+var anesaname = document.getElementById('anesaname');
+var anesasubs = document.getElementById('anesasubs');
+var anesaview = document.getElementById('anesaview');
+var anesaprofile = document.getElementById('anesaprofile');
+function reloadsubs () {
+// Anesa
+fetch(link1 + "UCkCtz2jM4nIXEbU7y1tYXkQ" + link2).then(function(response) {return response.json();}).then(function(anesa) {anesasubs.innerHTML = anesa.items[0].statistics.subscriberCount;anesaview.innerHTML = anesa.items[0].statistics.viewCount;anesaname.innerHTML = anesa.items[0].snippet.localized.title;});
+// Tysk Agario
+fetch(link1 + "UCvn6blqSVKRoioUVO4XwUCA" + link2).then(function(response) {return response.json();}).then(function(tysk) {i.innerHTML = tysk.items[0].statistics.subscriberCount;taview.innerHTML = tysk.items[0].statistics.viewCount;tyskname.innerHTML = tysk.items[0].snippet.localized.title;});
+// Young Boy Isiah
+fetch(link1 + "UCPJxs7FsMnB6Use209YyQPw" + link2).then(function(response) {return response.json();}).then(function(boy) {boysubs.innerHTML = boy.items[0].statistics.subscriberCount;boyview.innerHTML = boy.items[0].statistics.viewCount;boyname.innerHTML = boy.items[0].snippet.localized.title;});
+// Xavier
+fetch(link1 +'UCgW-EIsK_8vjF66s1HIchpA'+ link2).then(function(response) {return response.json();}).then(function(xav) {xavsubs.innerHTML = xav.items[0].statistics.subscriberCount;xavview.innerHTML = xav.items[0].statistics.viewCount;xavname.innerHTML = xav.items[0].snippet.localized.title;});
+// Sajin
+fetch(link1 +'UCWi-PdEHG8YofbhsK2o76DA' + link2).then(function(response) {return response.json();}).then(function(sajin) {sajinsubs.innerHTML = sajin.items[0].statistics.subscriberCount;sajinview.innerHTML = sajin.items[0].statistics.viewCount;sajinname.innerHTML = sajin.items[0].snippet.localized.title;});
+// MangoDirt
+fetch(link1 + 'UC5uDqiEEXm_3Vsrl-5F2V7g' + link2).then(function(response) {return response.json();}).then(function(md) {f.innerHTML = md.items[0].statistics.subscriberCount;mdview.innerHTML = md.items[0].statistics.viewCount;mangoname.innerHTML = md.items[0].snippet.localized.title;});
+// THE BMX BOYS
+fetch(link1 +'UC8R0KPxDEQSj_OBzQ6Xqz_Q' + link2).then(function(response) {return response.json();}).then(function(bmx) {d.innerHTML = bmx.items[0].statistics.subscriberCount;bmxview.innerHTML = bmx.items[0].statistics.viewCount;bmxname.innerHTML = bmx.items[0].snippet.localized.title;});
+// Kid_Sh4rk
+fetch(link1 + 'UCol2LuK5wkUQlS_fhS8KgUA' + link2).then(function(response) {return response.json();}).then(function(ks) {m.innerHTML = ks.items[0].statistics.subscriberCount;ksview.innerHTML = ks.items[0].statistics.viewCount;kidname.innerHTML = ks.items[0].snippet.localized.title;});
+// BrysonGoCray
+fetch(link1 +'UCiDKBr-h_v2JzAme_l-Rxhw' + link2).then(function(response) {return response.json();}).then(function(bryson) {brysonsubs.innerHTML = bryson.items[0].statistics.subscriberCount;brysonview.innerHTML = bryson.items[0].statistics.viewCount;brysonname.innerHTML = bryson.items[0].snippet.localized.title;});
+// FaceOffGaming
+fetch(link1 + "UCCs75eiciLbzwew0ukOaDZQ" + link2).then(function(response) {return response.json();}).then(function(face) {faceoffsubs.innerHTML = face.items[0].statistics.subscriberCount;faceview.innerHTML = face.items[0].statistics.viewCount;faceoffname.innerHTML = face.items[0].snippet.localized.title;});}
+function finalsubload() {div.innerHTML = (f.innerHTML*1)  +(d.innerHTML*1) + (m.innerHTML*1) + (i.innerHTML*1) + (faceoffsubs.innerHTML*1) + (brysonsubs.innerHTML*1) + (sajinsubs.innerHTML*1) + (xavsubs.innerHTML*1 + (boysubs.innerHTML*1));tviews.innerHTML = (mdview.innerHTML*1) + (taview.innerHTML*1)  + (ksview.innerHTML*1) + (bmxview.innerHTML*1) + (faceview.innerHTML*1 + (brysonview.innerHTML*1) + (sajinview.innerHTML*1) + (xavview.innerHTML*1) + (boyview.innerHTML*1));}
+finalsubload();reloadsubs();setInterval(finalsubload,30);setInterval(reloadsubs,900);
+</script><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-66082501-4', 'auto');ga('send', 'pageview');</script>
+<script aync type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"></script>
+</body></html>
