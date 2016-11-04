@@ -5,13 +5,22 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
-<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 
 <style>
 
 
-
+.mdl-textfield {
+    width: 84%;
+    max-width: 100%;
+    margin: auto;
+}
  body {
 
  }
@@ -26,16 +35,13 @@ h1 {
 div#channelimg {
     width: 50%;
 }
-@media (max-width: 600px) {
-div#channelimg {
-    width: 150%;
-}
-}
+@media (min-width: 601px) {
 
 .mdl-data-table {
 
-    width: 100%;
-    text-align: center;
+    width: 80%;
+    margin: auto;
+}
 }
 .mdl-textfield {
 
@@ -62,18 +68,11 @@ div#channelimg {
 
 
   <h1 id="div" >
-    load css fast in javascript
+    This Is the Live Subcount and viewCount of any youtuber
    </h1>
-<p class="lead">
-  function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
-  loadCSS("");  </p>
-  <h1 id="tview" >
-    Youtube V3 Api Get Details
-  </h1>
-  <p class="lead">
-    https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC5uDqiEEXm_3Vsrl-5F2V7g&fields=items/statistics&key=AIzaSyDEoLUnWe9oL-3jyscdTg-gQd4DLRx72mo
+<p >
+  This is a beta so please DM be at <a href="https://twitter.com/mangodirt">@mangodirt </a> for ideas or bugs that you have found!<p>
 
-  </p>
   <hr class="m-y-2" />
 
   <div class="form-group">
@@ -88,9 +87,9 @@ div#channelimg {
   </div>
 
   <!-- Colored FAB button with ripple -->
-<button  onclick=loadsub() class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-  <i class="material-icons">add</i>
-</button>
+
+<a onclick=loadsub() class="waves-effect waves-light btn-large"><i class="material-icons left">search</i>search</a>
+
 </div>
 
 
@@ -135,6 +134,12 @@ div#channelimg {
   </tbody>
 </table>
 <script>
+
+function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
+loadCSS("");
+
+https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC5uDqiEEXm_3Vsrl-5F2V7g&fields=items/statistics&key=AIzaSyDEoLUnWe9oL-3jyscdTg-gQd4DLRx72mo
+
 
 var namelink1 = ("https://www.googleapis.com/youtube/v3/search?part=snippet&q=");
 var namelink2 = ("&type=channel&maxResults=2&key=AIzaSyCrIMmwqmqGYvrOV-AgFBoLPxrTRRfqkY4")
