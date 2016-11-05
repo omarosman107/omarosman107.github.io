@@ -16,11 +16,7 @@
 <style>
 
 
-.mdl-textfield {
-    width: 84%;
-    max-width: 100%;
-    margin: auto;
-}
+
  body {
 
  }
@@ -36,15 +32,34 @@ div#channelimg {
     width: 50%;
 }
 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
 @media screen and (orientation:portrait) {
+  .mdl-textfield {
+
+      width: 100%;
+      max-width: 100%;
+      margin: auto;
+  }
 div#channelimg {
-    width: 115%;
 }
 }
 
 
 @media (min-width: 601px) {
 
+  .mdl-textfield {
+
+      width: 60%;
+      max-width: 100%;
+      margin: auto;
+
+  }
 
 .mdl-data-table {
 
@@ -52,12 +67,13 @@ div#channelimg {
     margin: auto;
 }
 }
-.mdl-textfield {
 
-    width: 90%;
-    max-width: 100%;
 
-}
+.preloader-wrapper.active{
+
+  left: 50%;
+      margin-left: -4em;
+    }
 </style>
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
@@ -65,7 +81,7 @@ div#channelimg {
 
 <meta name="apple-mobile-web-app-title" content="YT SubCount" />
 
-<meta name=viewport content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
 
   <title>YT sub</title>
@@ -100,6 +116,8 @@ div#channelimg {
 <a onclick=loadsub() class="waves-effect waves-light btn-large"><i class="material-icons left">search</i>search</a>
 
 </div>
+
+
 
 
 
@@ -143,6 +161,36 @@ div#channelimg {
   </tbody>
 </table>
 <script>
+function shortenNumber (num, decimalPlaces) {
+var str,
+    suffix = '';
+
+decimalPlaces = decimalPlaces || 0;
+num = +num;
+
+var factor = Math.pow(10, decimalPlaces);
+
+
+//99999 -> 99.9K
+
+if (num < 1000) {
+    str = num;
+} else if (num < 1000000) {
+    str = Math.floor(num / (1000 / factor)) / factor;
+    suffix = 'K';
+} else if (num < 1000000000) {
+    str = Math.floor(num / (1000000 / factor)) / factor;
+    suffix = 'M';
+} else if (num < 1000000000000) {
+    str = Math.floor(num / (1000000000 / factor)) / factor;
+    suffix = 'B';
+} else if (num < 1000000000000000) {
+    str = Math.floor(num / (1000000000000 / factor)) / factor;
+    suffix = 'T';
+}
+return str + suffix;
+}
+
 
 function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
 loadCSS("");
@@ -155,6 +203,8 @@ var namelink2 = ("&type=channel&maxResults=2&key=AIzaSyCrIMmwqmqGYvrOV-AgFBoLPxr
 
 var link1 = ("https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=");
 var link2 = ("&fields=items/snippet/thumbnails/high/url,items/statistics/subscriberCount,items/snippet/localized/title,items/statistics/viewCount&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY")
+var spinner =  document.getElementById('spinner');
+var lineload =  document.getElementById('lineload');
 
 
 var table =  document.getElementById('table');
@@ -205,8 +255,12 @@ fetch(
 
 
               subs.innerHTML = data.items[0].statistics.subscriberCount;
-                              views.innerHTML = data.items[0].statistics.viewCount;
+                              views.innerHTML =(data.items[0].statistics.viewCount);
+                              if (screen.width < 400) {
+                                views.innerHTML =(shortenNumber(data.items[0].statistics.viewCount));
+                                subs.innerHTML = (shortenNumber(data.items[0].statistics.subscriberCount));
 
+                              }
 
 
 
@@ -218,7 +272,6 @@ fetch(
 
   });
 
-console.log(link1 + convert.items[1].snippet.channelId + link2);
 
   fetch(
          link1 + convert.items[1].snippet.channelId + link2
@@ -230,7 +283,14 @@ console.log(link1 + convert.items[1].snippet.channelId + link2);
 
 
                 subs2.innerHTML = data2.items[0].statistics.subscriberCount;
-                                views2.innerHTML = data2.items[0].statistics.viewCount;
+                views2.innerHTML =(data2.items[0].statistics.viewCount);
+
+                if (screen.width < 400) {
+                  views2.innerHTML =(shortenNumber(data2.items[0].statistics.viewCount));
+                  subs2.innerHTML = (shortenNumber(data2.items[0].statistics.subscriberCount));
+
+                }
+
 
 
 
