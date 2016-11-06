@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+<style>
+
+
+
+ body {
+
+ }
+h1 {
+
+}
+
+.jumbotron {
+
+  text-align: center;
+}
+div#channelimg {
+    width: 50%;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
+@media screen and (orientation:portrait) {
+  .mdl-textfield {
+
+      width: 100%;
+      max-width: 100%;
+      margin: auto;
+  }
+div#channelimg {
+}
+}
+
+
+@media (min-width: 601px) {
+
+  .mdl-textfield {
+
+      width: 60%;
+      max-width: 100%;
+      margin: auto;
+
+  }
+
+.mdl-data-table {
+
+    width: 80%;
+    margin: auto;
+}
+}
+
+
+.preloader-wrapper.active{
+
+  left: 50%;
+      margin-left: -4em;
+    }
+</style>
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-title" content="YT SubCount" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+
+  <title>YT sub</title>
+</head>
+<body>
+
+
+<div class="jumbotron">
+
+
+  <img height="120px" width="120px" src="logo.svg">
+
+<p >
+  This is a beta so please DM me  <a href="https://twitter.com/mangodirt">@mangodirt </a> for ideas or bugs that you have found!<p>
+
+  <hr class="m-y-2" />
+
+  <div class="form-group">
+
+    <!-- Textfield with Floating Label -->
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input id="ytchannelid" oninput="loadsub();" class="mdl-textfield__input" type="text" >
+        <label class="mdl-textfield__label" for="sample3">Enter Channel Name here</label>
+      </div>
+
+  </div>
+
+  <!-- Colored FAB button with ripple -->
+
+<a onclick=loadsub() class="btn-floating btn-large waves-effect waves-light teal"><i class="material-icons left">search</i>search</a>
+
+</div>
+
+
+
+
+
+
+<table class="mdl-data-table mdl-js-data-table mdl-data-table">
+  <thead>
+    <tr>
+      <th>Profile</th>
+      <th>Channel Name</th>
+      <th>Subs</th>
+      <th>Total Views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+      <th scope="row"><div id="channelimg">
+        <a id="link" href="#">
+
+        <img height="100%" width="100%" id="channelprofile" ></div></th>
+      <td><div id="channeln"></div>    </a>
+</td>
+      <td><div id="channelsub"></div></td>
+      <td><div id="channelview"></div>
+</td>
+    </tr>
+
+
+    <tr>
+
+      <th scope="row"><div id="channelimg">
+        <a id="link2" href="https://www.youtube.com/channel/UCCs75eiciLbzwew0ukOaDZQ">
+
+        <img height="100%" width="100%" id="channelprofile2"></div></th>
+      <td><div id="channeln2"></div>    </a>
+    </td>
+      <td><div id="channelsub2"></div></td>
+      <td><div id="channelview2"></div>
+    </td>
+    </tr>
+  </tbody>
+</table>
+<script>
+function shortenNumber (num, decimalPlaces) {
+var str,
+    suffix = '';
+
+decimalPlaces = decimalPlaces || 0;
+num = +num;
+
+var factor = Math.pow(10, decimalPlaces);
+
+
+//99999 -> 99.9K
+
+if (num < 1000) {
+    str = num;
+} else if (num < 1000000) {
+    str = Math.floor(num / (1000 / factor)) / factor;
+    suffix = 'K';
+} else if (num < 1000000000) {
+    str = Math.floor(num / (1000000 / factor)) / factor;
+    suffix = 'M';
+} else if (num < 1000000000000) {
+    str = Math.floor(num / (1000000000 / factor)) / factor;
+    suffix = 'B';
+} else if (num < 1000000000000000) {
+    str = Math.floor(num / (1000000000000 / factor)) / factor;
+    suffix = 'T';
+}
+return str + suffix;
+}
+
+
+function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
+loadCSS("");
+
+https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC5uDqiEEXm_3Vsrl-5F2V7g&fields=items/statistics&key=AIzaSyDEoLUnWe9oL-3jyscdTg-gQd4DLRx72mo
+
+
+var namelink1 = ("https://www.googleapis.com/youtube/v3/search?part=snippet&q=");
+var namelink2 = ("&type=channel&maxResults=2&key=AIzaSyCrIMmwqmqGYvrOV-AgFBoLPxrTRRfqkY4")
+
+var link1 = ("https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=");
+var link2 = ("&fields=items/snippet/thumbnails/high/url,items/statistics/subscriberCount,items/snippet/localized/title,items/statistics/viewCount&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY")
+var spinner =  document.getElementById('spinner');
+var lineload =  document.getElementById('lineload');
+
+
+var table =  document.getElementById('table');
+
+
+var profile =  document.getElementById('channelprofile');
+var name =  document.getElementById('channeln');
+var subs =  document.getElementById('channelsub');
+var views =  document.getElementById('channelview');
+var ytid =  document.getElementById('ytchannelid');
+
+var link =  document.getElementById('link');
+
+var profile2 =  document.getElementById('channelprofile2');
+var name2 =  document.getElementById('channeln2');
+var subs2 =  document.getElementById('channelsub2');
+var views2 =  document.getElementById('channelview2');
+var ytid2 =  document.getElementById('ytchannelid2');
+
+var href2 =  document.getElementById('link2');
+
+
+
+
+
+
+function loadsub() {
+
+
+fetch(
+       namelink1 + ytid.value + namelink2
+  ).then(function(response) {
+      // Convert to JSON
+      return response.json();
+  }).then(function(convert) {
+
+
+fetch(
+       link1 + convert.items[0].snippet.channelId + link2
+  ).then(function(response) {
+      // Convert to JSON
+      return response.json();
+  }).then(function(data) {
+
+
+
+
+
+
+              subs.innerHTML = data.items[0].statistics.subscriberCount;
+                              views.innerHTML =(data.items[0].statistics.viewCount);
+                              if (screen.width < 500) {
+                                views.innerHTML =(shortenNumber(data.items[0].statistics.viewCount));
+                                subs.innerHTML = (shortenNumber(data.items[0].statistics.subscriberCount));
+
+                              }
+
+
+
+
+
+
+
+
+
+  });
+
+
+  fetch(
+         link1 + convert.items[1].snippet.channelId + link2
+    ).then(function(response) {
+        // Convert to JSON
+        return response.json();
+    }).then(function(data2) {
+
+
+
+                subs2.innerHTML = data2.items[0].statistics.subscriberCount;
+                views2.innerHTML =(data2.items[0].statistics.viewCount);
+
+                if (screen.width < 500) {
+                  views2.innerHTML =(shortenNumber(data2.items[0].statistics.viewCount));
+                  subs2.innerHTML = (shortenNumber(data2.items[0].statistics.subscriberCount));
+
+                }
+
+
+
+
+
+
+                                document.getElementById('channeln').innerHTML = convert.items[0].snippet.title;
+                                profile.src = convert.items[0].snippet.thumbnails.high.url;
+
+                                link.href = "https://youtube.com/channel/" + convert.items[0].snippet.channelId;
+
+
+                                document.getElementById('channeln2').innerHTML = convert.items[1].snippet.title;
+                                profile2.src = convert.items[1].snippet.thumbnails.high.url;
+
+                                href2.href = "https://youtube.com/channel/" + convert.items[1].snippet.channelId;
+
+
+
+
+
+
+
+    });
+
+});
+
+}
+
+
+
+
+
+
+</script>
+</body>
+  </html>
