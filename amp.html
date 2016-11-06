@@ -92,11 +92,10 @@ div#channelimg {
 <div class="jumbotron">
 
 
-  <h1  >
-    Live YT info
-   </h1>
+  <img height="120px" src="logo.png">
+
 <p >
-  This is a beta so please DM be at <a href="https://twitter.com/mangodirt">@mangodirt </a> for ideas or bugs that you have found!<p>
+  This is a beta so please DM me  <a href="https://twitter.com/mangodirt">@mangodirt </a> for ideas or bugs that you have found!<p>
 
   <hr class="m-y-2" />
 
@@ -113,7 +112,7 @@ div#channelimg {
 
   <!-- Colored FAB button with ripple -->
 
-<a onclick=loadsub() class="waves-effect waves-light btn-large"><i class="material-icons left">search</i>search</a>
+<a onclick=loadsub() class="btn-floating btn-large waves-effect waves-light teal"><i class="material-icons left">search</i>search</a>
 
 </div>
 
@@ -256,7 +255,7 @@ fetch(
 
               subs.innerHTML = data.items[0].statistics.subscriberCount;
                               views.innerHTML =(data.items[0].statistics.viewCount);
-                              if (screen.width < 400) {
+                              if (screen.width < 500) {
                                 views.innerHTML =(shortenNumber(data.items[0].statistics.viewCount));
                                 subs.innerHTML = (shortenNumber(data.items[0].statistics.subscriberCount));
 
@@ -285,7 +284,7 @@ fetch(
                 subs2.innerHTML = data2.items[0].statistics.subscriberCount;
                 views2.innerHTML =(data2.items[0].statistics.viewCount);
 
-                if (screen.width < 400) {
+                if (screen.width < 500) {
                   views2.innerHTML =(shortenNumber(data2.items[0].statistics.viewCount));
                   subs2.innerHTML = (shortenNumber(data2.items[0].statistics.subscriberCount));
 
