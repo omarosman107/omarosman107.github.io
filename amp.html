@@ -56,7 +56,23 @@ div#channelimg {
 }
 }
 
+@media (min-width: 601px) {
+#cssswitch {
+  text-align: right;
+  padding-right: 2%;
+  padding-top: 1%;
+  padding-bottom: 1%
 
+}
+}
+@media screen and (orientation:portrait) {
+#cssswitch {
+  text-align: right;
+  padding-right: 4%;
+  padding-top: 3%;
+  padding-bottom: 3%
+}
+}
 @media (min-width: 601px) {
 
   .mdl-textfield {
@@ -98,7 +114,7 @@ div#channelimg {
 </head>
 <body>
 
-  <div class="switch">
+  <div class="switch" id="cssswitch">
      <label>
        Off
        <input type="checkbox" name="materialcheckbox" id="switch" >
@@ -110,7 +126,7 @@ div#channelimg {
 <div id="jumbo" class="jumbotron">
 
 
-  <img height="120px" width="120px" src="logo.svg">
+  <img id="logotop" height="120px" width="120px" src="logo.svg">
 <p>
   This is a beta so please DM me  <a class="spf-link" href="https://twitter.com/mangodirt">@mangodirt </a> for ideas or bugs that you have found!<p>
 
@@ -325,6 +341,7 @@ $('#switch').click(function(){
 
 });
 
+var logo=document.getElementById('logotop');
 
 
 function makeDark() {
@@ -333,6 +350,7 @@ function makeDark() {
   document.body.style.color = "white";
   document.getElementById('jumbo').style.backgroundColor = "#424242";
   document.getElementById('tbody').style.backgroundColor = "#424242";
+  logo.src = "logow.png"
 
 
 
@@ -345,6 +363,7 @@ function reverse() {
   document.body.style.color = "black";
   document.getElementById('jumbo').style.backgroundColor = "#ffffff";
   document.getElementById('tbody').style.backgroundColor = "#ffffff";
+  logo.src = "logo.svg"
 
 
 
