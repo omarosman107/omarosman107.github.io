@@ -3,8 +3,13 @@
 
 <head>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<script> NProgress.start();</script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<div id="cssdiv">
 
+</div>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 
@@ -120,6 +125,22 @@
         .preloader-wrapper.active {
             margin-top: 5%;
         }
+        #nav-mobile li.search {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 120px;
+    margin-top: 1px;
+    padding: 1px 0 0 0;
+    z-index: 2;
+}
+nav {
+    color: #fff;
+    background-color: rgb(0, 150, 136);
+    width: 100%;
+    height: 56px;
+    line-height: 56px;
+}
     </style>
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
@@ -133,7 +154,7 @@
     <title>YT Modern Subcount</title>
 </head>
 
-<body>
+<body onload="NProgress.done()">
 
     <div class="hidden">
         <script type="text/javascript">
@@ -186,15 +207,23 @@
 
                 <hr class="m-y-2" />
 
+
                 <div class="form-group">
+
+
 
                     <!-- Textfield with Floating Label -->
 
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input id="ytchannelid" oninput="loadsub();" class="mdl-textfield__input" type="text">
-                        <label class="mdl-textfield__label" for="sample3">Enter Channel Name here</label>
-                    </div>
+                   
 
+
+
+  <div class="row">
+        <div class="input-field col s12">
+          <input id="search" type="text" oninput="loadsub();" class="validate">
+          <label for="search">Enter Channel</label>
+        </div>
+      </div>
                 </div>
 
                 <!-- Colored FAB button with ripple -->
@@ -203,18 +232,19 @@
 
                 <div id="spinner">
                   <div id="spinnera" class="preloader-wrapper big ">
-                <div class="spinner-layer spinner-blue-only">
-                  <div class="circle-clipper left">
-                    <div class="circle"></div>
-                  </div><div class="gap-patch">
-                    <div class="circle"></div>
-                  </div><div class="circle-clipper right">
-                    <div class="circle"></div>
-                  </div>
-                </div>
-                </div>
+      <div class="spinner-layer spinner-blue">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
                 </div>
 
+                
                 <table class="mdl-data-table mdl-js-data-table mdl-data-table">
                     <thead>
                         <tr>
@@ -273,6 +303,10 @@
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
                 <script>
+                NProgress.configure({ showSpinner: false });
+
+
+
                     function shortenNumber(num, decimalPlaces) {
                         var str,
                             suffix = '';
@@ -322,7 +356,7 @@
 
 
                         var namelink1 = ("https://www.googleapis.com/youtube/v3/search?part=snippet&q=");
-                    var namelink2 = ("&type=channel&maxResults=2&key=AIzaSyCrIMmwqmqGYvrOV-AgFBoLPxrTRRfqkY4")
+                    var namelink2 = ("&fields=items/id/channelId&type=channel&maxResults=2&key=AIzaSyCrIMmwqmqGYvrOV-AgFBoLPxrTRRfqkY4")
 
                     var link1 = ("https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=");
                     var link2 = ("&fields=items/snippet/thumbnails/high/url,items/statistics/subscriberCount,items/snippet/localized/title,items/statistics/viewCount&key=AIzaSyANLBp5fHf-XEsQnksu_-ygJMHviGQO7TY")
@@ -337,7 +371,7 @@
                     var name = document.getElementById('channeln');
                     var subs = document.getElementById('channelsub');
                     var views = document.getElementById('channelview');
-                    var ytid = document.getElementById('ytchannelid');
+                    var ytid = document.getElementById('search');
 
                     var link = document.getElementById('link');
 
@@ -369,27 +403,49 @@
 
 
                     function loadsub() {
+                      NProgress.start();
+
                       spinner.classList.value = "preloader-wrapper big active"
                         $.getJSON(namelink1 + ytid.value + namelink2, function(convert) {
 
 
+if(convert.items[0] == undefined) {
+
+console.log("working");
+views.innerHTML = "";
+subs.innerHTML = "";
+views2.innerHTML = "";
+subs2.innerHTML = "";
+profile.src = "";
+profile2.src = "";
+link.href = "";
+href2.href = "";
+channeln.innerHTML = "";
+channeln2.innerHTML = "";
 
 
-                            $.getJSON(link1 + convert.items[0].snippet.channelId + link2, function(data) {
+
+}
+
+if (convert.items[0]) {
+
+console.log("arrived");
+
+}
+                            $.getJSON(link1 + convert.items[0].id.channelId + link2, function(data) {
                                 subs.innerHTML = data.items[0].statistics.subscriberCount;
                                 views.innerHTML = (data.items[0].statistics.viewCount);
-
+ NProgress.inc()
                                 if (screen.width < 500) {
                                     views.innerHTML = (shortenNumber(data.items[0].statistics.viewCount));
                                     subs.innerHTML = (shortenNumber(data.items[0].statistics.subscriberCount));
 
                                 }
-                            });
 
-                            $.getJSON(link1 + convert.items[1].snippet.channelId + link2, function(data2) {
+                            $.getJSON(link1 + convert.items[1].id.channelId + link2, function(data2) {
                                 subs2.innerHTML = data2.items[0].statistics.subscriberCount;
                                 views2.innerHTML = (data2.items[0].statistics.viewCount);
-
+ NProgress.inc()
                                 if (screen.width < 500) {
                                     views2.innerHTML = (shortenNumber(data2.items[0].statistics.viewCount));
                                     subs2.innerHTML = (shortenNumber(data2.items[0].statistics.subscriberCount));
@@ -398,19 +454,21 @@
 
 
 
-                                document.getElementById('channeln').innerHTML = convert.items[0].snippet.title;
-                                profile.src = convert.items[0].snippet.thumbnails.high.url;
+                                document.getElementById('channeln').innerHTML = data.items[0].snippet.localized.title;
+                                profile.src = data.items[0].snippet.thumbnails.high.url;
 
-                                link.href = "https://youtube.com/channel/" + convert.items[0].snippet.channelId;
+                                link.href = "https://youtube.com/channel/" + convert.items[0].id.channelId;
 
 
-                                document.getElementById('channeln2').innerHTML = convert.items[1].snippet.title;
-                                profile2.src = convert.items[1].snippet.thumbnails.high.url;
+                                document.getElementById('channeln2').innerHTML = data2.items[0].snippet.localized.title;
+                                profile2.src = data2.items[0].snippet.thumbnails.high.url;
 
-                                href2.href = "https://youtube.com/channel/" + convert.items[1].snippet.channelId;
+                                href2.href = "https://youtube.com/channel/" + convert.items[1].id.channelId;
 
 
                                 spinner.classList.value = "preloader-wrapper big"
+                                NProgress.done()
+                            });
 
                             });
                         });
@@ -462,6 +520,8 @@
                         validate()
 
                     });
+
+
 
 
 
@@ -527,6 +587,9 @@
                     }
                     // document.write("<link rel='stylesheet' href='night.css' type='text/css'>"); for dynamic css!
 
+
+
+
                     if (checkmark.checked == true) {
                         console.log("not going to do auto css change :(");
                     } else {
@@ -535,7 +598,16 @@
 
                     }
                 </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-66082501-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </body>
 
 </html>
