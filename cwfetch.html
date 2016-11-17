@@ -1,0 +1,69 @@
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<input id="input" type="text" name="input">
+ <a id="buttonsearch" style="margin: auto;display: block;" onclick="fetchcw();" class="btn-floating btn-large waves-effect waves-light teal"><i class="material-icons left">search</i>search</a>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.6.2-2/hls.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video-js.min.css" /></head>
+<body>
+<video id=LS x-webkit-airplay="allow" preload=metadata class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls>
+<source src="#" type="application/x-mpegURL">
+</video>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video.min.js"></script>
+<script src="https://cdn.rawgit.com/Peer5/videojs-contrib-hls.js/master/src/videojs5.hlsjs.js"></script>
+<script>var player=videojs('LS');</script>
+
+
+<div id="div"></div>
+<script>
+
+var cid = document.getElementById('input')
+var div = document.getElementById('div')
+
+var url = "http://www.cwtv.com/shows/the-flash/?play=b0437a7b-754c-46cb-873d-77ec303cd72f"
+
+
+
+
+var link1 = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/"
+var link2 = "/partner/154?format=json"
+
+function fetchcw() {
+
+	var lastSegment = cid.value.split('/').pop();
+
+var stripped = lastSegment.substring(6);
+
+$.getJSON(link1 + stripped + link2, function(data) {
+    
+    console.log(data.videos.variantplaylist.uri)
+
+    if (data.videos.variantplaylist.uri) {
+
+
+ div.innerHTML = data.videos.variantplaylist.uri
+player.src({"type":"application/x-mpegURL", "src":(data.videos.variantplaylist.uri)});
+     player.play();
+    }else{
+    	alert("error")
+    }
+
+   
+
+                                
+                         
+
+                            });
+}
+
+</script>
+
+</html>
