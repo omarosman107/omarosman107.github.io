@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video-js.min.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/3.6.13/videojs-contrib-hls.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+
+
+<style type="text/css">
+    
+.embed-responsive-16by9 {
+    padding-bottom: 28.25%;
+    width: 50%;
+    margin: auto;
+    padding-top: 6%;
+
+}
+
+body {
+
+
+}
+
+@media (max-width: 800px){
+
+    .embed-responsive-16by9 {
+    padding-bottom: 59.25%;
+    width: 100%;
+    margin: auto;
+    padding-left: 0%;
+}
+}
+
+img {
+    vertical-align: middle;
+    border-radius: 6%;
+}
+
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<input id="input" type="text" class="form-control" name="input">
+
+
+
+<a id="buttonsearch" style="margin: auto;display: block;" onclick="fetchabc();" class="btn btn-primary">Load..</a>
+
+
+<div class="embed-responsive embed-responsive-16by9">
+<video  id=LS x-webkit-airplay="allow" preload="auto" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls>
+
+
+</video>
+</div>
+
+
+
+
+  <a download="proposed_file_name" type="button" id="downloadbutton" href="#" class="btn btn-default"></a>
+  <br>
+    <img height="20%" id="img">
+
+
+<h1 id="div"></h1>
+
+
+<div id="seriesDesc"></div>
+
+<script>
+
+
+var QueryString = function () {
+  // This function is anonymous, is executed immediately and 
+  // the return value is assigned to QueryString!
+  var query_string = {};
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+        // If first entry with this name
+    if (typeof query_string[pair[0]] === "undefined") {
+      query_string[pair[0]] = decodeURIComponent(pair[1]);
+        // If second entry with this name
+    } else if (typeof query_string[pair[0]] === "string") {
+      var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
+      query_string[pair[0]] = arr;
+        // If third or later entry with this name
+    } else {
+      query_string[pair[0]].push(decodeURIComponent(pair[1]));
+    }
+  } 
+  return query_string;
+}();
+
+
+
+
+var player=videojs('LS');
+var desc = document.getElementById('seriesDesc')
+
+var buttondown = document.getElementById('downloadbutton')
+
+var cid = document.getElementById('input')
+var div = document.getElementById('div')
+
+var url = "http://abc.go.com/shows/marvels-agents-of-shield/episode-guide/season-04/5-lockup"
+
+
+
+var yql1 = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27"
+var yql2 = "%27%0A&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
+
+
+var videourl
+
+
+var format
+
+
+var finalurl
+var sessionKey
+
+
+
+function parseHTML(html) {
+    var t = document.createElement('template');
+    t.innerHTML = html;
+    return t.content.cloneNode(true);
+}
+
+var documentFragment = parseHTML('<td>Test</td>'); 
+
+
+
+function fetchabc() {
+    
+
+if (cid.value == ""){
+
+console.log(url)
+
+finalurl = QueryString.url
+
+}else{
+
+    finalurl = cid.value
+
+}
+fetchabcjson(finalurl)
+
+}
+var html = "";
+	function fetchabcjson(value) {
+
+
+var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+
+ html = this.responseText;
+
+ console.log(parseHTML(html).getElementById('playerContainer').getAttribute('data-video-id'))
+
+   var showid = parseHTML(html).getElementById('playerContainer').getAttribute('data-video-id')
+
+
+   $.post("https://api.entitlement.watchabc.go.com/vp2/ws-secure/entitlement/2020/authorize.json",
+        {
+
+
+     video_id:showid,
+     brand:"001",
+     video_type:"lf",
+     device:"001"
+        },
+        function(sessionkey,status){
+          sessionKey = sessionkey.uplynkData.sessionKey
+          console.log(sessionkey.uplynkData.sessionKey)
+        });
+    
+
+
+
+$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fapi.contents.watchabc.go.com%2Fvp2%2Fws%2Fs%2Fcontents%2F3000%2Fvideos%2F001%2F001%2F-1%2F-1%2F-1%2F" + showid
+ + "%2F-1%2F-1.json%22%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=", function(data) {
+
+
+       document.title = data.query.results.json.video.show.title + "- " + data.query.results.json.video.title ;
+
+        buttondown.innerHTML = "Download"
+
+
+
+
+
+
+
+console.log(data.query.results.json.video.assets.asset.value)
+
+
+
+   videourl = data.query.results.json.video.assets.asset.value + "?" + sessionKey;
+
+   console.log(data.query.results.json.video.assets.asset.format)
+
+if(data.query.results.json.video.assets.asset.format == "ULNK") {
+  format = "application/x-mpegURL";
+  videourl = data.query.results.json.video.assets.asset.value + "?" + sessionKey;
+
+
+
+}else{
+
+
+if(data.query.results.json.video.assets.asset[1].format == "MP4") {
+  format = "video/mp4";
+  videourl = data.query.results.json.video.assets.asset[1].value ;
+}
+
+}
+
+
+
+
+
+console.log("got the session key")
+        buttondown.setAttribute("href", videourl);
+
+        div.innerHTML = data.query.results.json.video.show.title + " - " +data.query.results.json.video.title
+  desc.innerHTML = data.query.results.json.video.longdescription
+
+
+
+
+
+
+
+
+
+
+player.src({"type":format, "src":videourl});
+   player.play();
+
+
+                            });
+
+
+
+
+
+    }
+  };
+
+  xhttp.open("GET", "https://crossorigin.me/" + value , true);
+  xhttp.send();
+
+
+
+
+}
+
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-66082501-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
