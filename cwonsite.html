@@ -70,11 +70,11 @@ $.getJSON(yql1 + value + yql2, function(data) {
 
 
     
-    console.log(data.query.results.json.videos.hls5128.uri)
+    console.log(data.query.results.json.videos.variantplaylist.uri)
 
-    if (data.query.results.json.videos.hls5128.uri) {
+    if (data.query.results.json.videos.variantplaylist.uri) {
 
-player.src({"type":"application/x-mpegURL", "src":data.query.results.json.videos.hls5128.uri});
+player.src({"type":"application/x-mpegURL", "src":data.query.results.json.videos.variantplaylist.uri});
    player.play();
     }else{
     	alert("error")
