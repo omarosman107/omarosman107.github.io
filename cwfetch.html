@@ -180,7 +180,7 @@ $.getJSON("https://www.omdbapi.com/?t=" + data.query.results.json.assetFields.se
   desc.innerHTML = data.query.results.json.assetFields.description
 console.log(tvmazedata)
 
-player.src({"type":"application/x-mpegURL", "src":data.query.results.json.videos.variantplaylist.uri});
+player.src({"type":"video/mp4", "src":data.query.results.json.videos.variantplaylist.uri});
    player.play();
     }else{
     	alert("error")

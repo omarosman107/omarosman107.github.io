@@ -74,7 +74,7 @@ $.getJSON(yql1 + value + yql2, function(data) {
 
     if (data.query.results.json.videos.variantplaylist.uri) {
 
-player.src({"type":"application/x-mpegURL", "src":data.query.results.json.videos.variantplaylist.uri});
+player.src({"type":"video/mp4", "src":data.query.results.json.videos.variantplaylist.uri});
    player.play();
     }else{
     	alert("error")
