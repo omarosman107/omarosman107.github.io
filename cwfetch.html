@@ -1,57 +1,187 @@
+
 <html>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<input id="input" type="text" name="input">
- <a id="buttonsearch" style="margin: auto;display: block;" onclick="fetchcw();" class="btn-floating btn-large waves-effect waves-light teal"><i class="material-icons left">search</i>search</a>
-
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-<script  src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.6.2-2/hls.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video-js.min.css" /></head>
-<body>
-<video id=LS x-webkit-airplay="allow" preload=metadata class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls>
-<source src="#" type="application/x-mpegURL">
-</video>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video.min.js"></script>
-<script src="https://cdn.rawgit.com/Peer5/videojs-contrib-hls.js/master/src/videojs5.hlsjs.js"></script>
-<script>var player=videojs('LS');</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/3.6.13/videojs-contrib-hls.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
 
 
-<div id="div"></div>
+<style type="text/css">
+    
+.embed-responsive-16by9 {
+    padding-bottom: 28.25%;
+    width: 50%;
+    margin: auto;
+    padding-top: 6%;
+
+}
+
+body {
+
+
+}
+
+@media (max-width: 800px){
+
+    .embed-responsive-16by9 {
+    padding-bottom: 59.25%;
+    width: 100%;
+    margin: auto;
+    padding-left: 0%;
+}
+}
+
+img {
+    vertical-align: middle;
+    border-radius: 6%;
+}
+
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<input id="input" type="text" class="form-control" name="input">
+
+
+
+
+
+
+
+ <a id="buttonsearch" style="margin: auto;display: block;" onclick="fetchcw();" class="btn btn-primary">Load..</a>
+
+
+<div class="embed-responsive embed-responsive-16by9">
+<body>
+<video  id=LS x-webkit-airplay="allow" preload="auto" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls>
+
+
+</video>
+</div>
+
+
+
+
+  <a download="proposed_file_name" type="button" id="downloadbutton" href="#" class="btn btn-default"></a>
+  <br>
+    <img height="20%" id="img">
+
+
+<h1 id="div"></h1>
+
+
+<div id="seriesDesc"></div>
+
 <script>
+var player=videojs('LS');
+var desc = document.getElementById('seriesDesc')
+var img = document.getElementById('img')
+
+var buttondown = document.getElementById('downloadbutton')
 
 var cid = document.getElementById('input')
 var div = document.getElementById('div')
 
-var url = "http://www.cwtv.com/shows/the-flash/?play=b0437a7b-754c-46cb-873d-77ec303cd72f"
+var url = window.location.href
 
 
 
+var yql1 = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fmetaframe.digitalsmiths.tv%2Fv2%2FCWtv%2Fassets%2F"
+var yql2 = "%2Fpartner%2F154%3Fformat%3Djson%22%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
+var link1 = "https://metaframe.digitalsmiths.tv/v2/CWtv/assets/"
 
-var link1 = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/"
+var ids = "154 213"
 var link2 = "/partner/154?format=json"
+var tvmazedata
 
-function fetchcw() {
+var cwmp4 = "data.query.results.json.videos.hls5128.uri"
 
-	var lastSegment = cid.value.split('/').pop();
+var cwhls= "data.query.results.json.videos.variantplaylist.uri"
+
+
+var lastSegment = cid.value.split('/').pop();
 
 var stripped = lastSegment.substring(6);
 
-$.getJSON(link1 + stripped + link2, function(data) {
+var finalurl
+
+function fetchcw() {
     
-    console.log(data.videos.variantplaylist.uri)
+var lastSegment = cid.value.split('/').pop();
 
-    if (data.videos.variantplaylist.uri) {
+var stripped = lastSegment.substring(6);
+
+if (cid.value == ""){
+
+var spliturl = url.split('/').pop();
+var strippedurl = spliturl.substring(6);
+console.log(strippedurl)
+
+finalurl = strippedurl
+
+}else{
+    finalurl = stripped
+
+}
+
+fetchcwjson(finalurl)
+}
 
 
- div.innerHTML = data.videos.variantplaylist.uri
-player.src({"type":"application/x-mpegURL", "src":(data.videos.variantplaylist.uri)});
-     player.play();
+
+
+	function fetchcwjson(value) {
+
+$.getJSON(yql1 + value + yql2, function(data) {
+
+
+
+    
+    console.log(data.query.results.json.videos.variantplaylist.uri)
+
+    if (data.query.results.json.videos.variantplaylist.uri) {
+
+        document.title = data.query.results.json.assetFields.seriesName + "- " + data.query.results.json.assetFields.title ;
+
+        buttondown.innerHTML = "Download"
+        buttondown.setAttribute("href", data.query.results.json.videos.variantplaylist.uri);
+
+        http://api.tvmaze.com/singlesearch/shows?q=arrow
+
+
+
+$.getJSON("https://www.omdbapi.com/?t=" + data.query.results.json.assetFields.seriesName + "&y=t&r=json", function(tvdata) {
+
+    
+
+  tvmazedata = tvdata.Poster
+  console.log(tvmazedata)
+  img.src = tvmazedata
+
+    
+   
+
+                                
+                         
+
+                            });
+
+
+
+
+
+
+ div.innerHTML = data.query.results.json.assetFields.seriesName + " - " +data.query.results.json.assetFields.title
+  desc.innerHTML = data.query.results.json.assetFields.description
+console.log(tvmazedata)
+
+player.src({"type":"application/x-mpegURL", "src":data.query.results.json.videos.variantplaylist.uri});
+   player.play();
     }else{
     	alert("error")
     }
@@ -64,6 +194,18 @@ player.src({"type":"application/x-mpegURL", "src":(data.videos.variantplaylist.u
                             });
 }
 
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-66082501-6', 'auto');
+  ga('send', 'pageview');
+
 </script>
 
+<h1>document.getElementById('customOverlay').innerHTML = '<iframe src="http://tv.youngyt.ml/cwonsite.html?url=' +window.location.href  + '" width="100%" height="100%" frameBorder="0px" scrolling="no" allowfullscreen>';</h1>
 </html>
