@@ -27,6 +27,10 @@ body {
 
 }
 
+div {
+  color:black;
+}
+
 @media (max-width: 800px){
 
     .embed-responsive-16by9 {
@@ -114,8 +118,8 @@ var url = "http://abc.go.com/shows/marvels-agents-of-shield/episode-guide/season
 
 
 
-var yql1 = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27"
-var yql2 = "%27%0A&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
+var yql1 = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D"'
+var yql2 = '"%20and%20compat%3D"html5"%20and%20xpath%3D%27*%27%0A&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback='
 
 
 var videourl
@@ -167,16 +171,24 @@ var xhttp = new XMLHttpRequest();
 
  html = this.responseText;
 
- console.log(parseHTML(html).getElementById('playerContainer').getAttribute('data-video-id'))
+var jsonResponse = JSON.parse(this.responseText);
 
-   var showid = parseHTML(html).getElementById('playerContainer').getAttribute('data-video-id')
+
+ var showidjson = jsonResponse.query.results.html.body.div.main.div.section[1].div[0].div.div[1].div["data-video-id"]
+   console.log(showidjson)
+
+
+ // console.log(parseHTML(html).getElementById('playerContainer').getAttribute('data-video-id'))
+
+  //  var showid = parseHTML(html).getElementById('playerContainer').getAttribute('data-video-id')
+
 
 
    $.post("https://api.entitlement.watchabc.go.com/vp2/ws-secure/entitlement/2020/authorize.json",
         {
 
 
-     video_id:showid,
+     video_id:showidjson,
      brand:"001",
      video_type:"lf",
      device:"001"
@@ -189,7 +201,7 @@ var xhttp = new XMLHttpRequest();
 
 
 
-$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fapi.contents.watchabc.go.com%2Fvp2%2Fws%2Fs%2Fcontents%2F3000%2Fvideos%2F001%2F001%2F-1%2F-1%2F-1%2F" + showid
+$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fapi.contents.watchabc.go.com%2Fvp2%2Fws%2Fs%2Fcontents%2F3000%2Fvideos%2F001%2F001%2F-1%2F-1%2F-1%2F" + showidjson
  + "%2F-1%2F-1.json%22%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=", function(data) {
 
 
@@ -259,7 +271,7 @@ player.src({"type":format, "src":videourl});
     }
   };
 
-  xhttp.open("GET", "https://crossorigin.me/" + value , true);
+  xhttp.open("GET", yql1 + value + yql2 , true);
   xhttp.send();
 
 
