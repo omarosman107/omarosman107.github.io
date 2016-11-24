@@ -6,12 +6,7 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.6.10/hls.min.js
-"></script>
-
-<script type="text/javascript" src="https://cdn.rawgit.com/benjipott/videojs-hlsjs/master/lib/videojs-hlsjs.js"></script>
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/3.6.13/videojs-contrib-hls.min.js"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <!-- Latest compiled and minified CSS -->
@@ -44,9 +39,7 @@ body {
 
 img {
     vertical-align: middle;
-    border-radius: 6%;
 }
-
 
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,10 +76,15 @@ img {
 
 <div id="seriesDesc"></div>
 
+<div id="suggest">
+</div>
+
 <script>
 var player=videojs('LS');
 var desc = document.getElementById('seriesDesc')
 var img = document.getElementById('img')
+var suggest = document.getElementById('suggest')
+
 
 var buttondown = document.getElementById('downloadbutton')
 
@@ -116,6 +114,8 @@ var stripped = lastSegment.substring(6);
 
 var finalurl
 
+var addinfo = ""
+
 function fetchcw() {
     
 var lastSegment = cid.value.split('/').pop();
@@ -139,9 +139,32 @@ fetchcwjson(finalurl)
 }
 
 
+$.getJSON('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D"cwtv.com%2Fsearch%2F%3Fq%3D' + "The%2520Flash"
+ + '"%20and%20compat%3D"html5"%20and%20xpath%3D%27*%27%0A&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function(html) {
 
 
-	function fetchcwjson(value) {
+for (var i = 0; i < html.query.results.html.body.div.div[1].section.div.div[1].ul.li.length; i++){
+
+var onclickevent = "<a onclick='fetchcwjson('" + html.query.results.html.body.div.div[1].section.div.div[1].ul.li[i]['data-videoguid']  + "')'>"
+
+
+
+addinfo = addinfo  + '<img onclick="fetchcwjson("'  + html.query.results.html.body.div.div[1].section.div.div[1].ul.li[i]['data-videoguid']  +  '"")" class="suggestions" src="'  +  html.query.results.html.body.div.div[1].section.div.div[1].ul.li[i].div.a.img['data-src']   + '">'
+suggest.innerHTML = addinfo
+
+console.log(html.query.results.html.body.div.div[1].section.div.div[1].ul.li[i].div.a.img['data-src'])
+ console.log(html.query.results.html.body.div.div[1].section.div.div[1].ul.li[i]['data-videoguid'])
+}
+suggest.innerHTML = addinfo
+
+
+                            });
+
+
+
+
+
+    function fetchcwjson(value) {
 
 $.getJSON(yql1 + value + yql2, function(data) {
 
@@ -174,7 +197,7 @@ $.getJSON(yql1 + value + yql2, function(data) {
 player.src({"type":"application/x-mpegURL", "src":data.query.results.json.videos.variantplaylist.uri});
    player.play();
     }else{
-    	alert("error")
+        alert("error")
     }
 
    
