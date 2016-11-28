@@ -23,7 +23,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <style type="text/css">
-	.header {
+.header {
     background: #f7d633;
     padding: 2%;
     text-align: center;
@@ -32,8 +32,8 @@
     font-weight: 700;
     width: 100%;
     padding-bottom: 2%;
-
-
+    position: fixed;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 img{
@@ -59,13 +59,44 @@ img{
 h1{
 	font-size: 1.5rem;
 	    color: #393939;
+	    font-weight: 700;
 }
 p {
     margin-top: 0;
     margin-bottom: 1rem;
-    font-weight: 700;
+    font-size: normal;
 }
 
+h5.epileft {
+    display: inline-block;
+    padding-left: 3%;
+}
+
+p.episodenum {
+    display: inline-block;
+}
+.showimg {
+    width: 70%;
+}
+.spacer {
+    width: 100%;
+    padding: 2%;
+}
+.w3-progress-container {
+    width: 90%;
+    height: 0.5em;
+    position: relative;
+    background-color: #f1f1f1;
+    opacity: .90;
+    bottom: 9px;
+}
+.w3-progressbar {
+    background-color: #f8d637;
+        height: 100%;
+    position: absolute;
+    line-height: inherit;
+        transition: width .6s ease;
+}
 </style>
 
 	<title>TVShow Time++</title>
@@ -73,6 +104,9 @@ p {
 <body>
 <div class="header">
 EPISODES TO WATCH
+</div>
+<div class="spacer">
+    &nbsp;
 </div>
 <div class="tableborder">
 <table id="tablediv" class="table">
@@ -83,11 +117,14 @@ EPISODES TO WATCH
     display: table;
     vertical-align: baseline;
     position: absolute;
-    padding: 39%;
+     top: 39%;
+    left: 41%;
+
 "></i>
 
 </table>
 </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script>
     <script type="text/javascript">
 	var googleurl
@@ -104,92 +141,40 @@ var clickablelink
 var googlejson
     var tempel = ""
     var i 
+    var progress
     var finishjson
 $.getJSON( "https://api.tvshowtime.com/v1/to_watch?access_token=82fb423156c817655962b583129a696d&limit=100&lang=en", function(json) {
 
 	finishjson = json
-function makelink(url) {
-	var nameshow
-	var nameepi
-var samedata =  encodeURIComponent(json.episodes[i].show.name + " "  +  json.episodes[i].name)
 
-
-$.getJSON("https://api.tvshowtime.com/v1/episode?episode_id=" + json.episodes[i].id + "&access_token=82fb423156c817655962b583129a696d" , function(network) {
-
-
-	console.log(network.episode.network)
-
-
-var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      	googlejson = JSON.parse(this.responseText);
-       
-      	googleurl = googlejson.results[0].unescapedUrl
-
-
-	
-if(network.episode.network == "The CW"){
-finalurl =  "cwfetch?url=" + googleurl
-
-      	      	      	      	clickablelink = finalurl
-
-return finalurl;
-
-}
-if(network.episode.network == "ABC (US)"){
-finalurl = "abcfetch.html?url=" + googleurl
-
-      	      	      	      	clickablelink = finalurl
-
-return finalurl;
-
-}
-if(network.episode.network == "FOX (US)"){
-finalurl = "foxfetch.html?url=" + googleurl
-
-      	      	      	      	clickablelink = finalurl
-
-return finalurl;
-
-}
-if(network.episode.network == "Netflix"){
-finalurl = ("netflixfetch.html?url=" + googleurl)
-      	                       	clickablelink = finalurl
-return finalurl;
-
-}}};
-
-
-
-  xhttp.open("GET", "https://www.googleapis.com/customsearch/v1element?key=AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY&rsz=filtered_cse&num=1&hl=en&prettyPrint=false&source=gcsc&gss=.com&sig=0c3990ce7a056ed50667fe0c3873c9b6&cx=009916453314335219988:-0yvqrz4snu&q=" + url  , true);
-  xhttp.send();
-
-
-
-
-
-	});
 
 
                             
-}
       for (var i = 0; i < json.episodes.length; i++){
 
- var mathleft = (  finishjson.episodes[i].show.aired_episodes*1 - finishjson.episodes[i].show.seen_episodes*1)
+      	var showprog = ( finishjson.episodes[i].show.seen_episodes*1 / finishjson.episodes[i].show.aired_episodes*1)
+
+      	console.log(showprog)
+
+ var mathleft = (  finishjson.episodes[i].show.aired_episodes*1 - finishjson.episodes[i].show.seen_episodes*1 -1)
 
 
- if (mathleft == 1) {
+ if (mathleft == 0) {
 mathleft = "Last!"
 
  }
- if (mathleft > 1){
+ if (mathleft >= 1){
  	mathleft = "+" + mathleft
  }
 
+if (finishjson.episodes[i].show.aired_episodes*1 - finishjson.episodes[i].show.seen_episodes*1 == finishjson.episodes[i].show.aired_episodes*1) {
+
+progress = "display:none;"
+
+}  
 
 
-      	tempel = tempel + ' <tr><th scope="row"><img src="' + finishjson.episodes[i].show.images.poster["4"] + '"></th><td><h1>' + finishjson.episodes[i].show.name + '</h1><p>' + "S" + pad(finishjson.episodes[i].season_number) + "E" + pad(finishjson.episodes[i].number)  +'</p><h5>'+   mathleft  + '</h5><h5>'+ finishjson.episodes[i].name +'</h5><a href="'+ "validator.html?"  +  finishjson.episodes[i].show.name +" - " +finishjson.episodes[i].name +'" class="btn btn-outline-success">Play</a></td></tr>'
+      	tempel = tempel + ' <tr><th scope="row"><a href="'+   "validator.html?"  +  finishjson.episodes[i].show.name +" , " +finishjson.episodes[i].name       + '"><div class="showimg"><img width="100%" src="' + finishjson.episodes[i].show.images.poster["4"] + '" ><div class="w3-progress-container"><div class="w3-progressbar" style="color:#f8d637;width:' + showprog*100 +'%;'+ progress   +'"></div></a></div></div></th><td><h1>' + finishjson.episodes[i].show.name + '</h1><p class="episodenum">' + "S" + pad(finishjson.episodes[i].season_number) + "E" + pad(finishjson.episodes[i].number)  +'</p><h5 class="epileft">'+   mathleft  + '</h5><h5>'+ finishjson.episodes[i].name +'</h5><a data-target="#loadvideo" href="'+ "validator.html?"  +  finishjson.episodes[i].show.name +" , " +finishjson.episodes[i].name +'" class="btn btn-outline-success">Play</a></td></tr>'
  
 
             

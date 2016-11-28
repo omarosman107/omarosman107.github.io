@@ -1,6 +1,6 @@
  <script>
 
-var currenturl  = window.location.search.split('?')[1]
+var currenturl  = window.location.search.split('?')[1];
 
 
 
@@ -10,31 +10,31 @@ var xhttp = new XMLHttpRequest();
     if (this.readyState == 4 && this.status == 200) {
       	googlejson = JSON.parse(this.responseText);
        
-      	googleurl = googlejson.results[0].unescapedUrl
+      	googleurl = googlejson.results[0].unescapedUrl;
 
 console.log(googleurl)
 
 if (googleurl.includes("cw")) {
 
-	window.location = "cwfetch.html?url=" + googleurl
+	window.location = "cwfetch.html?url=" + googleurl;
 
 }
 
 if (googleurl.includes("abc")) {
 
-window.location = "abcfetch.html?url=" + googleurl
+window.location = "abcfetch.html?url=" + googleurl;
 
 }
 
 if (googleurl.includes("fox")) {
 
-	window.location = "foxfetch.html?url=" + googleurl
+	window.location = "foxfetch.html?url=" + googleurl;
 
 }
 
 if (googleurl.includes("netflix")) {
 
-	window.location = "netflixfetch.html?url=" + googleurl
+	window.location = "netflixfetch.html?url=" + googleurl;
 
 }
 
