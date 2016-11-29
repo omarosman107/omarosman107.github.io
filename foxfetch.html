@@ -125,16 +125,38 @@ var stripped
 
 var finalurl
 
+var jsoncode
 function fetchfox() {
 
 if (cid.value != "") {
 
  $.getJSON(url1 + cid.value + url2, function(data) {
-var stripped = data.query.results.html.head.script[13].split(',')[162].split('/')[5].split('?')[0]
-console.log(stripped)
-finalurl = stripped
-console.log(data.query.results.html.head.script[13].split(',')[162].split('/')[5].split('?')[0])
-fetchfoxjson(stripped)
+console.log(data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[0].a.content , data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[1].content)
+
+
+$.getJSON("http://feed.theplatform.com/f/fox-mobile/fullepisodes?validFeed=false&types=none&byCustomValue=%7Bseries%7D%7B" + data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[0].a.content + "%7D&count=true&range=1-50&adapterParams=mvpd%253D&byContent=byFormat=m3u%7Cmpeg4&form=json", function(episodecode) {
+
+   for (var i = 0; i < episodecode.entries.length; i++){
+if(episodecode.entries[i].title == data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[1].content){
+console.log(episodecode.entries[i].media$content[8]["plfile$url"])
+
+fetchfoxjson(episodecode.entries[i].media$content[8]["plfile$url"])
+
+div.innerHTML = data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[0].a.content + "- " + data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[1].content ;
+
+    seriesDesc.innerHTML  = episodecode.entries["0"].description
+
+
+}
+
+            
+            }
+
+
+
+
+});
+
 
 });
 
@@ -149,27 +171,46 @@ var strippedurl = url.split("=")[1]
 console.log(strippedurl)
 
   $.getJSON(url1 + strippedurl + url2, function(data) {
-var stripped = data.query.results.html.head.script[12].split(',')[162].split('/')[5].split('?')[0]
-console.log(stripped)
-finalurl = stripped
-console.log(data.query.results.html.head.script[12].split(',')[162].split('/')[5].split('?')[0])
+console.log(data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[1].content);
 
-fetchfoxjson(stripped)
+
+$.getJSON("http://feed.theplatform.com/f/fox-mobile/fullepisodes?validFeed=false&types=none&byCustomValue=%7Bseries%7D%7B" + data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[0].a.content + "%7D&count=true&range=1-50&adapterParams=mvpd%253D&byContent=byFormat=m3u%7Cmpeg4&form=json", function(episodecode) {
+
+for (i in episodecode.entries)
+{
+  var cuttitle = data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[1].content.slice(0, -1)
+console.log( cuttitle)
+
+
+if(episodecode.entries[i].title == cuttitle)
+{
+console.log(episodecode.entries[i].media$content[8]["plfile$url"])
+
+fetchfoxjson(episodecode.entries[i].media$content[8]["plfile$url"])
+
+div.innerHTML = episodecode.entries[i]["fox$series"] + "- " + episodecode.entries[i].title ;
+
+    seriesDesc.innerHTML  = episodecode.entries[i].description
+
+
+}else{
+
+  console.error("not found")
+}
+
+
+
+}
+
+
+
 
 
 });
 
 
-finalurl = strippedurl
-console.log(data.query.results.html.head.script[12].split(',')[162].split('/')[5].split('?')[0])
+});
 
-fetchfoxjson(stripped)
-
-}else{
-    finalurl = stripped
-    console.log(data.query.results.html.head.script[13].split(',')[162].split('/')[5].split('?')[0])
-
-    fetchfoxjson(stripped)
 
 
 }
@@ -208,7 +249,6 @@ var xhttp = new XMLHttpRequest();
 
 
 
-div.innerHTML = json.smil.body.seq.par["0"].video._title + "- " + json.smil.body.seq.par["0"].video._title ;
 
 player.src({"type":"application/x-mpegURL", "src":json.smil.body.seq.par["0"].video._src});
    player.play();
@@ -221,7 +261,7 @@ player.src({"type":"application/x-mpegURL", "src":json.smil.body.seq.par["0"].vi
 
 }
   };
-  xhttp.open("GET", yql1 + value + yql2, true);
+  xhttp.open("GET",  value , true);
   xhttp.send();
 
 

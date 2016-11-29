@@ -12,7 +12,21 @@ var xhttp = new XMLHttpRequest();
        
       	googleurl = googlejson.results[0].unescapedUrl;
 
-console.log(googleurl)
+
+      	 for (var i = 0; i < googlejson.results.length; i++){
+
+      	if (googlejson.results[i].richSnippet.metatags.ogType == "video.episode"){
+      		console.log(googlejson.results[i].richSnippet.metatags.ogType)
+      		foxurl = googlejson.results[i].url
+
+      	}
+
+            
+            }
+
+      		console.log(foxurl)
+
+
 
 if (googleurl.includes("cw")) {
 
@@ -26,11 +40,11 @@ window.location = "abcfetch.html?url=" + googleurl;
 
 }
 
-if (googleurl.includes("fox")) {
+ if (googleurl.includes("fox")) {
 
-	window.location = "foxfetch.html?url=" + googleurl;
+ window.location = "foxfetch.html?url=" + foxurl;
 
-}
+ }
 
 if (googleurl.includes("netflix")) {
 
@@ -43,7 +57,7 @@ if (googleurl.includes("netflix")) {
 
 
 
-  xhttp.open("GET", "https://www.googleapis.com/customsearch/v1element?key=AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY&rsz=filtered_cse&num=1&hl=en&prettyPrint=false&source=gcsc&gss=.com&sig=0c3990ce7a056ed50667fe0c3873c9b6&cx=009916453314335219988:-0yvqrz4snu&q=" + currenturl  , true);
+  xhttp.open("GET", "https://www.googleapis.com/customsearch/v1element?key=AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY&rsz=filtered_cse&num=2&hl=en&prettyPrint=false&source=gcsc&gss=.com&sig=0c3990ce7a056ed50667fe0c3873c9b6&cx=009916453314335219988:-0yvqrz4snu&q=" + currenturl  , true);
   xhttp.send();
 
 
