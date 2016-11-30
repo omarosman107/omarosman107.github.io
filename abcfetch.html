@@ -185,11 +185,17 @@ var jsonResponse = JSON.parse(this.responseText);
    $.post("https://api.entitlement.watchabc.go.com/vp2/ws-secure/entitlement/2020/authorize.json",
         {
 
-
-     video_id:showidjson,
-     brand:"001",
      video_type:"lf",
-     device:"001"
+    token: '<signatureInfo>VCHGjI/bofuiWcleZxKfMgpZOv36XHIsqIGVOO+J+9IWg2wswtnFx5JM6MpXe3va8jFg0YQ3peyAOQwYiMFg0RJODGJ8GuTO9c/QNGaLDyzplaxo9uz/Q9Y3UbXI+rZC0IFM+TQjCr/kbK194sX3qJMRhU5fiH10rToF6YPWyLg=<signatureInfo><authToken><sessionGUID>2f46ce79d4a4dfbfca97d685680fee0e</sessionGUID><requestorID>ABC</requestorID><resourceID><![CDATA[<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>ABC</title><item><title>DATG</title><guid>VDKA3549999</guid><media:rating scheme="urn:v-chip">TV-14</media:rating></item></channel></rss>]]></resourceID><ttl>420000</ttl><issueTime>2016-11-30 14:34:00 -0800</issueTime><mvpdId>Comcast_SSO</mvpdId></authToken>',
+brand:"001",
+mvpd:"Comcast_SSO",
+token_type:"ap",
+device:"001",
+auth_flag:"1",
+adobe_resource_id:'<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>ABC</title><item><title>DATG</title><guid>VDKA3549999</guid><media:rating scheme="urn:v-chip">TV-14</media:rating></item></channel></rss>',
+adobe_requestor_id:"ABC",
+video_id:showidjson
+
         },
         function(sessionkey,status){
           sessionKey = sessionkey.uplynkData.sessionKey

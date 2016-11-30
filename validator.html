@@ -15,6 +15,7 @@ var xhttp = new XMLHttpRequest();
 
       	 for (var i = 0; i < googlejson.results.length; i++){
 
+
       	if (googlejson.results[i].richSnippet.metatags.ogType == "video.episode"){
       		console.log(googlejson.results[i].richSnippet.metatags.ogType)
       		foxurl = googlejson.results[i].url
@@ -24,13 +25,20 @@ var xhttp = new XMLHttpRequest();
             
             }
 
-      		console.log(foxurl)
+
+      	if (googlejson.results[0].richSnippet.metatags.ogUrl.includes("cwtv")){
+      		console.log(googlejson.results[0].richSnippet.metatags.ogUrl)
+      		cwurl = googlejson.results[0].richSnippet.metatags.ogUrl
+
+      	}
+
+      
 
 
 
 if (googleurl.includes("cw")) {
 
-	window.location = "cwfetch.html?url=" + googleurl;
+	window.location = "cwfetch.html?url=" + cwurl;
 
 }
 
