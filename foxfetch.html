@@ -112,8 +112,8 @@ var url1 = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html
 var url2 = '%27%20and%20compat%3D"html5"%20and%20xpath%3D%27*%27&format=json&callback='
 
 
-var yql1 = "http://link.theplatform.com/s/fox-mobile/"
-var yql2 = "?mbr=true&manifest=m3u&feed=FOXNOW%20Full%20%20Episodes"
+var yql1 = "https://link.theplatform.com/s/fox.com/"
+var yql2 = "?mbr=true&policy=63641552&assetType=SSL&auth=%3CsignatureInfo%3EFdzOLElGoj%2FovYkqQxszkpiSup%2FXWpQXX8nwUVVoR5lYT8EqLUdmT%2BSQC7W%2FKRsYeNn3S8orQwvpn8HEHNBaoNmAYccglh%2F5FhhfAD3cnSIP1u7aVVvE23%2FKRpuVHh3V9BXNHGlvc517SYmmerNEPHeLbJxw6hgs50pSHOQyvE8%3D%3CsignatureInfo%3E%3CauthToken%3E%3CsessionGUID%3E1c45906bedc6fb115227d1df47e832ee%3C%2FsessionGUID%3E%3CrequestorID%3Efbc-fox%3C%2FrequestorID%3E%3CresourceID%3E%3C!%5BCDATA%5B%3Crss%20version%3D%222.0%22%20xmlns%3Amedia%3D%22http%3A%2F%2Fsearch.yahoo.com%2Fmrss%2F%22%3E%3Cchannel%3E%3Ctitle%3Efbc-fox%3C%2Ftitle%3E%3Citem%3E%3Cguid%3EL-210%3C%2Fguid%3E%3Cmedia%3Arating%20scheme%3D%22urn%3Av-chip%22%3ETV-14%3C%2Fmedia%3Arating%3E%3C%2Fitem%3E%3C%2Fchannel%3E%3C%2Frss%3E%5D%5D%3E%3C%2FresourceID%3E%3Cttl%3E420000%3C%2Fttl%3E%3CissueTime%3E2016-12-01%2017%3A49%3A58%20-0800%3C%2FissueTime%3E%3CmvpdId%3EComcast_SSO%3C%2FmvpdId%3E%3C%2FauthToken%3E&format=SMIL&Tracking=true&manifest=m3u"
 
 var tvmazedata
 
@@ -134,11 +134,12 @@ if (cid.value != "") {
 console.log(data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[0].a.content , data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[1].content)
 
 
-$.getJSON("http://feed.theplatform.com/f/fox-mobile/fullepisodes?validFeed=false&types=none&byCustomValue=%7Bseries%7D%7B" + data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[0].a.content + "%7D&count=true&range=1-50&adapterParams=mvpd%253D&byContent=byFormat=m3u%7Cmpeg4&form=json", function(episodecode) {
+$.getJSON("https://feed.theplatform.com/f/fox-mobile/fullepisodes?validFeed=false&types=none&byCustomValue=%7Bseries%7D%7B" + data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[0].a.content + "%7D&count=true&range=1-50&adapterParams=mvpd%253D&byContent=byFormat=m3u%7Cmpeg4&form=json", function(episodecode) {
 
    for (var i = 0; i < episodecode.entries.length; i++){
 if(episodecode.entries[i].title == data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[1].content){
 console.log(episodecode.entries[i].media$content[8]["plfile$url"])
+
 
 fetchfoxjson(episodecode.entries[i].media$content[8]["plfile$url"])
 
@@ -174,7 +175,7 @@ console.log(strippedurl)
 console.log(data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[1].content);
 
 
-$.getJSON("http://feed.theplatform.com/f/fox-mobile/fullepisodes?validFeed=false&types=none&byCustomValue=%7Bseries%7D%7B" + data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[0].a.content + "%7D&count=true&range=1-50&adapterParams=mvpd%253D&byContent=byFormat=m3u%7Cmpeg4&form=json", function(episodecode) {
+$.getJSON("https://feed.theplatform.com/f/fox-mobile/fullepisodes?validFeed=false&types=none&byCustomValue=%7Bseries%7D%7B" + data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[0].a.content + "%7D&count=true&range=1-50&adapterParams=mvpd%253D&byContent=byFormat=m3u%7Cmpeg4&form=json", function(episodecode) {
 
 for (i in episodecode.entries)
 {
@@ -186,7 +187,9 @@ if(episodecode.entries[i].title == cuttitle)
 {
 console.log(episodecode.entries[i].media$content[8]["plfile$url"])
 
-fetchfoxjson(episodecode.entries[i].media$content[8]["plfile$url"])
+fetchfoxjson(yql1 + episodecode.entries[i].media$content[8]["plfile$url"].split('/')[5].split('?')[0] + yql2)
+
+console.log(episodecode.entries[i].media$content[8]["plfile$url"].split('/')[5].split('?')[0])
 
 div.innerHTML = episodecode.entries[i]["fox$series"] + "- " + episodecode.entries[i].title ;
 
@@ -283,7 +286,6 @@ player.src({"type":"application/x-mpegURL", "src":json.smil.body.seq.par["0"].vi
   var _gaq = _gaq || [];
     _gaq.push(
       ['_setAccount', 'UA-66082501-6'],
-      ['_setCustomVar', 1, 'IP', myip, 2],
       ['_trackPageview']
     );
   (function() {
