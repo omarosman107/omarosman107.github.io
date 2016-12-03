@@ -26,9 +26,9 @@ var xhttp = new XMLHttpRequest();
             }
 
 
-      	if (googlejson.results[0].richSnippet.metatags.ogUrl.includes("cwtv")){
-      		console.log(googlejson.results[0].richSnippet.metatags.ogUrl)
-      		cwurl = googlejson.results[0].richSnippet.metatags.ogUrl
+      	if (googlejson.results[0].unescapedUrl.includes("cwtv")){
+      		console.log(googlejson.results[0].unescapedUrl)
+      		cwurl = googlejson.results[0].unescapedUrl
 
       	}
 
