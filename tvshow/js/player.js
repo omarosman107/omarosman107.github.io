@@ -6,7 +6,10 @@ showdesc = document.getElementById('showdesc')
  var currenturl  = window.location.search.split('?')[1];
 
 
+	googleAPI();
 
+
+function googleAPI(){
 
 var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -53,15 +56,15 @@ fetchabcjson(googleurl)
 
 }
 
-if (googleurl.includes("watchcartoon")) {
+if (googleurl.includes("cartoon")) {
 
-fetchabcjson(googleurl)
+fetchcartoonjson(googleurl)
 
 
 }
 
  if (googleurl.includes("fox")) {
-fetchabcjson(foxurl)
+fetchfoxjson(foxurl)
 
 
 
@@ -69,7 +72,7 @@ fetchabcjson(foxurl)
 
 if (googleurl.includes("netflix")) {
 
-fetchabcjson(googleurl)
+fetchnetflixjson(googleurl)
 
 
 
@@ -84,7 +87,7 @@ fetchabcjson(googleurl)
   xhttp.send();
 
 
-
+}
 
 
 

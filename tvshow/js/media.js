@@ -28,6 +28,8 @@ console.log(finalurl)
  showname.innerHTML = data.query.results.json.assetFields.seriesName + " - " +data.query.results.json.assetFields.title
  showdesc.innerHTML = data.query.results.json.assetFields.description
 
+document.getElementById('downloader').href = finalurl
+
 player.src({"type":"application/x-mpegURL", "src":finalurl});
    player.play();
 
@@ -52,10 +54,9 @@ var xhttp = new XMLHttpRequest();
 
  html = this.responseText;
 
-var jsonResponse = JSON.parse(this.responseText);
 
 
- var showidjson = jsonResponse.query.results.html.body.div.main.div.section[1].div[0].div.div[1].div["data-video-id"]
+ var showidjson = JSON.parse(this.responseText).query.results.div['data-video-id']
    console.log(showidjson)
 
 
@@ -82,6 +83,7 @@ showdesc.innerHTML = data.query.results.json.video.longdescription
 
 console.log(data.query.results.json.video.assets.asset.value)
 videourl = data.query.results.json.video.assets.asset.value + "?" + sessionKey;
+document.getElementById('downloader').href = videourl
 return videourl
  player.src({"type":"application/x-mpegURL", "src":videourl});
    player.play();
@@ -90,7 +92,12 @@ return videourl
 }
   };
 
-  xhttp.open("GET", 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D"' + value + '"%20and%20compat%3D"html5"%20and%20xpath%3D%27*%27%0A&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', true);
+if (currenturl.includes('http')) {
+value = currenturl
+
+}
+
+  xhttp.open("GET", 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27' + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D%27%2F%2Fdiv%5B%40class%3D"datgPlayer%20m-videoplayer-container"%5D%27&format=json&callback=', true);
   xhttp.send();
 
 
@@ -106,6 +113,8 @@ return videourl
 
 
 	function fetchfoxjson(value) {
+		var x2js = new X2JS();
+
 console.log(value)
 
 
@@ -149,6 +158,7 @@ json =  JSON.parse(jsonfirst);
 
 var videofile = json.smil.body.seq.par["0"].video._src
 console.log(videofile)
+document.getElementById('downloader').href = videofile
 
  player.src({"type":"application/x-mpegURL", "src":videofile});
    player.play();
@@ -186,24 +196,18 @@ return videofile
 
 	function fetchcartoonjson(value) {
 
-$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" + value + '%2F%27%20and%20compat%3D"html5"%20and%20xpath%3D%27*%27%20&format=json&callback=', function(data) {
+$.post("https://developer.yahoo.com/yql/console/proxy.php",
+        {
+format: "json",
+q: 'select * from html where url="' + value + '" and compat="html5" and xpath="//a"'
+},
+          function(data,status){
 
-    console.log(data.query.results.html.head.meta[4].content)
+          	console.log(data)
 
-showname.innerHTML = data.query.results.html.head.title
-
-
-$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" + data.query.results.html.head.meta[4].content + '%2F%27%20and%20compat%3D"html5"%20and%20xpath%3D%27*%27%20&format=json&callback=', function(iframeex) {
-console.log(iframeex)
-player.src({"type":"video/mp4", "src": "d"  });
-   player.play();
-
-
-                            });
+        });
 
 
-
-                            });
 }
 
 // Netflix Fetch
