@@ -24,7 +24,7 @@ var xhttp = new XMLHttpRequest();
 
       	if (googlejson.results[i].richSnippet.metatags.ogType == "video.episode"){
       		console.log(googlejson.results[i].richSnippet.metatags.ogType)
-      		foxurl = googlejson.results[i].url
+      		foxurl = googlejson.results[i].unescapedUrl
 
       	}
 
@@ -43,6 +43,8 @@ var xhttp = new XMLHttpRequest();
 
 
 if (googleurl.includes("cw")) {
+	 	console.log(" CW Detected")
+
 
 fetchcwjson(cwurl)
 
@@ -50,13 +52,24 @@ fetchcwjson(cwurl)
 }
 
 if (googleurl.includes("abc")) {
+	 	console.log(" ABC Detected")
+
 
 fetchabcjson(googleurl)
 
 
 }
 
+if (googleurl.includes("cbs")) {
+	 	console.log(" CBS Detected")
+
+fetchcbsjson(googleurl)
+
+
+}
+
 if (googleurl.includes("cartoon")) {
+ 	console.log(" Cartoon Detected")
 
 fetchcartoonjson(googleurl)
 
@@ -64,6 +77,7 @@ fetchcartoonjson(googleurl)
 }
 
  if (googleurl.includes("fox")) {
+ 	console.log("Fox Detected")
 fetchfoxjson(foxurl)
 
 
@@ -71,6 +85,7 @@ fetchfoxjson(foxurl)
 }
 
 if (googleurl.includes("netflix")) {
+ 	console.log(" Netflix Detected")
 
 fetchnetflixjson(googleurl)
 

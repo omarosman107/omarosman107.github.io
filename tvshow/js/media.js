@@ -122,17 +122,17 @@ console.log(value)
 
 
 
- $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D%27*%27&format=json&callback=', function(data) {
-console.log(data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[0].a.content , data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[1].content)
+ $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fh3%5B%40class%3D%27video-show-title%27%5D%2Fa%7C%2F%2Fh3%5B%40class%3D%27video-title%27%5D"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function(data) {
+console.log(data.query.results.a.content , data.query.results.h3.content)
 
 
-$.getJSON("https://feed.theplatform.com/f/fox-mobile/fullepisodes?validFeed=false&types=none&byCustomValue=%7Bseries%7D%7B" + data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[0].a.content + "%7D&count=true&range=1-50&adapterParams=mvpd%253D&byContent=byFormat=m3u%7Cmpeg4&form=json", function(episodecode) {
+$.getJSON("https://feed.theplatform.com/f/fox-mobile/fullepisodes?validFeed=false&types=none&byCustomValue=%7Bseries%7D%7B" + data.query.results.a.content + "%7D&count=true&range=1-50&adapterParams=mvpd%253D&byContent=byFormat=m3u%7Cmpeg4&form=json", function(episodecode) {
 
 
 
 
 
- var cuttitle = data.query.results.html.body.div[1].main.div.div[0].div.div.div.div.div[1].div.div[0].div[1].div[1].h3[1].content.slice(0, -1)
+ var cuttitle = data.query.results.h3.content.slice(0, -1)
 console.log( cuttitle)
 
    for (var i = 0; i < episodecode.entries.length; i++){
@@ -195,11 +195,14 @@ return videofile
 // WatchCartoon Fetch
 
 	function fetchcartoonjson(value) {
+	//	var "link1" = "select * from html where url="
+
+	//	var "link2" = ' and compat="html5" and xpath="//a"'
 
 $.post("https://developer.yahoo.com/yql/console/proxy.php",
         {
 format: "json",
-q: 'select * from html where url="' + value + '" and compat="html5" and xpath="//a"'
+q: "link1" + value + "link2"
 },
           function(data,status){
 
@@ -217,4 +220,40 @@ function fetchnetflixjson(value){
 	console.log(value)
 
 	return value;
+}
+
+
+// CBS Fetch
+
+function fetchcbsjson(value){
+	if (value.includes('http')) {
+		searchValue = value.split('/')[6]
+
+	}else{
+		searchValue = value.split('/')[4]
+
+
+	}
+
+	if(value.slice(-1) == "/"){
+           value =   value.slice(0, -1)
+	}
+console.log(searchValue)
+
+$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'" + value
+ + "%2F'%20and%20compat%3D%22html5%22%20and%20xpath%3D%22%2F%2Fa%5B%40class%3D'show-title'%5D%7C%2F%2Fdiv%5B%40class%3D'title'%5D%7C%2F%2Fhead%2Fmeta%5B%40property%3D'og%3Adescription'%5D%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=", function(data) {
+
+showname.innerHTML = data.query.results.a[0].content + "- " + data.query.results.div.content
+showdesc.innerHTML = data.query.results.meta.content
+
+
+
+videourl = "https://link.theplatform.com/s/dJ5BDC/media/guid/2198311517/" + searchValue + "?mbr=true&manifest=m3u&form=json"
+document.getElementById('downloader').href = videourl
+
+ player.src({"type":"application/x-mpegURL", "src":videourl});
+   player.play();
+
+});
+
 }
