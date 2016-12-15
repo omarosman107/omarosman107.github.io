@@ -1,41 +1,24 @@
 .videoContainer{
-
-	width: 100%;
+width: 100%;
 }
-
-
-
-
 @media (min-width: 950px) {
 .videoContainer{
 
 	width: 60%;
 }
 }
-
-
-
 body{
 background-color: #222;
 color: white;
-
 }
 h1{
 	color: white;
 	font-family: 'Roboto', sans-serif;
-
-
 }
 p{
 	color: white;
 	font-family: 'Open Sans', sans-serif;
-
-
 }
-
-.showImg {
-
-
-}
+.showImg {}
 
 
