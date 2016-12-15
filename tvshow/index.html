@@ -25,7 +25,8 @@
 @font-face {
 
   font-family: 'ProximaNova';
-    url('css/proximanova-black-webfont.woff2') format('woff2'),
+  font-style: bold;
+  src: url('css/proximanova-black-webfont.woff2') format('woff2')
 /*  url('css/proximanova-bold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
 
 }
@@ -35,7 +36,7 @@
     padding: 2%;
     text-align: center;
     font-size: medium;
-    font-family: 'ProximaNova', sans-serif;
+    font-family: ProximaNova, sans-serif;
     width: 100%;
     padding-bottom: 2%;
     position: fixed;
@@ -122,9 +123,7 @@ EPISODES TO WATCH
     margin: auto;
     display: table;
     vertical-align: baseline;
-    position: absolute;
-
-    position: absolute;
+    position: fixed;
 top: 50%;
 left: 50%;
 margin: -50px 0px 0px -50px;
