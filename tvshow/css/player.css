@@ -1,3 +1,6 @@
+
+
+
 .videoContainer{
 width: 100%;
 }
@@ -8,7 +11,7 @@ width: 100%;
 }
 }
 body{
-background-color: #222;
+background-color: rgb(66, 66, 66);
 color: white;
 }
 h1{
@@ -21,4 +24,8 @@ p{
 }
 .showImg {}
 
+.header {
 
+background-color: rgb(48, 48, 48); color: white;
+	height: 20%;
+}

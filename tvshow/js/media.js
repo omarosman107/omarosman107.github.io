@@ -88,7 +88,7 @@ function fetchfoxjson(value) {
          console.log(cuttitle)
          for (var i = 0; i < episodecode.entries.length; i++) {
             if (episodecode.entries[i].title == cuttitle) {
-               console.log(episodecode.entries[i].media$content[8]["plfile$url"])
+               console.log(episodecode.entries[i].media$content[9]["plfile$url"])
                showname.innerHTML = episodecode.entries[i]["fox$series"] + "- " + episodecode.entries[i].title
                showdesc.innerHTML = episodecode.entries[i].description
                var xhttp = new XMLHttpRequest();
@@ -108,7 +108,7 @@ function fetchfoxjson(value) {
                      return videofile
                   }
                };
-               xhttp.open("GET", episodecode.entries[i].media$content[8]["plfile$url"], true);
+               xhttp.open("GET", episodecode.entries[i].media$content[9]["plfile$url"], true);
                xhttp.send();
             }
          }
