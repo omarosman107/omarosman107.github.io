@@ -8,10 +8,9 @@ function addJS(url) {
 };
 // CWTV Fetch 
 function fetchcwjson(value) {
-   var finalurl = "NOT WORKING"
    var lastSegment = value.split('/').pop();
    var stripped = lastSegment.substring(6);
-   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fmetaframe.digitalsmiths.tv%2Fv2%2FCWtv%2Fassets%2F" + stripped + "%2Fpartner%2F154%3Fformat%3Djson%22%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=", function(data) {
+   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20videos.variantplaylist.uri%20%2C%20assetFields.seriesName%20%2C%20assetFields.title%20%2C%20assetFields.description%20from%20json%20where%20url%3D%27http%3A%2F%2Fmetaframe.digitalsmiths.tv%2Fv2%2FCWtv%2Fassets%2F" + stripped + "%2Fpartner%2F154%3Fformat%3Djson%27%20%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=", function(data) {
       finalurl = data.query.results.json.videos.variantplaylist.uri;
       console.log(finalurl)
       showname.innerHTML = data.query.results.json.assetFields.seriesName + " - " + data.query.results.json.assetFields.title
@@ -23,8 +22,6 @@ function fetchcwjson(value) {
       });
       player.play();
    });
-   console.log(finalurl)
-   return finalurl
 }
 // ABC Fetch 
 var sessionKey
