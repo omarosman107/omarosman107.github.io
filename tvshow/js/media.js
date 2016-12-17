@@ -77,6 +77,8 @@ function fetchabcjson(value) {
 }
 
  
+
+ 
 // FOX Fetch
 function fetchfoxjson(value) {
    var x2js = new X2JS();
