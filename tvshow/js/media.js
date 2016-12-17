@@ -6,6 +6,7 @@ function addJS(url) {
    var fs = document.getElementsByTagName('script')[0]; // Get the first script
    fs.parentNode.insertBefore(s, fs);
 };
+
 // CWTV Fetch 
 function fetchcwjson(value) {
    var lastSegment = value.split('/').pop();
@@ -74,11 +75,13 @@ function fetchabcjson(value) {
    xhttp.send();
 
 }
+
+
 // FOX Fetch
 function fetchfoxjson(value) {
    var x2js = new X2JS();
    console.log(value)
-   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fh3%5B%40class%3D%27video-show-title%27%5D%2Fa%7C%2F%2Fh3%5B%40class%3D%27video-title%27%5D"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function(data) {
+   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fh3%5B%40class%3D%27video-show-title%27%5D%2Fa%7C%2F%2Fh3%5B%40class%3D%27video-title%27%5D"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&_maxage=2592000&callback=', function(data) {
       console.log(data.query.results.a.content, data.query.results.h3.content)
       $.getJSON("https://feed.theplatform.com/f/fox-mobile/fullepisodes?validFeed=false&types=none&byCustomValue=%7Bseries%7D%7B" + data.query.results.a.content + "%7D&count=true&range=1-50&adapterParams=mvpd%253D&byContent=byFormat=m3u%7Cmpeg4&form=json", function(episodecode) {
          var cuttitle = data.query.results.h3.content.slice(0, -1)
