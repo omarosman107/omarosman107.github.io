@@ -14,6 +14,7 @@ function fetchcwjson(value) {
    $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20videos.variantplaylist.uri%20%2C%20assetFields.seriesName%20%2C%20assetFields.title%20%2C%20assetFields.description%20from%20json%20where%20url%3D%27http%3A%2F%2Fmetaframe.digitalsmiths.tv%2Fv2%2FCWtv%2Fassets%2F" + stripped + "%2Fpartner%2F154%3Fformat%3Djson%27%20%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&_maxage=604800&callback=", function(data) {
       finalurl = data.query.results.json.videos.variantplaylist.uri;
       console.log(finalurl)
+      getShowinfo(data.query.results.json.assetFields.seriesName)
       showname.innerHTML = data.query.results.json.assetFields.seriesName + " - " + data.query.results.json.assetFields.title
       showdesc.innerHTML = data.query.results.json.assetFields.description
       document.getElementById('downloader').href = finalurl
@@ -37,6 +38,7 @@ function fetchabcjson(value) {
             //  var showid = parseHTML(html).getElementById('playerContainer').getAttribute('data-video-id')
 
          $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fapi.contents.watchabc.go.com%2Fvp2%2Fws%2Fs%2Fcontents%2F3000%2Fvideos%2F001%2F001%2F-1%2F-1%2F-1%2F" + showidjson + "%2F-1%2F-1.json%22%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=", function(data) {
+            getShowinfo(data.query.results.json.show.title)
             showname.innerHTML = data.query.results.json.video.show.title + "- " + data.query.results.json.video.title
             showdesc.innerHTML = data.query.results.json.video.longdescription
        
@@ -78,7 +80,7 @@ function fetchabcjson(value) {
 
  
 
- 
+
 // FOX Fetch
 function fetchfoxjson(value) {
    var x2js = new X2JS();
@@ -89,8 +91,9 @@ function fetchfoxjson(value) {
          var cuttitle = data.query.results.h3.content.slice(0, -1)
          console.log(cuttitle)
          for (var i = 0; i < episodecode.entries.length; i++) {
-            if (episodecode.entries[i].title == cuttitle) {
+            if (data.query.results.h3.content.includes(episodecode.entries[i].title)) {
                console.log(episodecode.entries[i].media$content[9]["plfile$url"])
+               getShowinfo(episodecode.entries[i]['fox$series'])
                showname.innerHTML = episodecode.entries[i]["fox$series"] + "- " + episodecode.entries[i].title
                showdesc.innerHTML = episodecode.entries[i].description
                var xhttp = new XMLHttpRequest();
@@ -145,8 +148,10 @@ function fetchcbsjson(value) {
    }
    console.log(searchValue)
    $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'" + value + "%2F'%20and%20compat%3D%22html5%22%20and%20xpath%3D%22%2F%2Fa%5B%40class%3D'show-title'%5D%7C%2F%2Fdiv%5B%40class%3D'title'%5D%7C%2F%2Fhead%2Fmeta%5B%40property%3D'og%3Adescription'%5D%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&_maxage=2592000&callback=", function(data) {
+      getShowinfo(data.query.results.a[0].content)
       showname.innerHTML = data.query.results.a[0].content + "- " + data.query.results.div.content
       showdesc.innerHTML = data.query.results.meta.content
+
       videourl = "https://link.theplatform.com/s/dJ5BDC/media/guid/2198311517/" + searchValue + "?mbr=true&manifest=m3u&form=json"
       document.getElementById('downloader').href = videourl
       player.src({

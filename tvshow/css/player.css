@@ -22,10 +22,25 @@ p{
 	color: white;
 	font-family: 'Open Sans', sans-serif;
 }
-.showImg {}
+.showImg {
+    padding-top: 4%;
+    width: 15%;
+}
+@media (min-width: 900px){
+
+.showImg {
+    padding-top: 2%;
+    width: 10%;
+}
+
+}
 
 .header {
 
 background-color: rgb(48, 48, 48); color: white;
 	height: 20%;
+}
+
+#showname {
+
 }

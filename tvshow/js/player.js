@@ -95,3 +95,26 @@
 googleAPI();
 xhttp.send();
 }
+
+
+ function getShowinfo(name) {
+
+
+var showFetch = new XMLHttpRequest();
+/**
+ showFetch.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+   var data = JSON.parse(this.responseText)
+console.log(data)
+document.getElementsByClassName('showImg')[0].innerHTML = '<img width="100%" src="'+ data.image.medium   +'">'
+console.log(data.rating.average / 2)
+
+    }
+  };
+  showFetch.open("GET", 'http://api.tvmaze.com/singlesearch/shows?q=' +  name, true);
+  showFetch.send();
+  */
+
+
+}
