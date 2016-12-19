@@ -1,3 +1,5 @@
+   var x2js = new X2JS();
+
 function addJS(url) {
    var s = document.createElement('script'); // Create a script element
    s.type = "text/javascript"; // optional in html5
@@ -11,12 +13,12 @@ function addJS(url) {
 function fetchcwjson(value) {
    var lastSegment = value.split('/').pop();
    var stripped = lastSegment.substring(6);
-   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20videos.variantplaylist.uri%20%2C%20assetFields.seriesName%20%2C%20assetFields.title%20%2C%20assetFields.description%20from%20json%20where%20url%3D%27http%3A%2F%2Fmetaframe.digitalsmiths.tv%2Fv2%2FCWtv%2Fassets%2F" + stripped + "%2Fpartner%2F154%3Fformat%3Djson%27%20%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&_maxage=604800&callback=", function(data) {
-      finalurl = data.query.results.json.videos.variantplaylist.uri;
+   $.getJSON("http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/154" , function(data) {
+      finalurl = data.videos.variantplaylist.uri;
       console.log(finalurl)
-      getShowinfo(data.query.results.json.assetFields.seriesName)
-      showname.innerHTML = data.query.results.json.assetFields.seriesName + " - " + data.query.results.json.assetFields.title
-      showdesc.innerHTML = data.query.results.json.assetFields.description
+      getShowinfo(data.assetFields.seriesName)
+      showname.innerHTML = data.assetFields.seriesName + " - " + data.assetFields.title
+      showdesc.innerHTML = data.assetFields.description
       document.getElementById('downloader').href = finalurl
       player.src({
          "type": "application/x-mpegURL",
@@ -83,7 +85,6 @@ function fetchabcjson(value) {
 
 // FOX Fetch
 function fetchfoxjson(value) {
-   var x2js = new X2JS();
    console.log(value)
    $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fh3%5B%40class%3D%27video-show-title%27%5D%2Fa%7C%2F%2Fh3%5B%40class%3D%27video-title%27%5D"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&_maxage=2592000&callback=', function(data) {
       console.log(data.query.results.a.content, data.query.results.h3.content)
@@ -161,3 +162,104 @@ function fetchcbsjson(value) {
       player.play();
    });
 }
+
+
+
+// Nickelodeon
+var playlist = ""
+
+function fetchnickjson(value){
+	value = value.split('/')[5]
+	var split = value.split('.')[0]
+	console.log(split)
+
+
+
+   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20id%2Ctitle%2Cdescription%20from%20json%20where%20url%3D%27http%3A%2F%2Fwww.nick.com%2Fdata%2FvideoEndLevel%3FurlKey%3D"+ split +"'%20%20&format=json" , function(data) {
+    
+      showname.innerHTML = data.query.results.json.title 
+      showdesc.innerHTML = data.query.results.json.description
+
+         console.log(data.query.results.json.id)
+      
+   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20channel.item.group.content.url%20from%20xml%20where%20url%3D%27http%3A%2F%2Fudat.mtvnservices.com%2Fservice1%2Fdispatch.htm%3Ffeed%3Dnick_arc_player_prime%26mgid%3Dmgid%253Aarc%253Aepisode%253Anick.com%253A"+ data.query.results.json.id +'%27%20%20and%20itemPath%3D"rss"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=' , function(data) {
+    console.log(data.query.results.rss)
+    
+               
+
+         
+         console.log("[{" + playlist.substring(0, playlist.length - 1) +"," +"}]")
+
+         var finaldata = eval(playlist.substring(0, playlist.length - 1))
+
+
+         player.playlist([{
+  sources: [{
+    src: gatherData(data.query.results.rss[0].channel.item.group.content.url),
+    type: 'application/x-mpegURL'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[1].channel.item.group.content.url),
+    type: 'application/x-mpegURL'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[2].channel.item.group.content.url),
+    type: 'application/x-mpegURL'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[3].channel.item.group.content.url),
+    type: 'application/x-mpegURL'
+  }],
+}]);
+
+// Play through the playlist automatically.
+player.playlist.autoadvance(0);
+
+
+
+
+
+
+   });
+
+
+        });
+	}
+
+
+function gatherData(info){
+	var final
+
+ var xhttp = new XMLHttpRequest();
+
+               xhttp.onreadystatechange = function() {
+                  if (this.readyState == 4 && this.status == 200) {
+                     xml = this.responseText;
+                     var jsonfirst = (x2js.xml_str2json(this.response)).package.video.item["0"].rendition.src
+                     console.log(jsonfirst)
+                      videourl = jsonfirst
+
+
+      document.getElementById('downloader').href = videourl
+    
+           final = videourl
+               };
+           }
+           xhttp.open("GET", info + "?acceptMethods=hls", false);
+ 
+              xhttp.send();
+      return final
+
+}
+
+
+
+
+
+
+
+
+

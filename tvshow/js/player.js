@@ -32,7 +32,7 @@
 
 
              console.log(" CW Detected")
-             getcwurl(currenturl);
+             fetchcwjson(currenturl);
 
 
           }
@@ -59,7 +59,7 @@
           }
           if (googleurl.includes("cw")) {
              console.log(" CW Detected")
-             getcwurl(googleurl);
+             fetchcwjson(googleurl);
 
 
           }
@@ -69,6 +69,10 @@
           if (googleurl.includes("abc")) {
              console.log(" ABC Detected")
              fetchabcjson(googleurl)
+          }
+          if (googleurl.includes("nick")) {
+             console.log(" Nickelodeon Detected")
+             fetchnickjson(googleurl)
           }
           if (googleurl.includes("cbs")) {
              console.log(" CBS Detected")
