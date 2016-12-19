@@ -70,6 +70,10 @@
              console.log(" ABC Detected")
              fetchabcjson(googleurl)
           }
+          if (googleurl.includes("southpark")) {
+             console.log(" South Park Detected")
+             fetchsouthpjson(googleurl)
+          }
           if (googleurl.includes("nick")) {
              console.log(" Nickelodeon Detected")
              fetchnickjson(googleurl)

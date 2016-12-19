@@ -196,29 +196,39 @@ function fetchnickjson(value){
          player.playlist([{
   sources: [{
     src: gatherData(data.query.results.rss[0].channel.item.group.content.url),
-    type: 'application/x-mpegURL'
+    type: 'video/mp4'
   }],
 }, {
   sources: [{
     src: gatherData(data.query.results.rss[1].channel.item.group.content.url),
-    type: 'application/x-mpegURL'
+    type: 'video/mp4'
   }],
 }, {
   sources: [{
     src: gatherData(data.query.results.rss[2].channel.item.group.content.url),
-    type: 'application/x-mpegURL'
+    type: 'video/mp4'
   }],
 }, {
   sources: [{
     src: gatherData(data.query.results.rss[3].channel.item.group.content.url),
-    type: 'application/x-mpegURL'
+    type: 'video/mp4'
   }],
 }]);
 
 // Play through the playlist automatically.
 player.playlist.autoadvance(0);
 
+if (data.query.results.rss.channel.item.group.content.url) {
 
+ player.src({
+         "type": "video/mp4",
+         "src": gatherData(data.query.results.rss[3].channel.item.group.content.url)
+      });
+
+}
+
+// video/mp4
+// application/x-mpegURL
 
 
 
@@ -238,9 +248,9 @@ function gatherData(info){
                xhttp.onreadystatechange = function() {
                   if (this.readyState == 4 && this.status == 200) {
                      xml = this.responseText;
-                     var jsonfirst = (x2js.xml_str2json(this.response)).package.video.item["0"].rendition.src
+                     var jsonfirst = (x2js.xml_str2json(this.response)).package.video.item[0].rendition[5].src
                      console.log(jsonfirst)
-                      videourl = jsonfirst
+                      videourl = jsonfirst.replace("rtmpe://cp5289.edgefcs.net/ondemand/mtvnorigin/","http://viacommtvstrmfs.fplive.net/")
 
 
       document.getElementById('downloader').href = videourl
@@ -248,13 +258,105 @@ function gatherData(info){
            final = videourl
                };
            }
-           xhttp.open("GET", info + "?acceptMethods=hls", false);
+           xhttp.open("GET", info, false);
  
               xhttp.send();
       return final
 
 }
 
+
+
+// South Park
+
+function fetchsouthpjson(value){
+
+	   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20%20data-itemid%2Ccontent%20from%20html%20where%20url%3D%27" + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fdiv%5B%40id%3D%27player_page_player%27%5D%7C%2F%2Fmeta%5B%40property%3D%27og%3Atitle%27%5D%7C%2F%2Fmeta%5B%40property%3D%27sm4%3Acategory%27%5D%7C%2F%2Fmeta%5B%40property%3D%27og%3Adescription%27%5D"&format=json&callback=', function(data) {
+console.log(data.query.results.div["data-itemid"])
+showname.innerHTML =  data.query.results.meta[2].content +" - " +  data.query.results.meta["0"].content
+showdesc.innerHTML = data.query.results.meta[1].content
+
+  $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20channel.item.group.content.url%20from%20xml%20where%20url%3D%27http%3A%2F%2Fsouthpark.cc.com%2Ffeeds%2Fvideo-player%2Fmrss%3Furi%3Dmgid%253Aarc%253Aepisode%253Asouthparkstudios.com%253A" + data.query.results.div["data-itemid"] + '%27%20%20and%20itemPath%3D"rss"&format=json&callback=', function(data1) {
+
+
+
+
+         player.playlist([{
+  sources: [{
+    src: gatherSouthParkData(data1.query.results.rss[0].channel.item.group.content.url.split('?')[0]),
+    type: 'video/mp4'
+  }],
+}, {
+  sources: [{
+    src: gatherSouthParkData(data1.query.results.rss[1].channel.item.group.content.url.split('?')[0]),
+    type: 'video/mp4'
+  }],
+}, {
+  sources: [{
+    src: gatherSouthParkData(data1.query.results.rss[2].channel.item.group.content.url.split('?')[0]),
+    type: 'video/mp4'
+  }],
+}]);
+
+// Play through the playlist automatically.
+player.playlist.autoadvance(0);
+
+
+
+
+
+
+
+   });
+
+
+function gatherSouthParkData(info){
+	var final
+
+ var xhttp = new XMLHttpRequest();
+
+               xhttp.onreadystatechange = function() {
+                  if (this.readyState == 4 && this.status == 200) {
+                     xml = this.responseText;
+                     var jsonfirst = (x2js.xml_str2json(this.response)).package.video.item.rendition[4].src
+                     console.log(jsonfirst)
+
+                      videourl = jsonfirst.replace( "rtmpe://cp9950.edgefcs.net/ondemand/mtvnorigin/", "http://viacommtvstrmfs.fplive.net/")
+
+
+      document.getElementById('downloader').href = videourl
+    
+           final = videourl
+               };
+           }
+           xhttp.open("GET", info, false);
+ 
+              xhttp.send();
+      return final
+
+}
+
+
+
+
+
+     
+   });
+
+
+	 
+
+
+
+
+
+
+
+
+
+
+
+}
 
 
 
