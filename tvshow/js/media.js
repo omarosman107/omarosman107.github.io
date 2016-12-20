@@ -1,3 +1,4 @@
+  
    var x2js = new X2JS();
 
 function addJS(url) {
@@ -184,6 +185,20 @@ function fetchnickjson(value){
       
    $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20channel.item.group.content.url%20from%20xml%20where%20url%3D%27http%3A%2F%2Fudat.mtvnservices.com%2Fservice1%2Fdispatch.htm%3Ffeed%3Dnick_arc_player_prime%26mgid%3Dmgid%253Aarc%253Aepisode%253Anick.com%253A"+ data.query.results.json.id +'%27%20%20and%20itemPath%3D"rss"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=' , function(data) {
     console.log(data.query.results.rss)
+
+        /** for (var i = 0; i < data.query.results.rss.length; i++) {
+         	player.playlist([{
+  sources: [{
+    src: gatherData(data.query.results.rss[i].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}]);
+
+         }
+         player.playlist.autoadvance(0);
+
+         */
+
     
                
 
@@ -192,8 +207,12 @@ function fetchnickjson(value){
 
          var finaldata = eval(playlist.substring(0, playlist.length - 1))
 
+         console.log(whatIsIt(data.query.results.rss))
 
-         player.playlist([{
+     if(whatIsIt(data.query.results.rss) == "Array"){
+
+
+     player.playlist([{
   sources: [{
     src: gatherData(data.query.results.rss[0].channel.item.group.content.url),
     type: 'video/mp4'
@@ -214,21 +233,202 @@ function fetchnickjson(value){
     type: 'video/mp4'
   }],
 }]);
+         
 
 // Play through the playlist automatically.
 player.playlist.autoadvance(0);
 
-if (data.query.results.rss.channel.item.group.content.url) {
 
- player.src({
-         "type": "video/mp4",
-         "src": gatherData(data.query.results.rss[3].channel.item.group.content.url)
-      });
-
-}
 
 // video/mp4
 // application/x-mpegURL
+}
+
+     if(data.query.count == 6){
+
+
+     player.playlist([{
+  sources: [{
+    src: gatherData(data.query.results.rss[0].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[1].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[2].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+},{
+sources: [{
+    src: gatherData(data.query.results.rss[3].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+},{
+sources: [{
+    src: gatherData(data.query.results.rss[4].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[5].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}]);
+         
+
+// Play through the playlist automatically.
+player.playlist.autoadvance(0);
+
+
+
+// video/mp4
+// application/x-mpegURL
+}
+ if(data.query.count == 7){
+
+
+     player.playlist([{
+  sources: [{
+    src: gatherData(data.query.results.rss[0].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[1].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[2].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+},{
+sources: [{
+    src: gatherData(data.query.results.rss[3].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+},{
+sources: [{
+    src: gatherData(data.query.results.rss[4].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[5].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+},
+{
+  sources: [{
+    src: gatherData(data.query.results.rss[6].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}]);
+         
+
+// Play through the playlist automatically.
+player.playlist.autoadvance(0);
+
+
+
+// video/mp4
+// application/x-mpegURL
+}
+
+ if(data.query.count == 5){
+
+
+     player.playlist([{
+  sources: [{
+    src: gatherData(data.query.results.rss[0].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[1].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[2].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+},{
+sources: [{
+    src: gatherData(data.query.results.rss[3].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+},{
+sources: [{
+    src: gatherData(data.query.results.rss[4].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}]);
+         
+
+// Play through the playlist automatically.
+player.playlist.autoadvance(0);
+
+
+
+// video/mp4
+// application/x-mpegURL
+}
+ if(data.query.count == 3){
+
+
+     player.playlist([{
+  sources: [{
+    src: gatherData(data.query.results.rss[0].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[1].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}, {
+  sources: [{
+    src: gatherData(data.query.results.rss[2].channel.item.group.content.url),
+    type: 'video/mp4'
+  }],
+}]);
+         
+
+// Play through the playlist automatically.
+player.playlist.autoadvance(0);
+
+
+
+// video/mp4
+// application/x-mpegURL
+}
+
+
+
+
+
+
+
+
+
+
+
+
+if(whatIsIt(data.query.results.rss) == "Object"){
+
+
+   player.src({
+         "type": "video/mp4",
+         "src": gatherData(data.query.results.rss.channel.item.group.content.url)
+      });
+      player.play();
+
+}
 
 
 
@@ -361,7 +561,33 @@ function gatherSouthParkData(info){
 
 
 
+var stringConstructor = "test".constructor;
+var arrayConstructor = [].constructor;
+var objectConstructor = {}.constructor;
 
+function whatIsIt(object) {
+    if (object === null) {
+        return "null";
+    }
+    else if (object === undefined) {
+        return "undefined";
+    }
+    else if (object.constructor === stringConstructor) {
+        return "String";
+    }
+    else if (object.constructor === arrayConstructor) {
+        return "Array";
+    }
+    else if (object.constructor === objectConstructor) {
+        return "Object";
+    }
+    else {
+        return "don't know";
+    }
+}
 
+var testSubjects = ["string", [1,2,3], {foo: "bar"}, 4];
 
+for (var i=0, len = testSubjects.length; i < len; i++) {
+}
 

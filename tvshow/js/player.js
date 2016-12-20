@@ -1,6 +1,13 @@
 
-
+var nickactive = false
  var player = videojs('LS');;
+ player.ready(function() {
+  this.hotkeys({
+    volumeStep: 0.1,
+    seekStep: 5,
+    enableModifiersForNumbers: false
+  });
+});
 
 
 
@@ -34,6 +41,12 @@
              console.log(" CW Detected")
              fetchcwjson(currenturl);
 
+
+          }
+          if (currenturl.includes("nick")) {
+             console.log(" Nickelodeon Detected")
+             fetchnickjson(currenturl)
+             nickactive = true
 
           }
 
@@ -75,8 +88,11 @@
              fetchsouthpjson(googleurl)
           }
           if (googleurl.includes("nick")) {
+          	if(nickactive == false){
              console.log(" Nickelodeon Detected")
+
              fetchnickjson(googleurl)
+            }
           }
           if (googleurl.includes("cbs")) {
              console.log(" CBS Detected")
