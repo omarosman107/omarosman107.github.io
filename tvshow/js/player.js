@@ -1,5 +1,12 @@
 
 var nickactive = false
+var foxactive = false
+var cbsactive = false
+var cwtv = false
+var abcactive = false
+var spactive = false
+var cwactive = false
+var isDone = false
  var player = videojs('LS');;
  player.ready(function() {
   this.hotkeys({
@@ -40,6 +47,8 @@ var nickactive = false
 
              console.log(" CW Detected")
              fetchcwjson(currenturl);
+             cwactive = true
+             isDone = true
 
 
           }
@@ -47,10 +56,38 @@ var nickactive = false
              console.log(" Nickelodeon Detected")
              fetchnickjson(currenturl)
              nickactive = true
+                          isDone = true
+
 
           }
+                if (currenturl.includes("abc")) {
+             console.log(" ABC Detected")
+             fetchabcjson(currenturl)
+                 abcactive = true
+                              isDone = true
 
+          }
+          if (currenturl.includes("southpark")) {
+             console.log(" South Park Detected")
+             fetchsouthpjson(currenturl)
+             spactive = true
+                          isDone = true
 
+          }
+if (currenturl.includes("cbs")) {
+             console.log(" CBS Detected")
+             fetchcbsjson(currenturl)
+             cbsactive = true
+                          isDone = true
+
+          }
+           if (currenturl.includes("fox")) {
+             console.log("Fox Detected")
+             fetchfoxjson(currenturl)
+             foxactive = true
+                          isDone = true
+
+          }
 
 
  function googleAPI() {
@@ -71,21 +108,25 @@ var nickactive = false
              cwurl = googlejson.results["0"].richSnippet.metatags.ogUrl
           }
           if (googleurl.includes("cw")) {
+          	if (cwactive == false) {
              console.log(" CW Detected")
              fetchcwjson(googleurl);
-
+}
 
           }
       
 
 
           if (googleurl.includes("abc")) {
+          	if (abcactive == false) {
              console.log(" ABC Detected")
-             fetchabcjson(googleurl)
+             fetchabcjson(googleurl)}
           }
           if (googleurl.includes("southpark")) {
+          	if(spactive == false){
              console.log(" South Park Detected")
              fetchsouthpjson(googleurl)
+         }
           }
           if (googleurl.includes("nick")) {
           	if(nickactive == false){
@@ -95,16 +136,18 @@ var nickactive = false
             }
           }
           if (googleurl.includes("cbs")) {
+          	if (cbsactive == false) {
              console.log(" CBS Detected")
-             fetchcbsjson(googleurl)
+             fetchcbsjson(googleurl)}
           }
           if (googleurl.includes("cartoon")) {
              console.log(" Cartoon Detected")
              fetchcartoonjson(googleurl)
           }
           if (googleurl.includes("fox")) {
+          	if (foxactive == false) {
              console.log("Fox Detected")
-             fetchfoxjson(foxurl)
+             fetchfoxjson(foxurl)}
           }
           if (googleurl.includes("netflix")) {
              console.log(" Netflix Detected")
@@ -115,12 +158,11 @@ var nickactive = false
     xhttp.open("GET", "https://www.googleapis.com/customsearch/v1element?key=AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY&rsz=filtered_cse&num=2&hl=en&prettyPrint=false&source=gcsc&gss=.com&sig=0c3990ce7a056ed50667fe0c3873c9b6&cx=009916453314335219988:-0yvqrz4snu&q=" + currenturl, true);
  }
 
-  if (currenturl == undefined) {}else{
-googleAPI();
-xhttp.send();
+
+if (isDone == false) {
+googleAPI()
+
 }
-
-
  function getShowinfo(name) {
 
 
