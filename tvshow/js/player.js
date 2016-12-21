@@ -160,7 +160,8 @@ if (currenturl.includes("cbs")) {
 
 
 if (isDone == false) {
-googleAPI()
+googleAPI();
+xhttp.send();
 
 }
  function getShowinfo(name) {
