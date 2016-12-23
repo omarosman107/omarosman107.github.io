@@ -86,41 +86,65 @@ function fetchabcjson(value) {
 
 // FOX Fetch
 function fetchfoxjson(value) {
+	var signature
    console.log(value)
-   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fh3%5B%40class%3D%27video-show-title%27%5D%2Fa%7C%2F%2Fh3%5B%40class%3D%27video-title%27%5D"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&_maxage=2592000&callback=', function(data) {
-      console.log(data.query.results.a.content, data.query.results.h3.content)
-      $.getJSON("https://feed.theplatform.com/f/fox-mobile/fullepisodes?validFeed=false&types=none&byCustomValue=%7Bseries%7D%7B" + data.query.results.a.content + "%7D&count=true&range=1-50&adapterParams=mvpd%253D&byContent=byFormat=m3u%7Cmpeg4&form=json", function(episodecode) {
-         var cuttitle = data.query.results.h3.content.slice(0, -1)
-         console.log(cuttitle)
-         for (var i = 0; i < episodecode.entries.length; i++) {
-            if (data.query.results.h3.content.includes(episodecode.entries[i].title)) {
-               console.log(episodecode.entries[i].media$content[9]["plfile$url"])
-               getShowinfo(episodecode.entries[i]['fox$series'])
-               showname.innerHTML = episodecode.entries[i]["fox$series"] + "- " + episodecode.entries[i].title
-               showdesc.innerHTML = episodecode.entries[i].description
+   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fh3%5B%40class%3D%27video-show-title%27%5D%2Fa%7C%2F%2Fh3%5B%40class%3D%27video-title%27%5D%7C%2F%2Fscript%5B%40type%3D%27application%2Fld%2Bjson%27%5D%7C%2F%2Fscript"&_maxage=400000&format=json&callback=', function(data) {
+
+var mediaurl
+var episodedetails
+
+
+for (var i = 0; i < data.query.results.script.length; i++) {
+
+var jstype = (data.query.results.script[i].type)
+
+if (jstype == ('application/ld+json')) {
+
+ episodedetails = JSON.parse(data.query.results.script[i].content)
+
+
+}
+
+
+}
+mediaurl = (JSON.parse((data.query.results.script[11].split('jQuery.extend(Drupal.settings,'))[1].split(');')[0]).fox_pdk_player.release_url)
+
+
+
+               getShowinfo(episodedetails.partOfSeries.name)
+
+
+               showname.innerHTML = episodedetails.partOfSeries.name + "- " + episodedetails.name
+               showdesc.innerHTML = episodedetails.description
+
+
+
+
+
+
                var xhttp = new XMLHttpRequest();
                xhttp.onreadystatechange = function() {
                   if (this.readyState == 4 && this.status == 200) {
                      xml = this.responseText;
                      var jsonfirst = JSON.stringify(x2js.xml_str2json(this.response))
                      json = JSON.parse(jsonfirst);
-                     var videofile = json.smil.body.seq.par["0"].video._src
+                     console.log(json)
+                     var videofile = json.smil.body.seq.par["0"].switch.video[0]._src
                      console.log(videofile)
                      document.getElementById('downloader').href = videofile
                      player.src({
-                        "type": "application/x-mpegURL",
+                        "type": "video/mp4",
                         "src": videofile
                      });
                      player.play();
                      return videofile
                   }
                };
-               xhttp.open("GET", episodecode.entries[i].media$content[9]["plfile$url"], true);
+               xhttp.open("GET", mediaurl + "&switch=http", true);
                xhttp.send();
-            }
-         }
-      });
-   });
+            
+         
+         });
 }
 // WatchCartoon Fetch
 function fetchcartoonjson(value) {
