@@ -1,6 +1,12 @@
   
    var x2js = new X2JS();
-
+   var foxwholescript
+if (!String.prototype.includes) {
+    String.prototype.includes = function() {
+        'use strict';
+        return String.prototype.indexOf.apply(this, arguments) !== -1;
+    };
+}
 function addJS(url) {
    var s = document.createElement('script'); // Create a script element
    s.type = "text/javascript"; // optional in html5
@@ -104,10 +110,20 @@ if (jstype == ('application/ld+json')) {
 
 
 }
+ foxwholescript = data.query.results.script[i]
+
+ console.log(whatIsIt(data.query.results.script[i]))
+
+if (whatIsIt(data.query.results.script[i]) == "String") {
+
+
+
+mediaurl = (JSON.parse((data.query.results.script[i].split('jQuery.extend(Drupal.settings,'))[1].split(');')[0]).fox_pdk_player.release_url)
+
 
 
 }
-mediaurl = (JSON.parse((data.query.results.script[11].split('jQuery.extend(Drupal.settings,'))[1].split(');')[0]).fox_pdk_player.release_url)
+}
 
 
 
