@@ -6,6 +6,7 @@ var cwtv = false
 var abcactive = false
 var spactive = false
 var cwactive = false
+var nbcactive = false
 var isDone = false
  var player = videojs('LS');;
  player.ready(function() {
@@ -81,6 +82,13 @@ if (currenturl.includes("cbs")) {
                           isDone = true
 
           }
+          if (currenturl.includes("nbc")) {
+             console.log(" NBC Detected")
+             fetchnbcjson(currenturl)
+             nbcactive = true
+                          isDone = true
+
+          }
            if (currenturl.includes("fox")) {
              console.log("Fox Detected")
              fetchfoxjson(currenturl)
@@ -98,10 +106,18 @@ if (currenturl.includes("cbs")) {
                        	foxurl = googlejson.results[0].unescapedUrl
 
           for (var i = 0; i < googlejson.results.length; i++) {
-             if (googlejson.results[i].richSnippet.metatags.ogType == "video.episode") {
+
+          	if (typeof googlejson.results[i].richSnippet != "undefined") {
+
+  if (googlejson.results[i].richSnippet.metatags.ogType == "video.episode") {
                 console.log(googlejson.results[i].richSnippet.metatags.ogType)
                 foxurl = googlejson.results[i].unescapedUrl
              }
+
+}
+
+
+           
           }
           if (googlejson.results[0].unescapedUrl.includes("cwtv")) {
              console.log(googlejson.results["0"].richSnippet.metatags.ogUrl)
@@ -121,6 +137,11 @@ if (currenturl.includes("cbs")) {
           	if (abcactive == false) {
              console.log(" ABC Detected")
              fetchabcjson(googleurl)}
+          }
+          if (googleurl.includes("nbc")) {
+          	if (nbcactive == false) {
+             console.log(" NBC Detected")
+             fetchnbcjson(googleurl)}
           }
           if (googleurl.includes("southpark")) {
           	if(spactive == false){

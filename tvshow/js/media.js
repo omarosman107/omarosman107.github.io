@@ -1,4 +1,67 @@
   
+      function srt2webvtt(data) {
+          // remove dos newlines
+          var srt = data.replace(/\r+/g, '');
+          // trim white space start and end
+          srt = srt.replace(/^\s+|\s+$/g, '');
+        
+          // get cues
+          var cuelist = srt.split('\n\n');
+          var result = "";
+        
+          if (cuelist.length > 0) {
+            result += "WEBVTT\n\n";
+            for (var i = 0; i < cuelist.length; i=i+1) {
+              result += convertSrtCue(cuelist[i]);
+            }
+          }
+          
+          return result;
+        }
+        
+        function convertSrtCue(caption) {
+          // remove all html tags for security reasons
+          //srt = srt.replace(/<[a-zA-Z\/][^>]*>/g, ''); 
+          
+          var cue = "";
+          var s = caption.split(/\n/);
+          var line = 0;
+          
+          // detect identifier
+          if (!s[0].match(/\d+:\d+:\d+/) && s[1].match(/\d+:\d+:\d+/)) {
+            cue += s[0].match(/\w/) + "\n";
+            line += 1;
+          }
+          
+          // get time strings
+          if (s[line].match(/\d+:\d+:\d+/)) {
+            // convert time string
+            var m = s[1].match(/(\d+):(\d+):(\d+)(?:,(\d+))?\s*--?>\s*(\d+):(\d+):(\d+)(?:,(\d+))?/);
+            if (m) {
+              cue += m[1]+":"+m[2]+":"+m[3]+"."+m[4]+" --> "
+                    +m[5]+":"+m[6]+":"+m[7]+"."+m[8]+"\n";
+              line += 1;
+            } else {
+              // Unrecognized timestring
+              return "";
+            }
+          } else {
+            // file format error or comment lines
+            return "";
+          }
+          
+          // get cue text
+          if (s[line]) {
+            cue += s[line] + "\n\n";
+          }
+        
+          return cue;
+        }
+
+
+
+
+
    var x2js = new X2JS();
    var foxwholescript
 if (!String.prototype.includes) {
@@ -145,18 +208,18 @@ mediaurl = (JSON.parse((data.query.results.script[i].split('jQuery.extend(Drupal
                      var jsonfirst = JSON.stringify(x2js.xml_str2json(this.response))
                      json = JSON.parse(jsonfirst);
                      console.log(json)
-                     var videofile = json.smil.body.seq.par["0"].switch.video[0]._src
+                     var videofile = json.smil.body.seq.par["0"].video._src
                      console.log(videofile)
                      document.getElementById('downloader').href = videofile
                      player.src({
-                        "type": "video/mp4",
+                        "type": "application/x-mpegURL",
                         "src": videofile
                      });
                      player.play();
                      return videofile
                   }
                };
-               xhttp.open("GET", mediaurl + "&switch=http", true);
+               xhttp.open("GET", mediaurl.split('?')[0] + "?manifest=m3u", true);
                xhttp.send();
             
          
@@ -394,6 +457,104 @@ function gatherSouthParkData(info){
 
 
 }
+
+// NBC 
+var mediaurl
+var iframeDOM = document.createElement( 'html' );
+
+function fetchnbcjson(value){
+console.log(value)
+ $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fiframe%7C%2F%2Fscript%5B%40type%3D%20%27application%2Fld%2Bjson%27%5D"&format=json&callback=', function(data) {
+
+var episodedetails
+
+
+episodedetails = JSON.parse(data.query.results.script.content)
+
+
+
+
+getShowinfo(episodedetails.partOfSeries.name)
+
+
+               showname.innerHTML = episodedetails.partOfSeries.name + "- " + episodedetails.name
+               showdesc.innerHTML = episodedetails.description
+
+
+
+
+
+
+
+
+
+var iframefetchajax = new XMLHttpRequest();
+  iframefetchajax.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+iframeDOM.innerHTML = this.responseText
+
+
+var jsonfirst = iframeDOM.getElementsByTagName('link')[1].href;
+
+         mediaurl = jsonfirst
+
+
+var videofile = mediaurl.split('?')[0] + "?manifest=m3u"
+                     console.log(videofile)
+                     document.getElementById('downloader').href = videofile
+                     player.src({
+                        "type": "application/x-mpegURL",
+                        "src": videofile
+                     });
+                     player.play();
+       
+    }
+  };
+
+
+  iframefetchajax.open("GET", data.query.results.iframe.src, true);
+  iframefetchajax.send();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
