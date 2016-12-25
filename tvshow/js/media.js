@@ -460,17 +460,22 @@ function gatherSouthParkData(info){
 // NBC 
 var mediaurl
 var iframeDOM = document.createElement( 'html' );
+var pageDOM = document.createElement( 'html' );
+
 
 function fetchnbcjson(value){
 console.log(value)
- $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fiframe%7C%2F%2Fscript%5B%40type%3D%20%27application%2Fld%2Bjson%27%5D"&format=json&callback=', function(data) {
+ $.get( value , function(data) {
+
+
+
 
 var episodedetails
 
-
-episodedetails = JSON.parse(data.query.results.script.content)
-
-
+pageDOM.innerHTML = data
+var jsonfirst = pageDOM.getElementsByTagName('iframe')[0].src;
+episodedetails = JSON.parse(pageDOM.querySelector('script[type="application/ld+json"]').innerHTML)
+console.log(jsonfirst)
 
 
 getShowinfo(episodedetails.partOfSeries.name)
@@ -512,7 +517,7 @@ var videofile = mediaurl.split('?')[0] + "?manifest=m3u"
   };
 
 
-  iframefetchajax.open("GET", data.query.results.iframe.src, true);
+  iframefetchajax.open("GET", pageDOM.getElementsByTagName('iframe')[0].src, true);
   iframefetchajax.send();
 
 
