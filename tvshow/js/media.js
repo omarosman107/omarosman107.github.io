@@ -293,7 +293,7 @@ function fetchnickjson(value){
 
 
          for (var i = 0; i < data.query.results.rss.length; i++) {
-         arr = 	arr + "{sources: [{src: '" + gatherData(data.query.results.rss[i].channel.item.group.content.url) + "',type: 'video/mp4'}],},"
+         arr = 	arr + "{sources: [{src: '" + gatherData(data.query.results.rss[i].channel.item.group.content.url + "?format=json") + "',type: 'video/mp4'}],},"
 
          }
          player.playlist(eval("[" + (arr.substring(0, arr.length - 1)) + "]"))
@@ -307,7 +307,7 @@ if(data.query.count == 1){
 
    player.src({
          "type": "video/mp4",
-         "src": gatherData(data.query.results.rss.channel.item.group.content.url)
+         "src": gatherData(data.query.results.rss.channel.item.group.content.url + "?format=json")
       });
       player.play();
 
@@ -343,8 +343,7 @@ function gatherData(info){
                xhttp.onreadystatechange = function() {
                   if (this.readyState == 4 && this.status == 200) {
                      xml = this.responseText;
-                     console.log((x2js.xml_str2json(this.response)).package.video.item[0].rendition.length - 1)
-                     var jsonfirst = (x2js.xml_str2json(this.response)).package.video.item[0].rendition[(x2js.xml_str2json(this.response)).package.video.item[0].rendition.length - 1].src
+                     var jsonfirst = (JSON.parse(this.response)).package.video.item[0].rendition[(JSON.parse(this.response)).package.video.item[0].rendition.length - 1].src
                      console.log(jsonfirst)
                       videourl = jsonfirst.replace("rtmpe://cp5289.edgefcs.net/ondemand/mtvnorigin/","http://viacommtvstrmfs.fplive.net/")
 
@@ -378,7 +377,7 @@ showdesc.innerHTML = data.query.results.meta[1].content
 
 
          for (var i = 0; i < data1.query.results.rss.length; i++) {
-         arr = 	arr + "{sources: [{src: '" + gatherSouthParkData(data1.query.results.rss[i].channel.item.group.content.url) + "',type: 'video/mp4'}],},"
+         arr = 	arr + "{sources: [{src: '" + gatherSouthParkData(data1.query.results.rss[i].channel.item.group.content.url.split('?')[0] + "?format=json") + "',type: 'video/mp4'}],},"
 
          }
          player.playlist(eval("[" + (arr.substring(0, arr.length - 1)) + "]"))
@@ -399,7 +398,7 @@ if(data1.query.count == 1){
 
 	 player.src({
          "type": "video/mp4",
-         "src": gatherSouthParkData(data1.query.results.rss.channel.item.group.content.url)
+         "src": gatherSouthParkData(data1.query.results.rss.channel.item.group.content.url.split('?')[0] + "?format=json")
       });
 
 
@@ -418,7 +417,7 @@ function gatherSouthParkData(info){
                   if (this.readyState == 4 && this.status == 200) {
                      xml = this.responseText;
 
-                     var jsonfirst = (x2js.xml_str2json(this.response)).package.video.item.rendition[(x2js.xml_str2json(this.response)).package.video.item.rendition.length -1].src
+                     var jsonfirst = (JSON.parse(this.response)).package.video.item[0].rendition[(JSON.parse(this.response)).package.video.item[0].rendition.length - 1].src
                      console.log(jsonfirst)
 
                       videourl = jsonfirst.replace( "rtmpe://cp9950.edgefcs.net/ondemand/mtvnorigin/", "http://viacommtvstrmfs.fplive.net/")
