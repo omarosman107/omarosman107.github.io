@@ -43,10 +43,16 @@ var isDone = false
           }
                if (currenturl.includes("cwtv")) {
 
+ console.log(" CW Detected")
+             fetchcwjson(currenturl);
+             cwactive = true
+             isDone = true
 
 
+          }
+           if (currenturl.includes("cwseed")) {
 
-             console.log(" CW Detected")
+ console.log(" CWSEED Detected")
              fetchcwjson(currenturl);
              cwactive = true
              isDone = true
@@ -130,6 +136,7 @@ if (currenturl.includes("cbs")) {
 }
 
           }
+          
       
 
 

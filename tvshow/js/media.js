@@ -81,8 +81,8 @@ function addJS(url) {
 
 // CWTV Fetch 
 function fetchcwjson(value) {
-   var lastSegment = value.split('/').pop();
-   var stripped = lastSegment.substring(6);
+	console.log(value.split('?')[1].split("=")[1])
+   var stripped = value.split('?')[1].split("=")[1]
    $.getJSON("http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/154" , function(data) {
       finalurl = data.videos.variantplaylist.uri;
       console.log(finalurl)
@@ -219,7 +219,7 @@ mediaurl = (JSON.parse((data.query.results.script[i].split('jQuery.extend(Drupal
                      return videofile
                   }
                };
-               xhttp.open("GET", mediaurl.split('?')[0] + "?manifest=m3u", true);
+               xhttp.open("GET", "https://" + mediaurl.split('http://')[1].split('?')[0] + "?mbr=true&manifest=m3u", true);
                xhttp.send();
             
          
