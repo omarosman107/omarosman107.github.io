@@ -53,13 +53,12 @@ body{
 .w3-progress-container {
     width: 100%;
     height: 0.5em;
-    background-color: #f1f1f1;
     opacity: .90;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 .w3-progressbar {
-    background-color: #66BB6A;
+    background-color: #29d;
         height: 100%;
     line-height: inherit;
         transition: width .9s ease;

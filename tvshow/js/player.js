@@ -21,11 +21,7 @@ var isDone = false
 
  showname = document.getElementById('showname')
  showdesc = document.getElementById('showdesc')
- var currenturl = window.location.search.split('?')[1];
-     var xhttp = new XMLHttpRequest();
-
-
-          function getcwurl(url) {
+ function getcwurl(url) {
 
              var cwjsonextract = new XMLHttpRequest();
   cwjsonextract.onreadystatechange = function() {
@@ -41,6 +37,18 @@ var isDone = false
 
 
           }
+
+
+
+function findName(){
+document.getElementById('progress').style.width = "0%"
+
+
+ var currenturl = window.location.hash.split('#')[1];
+     var xhttp = new XMLHttpRequest();
+
+
+         
 
                if (currenturl.includes("cwtv")) {
 
@@ -194,6 +202,16 @@ googleAPI();
 xhttp.send();
 
 }
+}
+
+findName();
+$(window).on('hashchange', function() {
+  console.log(location.hash)
+  findName();
+
+
+});
+
  function getShowinfo(name) {
 
 
