@@ -41,6 +41,7 @@ var isDone = false
 
 
           }
+
                if (currenturl.includes("cwtv")) {
 
  console.log(" CW Detected")
@@ -102,11 +103,12 @@ if (currenturl.includes("cbs")) {
                           isDone = true
 
           }
-
+document.getElementById('progress').style.width = "15%"
 
  function googleAPI() {
     xhttp.onreadystatechange = function() {
        if (this.readyState == 4 && this.status == 200) {
+       	document.getElementById('progress').style.width = "25%"
           googlejson = JSON.parse(this.responseText);
           googleurl = googlejson.results[0].unescapedUrl;
                        	foxurl = googlejson.results[0].unescapedUrl
