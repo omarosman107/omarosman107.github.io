@@ -26,7 +26,8 @@ function fetchcwjson(value) {
 	document.getElementById('progress').style.width = "35%"
 	console.log(value.split('?')[1].split("=")[1])
    var stripped = value.split('?')[1].split("=")[1]
-   $.getJSON("http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/154" , function(data) {
+   var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/154"
+   $.getJSON(url , function(data) {
    	document.getElementById('progress').style.width = "50%"
       finalurl = data.videos.variantplaylist.uri;
       console.log(finalurl)
@@ -44,6 +45,7 @@ function fetchcwjson(value) {
          document.getElementById('progress').style.width = "100%"
 
    });
+
 }
 // ABC Fetch 
 var sessionKey
