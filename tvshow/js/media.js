@@ -27,8 +27,16 @@ function fetchcwjson(value) {
 	console.log(value.split('?')[1].split("=")[1])
    var stripped = value.split('?')[1].split("=")[1]
    var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/154"
-   $.getJSON(url , function(data) {
-   	document.getElementById('progress').style.width = "50%"
+
+   fetch(url, {
+	method: 'get'
+}).then(function(response) {
+	return response.json();
+	
+}).then(function(data) {
+
+
+document.getElementById('progress').style.width = "50%"
       finalurl = data.videos.variantplaylist.uri;
       console.log(finalurl)
       getShowinfo(data.assetFields.seriesName)
@@ -44,7 +52,11 @@ function fetchcwjson(value) {
       player.play();
          document.getElementById('progress').style.width = "100%"
 
-   });
+
+})
+
+
+
 
 }
 // ABC Fetch 
@@ -277,6 +289,8 @@ function fetchnickjson(value){
 
          }
          player.playlist(eval("[" + (arr.substring(0, arr.length - 1)) + "]"))
+         player.load();
+         player.play();
      }
 
 
@@ -289,6 +303,7 @@ if(data.query.count == 1){
          "type": "video/mp4",
          "src": gatherData(data.query.results.rss.channel.item.group.content.url + "?format=json")
       });
+   player.load();
       player.play();
 
 }
@@ -339,6 +354,9 @@ function gatherData(info){
  
               xhttp.send();
       return final
+
+
+
 
 }
 

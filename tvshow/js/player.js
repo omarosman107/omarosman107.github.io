@@ -41,6 +41,7 @@ var isDone = false
 
 
 function findName(){
+
 document.getElementById('progress').style.width = "0%"
 
 
