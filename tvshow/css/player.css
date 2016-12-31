@@ -63,5 +63,5 @@ body{
     background-color: #29d;
         height: 100%;
     line-height: inherit;
-        transition: width .9s ease;
+  transition: all 420ms cubic-bezier(0.22, 0.61, 0.22, 0.96);
 }
