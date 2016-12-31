@@ -11,16 +11,18 @@ width: 100%;
 }
 }
 body{
-background-color: rgb(66, 66, 66);
+background-color: #343434;
 color: white;
 }
 h1{
 	color: white;
 	font-family: 'Roboto', sans-serif;
+    margin: 8px;
 }
 p{
 	color: white;
 	font-family: 'Open Sans', sans-serif;
+    margin: 8px;
 }
 .showImg {
     padding-top: 4%;

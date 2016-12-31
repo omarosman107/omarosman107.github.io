@@ -8,6 +8,7 @@ var spactive = false
 var cwactive = false
 var nbcactive = false
 var isDone = false
+var aswim = false
  var player = videojs('LS');;
  player.ready(function() {
   this.hotkeys({
@@ -60,6 +61,17 @@ document.getElementById('progress').style.width = "0%"
 
 
           }
+
+                    if (currenturl.includes("adultswim")) {
+
+ console.log(" adultswim Detected")
+             fetchaswimjson(currenturl);
+             aswim = true
+             isDone = true
+
+
+          }
+
            if (currenturl.includes("cwseed")) {
 
  console.log(" CWSEED Detected")
@@ -149,6 +161,14 @@ document.getElementById('progress').style.width = "15%"
           }
           
       
+                 if (googleurl.includes("adultswim")) {
+if(aswim == false){
+ console.log(" adultswim Detected")
+             fetchaswimjson(googleurl);
+             aswim = true
+             isDone = true
+}
+}
 
 
           if (googleurl.includes("abc")) {

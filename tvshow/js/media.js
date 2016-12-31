@@ -552,7 +552,58 @@ var videofile = mediaurl.split('?')[0] + "?manifest=m3u"
 
                  });
 }
+// AdultSwim
+function fetchaswimjson(value){
+console.log(value)
+fetch("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" +  value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fscript"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', {
+	method: 'get'
+}).then(function(response) {
+return response.json()	
+}).then(function(final) {
+	                        document.getElementById('progress').style.width = "50%"
 
+	for (var i = final.query.results.script.length - 1; i >= 0; i--) {
+var script = final.query.results.script[i]
+
+if (whatIsIt(script) == 'String') {
+
+			if (script.includes('_AS_INITIAL_DATA')) {
+		eval(final.query.results.script[i])
+		console.log(__AS_INITIAL_DATA__.show.sluggedVideo.id)
+		fetch("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D%27https%3A%2F%2Fwww.adultswim.com%2Fvideos%2Fapi%2Fv0%2Fassets%3Fplatform%3Ddesktop%26id%3D" + __AS_INITIAL_DATA__.show.sluggedVideo.id + '%27%20%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=').then(function(response) {
+	return response.json();
+}).then(function(returnedValue) {
+	                        document.getElementById('progress').style.width = "75%"
+
+	  showname.innerHTML = returnedValue.query.results.video.franchise + "- " + returnedValue.query.results.video.title
+               showdesc.innerHTML =  returnedValue.query.results.video.description
+
+
+	var videofile = returnedValue.query.results.video.files.file[returnedValue.query.results.video.files.file.length - 1].content
+	document.getElementById('downloader').href = videofile
+                     player.src({
+                        "type": "application/x-mpegURL",
+                        "src": videofile
+                     });
+                     player.play();
+                                             document.getElementById('progress').style.width = "100%"
+
+
+	// ...
+})
+
+
+
+		}
+}
+
+	}
+	// ...
+})
+
+
+
+}
 
 
 
