@@ -51,6 +51,7 @@ document.getElementById('progress').style.width = "50%"
       document.getElementById('progress').style.width = "75%"
       player.play();
          document.getElementById('progress').style.width = "100%"
+         $('#progress').hide()
 
 
 })
@@ -104,6 +105,7 @@ function fetchabcjson(value) {
             });
             player.play();
                document.getElementById('progress').style.width = "100%"
+               $('#progress').hide()
 
 
          });
@@ -112,10 +114,7 @@ function fetchabcjson(value) {
          });
       }
    };
-   if (currenturl.includes('http')) {
-      value = currenturl
 
-   }
 
    xhttp.open("GET", 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27' + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D%27%2F%2Fdiv%5B%40class%3D"datgPlayer%20m-videoplayer-container"%5D%27&format=json&callback=', true);
    xhttp.send();
@@ -187,7 +186,7 @@ mediaurl = (JSON.parse((data.query.results.script[i].split('jQuery.extend(Drupal
                      var jsonfirst = JSON.stringify(x2js.xml_str2json(this.response))
                      json = JSON.parse(jsonfirst);
                      console.log(json)
-                     var videofile = json.smil.body.seq.par["0"].video._src
+                     var videofile = json.smil.body.seq.par[json.smil.body.seq.par.length - 1].video._src
                      console.log(videofile)
                      document.getElementById('downloader').href = videofile
                      player.src({
@@ -196,6 +195,7 @@ mediaurl = (JSON.parse((data.query.results.script[i].split('jQuery.extend(Drupal
                      });
                      player.play();
                         document.getElementById('progress').style.width = "100%"
+                        $('#progress').hide()
 
                      return videofile
                   }
@@ -250,6 +250,7 @@ function fetchcbsjson(value) {
       });
       player.play();
          document.getElementById('progress').style.width = "100%"
+         $('#progress').hide()
 
    });
 }
@@ -308,6 +309,7 @@ if(data.query.count == 1){
 
 }
    document.getElementById('progress').style.width = "100%"
+   $('#progress').hide()
 
     
               
@@ -410,6 +412,7 @@ if(data1.query.count == 1){
 }
 
    document.getElementById('progress').style.width = "100%"
+   $('#progress').hide()
 
 
    });
@@ -526,6 +529,7 @@ var videofile = mediaurl.split('?')[0] + "?manifest=m3u"
                      });
                      player.play();
                         document.getElementById('progress').style.width = "100%"
+                        $('#progress').hide()
 
        
     }
@@ -578,15 +582,27 @@ if (whatIsIt(script) == 'String') {
 	  showname.innerHTML = returnedValue.query.results.video.franchise + "- " + returnedValue.query.results.video.title
                showdesc.innerHTML =  returnedValue.query.results.video.description
 
-
-	var videofile = returnedValue.query.results.video.files.file[returnedValue.query.results.video.files.file.length - 1].content
-	document.getElementById('downloader').href = videofile
+for (var i = returnedValue.query.results.video.files.file.length; i >= 0; i--) {
+	if(returnedValue.query.results.video.files.file[i-1].content.includes("m3u8")){
+		if (returnedValue.query.results.video.files.file[i-1].type == "hd") {
+	var videofile = returnedValue.query.results.video.files.file[i-1].content
+		document.getElementById('downloader').href = videofile
                      player.src({
                         "type": "application/x-mpegURL",
                         "src": videofile
                      });
                      player.play();
+
+		}
+
                                              document.getElementById('progress').style.width = "100%"
+                                             $('#progress').hide()
+
+
+	}
+}
+
+
 
 
 	// ...
@@ -661,4 +677,3 @@ var testSubjects = ["string", [1,2,3], {foo: "bar"}, 4];
 for (var i=0, len = testSubjects.length; i < len; i++) {
 }
 
-document.getElementById('progress').style.width = "100%"

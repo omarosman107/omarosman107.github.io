@@ -228,6 +228,7 @@ xhttp.send();
 findName();
 $(window).on('hashchange', function() {
   console.log(location.hash)
+  window.location.reload()
   findName();
 
 
