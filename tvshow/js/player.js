@@ -9,6 +9,8 @@ var cwactive = false
 var nbcactive = false
 var isDone = false
 var aswim = false
+var amcactive = false
+
  var player = videojs('LS');;
  player.ready(function() {
   this.hotkeys({
@@ -103,6 +105,14 @@ document.getElementById('progress').style.width = "0%"
                           isDone = true
 
           }
+              if (currenturl.includes("amc")) {
+             console.log(" amc Detected")
+             fetchamcjson(currenturl)
+             amcactive = true
+                          isDone = true
+
+          }
+
 if (currenturl.includes("cbs")) {
              console.log(" CBS Detected")
              fetchcbsjson(currenturl)
@@ -180,6 +190,11 @@ if(aswim == false){
           	if (nbcactive == false) {
              console.log(" NBC Detected")
              fetchnbcjson(googleurl)}
+          }
+          if (googleurl.includes("amc")) {
+          	if (amcactive == false) {
+             console.log(" amc Detected")
+             fetchamcjson(googleurl)}
           }
           if (googleurl.includes("southpark")) {
           	if(spactive == false){

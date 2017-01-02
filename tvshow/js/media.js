@@ -620,7 +620,57 @@ for (var i = returnedValue.query.results.video.files.file.length; i >= 0; i--) {
 
 
 }
+// AMC Fetcher
 
+function fetchamcjson(value){
+console.log(value)
+      fetch("https://query.yahooapis.com/v1/public/yql?q=select%20data-video-id%2Ccontent%2Cproperty%20from%20html%20where%20url%3D%27" + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fdiv%5B%40class%3D%20%27platform-container%27%5D%7C%2F%2Fmeta%5B%40property%3D%27og%3Atitle%27%5D%7C%2F%2Fmeta%5B%40property%3D%27og%3Adescription%27%5D"&format=json&callback=').then(function(response) {
+         return response.json()
+      }).then(function(data) {
+      	               	   document.getElementById('progress').style.width = "50%"
+
+console.log(data)
+               showname.innerHTML = data.query.results.meta[0].content
+               showdesc.innerHTML = data.query.results.meta[1].content
+
+
+
+
+
+
+               var xhttp = new XMLHttpRequest();
+               xhttp.onreadystatechange = function() {
+               	   document.getElementById('progress').style.width = "90%"
+
+                  if (this.readyState == 4 && this.status == 200) {
+                     xml = this.responseText;
+                     var jsonfirst = JSON.stringify(x2js.xml_str2json(this.response))
+                     json = JSON.parse(jsonfirst);
+                     console.log(json)
+                     var videofile = json.smil.body.seq.par[json.smil.body.seq.par.length - 1].video._src
+                     console.log(videofile)
+                     document.getElementById('downloader').href = videofile
+                     player.src({
+                        "type": "application/x-mpegURL",
+                        "src": videofile
+                     });
+                     player.play();
+                        document.getElementById('progress').style.width = "100%"
+                        $('#progress').hide()
+
+                     return videofile
+                  }
+               };
+               xhttp.open("GET", "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?format=SMIL&mbr=true&manifest=m3u', true);
+               xhttp.send();
+
+
+      })
+
+
+
+
+}
 
 
 
