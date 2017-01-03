@@ -373,6 +373,67 @@ function fetchamcjson(value) {
       $('#progress').hide()
    })
 }
+// diziay.com
+function fetchdiziayjson(value){
+
+
+
+fetch('https://query.yahooapis.com/v1/public/yql?q=select%20src%2Ccontent%20from%20html%20where%20url%3D%27' + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fiframe%7C%2F%2Fspan%5B%40class%3D%27bolumisim%27%5D%7C%2F%2Fname%5B%40itemprop%3D%27name%27%5D"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=')
+.then(function(response) {
+
+
+	      document.getElementById('progress').style.width = "40%"
+
+  return response.json();
+})
+.then(function(data) {
+	      showname.innerHTML = data.query.results.name.split('Sezon')[0] +" - "+ data.query.results.span
+
+console.log(data.query.results.iframe["0"].src)
+  
+  
+  for (var i = 0; i < data.query.results.iframe.length; i++) {
+    
+    if(data.query.results.iframe[i].src.includes('http://dizipas.org/player/dizi-oynat.php')){
+    	      document.getElementById('progress').style.width = "70%"
+
+      
+      console.log(data.query.results.iframe[i].src.split('=')[1])
+      fetch('http://dizipas.org/player/ajax.php?dizi=' + data.query.results.iframe[i].src.split('=')[1])
+.then(function(response) {
+	      document.getElementById('progress').style.width = "90%"
+
+  return response.json();
+})
+.then(function(ajaxinfo) {
+        
+        console.log(ajaxinfo.success[0].src)
+          player.src({
+               "type": "video/mp4",
+               "src": ajaxinfo.success[0].src
+            });
+            player.play();
+                  document.getElementById('progress').style.width = "100%"
+
+
+});
+    }
+
+
+
+}
+});
+
+
+
+
+
+}
+
+
+
+
+
 var stringConstructor = "test".constructor;
 var arrayConstructor = [].constructor;
 var objectConstructor = {}.constructor;

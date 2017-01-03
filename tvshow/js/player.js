@@ -10,6 +10,7 @@ var nbcactive = false
 var isDone = false
 var aswim = false
 var amcactive = false
+var diziayactive = false
 
  var player = videojs('LS');;
  player.ready(function() {
@@ -64,7 +65,17 @@ document.getElementById('progress').style.width = "0%"
 
           }
 
-                    if (currenturl.includes("adultswim")) {
+                    if (currenturl.includes("diziay")) {
+
+ console.log(" diziay Detected")
+             fetchdiziayjson(currenturl);
+             diziayactive = true
+             isDone = true
+
+
+          }
+
+                              if (currenturl.includes("adultswim")) {
 
  console.log(" adultswim Detected")
              fetchaswimjson(currenturl);
@@ -223,9 +234,13 @@ if(aswim == false){
              console.log("Fox Detected")
              fetchfoxjson(foxurl)}
           }
-          if (googleurl.includes("netflix")) {
-             console.log(" Netflix Detected")
-             fetchnetflixjson(googleurl)
+          if (googleurl.includes("diziay")) {
+          	if (diziayactive == false) {
+
+       console.log(" diziay Detected")
+             fetchdiziayjson(googleurl)
+          	}
+      
           }
        }
     };
