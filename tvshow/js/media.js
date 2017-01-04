@@ -131,16 +131,7 @@ function fetchfoxjson(value) {
 }
 // WatchCartoon Fetch
 function fetchcartoonjson(value) {
-   //	var "link1" = "select * from html where url="
-   //	var "link2" = ' and compat="html5" and xpath="//a"'
-   $.post("https://developer.yahoo.com/yql/console/proxy.php", {
-      format: "json",
-      q: "link1" + value + "link2"
-   }, function(data, status) {
-      console.log(data)
-                                isDone = true
 
-   });
 }
 // Netflix Fetch
 function fetchnetflixjson(value) {
