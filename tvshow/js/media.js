@@ -7,14 +7,7 @@ if (!String.prototype.includes) {
    };
 }
 
-function addJS(url) {
-   var s = document.createElement('script'); // Create a script element
-   s.type = "text/javascript"; // optional in html5
-   s.async = true; // asynchronous? true/false
-   s.src = url;
-   var fs = document.getElementsByTagName('script')[0]; // Get the first script
-   fs.parentNode.insertBefore(s, fs);
-};
+
 // CWTV Fetch 
 function fetchcwjson(value) {
    document.getElementById('progress').style.width = "35%"
@@ -42,6 +35,8 @@ function fetchcwjson(value) {
       player.play();
       document.getElementById('progress').style.width = "100%"
       $('#progress').hide()
+                                isDone = true
+
    })
 }
 // ABC Fetch 
@@ -82,6 +77,8 @@ function fetchabcjson(value) {
                player.play();
                document.getElementById('progress').style.width = "100%"
                $('#progress').hide()
+                                         isDone = true
+
             });
          });
       }
@@ -99,6 +96,13 @@ function fetchfoxjson(value) {
    }).then(function(response) {
       return response.json()
    }).then(function(data) {
+   	console.log(data.entryCount)
+   	if (data.entryCount == 0) {
+   		      showname.innerHTML = "THIS VIDEO IS NOT AVALIABLE"
+   		               document.getElementById('progress').style.width = "100%"
+
+
+   	}else{
       document.getElementById('progress').style.width = "50%"
       epiname = (data.entries["0"].title)
       showname.innerHTML = data.entries["0"].fox$series + " - " + (data.entries["0"].title)
@@ -118,8 +122,12 @@ function fetchfoxjson(value) {
          player.play();
          document.getElementById('progress').style.width = "100%"
          $('#progress').hide()
+                                   isDone = true
+
       })
+  }
    })
+
 }
 // WatchCartoon Fetch
 function fetchcartoonjson(value) {
@@ -130,6 +138,8 @@ function fetchcartoonjson(value) {
       q: "link1" + value + "link2"
    }, function(data, status) {
       console.log(data)
+                                isDone = true
+
    });
 }
 // Netflix Fetch
@@ -149,11 +159,11 @@ function fetchcbsjson(value) {
       value = value.slice(0, -1)
    }
    console.log(searchValue)
-   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'" + value + "%2F'%20and%20compat%3D%22html5%22%20and%20xpath%3D%22%2F%2Fa%5B%40class%3D'show-title'%5D%7C%2F%2Fdiv%5B%40class%3D'title'%5D%7C%2F%2Fhead%2Fmeta%5B%40property%3D'og%3Adescription'%5D%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&_maxage=2592000&callback=", function(data) {
+   $.getJSON("https://link.theplatform.com/s/dJ5BDC/media/guid/2198311517/" + searchValue + "?format=preview", function(data) {
       document.getElementById('progress').style.width = "50%"
-      getShowinfo(data.query.results.a[0].content)
-      showname.innerHTML = data.query.results.a[0].content + "- " + data.query.results.div.content
-      showdesc.innerHTML = data.query.results.meta.content
+      getShowinfo(data.cbs$SeriesTitle)
+      showname.innerHTML = data.title
+      showdesc.innerHTML = data.description
       videourl = "https://link.theplatform.com/s/dJ5BDC/media/guid/2198311517/" + searchValue + "?mbr=true&manifest=m3u&form=json"
       document.getElementById('downloader').href = videourl
       player.src({
@@ -163,6 +173,8 @@ function fetchcbsjson(value) {
       player.play();
       document.getElementById('progress').style.width = "100%"
       $('#progress').hide()
+                                isDone = true
+
    });
 }
 // Nickelodeon
@@ -201,6 +213,8 @@ function fetchnickjson(value) {
          document.getElementById('progress').style.width = "100%"
          $('#progress').hide()
          player.playlist.autoadvance(0);
+                                   isDone = true
+
       });
    });
 }
@@ -248,6 +262,8 @@ function fetchsouthpjson(value) {
          }
          document.getElementById('progress').style.width = "100%"
          $('#progress').hide()
+                                   isDone = true
+
       });
 
       function gatherSouthParkData(info) {
@@ -304,6 +320,8 @@ function fetchnbcjson(value) {
             player.play();
             document.getElementById('progress').style.width = "100%"
             $('#progress').hide()
+                                      isDone = true
+
          }
       };
       iframefetchajax.open("GET", pageDOM.getElementsByTagName('iframe')[0].src, true);
@@ -344,6 +362,8 @@ function fetchaswimjson(value) {
                         }
                         document.getElementById('progress').style.width = "100%"
                         $('#progress').hide()
+                                                  isDone = true
+
                      }
                   }
                   // ...
@@ -371,6 +391,8 @@ function fetchamcjson(value) {
       player.play();
       document.getElementById('progress').style.width = "100%"
       $('#progress').hide()
+                                isDone = true
+
    })
 }
 // diziay.com
@@ -414,6 +436,8 @@ console.log(data.query.results.iframe["0"].src)
             });
             player.play();
                   document.getElementById('progress').style.width = "100%"
+                                            isDone = true
+
 
 
 });
