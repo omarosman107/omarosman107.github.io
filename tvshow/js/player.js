@@ -64,7 +64,7 @@ var url
 
 
 
-	 var currenturl = window.location.hash.split('?')[1];
+	 var currenturl = window.location.search.split('?')[1];
 	  	     var xhttp = new XMLHttpRequest();
 
 
