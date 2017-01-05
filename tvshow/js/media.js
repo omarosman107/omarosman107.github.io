@@ -109,7 +109,7 @@ function fetchfoxjson(value) {
       getShowinfo(data.entries["0"].fox$series)
       showdesc.innerHTML = data.entries["0"].description
          // url (required), options (optional)
-      fetch('http://feed.theplatform.com/f/fox.com/metadata?count=true&byCustomValue={fullEpisode}{true}&range=0-1&q=' + epiname, {
+      fetch('https://feed.theplatform.com/f/fox.com/metadata?count=true&byCustomValue={fullEpisode}{true}&range=0-1&q=' + epiname, {
          method: 'get'
       }).then(function(response) {
          return response.json()
