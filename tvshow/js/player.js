@@ -95,17 +95,32 @@ document.getElementById('progress').style.width = "15%"
                        	foxurl = googlejson.results[0].unescapedUrl
 
           for (var i = 0; i < googlejson.results.length; i++) {
-          	console.log(typeof(googlejson.results[i].richSnippet.metatags.ogType))
-          	
-if(typeof(googlejson.results[i].richSnippet.metatags.ogType) == "string"){
+
+
+
+
+
+if (JSON.stringify(googlejson.results[i]).includes('metatags')) {
+	console.log("worked")
+	if(typeof(googlejson.results[i].richSnippet.metatags.ogType) == "string"){
   if (googlejson.results[i].richSnippet.metatags.ogType == "video.episode") {
              
               foxurl = googlejson.results[i].unescapedUrl
            break
              }
 
+               if (googlejson.results[i].richSnippet.metatags.ogType == "video.other") {
+             
+              foxurl = googlejson.results[0].unescapedUrl
+           break
+             }
+
 
          }
+}
+
+          	
+
 
  }
   
@@ -127,7 +142,7 @@ console.log(url)
           i
        }
     };
-    xhttp.open("GET", "https://www.googleapis.com/customsearch/v1element?key=AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY&rsz=filtered_cse&num=2&hl=en&prettyPrint=false&source=gcsc&gss=.com&sig=0c3990ce7a056ed50667fe0c3873c9b6&cx=009916453314335219988:-0yvqrz4snu&q=" + currenturl, true);
+    xhttp.open("GET", "https://www.googleapis.com/customsearch/v1element?key=AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY&rsz=filtered_cse&hl=en&prettyPrint=false&source=gcsc&gss=.com&sig=0c3990ce7a056ed50667fe0c3873c9b6&cx=009916453314335219988:-0yvqrz4snu&q=" + currenturl, true);
  }
 
 findName();
