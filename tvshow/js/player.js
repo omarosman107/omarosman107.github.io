@@ -95,10 +95,18 @@ document.getElementById('progress').style.width = "15%"
                        	foxurl = googlejson.results[0].unescapedUrl
 
           for (var i = 0; i < googlejson.results.length; i++) {
-
+          	console.log(typeof(googlejson.results[i].richSnippet.metatags.ogType))
+          	
+if(typeof(googlejson.results[i].richSnippet.metatags.ogType) == "string"){
   if (googlejson.results[i].richSnippet.metatags.ogType == "video.episode") {
-                foxurl = googlejson.results[i].unescapedUrl
+             
+              foxurl = googlejson.results[i].unescapedUrl
+           break
              }
+
+
+         }
+
  }
   
   for (tv in sitefunctions) {
