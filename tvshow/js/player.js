@@ -81,7 +81,7 @@ url = currenturl
 
 
 }
-
+ 
 }
 document.getElementById('progress').style.width = "15%"
 
