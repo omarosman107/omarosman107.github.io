@@ -10,10 +10,11 @@ if (!String.prototype.includes) {
 
 // CWTV Fetch 
 function fetchcwjson(value) {
+	console.log(value)
    document.getElementById('progress').style.width = "35%"
-   console.log(value.split('?')[1].split("=")[1])
-   var stripped = value.split('?')[1].split("=")[1]
-   var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/154"
+   var stripped = value.split('?')[1].split('=')[1]
+   console.log(stripped)
+   var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/154?format=json"
    fetch(url, {
       method: 'get'
    }).then(function(response) {

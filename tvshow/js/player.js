@@ -31,17 +31,17 @@ var amcactive = false
 var diziayactive = false
 var sitefunctions = {
 
-"cwtv":"fetchcwjson(url)",
-"diziay":"fetchdiziayjson(url)",
-"adultswim":"fetchaswimjson(url)",
-"cwseed":"fetchcwjson(url)",
-"nick":"fetchnickjson(url)",
-"abc":"fetchabcjson(url)",
-"southpark":"fetchsouthpjson(url)",
-"amc":"fetchamcjson(url)",
-"cbs":"fetchcbsjson(url)",
-"nbc":"fetchnbcjson(url)",
-"fox":"fetchfoxjson(url)"
+"cwtv.com":"fetchcwjson(url)",
+"diziay.com":"fetchdiziayjson(url)",
+"adultswim.com":"fetchaswimjson(url)",
+"cwseed.com":"fetchcwjson(url)",
+"nick.com":"fetchnickjson(url)",
+"abc.go.com":"fetchabcjson(url)",
+"southpark.com":"fetchsouthpjson(url)",
+"amc.com":"fetchamcjson(url)",
+"cbs.com":"fetchcbsjson(url)",
+"nbc.com":"fetchnbcjson(url)",
+"fox.com":"fetchfoxjson(url)"
 
 
 
@@ -65,6 +65,12 @@ var url
 
 
 	 var currenturl = window.location.search.split('?')[1];
+
+	 if (window.location.search.split('?').length == 3) {
+
+
+	 	currenturl = window.location.search.split('?')[1] + "?" +window.location.search.split('?')[2]
+	 }
 	  	     var xhttp = new XMLHttpRequest();
 
 
@@ -72,12 +78,18 @@ function findName(){
 
 document.getElementById('progress').style.width = "0%"
 for (tv in sitefunctions) {
+
+	if (isDone == false) {
+
 		if (currenturl.includes(tv)) {
 console.log(tv + " "+"Detected")
 url = currenturl
              eval(sitefunctions[tv]);
              isDone = true
 }
+
+	}
+
 
 
 }
@@ -100,7 +112,7 @@ document.getElementById('progress').style.width = "15%"
 
 
 
-if (JSON.stringify(googlejson.results[i]).includes('metatags')) {
+if (JSON.stringify(googlejson.results[i]).includes('ogType')) {
 	console.log("worked")
 	if(typeof(googlejson.results[i].richSnippet.metatags.ogType) == "string"){
   if (googlejson.results[i].richSnippet.metatags.ogType == "video.episode") {
@@ -119,12 +131,19 @@ if (JSON.stringify(googlejson.results[i]).includes('metatags')) {
          }
 }
 
+
+
+
+
           	
 
 
  }
   
   for (tv in sitefunctions) {
+  	if (isDone == false) {
+
+
 		if (googleurl.includes(tv)) {
 console.log(tv + " "+"Detected")
 url = googleurl
@@ -136,6 +155,10 @@ console.log(url)
              eval(sitefunctions[tv]);
              isDone = true
 }
+
+
+  	}
+
 }
 
 
