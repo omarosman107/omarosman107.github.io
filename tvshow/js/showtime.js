@@ -41,7 +41,7 @@
   }
 
   function fetchshows() {
-     fetch('https://api.tvshowtime.com/v1/to_watch?access_token=' + accesstoken + '&limit=100&lang=en')
+     fetch('https://api.tvshowtime.com/v1/to_watch?access_token=' + accesstoken )
 .then(function(response) {
   return response.json();}).then(function(json) {
             finishjson = json
