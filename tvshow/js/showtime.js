@@ -1,4 +1,9 @@
   var googleurl
+  if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
 
   function pad(n) {
      return (n < 10) ? ("0" + n) : n;
