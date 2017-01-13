@@ -4,7 +4,7 @@
         FastClick.attach(document.body);
     }, false);
 }
-
+document.getElementsByTagName('body')[0].innerHTML =   document.getElementsByTagName('body')[0].innerHTML + '<div style="display:none;"><i class="material-icons">check</i></div';
   function pad(n) {
      return (n < 10) ? ("0" + n) : n;
   }
