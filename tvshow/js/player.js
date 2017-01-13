@@ -29,6 +29,7 @@ var isDone = false
 var aswim = false
 var amcactive = false
 var diziayactive = false
+var cwurl
 var sitefunctions = {
 
 "cwtv.com":"fetchcwjson(url)",
@@ -110,6 +111,12 @@ document.getElementById('progress').style.width = "15%"
 
 
 
+if (JSON.stringify(googlejson.results[i]).includes('ogUrl')) {
+	console.log("worked")
+
+              cwurl = googlejson.results[i].richSnippet.metatags.ogUrl
+             
+}
 
 
 if (JSON.stringify(googlejson.results[i]).includes('ogType')) {
@@ -129,16 +136,15 @@ if (JSON.stringify(googlejson.results[i]).includes('ogType')) {
 
 
          }
+
+
+
+
 }
 
 
 
-
-
-          	
-
-
- }
+}
   
   for (tv in sitefunctions) {
   	if (isDone == false) {
@@ -147,8 +153,12 @@ if (JSON.stringify(googlejson.results[i]).includes('ogType')) {
 		if (googleurl.includes(tv)) {
 console.log(tv + " "+"Detected")
 url = googleurl
-if (tv == "fox") {
+if (tv == "fox.com") {
 	url = foxurl
+
+}
+if (tv == "cwtv.com") {
+	url = cwurl
 
 }
 console.log(url)
