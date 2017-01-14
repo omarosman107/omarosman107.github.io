@@ -20,6 +20,8 @@ document.getElementsByTagName('body')[0].innerHTML =   document.getElementsByTag
   fetchshows()
 
   function mark(id) {
+        spinner.style.display = "";
+
      var details = {
         episode_id: id,
         access_token: accesstoken
@@ -40,12 +42,16 @@ document.getElementsByTagName('body')[0].innerHTML =   document.getElementsByTag
      };
      fetch("https://api.tvshowtime.com/v1/checkin", request).then(function(res) {
         console.log(res)
+                spinner.style.display = "none";
+
      })
      tempel = ""
      fetchshows();
   }
 
   function fetchshows() {
+            spinner.style.display = "";
+
      fetch('https://api.tvshowtime.com/v1/to_watch?access_token=' + accesstoken)
 .then(function(response) {
   return response.json();}).then(function(json) {
