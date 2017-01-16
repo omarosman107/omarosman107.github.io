@@ -116,6 +116,8 @@ function fetchfoxjson(value) {
          return response.json()
       }).then(function(final) {
          document.getElementById('progress').style.width = "90%"
+               document.getElementById('downloader').href = final.results["0"].videoURL.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
+
          player.src({
             "type": "application/x-mpegURL",
             "src": final.results["0"].videoURL.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
@@ -350,6 +352,8 @@ function fetchaswimjson(value) {
                               "type": "application/x-mpegURL",
                               "src": videofile
                            });
+                                 document.getElementById('downloader').href = videofile
+
                            player.play();
                         }
                         document.getElementById('progress').style.width = "100%"
@@ -376,6 +380,8 @@ function fetchamcjson(value) {
       console.log(data)
       showname.innerHTML = data.query.results.meta[0].content
       showdesc.innerHTML = data.query.results.meta[1].content
+            document.getElementById('downloader').href = "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false'
+
       player.src({
          "type": "application/x-mpegURL",
          "src": "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false'
@@ -426,6 +432,7 @@ console.log(data.query.results.iframe["0"].src)
                "type": "video/mp4",
                "src": ajaxinfo.success[0].src
             });
+          document.getElementById('downloader').href = ajaxinfo.success[0].src
             player.play();
                   document.getElementById('progress').style.width = "100%"
                                             isDone = true
@@ -439,13 +446,7 @@ console.log(data.query.results.iframe["0"].src)
 
 }
 });
-
-
-
-
-
 }
-
 
 
 
