@@ -448,6 +448,71 @@ console.log(data.query.results.iframe["0"].src)
 });
 }
 
+function fetchcartoonnjson(value){
+
+
+
+fetch('https://query.yahooapis.com/v1/public/yql?q=select%20src%2Ccontent%20from%20html%20where%20url%3D%27' + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fiframe%7C%2F%2Fspan%5B%40class%3D%27bolumisim%27%5D%7C%2F%2Fname%5B%40itemprop%3D%27name%27%5D"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=')
+.then(function(response) {
+
+
+	      document.getElementById('progress').style.width = "40%"
+
+  return response.json();
+})
+.then(function(data) {
+
+  
+  
+  for (var i = 0; i < data.query.results.script.length; i++) {
+    
+    if(data.query.results.script[i].content.includes('_cnglobal.cvpVideoId = ')){
+    	      document.getElementById('progress').style.width = "70%"
+var id =  data.query.results.script[i].content.split(';')[0]   	      
+
+
+ fetch('https://query.yahooapis.com/v1/public/yql?q=select%20description%2Cfranchise%2Cfiles%20from%20xml%20where%20url%3D%27http%3A%2F%2Fwww.cartoonnetwork.com%2Fcntv%2Fmvpd%2Fservices%2FcvpXML.do%3Fid%3D' + id  + '%27%20%20and%20itemPath%3D"video"&format=json&callback=')
+.then(function(response) {
+	      document.getElementById('progress').style.width = "90%"
+ return response.json();
+})
+.then(function(ajaxinfo) {
+console.log(ajaxinfo.results.files.file)
+ fetch('https://query.yahooapis.com/v1/public/yql?q=select%20token%20from%20xml%20where%20url%3D%27http%3A%2F%2Fwww.cartoonnetwork.com%2Fcntv%2Fmvpd%2Fprocessors%2Fservices%2Ftoken_ipadAdobe.do%3Fpath%3D%2Ftoon%2F*%26videoId%3D' + id + '%27%20%20and%20itemPath%3D"auth"&format=json&callback=')
+.then(function(response) {
+	      document.getElementById('progress').style.width = "90%"
+ return response.json();
+})
+.then(function(token) {
+var token = token.results.auth.token
+console.log(token)
+var finalurl = finalurl +"?hdnea="+  token
+player.src({
+               "type": "application/x-mpegURL",
+               "src": finalurl
+            });
+            player.play();
+                  document.getElementById('progress').style.width = "100%"
+                                            isDone = true
+                                        });
+
+
+
+});
+    }
+}
+});
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

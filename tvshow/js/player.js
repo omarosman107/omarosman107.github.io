@@ -42,6 +42,7 @@ var sitefunctions = {
 "amc.com":"fetchamcjson(url)",
 "cbs.com":"fetchcbsjson(url)",
 "nbc.com":"fetchnbcjson(url)",
+"cartoonnetwork.com":"fetchcartoonnjson(url)",
 "fox.com":"fetchfoxjson(url)"
 
 
