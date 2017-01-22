@@ -85,153 +85,40 @@ body{text-align:center}</style>
 <th>Stream</th>
 </tr>
 </thead>
-<tbody class=searchable>
-</tr>
-<th scope=row>CBSN</th>
-<td>HD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/cbsn.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i>
-</tr>
-<tr>
-<th scope=row>ABC</th>
-<td>HD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/abc.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>MSNBC</th>
-<td>SD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td >
-<a class="btn btn-success" href="urls/msnbc.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>Al-Jazeera</th>
-<td>HD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td >
-<a class="btn btn-success" href="urls/aj.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>ESPN</th>
-<td>HD</td>
-<td>
-<a class="btn btn-danger" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/espn.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>NBA</th>
-<td>HD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/nba.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>Eurosport</th>
-<td>HD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/es.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>Bloomberg</th>
-<td>HD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/bloom.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>NFL Now</th>
-<td>HD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/nfl.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>CNN</th>
-<td>SD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/cnn.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>Cartoon Network</th>
-<td>SD</td>
-<td>
-<a class="btn btn-danger" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/cartoon.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>Disney Channel</th>
-<td>SD</td>
-<td>
-<a class="btn btn-danger" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/disney.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>Weather Channel</th>
-<td>HD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/wc.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>Somali Cable TV</th>
-<td>SD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/sc.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>SNTV</th>
-<td>SD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/sntv.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>Universal TV Somali</th>
-<td>SD</td>
-<td>
-<a class="btn btn-success" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/universal.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
-<tr>
-<th scope=row>Nickelodeon</th>
-<td>SD</td>
-<td>
-<a class="btn btn-danger" aria-label=Delete>
-<i class="material-icons">check_circle</i><td>
-<a class="btn btn-success" href="urls/nick.html" aria-label=Delete>
-<i class="material-icons">play_circle_filled</i></tr>
+<tbody id="table" class=searchable>
 </tbody>
 </table>
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
 <script type="text/javascript">
 var  nworking = '<a class="btn btn-danger" aria-label=Delete>'
 var  working = '<a class="btn btn-success" aria-label=Delete>'
   var template = ''
 var isworking
 var vidurl
+function insertData(data){
+document.getElementById('table').innerHTML = data
+}
+
+
+    fetch('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fwww.filmon.com%2Fapi-v2%2Fchannel%2F3734%3Fprotocol%3Dhls%22%20and%20itemPath%3D%22json.data.streams.url%22&format=json').then(function(response) {
+  // Convert to JSON
+  return response.json();
+}).then(function(r) {
+ channels.SNTV.src = (r.query.results.url[0])
+ converttoHTML()
+});
+
+    fetch('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fwww.filmon.com%2Fapi-v2%2Fchannel%2F3731%3Fprotocol%3Dhls%22%20and%20itemPath%3D%22json.data.streams.url%22&format=json').then(function(response) {
+  return response.json();
+}).then(function(r) {
+ channels['Universal TV Somali'].src = (r.query.results.url[0])
+ converttoHTML()
+});
+
+
+
+
+
 var channels = {
 "CBSN":{
   "working":true,
@@ -247,15 +134,42 @@ var channels = {
   "working":true,
   "src":"http://tvemsnbc-lh.akamaihd.net/i/nbcmsnbc_1@122532/master.m3u8",
   "quality":"HD"
+},
+"Al-Jazeera":{
+  "working":true,
+  "src":"http://aljazeera-eng-hd-live.hls.adaptive.level3.net/aljazeera/english2/index.m3u8",
+  "quality":"HD"
+},
+"Bloomberg":{
+  "working":true,
+  "src":"http://cdn3.videos.bloomberg.com/btv/us/master.m3u8",
+  "quality":"HD"
+},
+"Weather Channel":{
+  "working":true,
+  "src":"http://cdnapi.kaltura.com/p/931702/sp/93170200/playManifest/entryId/1_oorxcge2/format/applehttp/protocol/http/uiConfId/28428751/a.m3u8",
+  "quality":"HD"
+},
+"Somali Cable":{
+  "working":true,
+  "src":"http://cdn01.iqbroadcast.tv:8081/g1/somcblehb9/playlist.m3u8?nimblesessionid=",
+  "quality":"HD"
+},
+"SNTV":{
+  "working":true,
+  "src":"",
+  "quality":"HD"
+},
+"Universal TV Somali":{
+  "working":true,
+  "src":"",
+  "quality":"HD"
+}
+
 }
 
 
-
-
-
-
-
-}
+function converttoHTML(){
 for(channelName in channels){
   cname = (channelName)
   qual = (channels[channelName].quality)
@@ -268,7 +182,9 @@ for(channelName in channels){
 
 }
   console.log(template)
-
+  insertData(template)
+  template = '';
+}
 
 
 
