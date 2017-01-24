@@ -161,6 +161,9 @@ a:hover {
 <div id="carasoul" class="row__inner"></div></div></div>
 <script>
 // url (required), options (optional)
+if (!window.fetch) {
+	alert('fetch isnt working')
+}
 var template = ''
 fetch('https://cors-anywhere.herokuapp.com/http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_the-flash', {
 	method: 'get'
@@ -175,6 +178,6 @@ fetch('https://cors-anywhere.herokuapp.com/http://images.cwtv.com/feed/mobileapp
   document.getElementById('carasoul').innerHTML = template;
    template = ''
 }).catch(function(err) {
-console.log('and error occured')
+alert('and error occured')
 });</script>
 </body></html>
