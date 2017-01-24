@@ -7,7 +7,10 @@ if (!String.prototype.includes) {
    };
 }
 
-
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
 // CWTV Fetch 
 function fetchcwjson(value) {
 	console.log(value)
@@ -89,6 +92,33 @@ function fetchabcjson(value) {
 }
 // FOX Fetch
 function fetchfoxjson(value) {
+	if (value.includes('link.theplatform.com/s/fox.com/')) {
+
+ fetch(value.split('?')[0] + "?format=preview", {
+         method: 'get'
+      }).then(function(response) {
+         return response.json()
+      }).then(function(data) {
+         document.getElementById('progress').style.width = "100%"
+
+      showname.innerHTML = toTitleCase(data['fox$showcode'].replace('-',' ')) + " - " + data.title
+      showdesc.innerHTML = data.description
+      })
+
+
+
+
+
+               document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
+
+        player.src({
+            "type": "application/x-mpegURL",
+            "src": value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
+         });
+                 document.getElementById('progress').style.width = "90%"
+
+
+	}else{
    var epiname
       // url (required), options (optional)
    document.getElementById('progress').style.width = "30%"
@@ -130,7 +160,7 @@ function fetchfoxjson(value) {
       })
   }
    })
-
+}
 }
 // WatchCartoon Fetch
 function fetchcartoonjson(value) {
