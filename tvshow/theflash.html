@@ -161,9 +161,17 @@ a:hover {
 <script type="text/javascript" href="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
 
 <script>
+function addJS(url) {
+   var s = document.createElement('script'); // Create a script element
+   s.type = "text/javascript"; // optional in html5
+   s.async = false; // asynchronous? true/false
+   s.src = url;
+   var fs = document.getElementsByTagName('script')[0]; // Get the first script
+   fs.parentNode.insertBefore(s, fs);
+};
 // url (required), options (optional)
 if (!window.fetch) {
-	alert('fetch isnt working')
+	addJS('https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js')
 }
 var template = ''
 fetch('https://cors-anywhere.herokuapp.com/http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_the-flash', {
