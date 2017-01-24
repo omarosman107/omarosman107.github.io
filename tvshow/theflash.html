@@ -173,6 +173,9 @@ function addJS(url) {
 if (!window.fetch) {
 	addJS('https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js')
 }
+if (!window.fetch) {
+	alert('fetch isnt working')
+}
 var template = ''
 fetch('https://cors-anywhere.herokuapp.com/http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_the-flash', {
 	method: 'get'
