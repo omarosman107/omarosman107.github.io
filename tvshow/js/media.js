@@ -17,26 +17,35 @@ function fetchcwjson(value) {
    document.getElementById('progress').style.width = "35%"
    var stripped = value.split('?')[1].split('=')[1]
    console.log(stripped)
-   var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/154?format=json"
+   // HLS = 154 | 206
+   // MP4 = 213
+   var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/206?format=json"
    fetch(url, {
       method: 'get'
    }).then(function(response) {
       return response.json();
    }).then(function(data) {
       document.getElementById('progress').style.width = "50%"
-      finalurl = data.videos.variantplaylist.uri;
+     // finalurl = data.videos.hls5128.uri;
+        finalurl = data.videos.variantplaylist.uri;
+
       console.log(finalurl)
       getShowinfo(data.assetFields.seriesName)
       showname.innerHTML = data.assetFields.seriesName + " - " + data.assetFields.title
       showdesc.innerHTML = data.assetFields.description
       document.getElementById('progress').style.width = "60%"
       document.getElementById('downloader').href = finalurl
-      player.src({
+    /*  player.src({
          "type": "application/x-mpegURL",
          "src": finalurl
-      });
-      document.getElementById('progress').style.width = "75%"
-      player.play();
+      }); */
+      jwplayer("myElement1").setup({
+  file: finalurl,
+  width: "100%",
+  aspectratio: "16:9",
+ autostart: true
+});
+
       document.getElementById('progress').style.width = "100%"
       $('#progress').hide()
                                 isDone = true
@@ -74,11 +83,13 @@ function fetchabcjson(value) {
                videourl = data.query.results.json.video.assets.asset.value + "?" + sessionKey;
                document.getElementById('downloader').href = videourl
                console.log(videourl)
-               player.src({
-                  "type": "application/x-mpegURL",
-                  "src": videourl
-               });
-               player.play();
+
+                     jwplayer("myElement1").setup({
+  file: videourl,
+  width: "100%",
+  aspectratio: "16:9",
+ autostart: true
+});
                document.getElementById('progress').style.width = "100%"
                $('#progress').hide()
                                          isDone = true
@@ -111,10 +122,24 @@ function fetchfoxjson(value) {
 
                document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
 
-        player.src({
-            "type": "application/x-mpegURL",
-            "src": value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
-         });
+
+                  jwplayer("myElement1").setup({
+  "playlist": [
+    {
+      "sources": [
+        {
+          "default": false,
+          "file": value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
+          "type": "hls",
+          "autoplay": true
+        }
+      ]
+    }
+  ],
+  "primary": "html5",
+  "hlshtml": true
+});
+
                  document.getElementById('progress').style.width = "90%"
 
 
@@ -148,11 +173,22 @@ function fetchfoxjson(value) {
          document.getElementById('progress').style.width = "90%"
                document.getElementById('downloader').href = final.results["0"].videoURL.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
 
-         player.src({
-            "type": "application/x-mpegURL",
-            "src": final.results["0"].videoURL.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
-         });
-         player.play();
+                  jwplayer("myElement1").setup({
+  "playlist": [
+    {
+      "sources": [
+        {
+          "default": false,
+          "file": final.results["0"].videoURL.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
+          "type": "hls"
+        }
+      ]
+    }
+  ],
+  "primary": "html5",
+  "hlshtml": true
+});
+       
          document.getElementById('progress').style.width = "100%"
          $('#progress').hide()
                                    isDone = true
@@ -190,11 +226,13 @@ function fetchcbsjson(value) {
       showdesc.innerHTML = data.description
       videourl = "https://link.theplatform.com/s/dJ5BDC/media/guid/2198311517/" + searchValue + "?mbr=true&manifest=m3u&form=json"
       document.getElementById('downloader').href = videourl
-      player.src({
-         "type": "application/x-mpegURL",
-         "src": videourl
-      });
-      player.play();
+
+            jwplayer("myElement1").setup({
+  file: videourl,
+  width: "100%",
+  aspectratio: "16:9",
+ autostart: true
+});
       document.getElementById('progress').style.width = "100%"
       $('#progress').hide()
                                 isDone = true
@@ -342,6 +380,12 @@ function fetchnbcjson(value) {
                "src": videofile
             });
             player.play();
+                                          jwplayer("myElement1").setup({
+  file: videofile,
+  width: "100%",
+  aspectratio: "16:9",
+ autostart: true
+});
             document.getElementById('progress').style.width = "100%"
             $('#progress').hide()
                                       isDone = true
@@ -378,10 +422,13 @@ function fetchaswimjson(value) {
                         if (returnedValue.query.results.video.files.file[i - 1].type == "hd") {
                            var videofile = returnedValue.query.results.video.files.file[i - 1].content
                            document.getElementById('downloader').href = videofile
-                           player.src({
-                              "type": "application/x-mpegURL",
-                              "src": videofile
-                           });
+
+                                                         jwplayer("myElement1").setup({
+  file: videofile,
+  width: "100%",
+  aspectratio: "16:9",
+ autostart: true
+});
                                  document.getElementById('downloader').href = videofile
 
                            player.play();
@@ -412,11 +459,12 @@ function fetchamcjson(value) {
       showdesc.innerHTML = data.query.results.meta[1].content
             document.getElementById('downloader').href = "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false'
 
-      player.src({
-         "type": "application/x-mpegURL",
-         "src": "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false'
-      });
-      player.play();
+                              jwplayer("myElement1").setup({
+  file: "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false',
+  width: "100%",
+  aspectratio: "16:9",
+ autostart: true
+});
       document.getElementById('progress').style.width = "100%"
       $('#progress').hide()
                                 isDone = true
@@ -458,12 +506,17 @@ console.log(data.query.results.iframe["0"].src)
 .then(function(ajaxinfo) {
         
         console.log(ajaxinfo.success[0].src)
-          player.src({
-               "type": "video/mp4",
-               "src": ajaxinfo.success[0].src
-            });
+
           document.getElementById('downloader').href = ajaxinfo.success[0].src
-            player.play();
+
+                        jwplayer("myElement1").setup({
+  file: ajaxinfo.success[0].src,
+  width: "100%",
+  aspectratio: "16:9",
+  provider: "video",
+  autoplay: true,
+  type:"mp4"
+});
                   document.getElementById('progress').style.width = "100%"
                                             isDone = true
 

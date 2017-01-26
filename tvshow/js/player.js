@@ -60,7 +60,7 @@ var sitefunctions = {
 
 } 
 
- var player = videojs('LS');;
+/* var player = videojs('LS');;
  player.ready(function() {
   this.hotkeys({
     volumeStep: 0.1,
@@ -68,6 +68,7 @@ var sitefunctions = {
     enableModifiersForNumbers: false
   });
 });
+*/
 
 var url
 
