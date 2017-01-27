@@ -54,7 +54,34 @@ function fetchcwjson(value) {
 }
 // ABC Fetch 
 var sessionKey
+var videourl
+function om(data){
+	console.log(data.video[0].assets.asset[0].value)
+	            document.getElementById('progress').style.width = "60%"
+            showname.innerHTML = data.video[0].show.title + "- " + data.video[0].title
+            showdesc.innerHTML = data.video[0].longdescription
+            $.post("https://api.entitlement.watchabc.go.com/vp2/ws-secure/entitlement/2020/authorize.json", {
+               video_type: "lf",
+               brand: "001",
+               device: "001",
+               video_id: data.video[0].id
+            }, function(sessionkey, status) {
+               document.getElementById('progress').style.width = "70%"
+               sessionKey = sessionkey.uplynkData.sessionKey
+               console.log(sessionKey)
+               videourl = data.video[0].assets.asset[0].value + "?" + sessionKey;
+               document.getElementById('downloader').href = videourl
+               console.log(videourl)
 
+                     jwplayer("myElement1").setup({
+  file: videourl,
+  width: "100%",
+  aspectratio: "16:9",
+ autostart: true
+});
+
+});
+}
 function fetchabcjson(value) {
    document.getElementById('progress').style.width = "35%"
    var xhttp = new XMLHttpRequest();
@@ -66,39 +93,11 @@ function fetchabcjson(value) {
          console.log(showidjson)
             // console.log(parseHTML(html).getElementById('playerContainer').getAttribute('data-video-id'))
             //  var showid = parseHTML(html).getElementById('playerContainer').getAttribute('data-video-id')
-         $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fapi.contents.watchabc.go.com%2Fvp2%2Fws%2Fs%2Fcontents%2F3000%2Fvideos%2F001%2F001%2F-1%2F-1%2F-1%2F" + showidjson + "%2F-1%2F-1.json%22%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=", function(data) {
-            document.getElementById('progress').style.width = "60%"
-            getShowinfo(data.query.results.json.video.show.title)
-            showname.innerHTML = data.query.results.json.video.show.title + "- " + data.query.results.json.video.title
-            showdesc.innerHTML = data.query.results.json.video.longdescription
-            $.post("https://api.entitlement.watchabc.go.com/vp2/ws-secure/entitlement/2020/authorize.json", {
-               video_type: "lf",
-               brand: "001",
-               device: "001",
-               video_id: showidjson
-            }, function(sessionkey, status) {
-               document.getElementById('progress').style.width = "70%"
-               sessionKey = sessionkey.uplynkData.sessionKey
-               console.log(sessionKey)
-               videourl = data.query.results.json.video.assets.asset.value + "?" + sessionKey;
-               document.getElementById('downloader').href = videourl
-               console.log(videourl)
+            addJS('https://api.contents.watchabc.go.com/vp2/ws/contents/3000/videos/001/001/-1/-1/-1/' + showidjson + '/-1/-1.jsonp?callback=om')
 
-                     jwplayer("myElement1").setup({
-  file: videourl,
-  width: "100%",
-  aspectratio: "16:9",
- autostart: true
-});
-               document.getElementById('progress').style.width = "100%"
-               $('#progress').hide()
-                                         isDone = true
-
-            });
-         });
       }
    };
-   xhttp.open("GET", 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27' + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D%27%2F%2Fdiv%5B%40class%3D"datgPlayer%20m-videoplayer-container"%5D%27&format=json&callback=', true);
+   xhttp.open("GET", 'https://query.yahooapis.com/v1/public/yql?q=select%20data-video-id%20from%20html%20where%20url%3D%27' + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D%27%2F%2Fdiv%5B%40class%3D"videoContainer%20m-videoplayer-embed%20m-videoplayer-embed-lf"%5D%27&format=json&callback=', true);
    xhttp.send();
 }
 // FOX Fetch
@@ -372,20 +371,26 @@ function fetchnbcjson(value) {
             iframeDOM.innerHTML = this.responseText
             var jsonfirst = iframeDOM.getElementsByTagName('link')[1].href;
             mediaurl = jsonfirst
-            var videofile = mediaurl.split('?')[0] + "?manifest=m3u"
+            var videofile = mediaurl.split('?')[0] + "?manifest=m3u&mbr=true&metafile=false"
             console.log(videofile)
             document.getElementById('downloader').href = videofile
-            player.src({
-               "type": "application/x-mpegURL",
-               "src": videofile
-            });
-            player.play();
-                                          jwplayer("myElement1").setup({
-  file: videofile,
-  width: "100%",
-  aspectratio: "16:9",
- autostart: true
+         jwplayer("myElement1").setup({
+  "playlist": [
+    {
+      "sources": [
+        {
+          "default": false,
+          "file": videofile,
+          "type": "hls"
+        }
+      ]
+    }
+  ],
+  "primary": "html5",
+  "hlshtml": true
 });
+
+
             document.getElementById('progress').style.width = "100%"
             $('#progress').hide()
                                       isDone = true
@@ -431,7 +436,6 @@ function fetchaswimjson(value) {
 });
                                  document.getElementById('downloader').href = videofile
 
-                           player.play();
                         }
                         document.getElementById('progress').style.width = "100%"
                         $('#progress').hide()
