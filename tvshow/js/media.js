@@ -497,7 +497,7 @@ console.log(data.query.results.iframe["0"].src)
 
       
       console.log(data.query.results.iframe[i].src.split('=')[1])
-      fetch('http://dizipas.org/player/ajax.php?dizi=' + data.query.results.iframe[i].src.split('=')[1])
+      fetch('https://dizipas.org/player/ajax.php?dizi=' + data.query.results.iframe[i].src.split('=')[1])
 .then(function(response) {
 	      document.getElementById('progress').style.width = "90%"
 
