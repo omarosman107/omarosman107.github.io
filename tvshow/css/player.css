@@ -63,5 +63,13 @@ body{
     background-color: #29d;
         height: 100%;
     line-height: inherit;
-    transition: width 0.4s ease 0s;
+        -moz-transition: width 500ms ease-out,opacity 500ms linear;
+    -webkit-transition: width 500ms ease-out,opacity 500ms linear;
+    transition: width 500ms ease-out,opacity 500ms linear;
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: width,opacity;
+     transition-duration: 400ms;
 }
