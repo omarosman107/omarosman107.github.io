@@ -60,9 +60,13 @@ function om(data){
 	            document.getElementById('progress').style.width = "60%"
             showname.innerHTML = data.video[0].show.title + "- " + data.video[0].title
             showdesc.innerHTML = data.video[0].longdescription
+            var brand = "001"
+            if (data.video[0].url.includes('disneyxd')) {
+brand = "009"
+            }
             $.post("https://api.entitlement.watchabc.go.com/vp2/ws-secure/entitlement/2020/authorize.json", {
                video_type: "lf",
-               brand: "001",
+               brand: brand,
                device: "001",
                video_id: data.video[0].id
             }, function(sessionkey, status) {
@@ -79,11 +83,29 @@ function om(data){
   aspectratio: "16:9",
  autostart: true
 });
+               document.getElementById('progress').style.width = "100%"
 
 });
 }
 function fetchabcjson(value) {
    document.getElementById('progress').style.width = "35%"
+
+
+if (value.includes('abc.go.com/disvidcode=')) {
+	console.log(value.split('=')[1])
+  addJS('https://api.contents.watchabc.go.com/vp2/ws/contents/3000/videos/009/001/-1/-1/-1/' + value.split('=')[1] + '/-1/-1.jsonp?callback=om')
+
+
+}
+
+
+if (value.includes('abc.go.com/vidcode=')) {
+	console.log(value.split('=')[1])
+  addJS('https://api.contents.watchabc.go.com/vp2/ws/contents/3000/videos/001/001/-1/-1/-1/' + value.split('=')[1] + '/-1/-1.jsonp?callback=om')
+
+
+}else{
+
    var xhttp = new XMLHttpRequest();
    xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -91,15 +113,16 @@ function fetchabcjson(value) {
          html = this.responseText;
          var showidjson = JSON.parse(this.responseText).query.results.div['data-video-id']
          console.log(showidjson)
-            // console.log(parseHTML(html).getElementById('playerContainer').getAttribute('data-video-id'))
-            //  var showid = parseHTML(html).getElementById('playerContainer').getAttribute('data-video-id')
             addJS('https://api.contents.watchabc.go.com/vp2/ws/contents/3000/videos/001/001/-1/-1/-1/' + showidjson + '/-1/-1.jsonp?callback=om')
 
       }
    };
    xhttp.open("GET", 'https://query.yahooapis.com/v1/public/yql?q=select%20data-video-id%20from%20html%20where%20url%3D%27' + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D%27%2F%2Fdiv%5B%40class%3D"videoContainer%20m-videoplayer-embed%20m-videoplayer-embed-lf"%5D%27&format=json&callback=', true);
+ 
    xhttp.send();
 }
+}
+
 // FOX Fetch
 function fetchfoxjson(value) {
 	if (value.includes('link.theplatform.com/s/fox.com/')) {
