@@ -7,7 +7,10 @@
 <link  rel=stylesheet  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" >
 <link rel="icon" href="../images/faviconlogohead.png" height="16px" width="16px">
 <meta name="viewport" content="width=device-width">
-<script src="http://content.jwplatform.com/libraries/oH2wJDod.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.6.2-2/hls.min.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video.min.js"></script>     
+ <script src="../js/videojs5.hlsjs.js"></script>   
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.13.0/video-js.min.css" /></head>
 
 </head>
 <body>
@@ -30,8 +33,9 @@
 
 <div class='embed-container'>
 
-    <div id="myElement1"></div>
-
+<video id=LS  x-webkit-airplay="allow" max-width="75%" preload=metadata class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls>  
+ <source  type="application/x-mpegURL">     
+ </video>    
 </div>
 </div>
 </div>
@@ -55,13 +59,19 @@ var jsonDat = JSON.parse(decodeURIComponent(window.location.search.substring(1).
 console.log(jsonDat)
 document.title = jsonDat.title;
 document.getElementById('channelname').innerHTML = jsonDat.title;
-jwplayer("myElement1").setup({
-  file: jsonDat.play,
-  width: "100%",
-  aspectratio: "16:9",
-  type:"hls"
+var vidHTML = '<video id="myElement1" class="video-js"  \
+            controls preload="auto" width="100%" height="100%" \
+            data-setup=\'{}\'>\
+            ' + '\
+            <source src="'+jsonDat.play+'" type="application/x-mpegURL" />\
+        </video>';
+
+videojs("LS").ready(function(){
+  var myPlayer = this;
+myPlayer.src(jsonDat.play)
+  myPlayer.play();
+
 });
-jwplayer().play()
 </script>
 
 
