@@ -249,11 +249,20 @@ function fetchcbsjson(value) {
       videourl = "https://link.theplatform.com/s/dJ5BDC/media/guid/2198311517/" + searchValue + "?mbr=true&manifest=m3u&form=json"
       document.getElementById('downloader').href = videourl
 
-            jwplayer("myElement1").setup({
-  file: videourl,
-  width: "100%",
-  aspectratio: "16:9",
- autostart: true
+                              jwplayer("myElement1").setup({
+  "playlist": [
+    {
+      "sources": [
+        {
+          "default": false,
+          "file": videourl,
+          "type": "hls"
+        }
+      ]
+    }
+  ],
+  "primary": "html5",
+  "hlshtml": true
 });
       document.getElementById('progress').style.width = "100%"
       $('#progress').hide()
@@ -278,27 +287,48 @@ function fetchnickjson(value) {
       $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20channel.item.group.content.url%20from%20xml%20where%20url%3D%27http%3A%2F%2Fudat.mtvnservices.com%2Fservice1%2Fdispatch.htm%3Ffeed%3Dnick_arc_player_prime%26mgid%3Dmgid%253Aarc%253Aepisode%253Anick.com%253A" + data.query.results.json.id + '%27%20%20and%20itemPath%3D"rss"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function(data) {
          console.log(data.query.results.rss)
          document.getElementById('progress').style.width = "60%"
+
+
+         	                      var playlist = []
+
          if (data.query.count > 1) {
+
             for (var i = 0; i < data.query.results.rss.length; i++) {
-               arr = arr + "{sources: [{src: '" + gatherData(data.query.results.rss[i].channel.item.group.content.url + "?format=json") + "',type: 'video/mp4'}],},"
+
+
+
+          var newItem = {
+                file: gatherData(data.query.results.rss[i].channel.item.group.content.url + "?format=json&acceptMethods=hls"),
+                type: "hls"
+            };
+                        playlist.push(newItem);
+
+         //      arr = arr + "{sources: [{src: '" + gatherData(data.query.results.rss[i].channel.item.group.content.url + "?format=json") + "',type: 'video/mp4'}],},"
             }
-            player.playlist(eval("[" + (arr.substring(0, arr.length - 1)) + "]"))
-            player.load();
-            player.play();
+
+
+
+         //   player.playlist(eval("[" + (arr.substring(0, arr.length - 1)) + "]"))
+           // player.load();
+            // player.play();
          }
          if (data.query.count == 1) {
-            player.src({
-               "type": "video/mp4",
-               "src": gatherData(data.query.results.rss.channel.item.group.content.url + "?format=json")
-            });
-            player.load();
-            player.play();
+            var newItem = {
+                file: gatherData(data.query.results.rss[i].channel.item.group.content.url + "?format=json&acceptMethods=hls"),
+                type: "hls"
+            };
+                        playlist.push(newItem);
          }
          document.getElementById('progress').style.width = "100%"
          $('#progress').hide()
-         player.playlist.autoadvance(0);
                                    isDone = true
 
+
+                        jwplayer("myElement1").setup({
+playlist: playlist
+
+});
+                        jwplayer("myElement1").load(playlist);
       });
    });
 }
@@ -330,24 +360,39 @@ function fetchsouthpjson(value) {
       showdesc.innerHTML = data.query.results.meta[1].content
       $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20channel.item.group.content.url%20from%20xml%20where%20url%3D%27http%3A%2F%2Fsouthpark.cc.com%2Ffeeds%2Fvideo-player%2Fmrss%3Furi%3Dmgid%253Aarc%253Aepisode%253Asouthparkstudios.com%253A" + data.query.results.div["data-itemid"] + '%27%20%20and%20itemPath%3D"rss"&format=json&callback=', function(data1) {
          document.getElementById('progress').style.width = "60%"
+
+         var playlist = []  
          if (data1.query.count > 1) {
             for (var i = 0; i < data1.query.results.rss.length; i++) {
-               arr = arr + "{sources: [{src: '" + gatherSouthParkData(data1.query.results.rss[i].channel.item.group.content.url.split('?')[0] + "?format=json") + "',type: 'video/mp4'}],},"
-            }
-            player.playlist(eval("[" + (arr.substring(0, arr.length - 1)) + "]"))
-            player.playlist.autoadvance(0);
-            // Play through the playlist automatically.
+var newItem = {
+                file: gatherSouthParkData(data1.query.results.rss[i].channel.item.group.content.url.split('?')[0] + "?format=json&acceptMethods=hls"),
+                type: "hls"
+            };
+                                    playlist.push(newItem);
+
+                        }
+
          }
          if (data1.query.count == 1) {
-            player.src({
-               "type": "video/mp4",
-               "src": gatherSouthParkData(data1.query.results.rss.channel.item.group.content.url.split('?')[0] + "?format=json")
-            });
+
+         	var newItem = {
+                file: gatherSouthParkData(data1.query.results.rss.channel.item.group.content.url.split('?')[0] + "?format=json&acceptMethods=hls"),
+                type: "hls"
+            };
+
+
+
          }
          document.getElementById('progress').style.width = "100%"
          $('#progress').hide()
                                    isDone = true
 
+
+                jwplayer("myElement1").setup({
+playlist: playlist
+
+});
+                        jwplayer("myElement1").load(playlist);
       });
 
       function gatherSouthParkData(info) {
@@ -486,11 +531,21 @@ function fetchamcjson(value) {
       showdesc.innerHTML = data.query.results.meta[1].content
             document.getElementById('downloader').href = "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false'
 
-                              jwplayer("myElement1").setup({
-  file: "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false',
-  width: "100%",
-  aspectratio: "16:9",
- autostart: true
+ 
+                                       jwplayer("myElement1").setup({
+  "playlist": [
+    {
+      "sources": [
+        {
+          "default": false,
+          "file": "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false',
+          "type": "hls"
+        }
+      ]
+    }
+  ],
+  "primary": "html5",
+  "hlshtml": true
 });
       document.getElementById('progress').style.width = "100%"
       $('#progress').hide()

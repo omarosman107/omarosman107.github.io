@@ -48,7 +48,7 @@ var sitefunctions = {
 "cwseed.com":"fetchcwjson(url)",
 "nick.com":"fetchnickjson(url)",
 "abc.go.com":"fetchabcjson(url)",
-"southpark.com":"fetchsouthpjson(url)",
+"southpark.cc.com":"fetchsouthpjson(url)",
 "amc.com":"fetchamcjson(url)",
 "cbs.com":"fetchcbsjson(url)",
 "nbc.com":"fetchnbcjson(url)",

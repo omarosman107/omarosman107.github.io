@@ -48,8 +48,10 @@ fetch('https://feed.theplatform.com/f/fox.com/metadata?count=true&byCustomValue=
 	return response.json();
 }).then(function(data){
  for(i in data.results){
+ 	if (Date.now() > data.results[i].authEndDate) {
     template = template + '<div class="_mhb"> <div class="koya-komponent-binding" id="koya_child_19"> <div class="_meb _mjwb"> <div class="_mhb" data-index="0"> <div class="koya-komponent-binding" id="koya_child_20"> <div class="_myvb _mpwb"> <a aria-hidden="true" href="player.html?'+data.results[i].videoURL+'" onclick="return clk(this);"> <div class="_mrwb"> <div class="_mswb" style="background-image: url('+data.results[i].videoStillURL + ');"></div> <div class="_mewb"> <span  class="_mlsc"><span>'+fmtMSS(data.results[i].length)+'</span></span> </div> </div></a> <div class="_mtwb"> <div class="_mzyc"> <div class="koya-komponent-binding" id="koya_child_27"> <button aria-label="More options" class="_mlac" ><span class="_mmxb _mmac"></span></button> </div> </div> <div class="_muwb"> <a data-click-tracking-params="CBMQ/FoYACITCLT8m+3H2dECFYJUTgoddEgOhDIGZy1oaWdoWg9GRXdoYXRfdG9fd2F0Y2g=" href="player.html?'+data.results[i].videoURL + '" onclick="return clk(this);"> <div class="_mvwb"> <span class="_mlsc"><span> Season '+data.results[i].season+" - "+toTitleCase(data.results[i].name)+'</span></span> </div> <div class="_mwwb"> <ul> <li><span class="_mlsc"><span>'+data.results[i].showcode+'</span></span></li> <li><span class="_mlsc"><span>'+data.results[i].airdate+'</span></span></li> <li><span class="_mlsc"><span>'+data.results[i].referenceId+'</span></span></li> </ul> </div></a> <div class="_mzwb"> <div class="koya-komponent-binding" id="koya_child_21"><div class="_maxb"></div></a> </div> </div> </div> </div> </div> </div> </div> </div> <div class="koya-komponent-binding" id="koya_child_29"></div> </div> </div>'
    document.getElementById('carasoul').innerHTML = template
+}
    }
    template = ''
 }).catch(function(err) {
