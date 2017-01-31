@@ -780,10 +780,12 @@ fetch(proxy + show_hub, {
    if(data.videos[i].overlay == 'EPISODE'){
      
      var date = new Date(data.videos[i].start_time);
-var hours = (Math.round(Math.abs(date.getTime() - Date.now()) /36e5 ) + 'h')
+ var  hours = (Math.round(Math.abs(date.getTime() - Date.now()) /36e5 )) +'m'
 
-if(hours.split('h')[0] < 1){
-   hours = Math.trunc(hours.split('h')[0]*60) +'m'
+
+if(hours.split('m')[0] < 1){
+	var hours = (Math.round(hours.split('m')[0] /36e5 ) + 'h')
+
    }
 
 if(hours.split('m')[0] > 24){
