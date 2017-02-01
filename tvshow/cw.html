@@ -782,7 +782,6 @@ fetch(proxy + show_hub, {
      var date = new Date(data.videos[i].start_time);
  var  hours = Math.round(date.getTime() / 60000) +'m'
 
-
 if(hours.split('m')[0] > 60){
 	var hours = (Math.round(hours.split('m')[0] /36e5 ) + 'h')
 
