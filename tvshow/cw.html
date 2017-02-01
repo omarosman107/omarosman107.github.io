@@ -755,7 +755,7 @@
   
                  
   
-               </div>
+               </div> 
        
 
    <script type="text/javascript" src="js/fetch.min.js"></script> 
@@ -780,10 +780,10 @@ fetch(proxy + show_hub, {
    if(data.videos[i].overlay == 'EPISODE'){
      
      var date = new Date(data.videos[i].start_time);
- var  hours = (Math.round(Math.abs(date.getTime() - Date.now()) /36e5 )) +'m'
+ var  hours = Math.round(date.getTime() / 60000) +'m'
 
 
-if(hours.split('m')[0] < 1){
+if(hours.split('m')[0] > 60){
 	var hours = (Math.round(hours.split('m')[0] /36e5 ) + 'h')
 
    }
