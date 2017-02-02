@@ -43,9 +43,10 @@ document.getElementsByTagName('body')[0].innerHTML =   document.getElementsByTag
      fetch("https://api.tvshowtime.com/v1/checkin", request).then(function(res) {
         console.log(res)
                 spinner.style.display = "none";
+                     fetchshows();
+
 
      })
-     fetchshows();
   }
 
   function fetchshows() {
