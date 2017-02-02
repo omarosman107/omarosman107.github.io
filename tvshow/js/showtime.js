@@ -45,7 +45,6 @@ document.getElementsByTagName('body')[0].innerHTML =   document.getElementsByTag
                 spinner.style.display = "none";
 
      })
-     tempel = ""
      fetchshows();
   }
 
@@ -66,9 +65,7 @@ document.getElementsByTagName('body')[0].innerHTML =   document.getElementsByTag
            if (mathleft >= 1) {
               mathleft = "+" + mathleft
            }
-           if (finishjson.episodes[i].show.aired_episodes * 1 - finishjson.episodes[i].show.seen_episodes * 1 == finishjson.episodes[i].show.aired_episodes * 1) {
-              progress = "display:none;"
-           }
+
            var newEpi = '<div class="new">NEW</div>';
            if (finishjson.episodes[i].is_new == true) {
             mathleft = newEpi
@@ -77,5 +74,7 @@ document.getElementsByTagName('body')[0].innerHTML =   document.getElementsByTag
         }
         div.innerHTML = tempel
         spinner.style.display = "none";
+             tempel = ""
+
 });
   }

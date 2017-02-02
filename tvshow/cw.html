@@ -787,12 +787,13 @@ if(hours.split('m')[0] > 60){
 
    }
 
-if(hours.split('m')[0] > 24){
+if(hours.split('h')[0] > 24){
    hours = Math.trunc(hours.split('m')[0]/24) +'d'
    }
+   console.log(hours)
      
      var videourl ='player.html?'+data.videos[i].share_url
-    template = template + '<article id=ARTICLE_1><header id=HEADER_2><div id=DIV_5><a id=A_6>'+data.videos[i].series_name +  ' - ' + data.videos[i].title +'</a></div><a id=A_7 ></a> <time id=TIME_8>'+hours+'</time></header><div id=DIV_9><div id=DIV_10><div id=DIV_11><div id=DIV_12><div id=DIV_13><div id=DIV_14><div id=DIV_15><img alt=""id=IMG_17 src="'+data.videos[i].large_thumbnail+'"></div></div></div><a id=A_18 href="'+videourl+'"></a></div></div></div></div><div id=DIV_24></div></div><div id=DIV_26><section id=SECTION_27><div id=DIV_28><span id=SPAN_29></span><span id=SPAN_30>'+'E' +data.videos[i].episode+'</span><span>- '+data.videos[i].title+'</span></div></section><ul id=UL_31><li id=LI_32><h1 id=H1_33><a id=A_34>Description:</a><span id=SPAN_35></span>'+data.videos[i].description_long+'</h1></ul><section id=SECTION_39><a id=A_40 href="'+videourl+'"><span><i class=material-icons>play_circle_outline</i></span></a><form id=FORM_42><input id=INPUT_43 placeholder="Play this video…"readonly></form></section></div></article></div>'
+    template = template + '<article id=ARTICLE_1><header id=HEADER_2><div id=DIV_5><a id=A_6>'+data.videos[i].series_name +  ' - ' + data.videos[i].title +'</a></div><a id=A_7 ></a> <time id=TIME_8>'+hours+'</time></header><div id=DIV_9><div id=DIV_10><div id=DIV_11><div id=DIV_12><div id=DIV_13><div id=DIV_14><div id=DIV_15><img alt=""id=IMG_17 src="'+data.videos[i].large_thumbnail+'"></div></div></div><a id=A_18 href="'+videourl+'"></a></div></div></div></div><div id=DIV_24></div></div><div id=DIV_26><section id=SECTION_27><div id=DIV_28><span id=SPAN_29></span><span id=SPAN_30>'+'E' +data.videos[i].episode+'</span><span>- '+data.videos[i].title+'</span></div></section><ul id=UL_31><li id=LI_32><h1 id=H1_33><a id=A_34 style="white-space: normal;">Description:'+data.videos[i].description_long+'</a><span id=SPAN_35></span></h1></ul><section id=SECTION_39><a id=A_40 href="'+videourl+'"><span><i class=material-icons>play_circle_outline</i></span></a><form id=FORM_42><input id=INPUT_43 placeholder="Play this video…"readonly></form></section></div></article></div>'
       document.getElementById('carasoul').innerHTML = template;
 
    }

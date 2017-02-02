@@ -59,8 +59,8 @@ body {
 .table td, .table th {
     padding: .75rem;
     vertical-align: top;
-    border-top: 1px solid #eceeef;
-    font-size: larger;
+    border-bottom: 1px solid #eceeef;
+        font-size: larger;
 }
 
 h1{
@@ -166,12 +166,15 @@ h1, h2, h3, h4, h5, h6 {
 .table td, .table th {
     padding: .75rem;
     vertical-align: top;
-    border-top: 1px solid #eceeef;
     font-size: larger;
 }
 table{
     background-color: white;
     box-shadow: 0 1px 7px rgba(0,0,0,.05);
+    margin: auto;
+    width: 100%;
+    max-width: 806px;
+    padding-top: 1%;
 }
 *, ::after, ::before {
     -webkit-box-sizing: inherit;

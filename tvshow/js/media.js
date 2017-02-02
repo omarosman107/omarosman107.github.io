@@ -33,6 +33,7 @@ function fetchcwjson(value) {
       getShowinfo(data.assetFields.seriesName)
       showname.innerHTML = data.assetFields.seriesName + " - " + data.assetFields.title
       showdesc.innerHTML = data.assetFields.description
+      document.title = data.assetFields.seriesName + " - " + data.assetFields.title
       document.getElementById('progress').style.width = "60%"
       document.getElementById('downloader').href = finalurl
     /*  player.src({
@@ -60,6 +61,8 @@ function om(data){
 	            document.getElementById('progress').style.width = "60%"
             showname.innerHTML = data.video[0].show.title + "- " + data.video[0].title
             showdesc.innerHTML = data.video[0].longdescription
+                  document.title = data.video[0].show.title + "- " + data.video[0].title
+
             var brand = "001"
             if (data.video[0].url.includes('disneyxd')) {
 brand = "009"
@@ -135,6 +138,8 @@ function fetchfoxjson(value) {
          document.getElementById('progress').style.width = "100%"
 
       showname.innerHTML = toTitleCase(data['fox$showcode'].replace('-',' ')) + " - " + data.title
+                        document.title = toTitleCase(data['fox$showcode'].replace('-',' ')) + " - " + data.title
+
       showdesc.innerHTML = data.description
       })
 
@@ -184,6 +189,8 @@ function fetchfoxjson(value) {
       document.getElementById('progress').style.width = "50%"
       epiname = (data.entries["0"].title)
       showname.innerHTML = data.entries["0"].fox$series + " - " + (data.entries["0"].title)
+                              document.title = data.entries["0"].fox$series + " - " + (data.entries["0"].title)
+
       getShowinfo(data.entries["0"].fox$series)
       showdesc.innerHTML = data.entries["0"].description
          // url (required), options (optional)
@@ -246,6 +253,7 @@ function fetchcbsjson(value) {
       getShowinfo(data.cbs$SeriesTitle)
       showname.innerHTML = data.title
       showdesc.innerHTML = data.description
+                                    document.title =  data.title
       videourl = "https://link.theplatform.com/s/dJ5BDC/media/guid/2198311517/" + searchValue + "?mbr=true&manifest=m3u&form=json"
       document.getElementById('downloader').href = videourl
 
@@ -282,6 +290,8 @@ function fetchnickjson(value) {
    $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20id%2Ctitle%2Cdescription%20from%20json%20where%20url%3D%27http%3A%2F%2Fwww.nick.com%2Fdata%2FvideoEndLevel%3FurlKey%3D" + split + "'%20%20&format=json", function(data) {
       document.getElementById('progress').style.width = "50%"
       showname.innerHTML = data.query.results.json.title
+                                          document.title =  data.query.results.json.title
+
       showdesc.innerHTML = data.query.results.json.description
       console.log(data.query.results.json.id)
       $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20channel.item.group.content.url%20from%20xml%20where%20url%3D%27http%3A%2F%2Fudat.mtvnservices.com%2Fservice1%2Fdispatch.htm%3Ffeed%3Dnick_arc_player_prime%26mgid%3Dmgid%253Aarc%253Aepisode%253Anick.com%253A" + data.query.results.json.id + '%27%20%20and%20itemPath%3D"rss"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function(data) {
@@ -357,6 +367,8 @@ function fetchsouthpjson(value) {
       console.log(data.query.results.div["data-itemid"])
       document.getElementById('progress').style.width = "40%"
       showname.innerHTML = data.query.results.meta[2].content + " - " + data.query.results.meta["0"].content
+                                                document.title =  data.query.results.meta[2].content + " - " + data.query.results.meta["0"].content
+
       showdesc.innerHTML = data.query.results.meta[1].content
       $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20channel.item.group.content.url%20from%20xml%20where%20url%3D%27http%3A%2F%2Fsouthpark.cc.com%2Ffeeds%2Fvideo-player%2Fmrss%3Furi%3Dmgid%253Aarc%253Aepisode%253Asouthparkstudios.com%253A" + data.query.results.div["data-itemid"] + '%27%20%20and%20itemPath%3D"rss"&format=json&callback=', function(data1) {
          document.getElementById('progress').style.width = "60%"
@@ -432,6 +444,8 @@ function fetchnbcjson(value) {
       getShowinfo(episodedetails.partOfSeries.name)
       showname.innerHTML = episodedetails.partOfSeries.name + "- " + episodedetails.name
       showdesc.innerHTML = episodedetails.description
+                                                      document.title = episodedetails.partOfSeries.name + "- " + episodedetails.name
+
       var iframefetchajax = new XMLHttpRequest();
       iframefetchajax.onreadystatechange = function() {
          if (this.readyState == 4 && this.status == 200) {
@@ -489,6 +503,8 @@ function fetchaswimjson(value) {
                }).then(function(returnedValue) {
                   document.getElementById('progress').style.width = "75%"
                   showname.innerHTML = returnedValue.query.results.video.franchise + "- " + returnedValue.query.results.video.title
+                                                                        document.title = returnedValue.query.results.video.franchise + "- " + returnedValue.query.results.video.title
+
                   showdesc.innerHTML = returnedValue.query.results.video.description
                   for (var i = returnedValue.query.results.video.files.file.length; i >= 0; i--) {
                      if (returnedValue.query.results.video.files.file[i - 1].content.includes("m3u8")) {
@@ -528,6 +544,8 @@ function fetchamcjson(value) {
       document.getElementById('progress').style.width = "50%"
       console.log(data)
       showname.innerHTML = data.query.results.meta[0].content
+                                                                              document.title = data.query.results.meta[0].content
+
       showdesc.innerHTML = data.query.results.meta[1].content
             document.getElementById('downloader').href = "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false'
 
@@ -568,6 +586,8 @@ fetch('https://query.yahooapis.com/v1/public/yql?q=select%20src%2Ccontent%20from
 })
 .then(function(data) {
 	      showname.innerHTML = data.query.results.name.split('Sezon')[0] +" - "+ data.query.results.span
+	                                                                                    document.title = data.query.results.name.split('Sezon')[0] +" - "+ data.query.results.span
+
 
 console.log(data.query.results.iframe["0"].src)
   
