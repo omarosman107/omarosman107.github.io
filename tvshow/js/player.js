@@ -55,8 +55,9 @@ var sitefunctions = {
 "cbs.com":"fetchcbsjson(url)",
 "nbc.com":"fetchnbcjson(url)",
 "cartoonnetwork.com":"fetchcartoonnjson(url)",
-"fox.com":"fetchfoxjson(url)"
-
+"fox.com":"fetchfoxjson(url)",
+"fxnetworks.com":"fetchfxjson(url)",
+"link.theplatfom.com/s/fng-fx/":"fetchfxjson(url)"
 
 
 

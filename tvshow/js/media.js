@@ -44,7 +44,8 @@ function fetchcwjson(value) {
   file: finalurl,
   width: "100%",
   aspectratio: "16:9",
- autostart: true
+ autostart: true,
+ title: data.assetFields.seriesName + " - " + data.assetFields.title
 });
 
       document.getElementById('progress').style.width = "100%"
@@ -687,6 +688,104 @@ player.src({
     }
 }
 });
+}
+
+// fxfetch
+function fetchfxjson(value) {
+	if (value.includes('link.theplatform.com/s/fng-fx/')) {
+
+ fetch(value.split('?')[0] + "?format=preview", {
+         method: 'get'
+      }).then(function(response) {
+         return response.json()
+      }).then(function(data) {
+         document.getElementById('progress').style.width = "100%"
+
+      showname.innerHTML = toTitleCase(data['fx$showcode'].replace('-',' ')) + " - " + data.title
+                        document.title = toTitleCase(data['fx$showcode'].replace('-',' ')) + " - " + data.title
+
+      showdesc.innerHTML = data.description
+      })
+
+
+
+
+
+               document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
+
+
+                  jwplayer("myElement1").setup({
+  "playlist": [
+    {
+      "sources": [
+        {
+          "default": false,
+          "file": value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
+          "type": "hls",
+          "autoplay": true
+        }
+      ]
+    }
+  ],
+  "primary": "html5",
+  "hlshtml": true
+});
+
+                 document.getElementById('progress').style.width = "90%"
+
+
+	}else{
+   var epiname
+      // url (required), options (optional)
+   document.getElementById('progress').style.width = "30%"
+            // url (required), options (optional)
+      fetch(value, {
+         method: 'get'
+      }).then(function(response) {
+         return response.text()
+      }).then(function(final) {
+  var parser = new DOMParser()
+var final =   parser.parseFromString(final, "text/html");
+
+final = (JSON.parse(final.getElementById('seo-data').innerHTML))
+         document.getElementById('progress').style.width = "90%"
+               showname.innerHTML = final.name 
+               console.log(final)
+                        document.title = final.name 
+
+      showdesc.innerHTML = final.description
+console.log(final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].split('?')[0])
+               document.getElementById('downloader').href = final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
+
+                  jwplayer("myElement1").setup({
+  "playlist": [
+    {
+      "sources": [
+        {
+          "default": false,
+          "file": final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
+          "type": "hls"
+        }
+      ]
+    }
+  ],
+  "primary": "html5",
+  "hlshtml": true
+});
+       
+         document.getElementById('progress').style.width = "100%"
+         $('#progress').hide()
+                                   isDone = true
+
+      })
+
+
+
+
+
+
+  }
+   
 }
 
 
