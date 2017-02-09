@@ -38,7 +38,7 @@ function fetchcwjson(value) {
       document.getElementById('downloader').href = finalurl
     /*  player.src({
          "type": "application/x-mpegURL",
-         "src": finalurl
+         "src": finalurl 
       }); */
       jwplayer("myElement1").setup({
   file: finalurl,
