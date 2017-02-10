@@ -788,6 +788,40 @@ console.log(final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].spl
    
 }
 
+function fetchlplatjson(value){
+
+ fetch(value.split('?')[0] + "?format=preview", {
+         method: 'get'
+      }).then(function(response) {
+         return response.json()
+      }).then(function(data) {
+         document.getElementById('progress').style.width = "100%"
+
+      showname.innerHTML =   data.title
+                        document.title = data.title
+
+      showdesc.innerHTML = data.description
+      })
+                  jwplayer("myElement1").setup({
+  "playlist": [
+    {
+      "sources": [
+        {
+          "default": false,
+          "file": value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect",
+          "type": "hls"
+        }
+      ]
+    }
+  ],
+  "primary": "html5",
+  "hlshtml": true
+});
+
+
+
+}
+
 
 
 

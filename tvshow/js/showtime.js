@@ -21,7 +21,7 @@ document.getElementsByTagName('body')[0].innerHTML =   document.getElementsByTag
 
   function mark(id) {
         spinner.style.display = "";
-
+document.getElementsByClassName('tableborder')[0].style.opacity = "0.4"
      var details = {
         episode_id: id,
         access_token: accesstoken
@@ -43,6 +43,7 @@ document.getElementsByTagName('body')[0].innerHTML =   document.getElementsByTag
      fetch("https://api.tvshowtime.com/v1/checkin", request).then(function(res) {
         console.log(res)
                 spinner.style.display = "none";
+                document.getElementsByClassName('tableborder')[0].style.opacity = "1"
                      fetchshows();
 
 
@@ -51,6 +52,7 @@ document.getElementsByTagName('body')[0].innerHTML =   document.getElementsByTag
 
   function fetchshows() {
             spinner.style.display = "";
+        document.getElementById('tablediv').style.opacity = "0.4"
 
      fetch('https://api.tvshowtime.com/v1/to_watch?access_token=' + accesstoken)
 .then(function(response) {
@@ -75,6 +77,8 @@ document.getElementsByTagName('body')[0].innerHTML =   document.getElementsByTag
         }
         div.innerHTML = tempel
         spinner.style.display = "none";
+        document.getElementById('tablediv').style.opacity = "1"
+
              tempel = ""
 
 });

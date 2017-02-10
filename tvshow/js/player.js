@@ -43,7 +43,7 @@ var amcactive = false
 var diziayactive = false
 var cwurl
 var sitefunctions = {
-
+"link.theplatform.com":"fetchlplatjson(url)",
 "cwtv.com":"fetchcwjson(url)",
 "diziay.com":"fetchdiziayjson(url)",
 "adultswim.com":"fetchaswimjson(url)",
@@ -56,9 +56,7 @@ var sitefunctions = {
 "nbc.com":"fetchnbcjson(url)",
 "cartoonnetwork.com":"fetchcartoonnjson(url)",
 "fox.com":"fetchfoxjson(url)",
-"fxnetworks.com":"fetchfxjson(url)",
-"link.theplatfom.com/s/fng-fx/":"fetchfxjson(url)"
-
+"fxnetworks.com":"fetchfxjson(url)"
 
 
 } 
@@ -102,6 +100,7 @@ console.log(tv + " "+"Detected")
 url = currenturl
              eval(sitefunctions[tv]);
              isDone = true
+             break;
 }
 
 	}
@@ -179,6 +178,7 @@ if (tv == "cwtv.com") {
 console.log(url)
              eval(sitefunctions[tv]);
              isDone = true
+             break;
 }
 
 
