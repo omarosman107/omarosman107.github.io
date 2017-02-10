@@ -1,5 +1,36 @@
+@font-face {
 
+  font-family: 'ProximaNova';
+  font-weight: bold;
+  src: url('../fonts/proximanovabold.woff') format('woff')
 
+}
+@font-face {
+
+  font-family: 'ProximaNova';
+  font-weight: normal;
+  src: url('../fonts/proximanovalight.woff') format('woff')
+        font-weight: normal;
+
+/*  url('css/proximanova-bold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+
+}
+@font-face {
+
+  font-family: 'ProximaNova';
+  font-weight: sbold;
+  src: url('../fonts/proximasbold.woff') format('woff')
+/*  url('css/proximanova-bold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+
+}
+@font-face {
+
+  font-family: 'ProximaNova';
+  font-weight: regular;
+  src: url('../fonts/proximanovareg.woff') format('woff')
+/*  url('css/proximanova-bold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+
+}
 
 .videoContainer{
 width: 100%;
@@ -16,12 +47,16 @@ color: white;
 }
 h1{
 	color: white;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'ProximaNova', sans-serif;
+      font-weight: bold;
+
     margin: 8px;
 }
 p{
 	color: white;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'ProximaNova', sans-serif;
+      font-weight: normal;
+
     margin: 8px;
 }
 .showImg {
@@ -38,7 +73,7 @@ p{
 }
 
 .header {
-
+ 
 background-color: rgb(48, 48, 48); color: white;
 	height: 20%;
 }

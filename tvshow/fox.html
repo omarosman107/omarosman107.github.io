@@ -40,7 +40,7 @@ function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
 function toTitleCase(str)
 {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-}
+} 
 var template = "";
 function fox(range){
 fetch('https://feed.theplatform.com/f/fox.com/metadata?count=true&byCustomValue={fullEpisode}{true}&range=' + range, {

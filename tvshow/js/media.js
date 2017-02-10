@@ -6,7 +6,12 @@ if (!String.prototype.includes) {
       return String.prototype.indexOf.apply(this, arguments) !== -1;
    };
 }
+  var parser = new DOMParser()
+function tohtml(data){
+	return  parser.parseFromString(data, "text/html");
 
+
+}
 function toTitleCase(str)
 {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
@@ -438,9 +443,12 @@ function fetchnbcjson(value) {
    $.get(value, function(data) {
       document.getElementById('progress').style.width = "50%"
       var episodedetails
-      pageDOM.innerHTML = data
+      var htmlparsed = tohtml(data)
+      pageDOM.innerHTML = htmlparsed.getElementsByTagName('iframe')[0].outerHTML
+      console.log(pageDOM)
+      console.log(pageDOM.getElementsByTagName('iframe')[0].src)
       var jsonfirst = pageDOM.getElementsByTagName('iframe')[0].src;
-      episodedetails = JSON.parse(pageDOM.querySelector('script[type="application/ld+json"]').innerHTML)
+      episodedetails = JSON.parse(htmlparsed.querySelector('script[type="application/ld+json"]').innerHTML)
       console.log(jsonfirst)
       getShowinfo(episodedetails.partOfSeries.name)
       showname.innerHTML = episodedetails.partOfSeries.name + "- " + episodedetails.name
@@ -451,8 +459,9 @@ function fetchnbcjson(value) {
       iframefetchajax.onreadystatechange = function() {
          if (this.readyState == 4 && this.status == 200) {
             document.getElementById('progress').style.width = "75%"
-            iframeDOM.innerHTML = this.responseText
-            var jsonfirst = iframeDOM.getElementsByTagName('link')[1].href;
+            var htmlframe = tohtml(this.responseText)
+            console.log(htmlframe)
+            var jsonfirst = htmlframe.getElementsByTagName('link')[1].href;
             mediaurl = jsonfirst
             var videofile = mediaurl.split('?')[0] + "?manifest=m3u&mbr=true&metafile=false"
             console.log(videofile)
@@ -480,7 +489,7 @@ function fetchnbcjson(value) {
 
          }
       };
-      iframefetchajax.open("GET", pageDOM.getElementsByTagName('iframe')[0].src, true);
+      iframefetchajax.open("GET", jsonfirst, true);
       iframefetchajax.send();
    });
 }
@@ -744,10 +753,8 @@ function fetchfxjson(value) {
       }).then(function(response) {
          return response.text()
       }).then(function(final) {
-  var parser = new DOMParser()
-var final =   parser.parseFromString(final, "text/html");
 
-final = (JSON.parse(final.getElementById('seo-data').innerHTML))
+final = (JSON.parse(tohtml(final).getElementById('seo-data').innerHTML))
          document.getElementById('progress').style.width = "90%"
                showname.innerHTML = final.name 
                console.log(final)
