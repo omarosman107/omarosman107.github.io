@@ -678,11 +678,13 @@ if(data.getElementsByTagName('script')[i].innerHTML.includes('_cnglobal.cvpVideo
 .then(function(apidat) {
 
 
-$.ajax("https://cors-anywhere.herokuapp.com/http://www.cartoonnetwork.com/cntv/mvpd/processors/services/token_spe.do",{
+$.ajax("https://cors-anywhere.herokuapp.com/https://www.cartoonnetwork.com/cntv/mvpd/processors/services/token_spe.do",{
     'data': encodeURI('path='+tohtml(apidat,'xml').querySelector('file[bitrate="ipad"]').innerHTML+'&profile=tve&videoId=' + cnvideoid), //{action:'x',params:['a','b','c']}
     'type': 'POST',
     'processData': false,
     'contentType': 'application/x-www-form-urlencoded',
+    'headers': {
+        "Content-Type":"application/x-www-form-urlencoded"    },
      success: function(result){
         console.log(result);
     } 
