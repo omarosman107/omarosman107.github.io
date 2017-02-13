@@ -2,7 +2,7 @@
 
   font-family: 'ProximaNova';
   font-style: bold;
-  src: url('proximanovabold.woff') format('woff')
+  src: url('../fonts/proximanovabold.woff') format('woff')
 /*  url('css/proximanova-bold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
 
 }
