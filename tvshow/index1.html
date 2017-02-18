@@ -7,7 +7,7 @@
    <meta charset="utf-8">
    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
    <meta content="ie=edge" http-equiv="x-ua-compatible">
-   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+   <link async href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
    <title>TVShow Time++</title>
    <style type="text/css">
    .spacer {
@@ -699,10 +699,11 @@
    <div class="tableborder">
       <ul class="to-watch-list posters-list list-unstyled list-inline" id="tablediv"></ul>
    </div>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
    </script> 
    <script src="js/fetch.min.js" type="text/javascript">
    </script> 
+
+
    <script type="text/javascript">
    function addJS(url) {
      var s = document.createElement('script'); // Create a script element
@@ -779,7 +780,7 @@
               mathleft = newEpi
            }
            var medialink = "player.html?" + finishjson.episodes[i].show.name.replace("(2015)", "") + " , " + finishjson.episodes[i].name;
-           tempel = tempel + '<li id=episode-item-' + finishjson.episodes[i].id + ' class="new ajaxpop piece" showID="' + finishjson.episodes[i].id + '"><div class=nav><a href=# onclick="mark(' + finishjson.episodes[i].id + ')" class="watched-btn popover-link" title="Mark as watched"><i class="to-watch-icon icon-tvst-watch"><\/i> <i class="watched-icon icon-tvst-check"><\/i><\/a><\/div><div class=image-crop>' + newBanner() + '<a href="' + medialink + '"><img alt="' + finishjson.episodes[i].show.name + '" src="' + finishjson.episodes[i].show.images.poster["4"] + '"><\/a><div class=progress><div class="progress-bar progress-bar-success uncomplete" aria-valuemax=100 aria-valuemin=0 aria-valuenow=40 role=progressbar style=width:' + showprog * 100 + '%;><\/div><\/div><div class=overlay><a href="' + medialink + '" class="overlay-btn zoom-btn"title=Infos><i class="fa fa-play"><\/i><\/a><\/div><div class="side subs"><div class=heading>Select language<div class=close><a href=#>×<\/a><\/div><\/div><ul class="list-unstyled subs-list"><\/ul><\/div><\/div><div class="episode-details poster-details">15<h2><a href=/en/show/281662/episode/5123357>' + "S" + pad(finishjson.episodes[i].season_number) + "E" + pad(finishjson.episodes[i].number) + '<\/a> <span class=nb-remainging-episodes>' + mathleft + ' episodes<\/span><\/h2><a href=/en/show/281662 class="nb-reviews-link secondary-link">' + finishjson.episodes[i].show.name + '<\/a><\/div>';
+           tempel = tempel + '<li id=episode-item-' + finishjson.episodes[i].id + ' class="new ajaxpop piece" showID="' + finishjson.episodes[i].id + '"><div class=nav><a href=# onclick="mark(' + finishjson.episodes[i].id + ')" class="watched-btn popover-link" title="Mark as watched"><i class="to-watch-icon icon-tvst-watch"><\/i> <i class="watched-icon icon-tvst-check"><\/i><\/a><\/div><div class=image-crop>' + newBanner() + '<a href="' + medialink + '"><img alt="' + finishjson.episodes[i].show.name + '" src="' + finishjson.episodes[i].show.images.poster["4"] + '"><\/a><div class=progress><div class="progress-bar progress-bar-success uncomplete" aria-valuemax=100 aria-valuemin=0 aria-valuenow=40 role=progressbar style=width:' + showprog * 100 + '%;><\/div><\/div><div class=overlay><a href="' + medialink + '" class="overlay-btn zoom-btn"title=Watch><i class="fa fa-play"><\/i><\/a><\/div><div class="side subs"><div class=heading>Select language<div class=close><a href=#>×<\/a><\/div><\/div><ul class="list-unstyled subs-list"><\/ul><\/div><\/div><div class="episode-details poster-details">15<h2><a href="'+medialink+'">' + "S" + pad(finishjson.episodes[i].season_number) + "E" + pad(finishjson.episodes[i].number) + '<\/a> <span class=nb-remainging-episodes>' + mathleft + ' episodes<\/span><\/h2><a href="'+medialink+'" class="nb-reviews-link secondary-link">' + finishjson.episodes[i].show.name + ' - '+ finishjson.episodes[i].name + '<\/a><\/div>';
         }
         div.innerHTML = tempel
         document.getElementById('tablediv').style.opacity = "1"
