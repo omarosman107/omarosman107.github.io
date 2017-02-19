@@ -1,4 +1,6 @@
 var x2js = new X2JS();
+jwplayer.defaults.preload = "auto"
+jwplayer.defaults.autostart = "true"
 var foxwholescript
 if (!String.prototype.includes) {
    String.prototype.includes = function() {
@@ -53,7 +55,7 @@ function fetchcwjson(value) {
   file: finalurl,
   width: "100%",
   aspectratio: "16:9",
- autostart: true,
+ atuostart: true,
  title: data.assetFields.seriesName + " - " + data.assetFields.title
 });
 
@@ -667,7 +669,7 @@ if(data.getElementsByTagName('script')[i].innerHTML.includes('_cnglobal.cvpVideo
 	
 	cnvideoid = (data.getElementsByTagName('script')[i].innerHTML.split(';')[0].split("'")[1])
 	console.log(_cnglobal)
-	fetch('https://cors-anywhere.herokuapp.com/http://www.cartoonnetwork.com/cntv/mvpd/services/cvpXML.do?phds=true&id=' + data.getElementsByTagName('script')[i].innerHTML.split(';')[0].split("'")[1])
+	fetch('https://cors-anywhere.herokuapp.com/http://www.cartoonnetwork.com/cntv/mvpd/services/cvpXML.do?id=' + data.getElementsByTagName('script')[i].innerHTML.split(';')[0].split("'")[1])
 .then(function(response) {
 
 
@@ -678,25 +680,21 @@ if(data.getElementsByTagName('script')[i].innerHTML.includes('_cnglobal.cvpVideo
 .then(function(apidat) {
 
 
-$.ajax("https://cors-anywhere.herokuapp.com/https://www.cartoonnetwork.com/cntv/mvpd/processors/services/token_spe.do",{
-    'data': encodeURI('path='+tohtml(apidat,'xml').querySelector('file[bitrate="ipad"]').innerHTML+'&profile=tve&videoId=' + cnvideoid), //{action:'x',params:['a','b','c']}
-    'type': 'POST',
-    'processData': false,
-    'contentType': 'application/x-www-form-urlencoded',
-    'headers': {
-        "Content-Type":"application/x-www-form-urlencoded"    },
+$.ajax("https://cors-anywhere.herokuapp.com/http://www.cartoonnetwork.com/cntv/mvpd/processors/services/token_ipadAdobe.do?path="+tohtml(apidat,'xml').querySelector('file[bitrate="androidphone"]').innerHTML +"&videoId=" + cnvideoid,{
+    'type': 'GET',
      success: function(result){
-        console.log(result);
-    } 
-});
-
-
-                      jwplayer("myElement1").setup({
-  file: tohtml(apidat,'xml').querySelector('file[bitrate="3500"]').innerHTML,
+        console.log(result.querySelector('token').innerHTML);
+                              jwplayer("myElement1").setup({
+  file: 'http://androidhls-secure.cdn.turner.com/toon/big' + tohtml(apidat,'xml').querySelector('file[bitrate="androidphone"]').innerHTML +'?hdnea=' +result.querySelector('token').innerHTML,
   width: "100%",
   aspectratio: "16:9",
   autoplay: true
 });
+    } 
+});
+
+
+
 
 	      document.getElementById('progress').style.width = "100%"
 

@@ -514,7 +514,7 @@
       box-shadow: none
    }
    .posters-list>li .image-crop .overlay {
-      display: none;
+      /* display: none; */
       position: absolute;
       border-radius: 3px;
       top: 0;
@@ -523,7 +523,11 @@
       right: 0;
       overflow: hidden;
       background-color: rgba(0, 0, 0, .6);
-      letter-spacing: 0
+      letter-spacing: 0;
+      opacity: 0;
+      -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
    }
    .posters-list>li .image-crop .overlay a:focus, .posters-list>li .image-crop .overlay a:hover {
       text-decoration: none
@@ -682,7 +686,10 @@
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
    }
    .piece:hover .image-crop .overlay {
+
+
       display: block;
+      opacity: 1;
    }
 
    </style>
