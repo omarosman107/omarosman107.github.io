@@ -750,12 +750,15 @@ color: #ccc;
 
 </script>
    <script type="text/javascript">
+
+
+
 if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function() {
         FastClick.attach(document.body);
     }, false);
 }
-   
+
    function addJS(url) {
      var s = document.createElement('script'); // Create a script element
      s.type = "text/javascript"; // optional in html5
@@ -765,7 +768,12 @@ if ('addEventListener' in document) {
      fs.parentNode.insertBefore(s, fs);
   };
   var accesstoken = "82fb423156c817655962b583129a696d";
+var opts = {
+  onBegin: fetchshows,
+  maxTime: 1000, //Number 
 
+}
+mRefresh(opts);
   function pad(n) {
      return (n < 10) ? ("0" + n) : n;
   }
@@ -845,7 +853,6 @@ var playerurl = medialink
         }
         div.innerHTML = tempel
         document.getElementById('tablediv').style.opacity = "1"
-        mRefresh.resolve();
 
         tempel = ""
      });
