@@ -692,12 +692,20 @@
 text-align: center;
 
 }
+#howmuch {
+
+color: #ccc;
+    font-family: ProximaNova;
+
+}
+
    </style>
+
 
 </head>
 <body>
    <div class="header">
-      EPISODES TO WATCH <a href="#" onclick="tempel='';fetchshows();">
+      EPISODES TO WATCH <span id="howmuch"></span><a href="#" onclick="tempel='';fetchshows();">
       <div class="refresh" style=" float: right; width: 24px;">
          <i class="fa fa-refresh"></i>
       </div></a>
@@ -761,14 +769,7 @@ text-align: center;
   }
 function spdpg(url){
 
-// url (required), options (optional)
-fetch(url, {
-   method: 'get'
-}).then(function(response) {
-   console.log(response)
-}).catch(function(err) {
-console.log('Something went wrong :(')});
-
+return ''
 
 }
 
@@ -776,6 +777,7 @@ console.log('Something went wrong :(')});
      fetch('https://api.tvshowtime.com/v1/to_watch?access_token=' + accesstoken).then(function(response) {
         return response.json();
      }).then(function(json) {
+      document.getElementById('howmuch').innerHTML = "(" + json.episodes.length +")";
         finishjson = json
         for (var i = 0; i < json.episodes.length; i++) {
            function newBanner() {
