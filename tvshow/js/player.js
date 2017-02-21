@@ -10,10 +10,7 @@ $('showname').bind('DOMNodeInserted DOMNodeRemoved', function() {
   alert('changed');
 });
 
-if (location.protocol != 'http:')
-{
- location.href = 'http:' + window.location.href.substring(window.location.protocol.length);
-}
+ 
 
 if (window.fetch) {}else{
 
