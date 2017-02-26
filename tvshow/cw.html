@@ -1,757 +1,420 @@
 
 <!DOCTYPE html><html class=''>
 <head>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+      <link async href="css/font-awesome.min.css" rel="stylesheet">
+
 <style>
 
 #carasoul {
-  margin:auto;
-  display:block;
-      max-width: 600px;
+    margin: auto;
     width: 100%;
 }
-#ARTICLE_1 {
-    bottom: 0px;
-    box-sizing: border-box;
-    display: flex;
-    height: 593.344px;
-    left: 0px;
-    min-height: auto;
-    min-width: auto;
-    position: relative;
-    right: 0px;
-    top: 0px;
-    width: 100%;
-    perspective-origin: 301px 296.672px;
-    transform-origin: 301px 296.672px;
-    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
-    border: 1px solid rgb(230, 230, 230);
-    border-radius: 3px 3px 3px 3px;
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    margin: 0px -1px 60px;
-    max-width: 602px;
-}/*#ARTICLE_1*/
-#ARTICLE_1:hover {
-               -webkit-transition: all .1s ease-in-out;
-      -moz-transition: all .1s ease-in-out;
-      transition: all .1s ease-in-out;
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+@charset "UTF-8";
+html {
+    -webkit-tap-highlight-color: transparent
 }
-#HEADER_2 {
-    bottom: 0px;
-    box-sizing: border-box;
-    display: flex;
-    height: 64px;
-    left: 0px;
-    min-height: auto;
-    min-width: auto;
-    position: relative;
-    right: 0px;
-    top: 0px;
-    align-items: center;
-    perspective-origin: 300px 32px;
-    transform-origin: 300px 32px;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    padding: 14px 20px;
-}/*#HEADER_2*/
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%
+}
+a {
+    background-color: transparent
+}
+a:active, a:hover {
+    outline: 0
+}
+h1 {
+    margin: .67em 0
+}
+img {
+    border: 0;
+    vertical-align: middle
+}
+@media print {
+    img {
+        page-break-inside: avoid
+    }
+    *, :after, :before {
+        color: #000!important;
+        text-shadow: none!important;
+        background: 0 0!important;
+        -webkit-box-shadow: none!important;
+        box-shadow: none!important
+    }
+    a, a:visited {
+        text-decoration: underline
+    }
+    a[href]:after {
+        content: " (" attr(href) ")"
+    }
+    img {
+        max-width: 100%!important
+    }
+    h2, p {
+        orphans: 3;
+        widows: 3
+    }
+    h2 {
+        page-break-after: avoid
+    }
+}
+body {
+    background-color: #fff
+}
 
-#A_3 {
-    box-sizing: border-box;
-    color: rgb(0, 53, 105);
-    display: block;
-    height: 30px;
-    min-height: auto;
-    min-width: auto;
-    text-decoration: none;
-    width: 30px;
-    column-rule-color: rgb(0, 53, 105);
-    align-self: center;
-    perspective-origin: 15px 15px;
-    transform-origin: 15px 15px;
-    background: rgb(250, 250, 250) none repeat scroll 0% 0% / auto padding-box border-box;
-    border: 1px solid rgb(219, 219, 219);
-    border-radius: 50% 50% 50% 50%;
-    flex: 0 0 auto;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    margin: -1px 10px -1px -5px;
-    outline: rgb(0, 53, 105) none 0px;
-    overflow: hidden;
-}/*#A_3*/
-
-#IMG_4 {
-    color: rgb(0, 53, 105);
-    height: 28px;
-    width: 28px;
-    column-rule-color: rgb(0, 53, 105);
-    perspective-origin: 14px 14px;
-    transform-origin: 14px 14px;
-    border: 0px none rgb(0, 53, 105);
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    outline: rgb(0, 53, 105) none 0px;
-}/*#IMG_4*/
-
-#DIV_5 {
-    bottom: 0px;
-    box-sizing: border-box;
-    height: 18px;
-    left: 0px;
-    min-height: auto;
-    min-width: auto;
-    position: relative;
-    right: 0px;
-    top: 0px;
-    width: 506.547px;
-    align-self: center;
-    perspective-origin: 253.266px 9px;
-    transform-origin: 253.266px 9px;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 1 1 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 16px / 0px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    overflow: hidden;
-}/*#DIV_5*/
-
-#A_6 {
-    color: rgb(38, 38, 38);
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+html {
+    font-size: 10px
+}
+body {
+    color: #333
+}
+a {
+    text-decoration: none
+}
+a:focus, a:hover {
+    color: #23527c;
+    text-decoration: underline
+}
+a:focus {
+    outline: dotted thin;
+    outline: -webkit-focus-ring-color auto 5px;
+    outline-offset: -2px
+}
+h1, h2 {
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit
+}
+h1, h2 {
+    margin-top: 20px;
+    margin-bottom: 10px
+}
+ul {
+    margin-top: 0
+}
+h1 {
+    font-size: 36px
+}
+h2 {
+    font-size: 30px
+}
+p {
+    margin: 0 0 10px
+}
+.list-inline, .list-unstyled {
+    list-style: none
+}
+ul {
+    margin-bottom: 10px
+}
+.list-inline {
+}
+.list-inline>li {
     display: inline-block;
-    height: 18px;
-    max-width: 100%;
-    text-decoration: none;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100%;
-    column-rule-color: rgb(38, 38, 38);
-    perspective-origin: 50.2344px 9px;
-    transform-origin: 50.2344px 9px;
-    border: 0px none rgb(38, 38, 38);
-    font: normal normal 600 normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    margin: 0px 506.547px 0px -5px;
-    outline: rgb(38, 38, 38) none 0px;
+}
+@-ms-viewport {
+    width: device-width
+}
+
+
+@font-face {
+    font-family: VideoJS;
+    src: url(/fonts/font-video-js/vjs.eot);
+    src: url(/fonts/font-video-js/vjs.eot?#iefix) format('embedded-opentype'), url(/fonts/font-video-js/vjs.woff) format('woff'), url(/fonts/font-video-js/vjs.ttf) format('truetype'), url(/fonts/font-video-js/vjs.svg#icomoon) format('svg');
+    font-weight: 400;
+    font-style: normal
+}
+@font-face {
+    font-family: chromeCast;
+    src: url(data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAQ4AA4AAAAABdQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAABRAAAABsAAAAcanr4mkdERUYAAAFgAAAAHAAAACAAMgAET1MvMgAAAXwAAABBAAAAVmJdk4JjbWFwAAABwAAAAE8AAAFaS8reomdhc3AAAAIQAAAACAAAAAj//wADZ2x5ZgAAAhgAAACoAAAAqJj06XxoZWFkAAACwAAAACsAAAA2BSui6WhoZWEAAALsAAAAGwAAACQQiQgGaG10eAAAAwgAAAATAAAAFBvoACBsb2NhAAADHAAAAAwAAAAMAFgAbG1heHAAAAMoAAAAHgAAACAASwAkbmFtZQAAA0gAAAC6AAABYBgyNH5wb3N0AAAEBAAAACwAAABDyG/48HdlYmYAAAQwAAAABgAAAAb6d1L4eNpjYGBgZACCM7aLzoPo83KrrkLprwBMzQd0AHjaY2BkYGDgA2IJBhBgYmAEQhYwBvEYAAR2ADd42mNgZFvEOIGBlYGF1Yh1BgMDoxyEZr7GkMYkxMDAxMDKyQADjAxIICDNNYXBgYFX9Q9b2r80hh0cSGoAnfsJzQAAAHjaY2BgYGaAYBkGRgYQCAHyGMF8FgYLIM3FwMHABIQMDLwMiap//v8Hq4Kz/3/9v+gWB1QvFDCyMcAFGEE6mRhQASMD5YCZYVADACELDI0AAAAAAf//AAIAAQAAAAAH0AgAAAMAADEhESEH0PgwCAAABAAgARgHrAbcAAsAEwAbACAAABMRFhcRIREhFhchEQEVFgAXMwIAARUeARczJgADFTMuAZJMTAXq/HwcEAPw+HTuAVYgqCL+SP7OeK4cph7+8rzAGGQG3P3WEBwBwPvaSkwFUv1IpiL+qu4BNAG2/v6mHK54vAEM/vjARGYAAAABAAAAAAAAAAAAAwAAOQN42mNgZGBgAOJd/7iZ4/ltvjJwczCAwHm5Vd+QafYLYHEOBiYQBQAcGQl+AHjaY2BkYOBgAIIdYJKB/QIDIwMqYAUAJZEBpwB42uNggAAOCFZgfsHAAAAEuAEkAAAAAAwADAAMAEwAVHjaY2BkYGBgZVBkYGEAASYgZmQAiTmA+QwABlUAcAAAeNptjjEOAWEUhL+1S2hEIeqNaIlFgQMIhUZBlAhChGRxDadwBIfAqcz+HoUo3u68mXn/DJBlhY8X5PAoguEUeW1v7NOnbDigwtZwmhIXwxkKXA3fxd8MP6jzZMqBMzEhAxbCe46MWLIWu2MmpefYk/vH4pfyNqjpOqSrWZnepKNpGhtJr8qXTF1b629S+JM11haL3zg9eSXJ+U2YyDX/sh/X0G56Tn03SL6R+kRq0dVl23V3fV5HLSzRAAB42mNgYsAPWBkYGJkYmRlcGFnY0nMqCzIM2UvzMg0MDFxAtJGpmzMAXa0HHQABUvj6dgAA) format('woff');
+    font-weight: 400;
+    font-style: normal
+}
+@font-face {
+    font-family: tvst-emotions;
+    src: url(/fonts/emotions/tvst-emotions.eot);
+    src: url(/fonts/emotions/tvst-emotions.eot?#iefix) format('embedded-opentype'), url(/fonts/emotions/tvst-emotions.ttf) format('truetype'), url(/fonts/emotions/tvst-emotions.woff) format('woff'), url(/fonts/emotions/tvst-emotions.svg#tvst-emotions) format('svg');
+    font-weight: 400;
+    font-style: normal
+}
+@font-face {
+    font-family: tvst-icons;
+    src: url(/fonts/tvst-icons/tvst-icons.eot?-d0mbwu);
+    src: url(/fonts/tvst-icons/tvst-icons.eot?#iefix-d0mbwu) format("embedded-opentype"), url(/fonts/tvst-icons/tvst-icons.woff?-d0mbwu) format("woff"), url(/fonts/tvst-icons/tvst-icons.ttf?-d0mbwu) format("truetype"), url(/fonts/tvst-icons/tvst-icons.svg?-d0mbwu#tvst-icons) format("svg");
+    font-weight: 400;
+    font-style: normal
+}
+@font-face {
+    font-family: RedactorFont;
+    src: url(redactor-font.eot)
+}
+
+body {
+    overflow-x: hidden
+}
+@font-face {
+    font-family: ProximaNova;
+    src: url(fonts/ProximaNova-Reg.otf)
+}
+@font-face {
+    font-family: ProximaNovaSB;
+    src: url(fonts/ProximaNova-Sbold.otf)
+}
+@font-face {
+    font-family: ProximaNovaB;
+    src: url(fonts/ProximaNova-Bold.otf)
+}
+@font-face {
+    font-family: ProximaNovaXB;
+    src: url(fonts/ProximaNova-Xbold.otf)
+}
+@font-face {
+    font-family: DinotCB;
+    src: url(fonts/DINOT-CondBold.otf)
+}
+@font-face {
+    font-family: DinotCL;
+    src: url(fonts/DINOT-CondLight.otf)
+}
+
+body {
+    font-size: 16px;
+    line-height: 1.428571429;
+    margin: 0;
+    padding: 0 0 1px
+}
+a {
+    color: #cbb123
+}
+@font-face {
+    font-family: ProximaNova;
+    src: url(fonts/ProximaNova-Reg.otf)
+}
+@font-face {
+    font-family: ProximaNovaSB;
+    src: url(fonts/ProximaNova-Sbold.otf)
+}
+@font-face {
+    font-family: ProximaNovaB;
+    src: url(fonts/ProximaNova-Bold.otf)
+}
+@font-face {
+    font-family: ProximaNovaXB;
+    src: url(fonts/ProximaNova-Xbold.otf)
+}
+@font-face {
+    font-family: DinotCB;
+    src: url(fonts/DINOT-CondBold.otf)
+}
+@font-face {
+    font-family: DinotCL;
+    src: url(/fonts/DINOT-CondLight.otf)
+}
+@font-face {
+    font-family: DinotL;
+    src: url(/fonts/DINOT-Light.otf)
+}
+@font-face {
+    font-family: Dinot;
+    src: url(/fonts/DINOT-Regular.otf)
+}
+@font-face {
+    font-family: DinotM;
+    src: url(/fonts/DINOT-Medium.otf)
+}
+@font-face {
+    font-family: "Helvetica Neue Thin";
+    src: url(/fonts/HelveticaNeueThin/HelveticaNeue-Thin.otf)
+}
+@font-face {
+    font-family: ProximaNova;
+    src: url(fonts/ProximaNova-Reg.otf)
+}
+@font-face {
+    font-family: ProximaNovaSB;
+    src: url(fonts/ProximaNova-Sbold.otf)
+}
+@font-face {
+    font-family: ProximaNovaB;
+    src: url(fonts/ProximaNova-Bold.otf)
+}
+@font-face {
+    font-family: ProximaNovaXB;
+    src: url(/fonts/ProximaNova-Xbold.otf)
+}
+@font-face {
+    font-family: DinotCB;
+    src: url(/fonts/DINOT-CondBold.otf)
+}
+@font-face {
+    font-family: DinotCL;
+    src: url(/fonts/DINOT-CondLight.otf)
+}
+@font-face {
+    font-family: DinotL;
+    src: url(/fonts/DINOT-Light.otf)
+}
+@font-face {
+    font-family: Dinot;
+    src: url(/fonts/DINOT-Regular.otf)
+}
+@font-face {
+    font-family: DinotM;
+    src: url(/fonts/DINOT-Medium.otf)
+}
+@font-face {
+    font-family: "Helvetica Neue Thin";
+    src: url(/fonts/HelveticaNeueThin/HelveticaNeue-Thin.otf)
+}
+@-moz-document url-prefix() {}
+.fanarts-list {
+    font-size: 0;
+    letter-spacing: -1px
+}
+.fanarts-list>li {
+    padding: 0;
+    margin: 12px;
+    vertical-align: top;
+    overflow: hidden
+}
+.fanarts-list>li .fanart-container {
+    background-color: #fbfbfb;
+    border: 1px solid #eee;
+    padding: 0;
     overflow: hidden;
-    padding: 0px 0px 0px 5px;
-}/*#A_6*/
+    position: relative
+}
+.fanarts-list>li .fanart-container:hover{
 
-#A_7 {
-    color: rgb(153, 153, 153);
-    display: block;
-    height: 18px;
-    min-height: auto;
-    min-width: auto;
-    text-decoration: none;
-    width: 18.4531px;
-    column-rule-color: rgb(153, 153, 153);
-    align-self: center;
-    perspective-origin: 9.21875px 9px;
-    transform-origin: 9.21875px 9px;
-    border: 0px none rgb(153, 153, 153);
-    flex: 0 0 auto;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    outline: rgb(153, 153, 153) none 0px;
-}/*#A_7*/
+}
+.initialized {
+    box-shadow: 1px 1px 2px 0 rgba(107,107,107,.15);
+}
 
-#TIME_8 {
-    color: rgb(153, 153, 153);
-    column-rule-color: rgb(153, 153, 153);
-    border: 0px none rgb(153, 153, 153);
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    outline: rgb(153, 153, 153) none 0px;
-}/*#TIME_8*/
 
-#DIV_9, #DIV_10 {
-    bottom: 0px;
-    box-sizing: border-box;
-    display: flex;
-    height: 333.344px;
-    left: 0px;
-    min-height: auto;
-    min-width: auto;
-    position: relative;
-    right: 0px;
-    top: 0px;
+.fanarts-list>li .image-crop {
     width: 100%;
-    perspective-origin: 300px 166.672px;
-    transform-origin: 300px 166.672px;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-}/*#DIV_9, #DIV_10*/
-
-#DIV_11 {
-    bottom: 0px;
-    box-shadow: rgb(239, 239, 239) 0px 0px 20px 0px inset;
-    box-sizing: border-box;
-    height: 333.344px;
-    left: 0px;
-    min-height: auto;
-    min-width: auto;
-    position: relative;
-    right: 0px;
-    top: 0px;
-    width: 100%;
-    perspective-origin: 300px 166.672px;
-    transform-origin: 300px 166.672px;
-    border-top: 1px solid rgb(239, 239, 239);
-    border-right: 0px solid rgb(0, 0, 0);
-    border-bottom: 1px solid rgb(239, 239, 239);
-    border-left: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-}/*#DIV_11*/
-
-#DIV_12 {
-    bottom: 0px;
-    box-sizing: border-box;
-    height: 331.344px;
-    left: 0px;
-    position: relative;
-    right: 0px;
-    top: 0px;
-    width: 100%;
-    perspective-origin: 300px 165.672px;
-    transform-origin: 300px 165.672px;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
     overflow: hidden;
-    padding: 0px 0px 331.344px;
-}/*#DIV_12*/
+    position: relative
+}
+.fanarts-list>li .image-crop img {
+    width: 100%
+}
 
-#DIV_13 {
-    bottom: -1px;
-    box-sizing: border-box;
-    display: flex;
-    height: 332.344px;
-    left: 0px;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    width: 100%;
-    perspective-origin: 300px 166.172px;
-    transform-origin: 300px 166.172px;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-}/*#DIV_13*/
+div:focus {
+    outline: 0
+}
 
-#DIV_14 {
-    bottom: 0px;
-    box-sizing: border-box;
-    display: flex;
-    height: 332.344px;
-    left: 0px;
-    min-height: auto;
-    min-width: auto;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    width: 100%;
-    perspective-origin: 300px 166.172px;
-    transform-origin: 300px 166.172px;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-}/*#DIV_14*/
+a:focus {
+    text-decoration: none
+}
+h1, h2 {
+    font-family: ProximaNovaSB, "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+body {
+    background: #f9f9f9;
+    font-family: ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+body a {
+    color: #3282b6
+}
+body a:hover {
+    color: #373737
+}
 
-#DIV_15 {
-    bottom: 0px;
-    box-sizing: border-box;
-    display: flex;
-    height: 332.344px;
-    left: 0px;
-    min-height: auto;
-    min-width: auto;
-    position: relative;
-    right: 0px;
-    top: 0px;
-    width: 100%;
-    perspective-origin: 300px 166.172px;
-    transform-origin: 300px 166.172px;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-}/*#DIV_15*/
-
-
-
-#IMG_17 {
-    bottom: 0px;
-    display: block;
-    height: 332.344px;
-    left: 0px;
-    min-height: auto;
-    min-width: auto;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    perspective-origin: 300px 166.172px;
-    transform-origin: 300px 166.172px;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-}/*#IMG_17*/
-
-#A_18 {
-    bottom: 0px;
-    color: rgb(0, 53, 105);
-    display: block;
-    height: 331.344px;
-    left: 0px;
-    position: absolute;
-    right: 0px;
-    text-decoration: none;
-    top: 0px;
-    width: 100%;
-    z-index: 2;
-    column-rule-color: rgb(0, 53, 105);
-    perspective-origin: 300px 165.672px;
-    transform-origin: 300px 165.672px;
-    border: 0px none rgb(0, 53, 105);
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    outline: rgb(0, 53, 105) none 0px;
-}/*#A_18*/
-
-#DIV_19 {
-    bottom: 0px;
-    box-sizing: border-box;
-    display: flex;
-    height: 331.344px;
-    left: 0px;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    width: 100%;
-    z-index: 1;
-    perspective-origin: 300px 165.672px;
-    transform-origin: 300px 165.672px;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-}/*#DIV_19*/
-
-#A_20 {
-    background-position: 0px 0px;
-    bottom: 97.6719px;
-    color: rgb(0, 53, 105);
-    display: block;
-    height: 135px;
-    left: 300px;
-    min-height: auto;
-    min-width: auto;
-    opacity: 0;
-    position: absolute;
-    right: 232px;
-    text-decoration: none;
-    top: 165.672px;
-    width: 135px;
-    column-rule-color: rgb(0, 53, 105);
-    perspective-origin: 67.5px 67.5px;
-    transform-origin: 67.5px 67.5px;
-    background: rgba(0, 0, 0, 0) url("https://instagramstatic-a.akamaihd.net/h1/sprites/video/196b78.png") no-repeat scroll 0px 0px / auto padding-box border-box;
-    border: 0px none rgb(0, 53, 105);
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    margin: -67px 0px 0px -67px;
-    outline: rgb(0, 53, 105) none 0px;
-    transition: opacity 0.2s ease-out 0.1s;
-}/*#A_20*/
-
-#DIV_21 {
-    bottom: 10px;
-    box-sizing: border-box;
-    color: rgb(255, 255, 255);
-    height: 26px;
-    left: 10px;
-    min-height: auto;
-    min-width: auto;
-    opacity: 0;
-    position: absolute;
-    right: 422.266px;
-    top: 295.344px;
-    width: 167.734px;
-    column-rule-color: rgb(255, 255, 255);
-    perspective-origin: 83.8594px 13px;
-    transform-origin: 83.8594px 13px;
-    background: rgba(0, 0, 0, 0.85098) none repeat scroll 0% 0% / auto padding-box border-box;
-    border: 0px solid rgb(0, 0, 0);
-    border-radius: 100px 100px 100px 100px;
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    outline: rgb(255, 255, 255) none 0px;
-    padding: 5px 10px;
-    transition: opacity 0.2s ease-out 0.1s;
-}/*#DIV_21*/
-
-#DIV_22 {
-    bottom: 283.344px;
-    box-sizing: border-box;
-    display: flex;
-    height: 48px;
-    left: 552px;
-    min-height: auto;
-    min-width: auto;
-    opacity: 0;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    width: 48px;
-    perspective-origin: 24px 24px;
-    transform-origin: 24px 24px;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    transition: opacity 0.2s ease-out 0.1s;
-}/*#DIV_22*/
-
-#SPAN_23 {
-    background-position: 0px -229px;
-    bottom: 1px;
-    display: block;
-    height: 48px;
-    left: -3px;
-    min-height: auto;
-    min-width: auto;
-    position: relative;
-    right: 3px;
-    text-indent: 110%;
-    top: -1px;
-    white-space: nowrap;
-    width: 48px;
-    perspective-origin: 24px 24px;
-    transform-origin: 24px 24px;
-    background: rgba(0, 0, 0, 0) url("https://instagramstatic-a.akamaihd.net/h1/sprites/core/e05e5e.png") no-repeat scroll 0px -229px / auto padding-box border-box;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    overflow: hidden;
-}/*#SPAN_23*/
-
-#DIV_24 {
-    background-position: 0px 0px;
-    bottom: 0px;
-    box-sizing: border-box;
-    display: flex;
-    height: 333.344px;
-    left: 0px;
-    min-height: auto;
-    min-width: auto;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    width: 100%;
-    z-index: -1;
-    perspective-origin: 300px 166.672px;
-    transform-origin: 300px 166.672px;
-    background: rgba(0, 0, 0, 0) none repeat scroll 0px 0px / auto padding-box border-box;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-}/*#DIV_24*/
-
-#IFRAME_25 {
-    display: block;
-    height: 333.344px;
-    min-height: auto;
-    min-width: auto;
-    width: 100%;
-    perspective-origin: 300px 166.672px;
-    transform-origin: 300px 166.672px;
-    border: 0px none rgb(0, 0, 0);
-    font: normal normal normal normal 16px / 16px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-}/*#IFRAME_25*/
-
-#DIV_26 {
-    bottom: 0px;
-    box-sizing: border-box;
-    display: flex;
-    height: 194px;
-    left: 0px;
-    min-height: auto;
-    min-width: auto;
-    position: relative;
-    right: 0px;
-    top: 0px;
-    width: 100%;
-    perspective-origin: 300px 97px;
-    transform-origin: 300px 97px;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    padding: 0px 24px;
-}/*#DIV_26*/
-
-#SECTION_27 {
-    bottom: 0px;
-    box-sizing: border-box;
-    display: flex;
-    height: 18px;
-    left: 0px;
-    min-height: auto;
-    min-width: auto;
-    position: relative;
-    right: 0px;
-    top: 0px;
-    width: 552px;
-    justify-content: flex-end;
-    perspective-origin: 276px 9px;
-    transform-origin: 276px 9px;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    margin: 20px 0px 7px;
-}/*#SECTION_27*/
-
-#DIV_28 {
-    bottom: 0px;
-    box-sizing: border-box;
-    color: rgb(38, 38, 38);
-    height: 18px;
-    left: 0px;
-    min-height: auto;
-    min-width: auto;
-    position: relative;
-    right: 0px;
-    top: 0px;
-    width: 552px;
-    column-rule-color: rgb(38, 38, 38);
-    perspective-origin: 276px 9px;
-    transform-origin: 276px 9px;
-    border: 0px solid rgb(0, 0, 0);
-    flex: 1 1 auto;
-    flex-flow: column nowrap;
-    font: normal normal 600 normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    outline: rgb(38, 38, 38) none 0px;
-}/*#DIV_28*/
-
-#SPAN_29, #SPAN_30 {
-    color: rgb(38, 38, 38);
-    cursor: pointer;
-    column-rule-color: rgb(38, 38, 38);
-    border: 0px none rgb(38, 38, 38);
-    font: normal normal 600 normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    outline: rgb(38, 38, 38) none 0px;
-}/*#SPAN_29, #SPAN_30*/
-
-#UL_31 {
-    height: 61px;
-    min-height: auto;
-    min-width: auto;
-    width: 552px;
-    perspective-origin: 300px 33px;
-    transform-origin: 300px 33px;
-    flex: 1 1 auto;
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    list-style: none outside none;
-    margin: -5px -24px 7px;
-    padding: 5px 24px 0px;
-}/*#UL_31*/
-
-#LI_32 {
-    bottom: 0px;
-    height: 36px;
-    left: 0px;
-    overflow-wrap: break-word;
-    position: relative;
-    right: 0px;
-    top: 0px;
-    width: 552px;
-    word-wrap: break-word;
-    perspective-origin: 276px 18px;
-    transform-origin: 276px 18px;
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    list-style: none outside none;
-    margin: 0px 0px 7px;
-}/*#LI_32*/
-
-#H1_33 {
-    height: 36px;
-    overflow-wrap: break-word;
-    text-align: left;
-    width: 552px;
-    word-wrap: break-word;
-    perspective-origin: 276px 18px;
-    transform-origin: 276px 18px;
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    list-style: none outside none;
-    margin: 0px;
-}/*#H1_33*/
-
-#A_34, #A_37 {
-    color: rgb(38, 38, 38);
-    overflow-wrap: break-word;
-    text-align: left;
-    text-decoration: none;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: break-word;
-    column-rule-color: rgb(38, 38, 38);
-    border: 0px none rgb(38, 38, 38);
-    font: normal normal 600 normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    list-style: none outside none;
-    margin: 0px 4.5px 0px -5px;
-    outline: rgb(38, 38, 38) none 0px;
-    overflow: hidden;
-    padding: 0px 0px 0px 5px;
-}/*#A_34, #A_37*/
-
-#SPAN_35, #SPAN_38 {
-    overflow-wrap: break-word;
-    text-align: left;
-    word-wrap: break-word;
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    list-style: none outside none;
-}/*#SPAN_35, #SPAN_38*/
-
-#LI_36 {
-    bottom: 0px;
-    height: 18px;
-    left: 0px;
-    overflow-wrap: break-word;
-    position: relative;
-    right: 0px;
-    top: 0px;
-    width: 552px;
-    word-wrap: break-word;
-    perspective-origin: 276px 9px;
-    transform-origin: 276px 9px;
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    list-style: none outside none;
-}/*#LI_36*/
-
-#SECTION_39 {
-    bottom: 0px;
-    box-sizing: border-box;
-    display: flex;
-    height: 68px;
-    left: 0px;
-    min-height: 68px;
-    min-width: auto;
-    position: relative;
-    right: 0px;
-    top: 0px;
-    width: 552px;
-    align-items: center;
-    justify-content: center;
-    perspective-origin: 276px 34px;
-    transform-origin: 276px 34px;
-    border-top: 1px solid rgb(239, 239, 239);
-    border-right: 0px solid rgb(0, 0, 0);
-    border-bottom: 0px solid rgb(0, 0, 0);
-    border-left: 0px solid rgb(0, 0, 0);
-    flex: 0 0 auto;
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    margin: 13px 0px 0px;
-}/*#SECTION_39*/
-
-#A_40 {
-    color: rgb(0, 53, 105);
-    cursor: pointer;
-    display: block;
-    height: 24px;
-    min-height: auto;
-    min-width: auto;
-    text-decoration: none;
-    width: 24px;
-    column-rule-color: rgb(0, 53, 105);
-    align-self: center;
-    perspective-origin: 20px 20px;
-    transform-origin: 20px 20px;
-    border: 0px none rgb(0, 53, 105);
-    flex: 0 0 auto;
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    margin: 0px 3px 0px -9px;
-    outline: rgb(0, 53, 105) none 0px;
-    padding: 8px;
-}/*#A_40*/
-
-#SPAN_41 {
-    background-position: -207px -229px;
-    color: rgb(0, 53, 105);
-    cursor: pointer;
-    display: block;
-    height: 24px;
-    text-indent: 110%;
-    white-space: nowrap;
-    width: 24px;
-    column-rule-color: rgb(0, 53, 105);
-    perspective-origin: 12px 12px;
-    transform-origin: 12px 12px;
-    background: rgba(0, 0, 0, 0) url("https://instagramstatic-a.akamaihd.net/h1/sprites/core/e05e5e.png") no-repeat scroll -207px -229px / auto padding-box border-box;
-    border: 0px none rgb(0, 53, 105);
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    outline: rgb(0, 53, 105) none 0px;
-    overflow: hidden;
-}/*#SPAN_41*/
-
-#FORM_42 {
-    color: rgb(153, 153, 153);
+.fanarts-list>li .fanart-details {
+    text-align: center;
+    letter-spacing: 0;
+    font-size: 16px
+}
+.fanarts-list>li .fanart-details h2 {
+    color: #444;
+    font-size: 16px;
+    font-family: ProximaNovaB;
+    margin: 10px auto 0
+}
+.fanarts-list>li .fanart-details h2 a {
+    color: #444
+}
+.fanarts-list>li a:hover {
+    text-decoration: none
+}
+.fanarts-list>li .fanart-details .secondary-link {
+    font-size: 12px;
+    color: #777;
+    font-family: ProximaNova
+}
+.fanarts-list>li .fanart-details .more-infos {
     height: 20px;
-    min-height: auto;
-    min-width: auto;
-    width: 479px;
-    column-rule-color: rgb(153, 153, 153);
-    align-self: center;
-    perspective-origin: 239.5px 10px;
-    transform-origin: 239.5px 10px;
-    border: 0px none rgb(153, 153, 153);
-    flex: 1 1 auto;
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    margin: 0px;
-    outline: rgb(153, 153, 153) none 0px;
-}/*#FORM_42*/
+    width: 193px;
+    margin: 5px auto 0;
+    overflow: hidden
+}
+.fanarts-list>li .fanart-details p {
+    width: 193px;
+    margin: 5px auto 0;
+    border-top: 1px solid #ececec;
+    color: #777;
+    font-size: 13px;
+    font-family: ProximaNova;
+    padding: 5px 0
+}
+ .image-crop .overlay {
+      /* display: none; */
+      position: absolute;
+      border-radius: 3px;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      background-color: rgba(0, 0, 0, .6);
+      letter-spacing: 0;
+      opacity: 0;
+      -webkit-transition: all .15s ease-in-out;
+    -moz-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+   }
+  .fanarts-list>li  .image-crop .overlay a:focus, .posters-list>li .image-crop .overlay a:hover {
+      text-decoration: none
+   }
 
-#INPUT_43 {
-    background-position: 0px 0px;
-    box-sizing: content-box;
-    color: rgb(38, 38, 38);
-    height: 18px;
-    width: 479px;
-    column-rule-color: rgb(38, 38, 38);
-    perspective-origin: 239.5px 10px;
-    transform-origin: 239.5px 10px;
-    background: rgba(0, 0, 0, 0) none repeat scroll 0px 0px / auto padding-box border-box;
-    border: 0px none rgb(38, 38, 38);
-    font: normal normal normal normal 15px / 18px proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    outline: rgb(38, 38, 38) none 0px;
-}/*#INPUT_43*/
 
-#BUTTON_44 {
-    background-position: -308px -37px;
-    cursor: pointer;
+ .nav a:hover {
+      color: #333;
+      text-decoration: none
+   }
+ .nav a i {
+      margin-left: 8px
+   }
+.image-crop .overlay .overlay-btn {
     display: block;
-    height: 44px;
-    min-height: auto;
-    min-width: auto;
-    text-indent: 110%;
-    white-space: nowrap;
-    width: 44px;
-    align-self: center;
-    perspective-origin: 22px 22px;
-    transform-origin: 22px 22px;
-    background: rgba(0, 0, 0, 0) url("https://instagramstatic-a.akamaihd.net/h1/sprites/core/e05e5e.png") no-repeat scroll -308px -37px / auto padding-box border-box;
-    border: 0px none rgb(0, 0, 0);
-    flex: 0 0 auto;
-    font: normal normal normal normal 13.3333px / normal proxima-nova, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    margin: 0px -10px 0px 5px;
-    overflow: hidden;
-    padding: 0px;
-}/*#BUTTON_44*/
-.thumb {position: relative; width: 400px; height: 200px;}
-.thumb a {position: absolute; top: 0; display: block; width: 100%; height: 100%; text-align: center; text-decoration: none;}
-.thumb a .play, .thumb a .overlay {opacity: 0;}
-.thumb a:hover .play, .thumb a:hover .overlay {display: block; transition: opacity .25s ease-in-out;-moz-transition: opacity .25s ease-in-out;-webkit-transition: opacity .25s ease-in-out;}
-.thumb a:hover .play {position: relative; font-size: 64px; color: #ffffff; margin-top: 60px; z-index: 1000; opacity: 1;}
-.thumb a:hover .overlay {position: absolute; top: 0; width: 100%; height: 100%; background-color: #000000; opacity: .7;}
+    /* height: 253px; */
+    line-height: 405%;
+    font-size: 96px;
+    color: #fff;
+    text-align: center;
+}
+
+     .piece:hover .image-crop .overlay {
+display: block;
+      opacity: 1;
+   }
+   .piece {
+           -webkit-transition: all .2s ease-in-out;
+      -moz-transition: all .2s ease-in-out;
+      transition: all .2s ease-in-out
+   }
 
 </style>
 </head>
@@ -761,11 +424,9 @@
 <p>Made By <a href="https://twitter.com/itsMangoPlays">@itsMangoPlays </a></p>
   <h1 style="text-align:center;font-size:xx-large">The Flash Episodes</h1>
 
-               <div id="carasoul" class="_mbzb">
-  
-                 
-  
-               </div> 
+<ul id="carasoul" class="fanarts-list list-unstyled list-inline">
+</ul>
+
        
 
    <script type="text/javascript" src="js/fetch.min.js"></script> 
@@ -776,15 +437,16 @@
 if (!window.fetch) {
 	alert('fetch isnt working')
 }
+
 var theflash = 'http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_the-flash'
 var show_hub = 'http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_hub'
 var shows = 'http://images.cwtv.com/feed/mobileapp/shows/apiversion_7/channel_cwtv/pagesize_100'
 var proxy = 'https://cors-anywhere.herokuapp.com/'
 var template = "";
 fetch(proxy + show_hub, {
-	method: 'get'
+    method: 'get'
 }).then(function(response) {
-	return response.json();
+    return response.json();
 }).then(function(data){
  for(i in data.videos){
    if(data.videos[i].overlay == 'EPISODE'){
@@ -794,32 +456,14 @@ fetch(proxy + show_hub, {
   return minutes;
 }
 
-    var date = new Date(data.videos[i].start_time);
-var datenow = new Date()
-     console.log(date) 
- var  hours = Math.round(datenow.getTime() - date.getTime())
-
-hours = millisToMinutesAndSeconds(hours / 60) + 'm'
-
-
-if (hours.split('m')[0] > 60) {
-	hours = Math.round(hours.split('m')[0] / 60) + 'h'
-
-if (hours.split('h')[0] > 24) {
-	hours = Math.round(hours.split('h')[0] / 24) + 'd'
-}
-if (hours.split('d')[0] > 7) {
-	hours = Math.round(hours.split('d')[0] / 7) + 'w'
-}
-
-}
 
 
 
      
-     var videourl ='player.html?'+data.videos[i].share_url
-    template = template + '<article id=ARTICLE_1><header id=HEADER_2><div id=DIV_5><a id=A_6>'+data.videos[i].series_name +  ' - ' + data.videos[i].title +'</a></div><a id=A_7 ></a> <time id=TIME_8>'+hours+'</time></header><div id=DIV_9><div id=DIV_10><div id=DIV_11><div id=DIV_12><div id=DIV_13><div id=DIV_14><div id=DIV_15><img alt=""id=IMG_17 src="'+data.videos[i].large_thumbnail+'"></div></div></div><a id=A_18 href="'+videourl+'"></a></div></div></div></div><div id=DIV_24></div></div><div id=DIV_26><section id=SECTION_27><div id=DIV_28><span id=SPAN_29></span><span id=SPAN_30>'+'E' +data.videos[i].episode+'</span><span>- '+data.videos[i].title+'</span></div></section><ul id=UL_31><li id=LI_32><h1 id=H1_33><a id=A_34 style="white-space: normal;">Description:'+data.videos[i].description_long+'</a><span id=SPAN_35></span></h1></ul></a><section id=SECTION_39><a id=A_40 href="'+videourl+'"><span><i class=material-icons>play_circle_outline</i></span></a><form id=FORM_42><input id=INPUT_43 placeholder="Play this video…"readonly></form></section></div></article></div>'
+     var medialink ='player.html?'+data.videos[i].share_url
+    template = template + '<li class=initialized id=episode-item-5749090><div class="piece fanart-container"><div class=image-crop><a href="'+medialink+'"><img alt="'+data.videos[i].series_name+'" src="'+data.videos[i].large_thumbnail+'"></a><div class="overlay"><a href="'+medialink+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="'+medialink+'">E'+data.videos[i].episode+'</a></h2><a href="'+medialink+'" class=secondary-link>'+data.videos[i].series_name +  ' - ' + data.videos[i].title+'</a><div class=more-infos></div><p>'+data.videos[i].airdate+' | ' + data.videos[i].rating + ' | '+data.videos[i].duration +'</div></div>'
       document.getElementById('carasoul').innerHTML = template;
+     
 
    }
    }
@@ -827,8 +471,6 @@ if (hours.split('d')[0] > 7) {
 }).catch(function(err) {
 console.log(err.message)
 });
-
-
 
 
 
