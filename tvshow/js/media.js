@@ -296,36 +296,35 @@ var arr = ''
 
 function fetchnickjson(value) {
    document.getElementById('progress').style.width = "35%"
-   value = value.split('/')[5]
-   var split = value.split('.')[0]
-   console.log(split)
-   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20id%2Ctitle%2Cdescription%20from%20json%20where%20url%3D%27http%3A%2F%2Fwww.nick.com%2Fdata%2FvideoEndLevel%3FurlKey%3D" + split + "'%20%20&format=json", function(data) {
+   $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20data-contenturi%20from%20html%20where%20url%3D'"+value+"'%20and%20xpath%3D%22%2F%2Fdiv%5B%40class%3D'video-player'%5D%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=", function(data) {
       document.getElementById('progress').style.width = "50%"
-      showname.innerHTML = data.query.results.json.title
-                                          document.title =  data.query.results.json.title
+      console.log(data.query.results.div["data-contenturi"])
 
-      showdesc.innerHTML = data.query.results.json.description
-      console.log(data.query.results.json.id)
-      $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20channel.item.group.content.url%20from%20xml%20where%20url%3D%27http%3A%2F%2Fudat.mtvnservices.com%2Fservice1%2Fdispatch.htm%3Ffeed%3Dnick_arc_player_prime%26mgid%3Dmgid%253Aarc%253Aepisode%253Anick.com%253A" + data.query.results.json.id + '%27%20%20and%20itemPath%3D"rss"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', function(data) {
-         console.log(data.query.results.rss)
+      $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D%27http://feeds.mtvnservices.com/od/feed/nick-mrss-player-prime-external/?mgid="+data.query.results.div["data-contenturi"]+"%27%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=", function(data) {
+         console.log(data.query.results.rss.channel.description)
+
+
+      showdesc.innerHTML = data.query.results.rss.channel.description
+
          document.getElementById('progress').style.width = "60%"
 
 
          	                      var playlist = []
 
-         if (data.query.count > 1) {
+         if (data.query.results.rss.channel.item.length > 1) {
+                showname.innerHTML = data.query.results.rss.channel.title + " - " +data.query.results.rss.channel.item[0].title
+                                          document.title =  data.query.results.rss.channel.title + " - " +data.query.results.rss.channel.item[0].title
 
-            for (var i = 0; i < data.query.results.rss.length; i++) {
+            for (var i = 0; i < data.query.results.rss.channel.item.length; i++) {
 
 
 
           var newItem = {
-                file: gatherData(data.query.results.rss[i].channel.item.group.content.url + "?format=json&acceptMethods=hls"),
+                file: gatherData(data.query.results.rss.channel.item[i].group.content.url + "?format=json&acceptMethods=hls"),
                 type: "hls"
             };
                         playlist.push(newItem);
 
-         //      arr = arr + "{sources: [{src: '" + gatherData(data.query.results.rss[i].channel.item.group.content.url + "?format=json") + "',type: 'video/mp4'}],},"
             }
 
 
@@ -334,9 +333,11 @@ function fetchnickjson(value) {
            // player.load();
             // player.play();
          }
-         if (data.query.count == 1) {
+         if (data.query.results.rss.channel.item.length == 1) {
+                showname.innerHTML = data.query.results.rss.channel.title + " - " +data.query.results.rss.channel.item.title
+                                          document.title =  data.query.results.rss.channel.title + " - " +data.query.results.rss.channel.item.title
             var newItem = {
-                file: gatherData(data.query.results.rss[i].channel.item.group.content.url + "?format=json&acceptMethods=hls"),
+                file: gatherData(data.query.results.rss.channel.item.group.content.url + "?format=json&acceptMethods=hls"),
                 type: "hls"
             };
                         playlist.push(newItem);
@@ -626,14 +627,14 @@ console.log(data.query.results.iframe["0"].src)
         console.log(ajaxinfo.success[0].src)
 
           document.getElementById('downloader').href = ajaxinfo.success[0].src
-
+          var obj = []
+for (var i = ajaxinfo.success.length - 1; i >= 0; i--) {
+  console.log(ajaxinfo.success[i].src)
+  obj.push({file:ajaxinfo.success[i].src,type:"mp4",label:ajaxinfo.success[i].label})
+}
+console.log(obj)
                         jwplayer("myElement1").setup({
-  file: ajaxinfo.success[0].src,
-  width: "100%",
-  aspectratio: "16:9",
-  provider: "video",
-  autoplay: true,
-  type:"mp4"
+  sources: obj
 });
                   document.getElementById('progress').style.width = "100%"
                                             isDone = true

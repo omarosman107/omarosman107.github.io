@@ -397,7 +397,6 @@ body a:hover {
       text-decoration: none
    }
  .nav a i {
-      margin-left: 8px
    }
 .image-crop .overlay .overlay-btn {
     display: block;
@@ -450,26 +449,37 @@ fetch(proxy + show_hub, {
 }).then(function(response) {
     return response.json();
 }).then(function(data){
+var start = new Date()
+
  for(i in data.videos){
-   if(data.videos[i].overlay == 'EPISODE'){
+   if(data.videos[i].fullep == 1){
      function millisToMinutesAndSeconds(millis) {
   var minutes = Math.floor(millis / 60000 * 60);
   var seconds = ((millis % 60000) / 1000).toFixed(0);
   return minutes;
 }
 
+var epinum = data.videos[i].episode
+try{
+epinum = data.videos[i].availability_asset_id.split('-')[data.videos[i].availability_asset_id.split('-').length - 1]
 
+}catch(e){
+console.log(e)
+}
 
 
      
      var medialink ='player.html?'+data.videos[i].share_url
-    template = template + '<li class=initialized id=episode-item-5749090><div class="piece fanart-container"><div class=image-crop><a href="'+medialink+'"><img alt="'+data.videos[i].series_name+'" src="'+data.videos[i].large_thumbnail+'"></a><div class="overlay"><a href="'+medialink+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="'+medialink+'">'+data.videos[i].title+'</a></h2><a href="'+medialink+'" class=secondary-link>'+data.videos[i].series_name +  ' - ' + data.videos[i].title+'</a><div class=more-infos></div><p>'+data.videos[i].airdate+' | ' + data.videos[i].rating + ' | '+data.videos[i].duration +'</div></div>'
+    template = template + '<li class=initialized id=episode-item-5749090><div class="piece fanart-container"><div class=image-crop><a href="'+medialink+'"><img alt="'+data.videos[i].series_name+'" src="'+data.videos[i].large_thumbnail+'"></a><div class="overlay"><a href="'+medialink+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="'+medialink+'">'+data.videos[i].title+'</a></h2><a href="'+medialink+'" class=secondary-link>'+data.videos[i].series_name +'</a><div class=more-infos></div><p>'+data.videos[i].airdate+' | ' + data.videos[i].rating + ' | '+data.videos[i].duration +' | '+epinum+'</div></div>'
       document.getElementById('carasoul').innerHTML = template;
      
 
    }
    }
    template = ''
+   var end = new Date()
+
+   console.log(end.getTime() - start.getTime())
 }).catch(function(err) {
 console.log(err.message)
 });
