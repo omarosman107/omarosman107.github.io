@@ -25,13 +25,11 @@
 function search(val){
 	loadMedia(
 obj.filter(function (el) {
-  return el.metadata.toLowerCase().includes(val)
+  return el.metadata.toLowerCase().includes(val.toLowerCase())
 }))
-	console.log(obj.filter(function (el) {
-  return el.metadata.toLowerCase().includes(val)
-}).length)
+
 	if (obj.filter(function (el) {
-  return el.metadata.toLowerCase().includes(val)
+  return el.metadata.toLowerCase().includes(val.toLowerCase())
 }).length == 0) {
 document.getElementById('carasoul').innerHTML = "No results found :("
 
