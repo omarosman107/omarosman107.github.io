@@ -13,6 +13,8 @@
 <h1>EPISODES</h1>
 <p>Made By <a href="https://twitter.com/itsMangoPlays">@itsMangoPlays </a></p>
   <h1 style="text-align:center;font-size:xx-large">FOX,CW  Episodes</h1>
+
+  <input type="text" name="" id="search" oninput="search(this.value)">
    <ul id="carasoul" class="fanarts-list list-unstyled list-inline">
 </ul>
    </div>
@@ -20,6 +22,22 @@
    <script type="text/javascript" src="js/fetch.min.js"></script> 
 
 <script>
+function search(val){
+	loadMedia(
+obj.filter(function (el) {
+  return el.metadata.toLowerCase().includes(val)
+}))
+	console.log(obj.filter(function (el) {
+  return el.metadata.toLowerCase().includes(val)
+}).length)
+	if (obj.filter(function (el) {
+  return el.metadata.toLowerCase().includes(val)
+}).length == 0) {
+document.getElementById('carasoul').innerHTML = "No results found :("
+
+	}
+
+}
 var theflash = 'http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_the-flash'
 var show_hub = 'http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_hub'
 var shows = 'http://images.cwtv.com/feed/mobileapp/shows/apiversion_7/channel_cwtv/pagesize_100'
@@ -152,7 +170,8 @@ console.log(e)
   	show:data.videos[i].series_name,
   	episode:data.videos[i].title,
   	epiformat:epinum,
-  	length:data.videos[i].duration
+  	length:data.videos[i].duration,
+  	metadata:data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration
   })
 
 
@@ -200,7 +219,8 @@ for(i in data.results){
   	show:data.results[i].series.split('/')[data.results[i].series.split('/').length - 1],
   	episode:data.results[i].name,
   	epiformat:epiformat(data.results[i].season,data.results[i].episode),
-  	length:fmtMSS(data.results[i].length)
+  	length:fmtMSS(data.results[i].length),
+  	metadata:rating(data.results[i].rating) + data.results[i].airdate + data.results[i].series.split('/')[data.results[i].series.split('/').length - 1] + data.results[i].name + epiformat(data.results[i].season,data.results[i].episode) + fmtMSS(data.results[i].length)
   })
 
 
@@ -234,7 +254,8 @@ if (data.tiles[i].video.accesslevel == "0") {
   	show:data.tiles[i].video.show.title,
   	episode:data.tiles[i].video.title,
   	epiformat:epiformat(data.tiles[i].video.seasonnumber,data.tiles[i].video.episodenumber),
-  	length:msToTime(data.tiles[i].video.duration)
+  	length:msToTime(data.tiles[i].video.duration),
+  	 metadata:(data.tiles[i].video.rating.value) + airdate + data.tiles[i].video.show.title + data.tiles[i].video.show.title + epiformat(data.tiles[i].video.seasonnumber,data.tiles[i].video.episodenumber) + msToTime(data.tiles[i].video.duration)
   })
 
 
