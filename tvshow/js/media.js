@@ -318,7 +318,7 @@ function fetchnickjson(value) {
             for (var i = 0; i < data.query.results.rss.channel.item.length; i++) {
 
 
-
+ 
           var newItem = {
                 file: gatherData(data.query.results.rss.channel.item[i].group.content.url + "?format=json&acceptMethods=hls"),
                 type: "hls"
@@ -830,6 +830,7 @@ function fetchlplatjson(value){
          document.getElementById('progress').style.width = "100%"
 
       showname.innerHTML =   data.title
+
                         document.title = data.title
 
       showdesc.innerHTML = data.description

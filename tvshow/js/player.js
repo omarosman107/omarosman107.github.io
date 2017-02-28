@@ -44,8 +44,8 @@ var aswim = false
 var amcactive = false
 var diziayactive = false
 var cwurl
+
 var sitefunctions = {
-"link.theplatform.com":"fetchlplatjson(url)",
 "cwtv.com":"fetchcwjson(url)",
 "diziay.com":"fetchdiziayjson(url)",
 "adultswim.com":"fetchaswimjson(url)",
@@ -58,6 +58,7 @@ var sitefunctions = {
 "nbc.com":"fetchnbcjson(url)",
 "cartoonnetwork.com":"fetchcartoonnjson(url)",
 "fox.com":"fetchfoxjson(url)",
+"link.theplatform.com":"fetchlplatjson(url)",
 "fxnetworks.com":"fetchfxjson(url)"
 
 
@@ -94,8 +95,9 @@ function findName(){
 
 document.getElementById('progress').style.width = "0%"
 for (tv in sitefunctions) {
+  console.log(currenturl)
+  console.log(currenturl.includes(tv))
 
-	if (isDone == false) {
 
 		if (currenturl.includes(tv)) {
 console.log(tv + " "+"Detected")
@@ -103,7 +105,7 @@ url = currenturl
              eval(sitefunctions[tv]);
              isDone = true
              break;
-}
+
 
 	}
 

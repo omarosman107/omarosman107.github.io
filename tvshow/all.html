@@ -1,0 +1,274 @@
+
+<!DOCTYPE html><html class=''>
+<head>
+
+   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+            <link async href="css/feed.css" rel="stylesheet">
+                  <link async href="css/font-awesome.min.css" rel="stylesheet">
+
+
+</head>
+<body>
+<div class="contain">
+<h1>EPISODES</h1>
+<p>Made By <a href="https://twitter.com/itsMangoPlays">@itsMangoPlays </a></p>
+  <h1 style="text-align:center;font-size:xx-large">FOX,CW  Episodes</h1>
+   <ul id="carasoul" class="fanarts-list list-unstyled list-inline">
+</ul>
+   </div>
+
+   <script type="text/javascript" src="js/fetch.min.js"></script> 
+
+<script>
+var theflash = 'http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_the-flash'
+var show_hub = 'http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_hub'
+var shows = 'http://images.cwtv.com/feed/mobileapp/shows/apiversion_7/channel_cwtv/pagesize_100'
+var proxy = 'https://cors-anywhere.herokuapp.com/'
+var template = "";
+if (!window.fetch) {
+	alert('fetch isnt working')
+}
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+// url (required), options (optional)
+function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
+function rating(rate){
+if (rate.includes('tv-14')) {
+	return "TV-14"
+}
+	if (rate.includes('tv-pg')) {
+		return "TV-PG"
+	}
+
+	if (rate.includes('tv-y7')) {
+		return "TV-Y7"
+	}
+
+
+	if(rate.includes('tv-y')){
+		return "TV-Y"
+	}
+
+	if(rate.includes('tv-g')){
+		return "TV-G"
+	}
+
+}
+
+function loadMedia(json){
+json = json.sort(function(a, b) {
+    a = new Date(a.airdate);
+    b = new Date(b.airdate);
+    return a>b ? -1 : a<b ? 1 : 0;
+})
+	template = ''
+ for(i in json){
+  
+  template = template + '<li class=initialized id=episode-item-5749090><div class="piece fanart-container"><div class=image-crop><a href="'+json[i].href+'"><img alt="'+json[i].show+'" src="'+json[i].img+'"></a><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class=secondary-link>'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</div></div>'
+      document.getElementById('carasoul').innerHTML = template;
+
+
+ }
+
+      template = ''
+
+}
+function epiformat(s,e){
+
+	if (s < 10) {
+s = 0 + s
+	}
+		if (e < 10) {
+e = 0 + e
+	}
+
+	return 'S' + s + 'E' + e
+}
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+} 
+
+ function msToTime(duration) {
+        var milliseconds = parseInt((duration%1000)/100)
+            , seconds = parseInt((duration/1000)%60)
+            , minutes = parseInt((duration/(1000*60))%60)
+            , hours = parseInt((duration/(1000*60*60))%24);
+
+        hours = (hours < 10) ? "0" + hours : hours;
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        return  minutes + ":" + seconds ;
+    }
+var template = "";
+
+
+
+	          var obj = []
+
+
+
+
+
+fetch(proxy + show_hub, {
+    method: 'get'
+}).then(function(response) {
+    return response.json();
+}).then(function(data){
+var start = new Date()
+
+ for(i in data.videos){
+   if(data.videos[i].fullep == 1){
+     function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000 * 60);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes;
+}
+
+var epinum = data.videos[i].episode
+try{
+epinum = data.videos[i].availability_asset_id.split('-')[data.videos[i].availability_asset_id.split('-').length - 1]
+
+}catch(e){
+console.log(e)
+}
+
+
+
+  obj.push({img:data.videos[i].medium_thumbnail,
+  	rating:(data.videos[i].rating),
+  	href: data.videos[i].share_url,
+  	airdate:data.videos[i].airdate,
+  	show:data.videos[i].series_name,
+  	episode:data.videos[i].title,
+  	epiformat:epinum,
+  	length:data.videos[i].duration
+  })
+
+
+
+
+     
+
+   }
+   }
+      loadMedia(obj)
+
+   template = ''
+   var end = new Date()
+
+   console.log(end.getTime() - start.getTime())
+
+
+}).catch(function(err) {
+console.log(err.message)
+});
+
+
+
+
+
+
+
+
+
+
+
+function fox(range){
+fetch('https://feed.theplatform.com/f/fox.com/metadata?count=true&byCustomValue={fullEpisode}{true}&range=' + range, {
+	method: 'get'
+}).then(function(response) {
+	return response.json();
+}).then(function(data){
+for(i in data.results){
+ 	if (Date.now() > data.results[i].authEndDate) {
+
+  obj.push({img:data.results[i].videoStillURL,
+  	rating:rating(data.results[i].rating),
+  	href: data.results[i].videoURL,
+  	airdate:data.results[i].airdate,
+  	show:data.results[i].series.split('/')[data.results[i].series.split('/').length - 1],
+  	episode:data.results[i].name,
+  	epiformat:epiformat(data.results[i].season,data.results[i].episode),
+  	length:fmtMSS(data.results[i].length)
+  })
+
+
+
+}
+   }
+         loadMedia(obj)
+
+   console.log(obj)
+
+}).catch(function(err) {
+console.log(err)
+});
+}
+
+
+
+fetch( proxy + 'https://api.pluto.watchabc.go.com/api/ws/pluto/v1/module/tilegroup/1381931?brand=001&device=003_2&authlevel=0&layout=1381879&start=0&size=50', {
+	method: 'get'
+}).then(function(response) {
+	return response.json();
+}).then(function(data){
+	console.log(data)
+for(i in data.tiles){
+if (data.tiles[i].video.accesslevel == "0") {
+	airdate = formatDate(data.tiles[i].video.airtime)
+  obj.push({img:data.tiles[i].images[0].value,
+  	rating:(data.tiles[i].video.rating.value),
+  	href: "abc.go.com/vidcode=" + data.tiles[i].video.id,
+  	airdate:airdate,
+  	show:data.tiles[i].video.show.title,
+  	episode:data.tiles[i].video.title,
+  	epiformat:epiformat(data.tiles[i].video.seasonnumber,data.tiles[i].video.episodenumber),
+  	length:msToTime(data.tiles[i].video.duration)
+  })
+
+
+}
+
+   }
+         loadMedia(obj)
+
+
+}).catch(function(err) {
+console.log(err)
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   fox('0-25')
+
+
+</script>
+</body></html>
