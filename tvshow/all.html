@@ -12,7 +12,7 @@
 <div class="contain">
 <h1>EPISODES</h1>
 <p>Made By <a href="https://twitter.com/itsMangoPlays">@itsMangoPlays </a></p>
-  <h1 style="text-align:center;font-size:xx-large">FOX,CW  Episodes</h1>
+  <h1 style="text-align:center;font-size:xx-large">FOX,CW,ABC  Episodes</h1>
 
   <input type="text" name="" id="search" oninput="search(this.value)">
    <ul id="carasoul" class="fanarts-list list-unstyled list-inline">
@@ -23,17 +23,28 @@
 
 <script>
 function search(val){
-	loadMedia(
-obj.filter(function (el) {
-  return el.metadata.toLowerCase().includes(val.toLowerCase())
-}))
+function filter(a)
+{
+    var match = []
 
-	if (obj.filter(function (el) {
-  return el.metadata.toLowerCase().includes(val.toLowerCase())
-}).length == 0) {
+    for (var i = 0; i < a.length; i++)
+    {
+        if ( a[i].metadata.toLowerCase().includes(val.toLowerCase()) ) match.push(a[i])
+    }
+
+    return match
+}
+
+var result = filter(obj);
+
+if (result.length == 0) {
 document.getElementById('carasoul').innerHTML = "No results found :("
-
-	}
+console.log(result.length)
+	}else{
+	loadMedia(result)
+}
+console.log(result.length)
+	
 
 }
 var theflash = 'http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_the-flash'
@@ -91,7 +102,7 @@ json = json.sort(function(a, b) {
   
   template = template + '<li class=initialized ><div class="piece fanart-container"><div class=image-crop><a href="'+json[i].href+'"><img alt="'+json[i].show+'" src="'+json[i].img+'"></a><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class=secondary-link>'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</div></div>'
       document.getElementById('carasoul').innerHTML = template;
-
+ 
 
  }
 
