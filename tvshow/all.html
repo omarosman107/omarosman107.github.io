@@ -22,6 +22,17 @@
    <script type="text/javascript" src="js/fetch.min.js"></script> 
 
 <script>
+function addJS(url) {
+   var s = document.createElement('script'); // Create a script element
+   s.type = "text/javascript"; // optional in html5
+   s.async = true; // asynchronous? true/false
+   s.src = url;
+   var fs = document.getElementsByTagName('script')[0]; // Get the first script
+   fs.parentNode.insertBefore(s, fs);
+};
+
+
+
 function search(val){
 function filter(a)
 {
@@ -100,13 +111,21 @@ json = json.sort(function(a, b) {
 	template = ''
  for(i in json){
   
-  template = template + '<li class=initialized ><div class="piece fanart-container"><div class=image-crop><a href="'+json[i].href+'"><img alt="'+json[i].show+'" src="'+json[i].img+'"></a><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class=secondary-link>'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</div></div>'
+  template = template + '<li class=initialized ><div class="piece fanart-container"><div class=image-crop><a href="'+json[i].href+'"><img alt="'+json[i].show+'" data-src="'+json[i].img+'" class"lazy" ></a><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class=secondary-link>'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</div></div>'
       document.getElementById('carasoul').innerHTML = template;
  
 
  }
 
-      template = ''
+      template = '';
+
+
+      [].forEach.call(document.querySelectorAll('img[data-src]'), function(img) {
+	img.setAttribute('src', img.getAttribute('data-src'));
+	img.onload = function() {
+		img.removeAttribute('data-src');
+	};
+});
 
 }
 function epiformat(s,e){
@@ -172,7 +191,7 @@ console.log(e)
 
 
 
-  obj.push({img:data.videos[i].medium_thumbnail,
+  obj.push({img:data.videos[i].large_thumbnail,
   	rating:(data.videos[i].rating),
   	href: data.videos[i].share_url,
   	airdate:data.videos[i].airdate,
@@ -245,47 +264,98 @@ console.log(err)
 });
 }
 
+function procABC(showepi){
+
+for(a in showepi.videos.video){
+ var thumb 
+
+	try{
+
+			if (showepi.videos.video[a].hasOwnProperty('thumbnails')) {
+			
+thumb = showepi.videos.video[a].thumbnails.thumbnail[0].$		}
 
 
-fetch( proxy + 'https://api.pluto.watchabc.go.com/api/ws/pluto/v1/module/tilegroup/1381931?brand=001&device=003_2&authlevel=0&layout=1381879&start=0&size=50', {
+	 	 	var airdate = formatDate(showepi.videos.video[a].airdates.airdate)
+
+
+
+	}catch(e){
+console.log(e)
+	}
+  obj.push({img:thumb,
+  	rating:(showepi.videos.video[a].tvrating.rating),
+  	href: "abc.go.com/vidcode=" + showepi.videos.video[a]['@id'],
+  	airdate:airdate,
+  	show:showepi.videos.video[a].show.title,
+  	episode:showepi.videos.video[a].title,
+  	epiformat:epiformat(showepi.videos.video[a].season.trackcode.generic.cseason,showepi.videos.video[a].number),
+  	length:msToTime(showepi.videos.video[a].duration['$']),
+  	 metadata:(showepi.videos.video[a].tvrating.rating) + airdate + showepi.videos.video[a].show.title + showepi.videos.video[a].show.title + epiformat(showepi.videos.video[a].season.trackcode.generic.cseason,showepi.videos.video[a].number) + msToTime(showepi.videos.video[a].duration['$'])
+});
+           loadMedia(obj)
+
+}
+}
+
+
+
+function useABC(json){
+console.log(json)
+
+for(i in json.shows.show){
+addJS('https://api.watchabc.go.com/vp2/ws/s/contents/2020/videos/jsonp/001/001/-1/'+json.shows.show[i]['@id']+'/-1/-1/-1/-1?callback=procABC')
+
+}
+
+
+
+
+
+         loadMedia(obj)
+
+}
+
+
+// addJS('https://api.watchabc.go.com/vp2/ws/s/contents/2020/shows/jsonp/001/001/-1?callback=useABC')
+
+
+
+
+
+
+
+
+fetch('http://feed.theplatform.com/f/OyMl-B/8IyhuVgUXDd_?count=true&form=json&range=0-40', {
 	method: 'get'
 }).then(function(response) {
 	return response.json();
 }).then(function(data){
-	console.log(data)
-for(i in data.tiles){
-if (data.tiles[i].video.accesslevel == "0") {
-	airdate = formatDate(data.tiles[i].video.airtime)
-  obj.push({img:data.tiles[i].images[0].value,
-  	rating:(data.tiles[i].video.rating.value),
-  	href: "abc.go.com/vidcode=" + data.tiles[i].video.id,
-  	airdate:airdate,
-  	show:data.tiles[i].video.show.title,
-  	episode:data.tiles[i].video.title,
-  	epiformat:epiformat(data.tiles[i].video.seasonnumber,data.tiles[i].video.episodenumber),
-  	length:msToTime(data.tiles[i].video.duration),
-  	 metadata:(data.tiles[i].video.rating.value) + airdate + data.tiles[i].video.show.title + data.tiles[i].video.show.title + epiformat(data.tiles[i].video.seasonnumber,data.tiles[i].video.episodenumber) + msToTime(data.tiles[i].video.duration)
+	console.log(data.entries)
+for(i in data.entries){
+
+  obj.push({img:data.entries[i].videoStillURL,
+  	rating:rating(data.entries[i].rating),
+  	href: data.entries[i].videoURL,
+  	airdate:data.entries[i].airdate,
+  	show:data.entries[i].series.split('/')[data.entries[i].series.split('/').length - 1],
+  	episode:data.entries[i].name,
+  	epiformat:epiformat(data.entries[i].season,data.entries[i].episode),
+  	length:fmtMSS(data.results[i].length),
+  	metadata:rating(data.entries[i].rating) + data.entries[i].airdate + data.entries[i].series.split('/')[data.entries[i].series.split('/').length - 1] + data.entries[i].name + epiformat(data.entries[i].season,data.entries[i].episode) + fmtMSS(data.entries[i].length)
   })
 
 
-}
+
 
    }
          loadMedia(obj)
 
+   console.log(obj)
 
 }).catch(function(err) {
 console.log(err)
 });
-
-
-
-
-
-
-
-
-
 
 
 

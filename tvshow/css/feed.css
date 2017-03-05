@@ -380,3 +380,13 @@ display: block;
       -moz-transition: all .2s ease-in-out;
       transition: all .2s ease-in-out
    }
+
+
+img {
+	opacity: 1;
+	transition: opacity 0.3s;
+}
+
+img[data-src] {
+	opacity: 0;
+}
