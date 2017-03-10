@@ -5,6 +5,87 @@
    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
             <link async href="css/feed.css" rel="stylesheet">
                   <link async href="css/font-awesome.min.css" rel="stylesheet">
+                  <style type="text/css">
+                  	body {
+  background-color: #eee;
+}
+
+.showbox {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5%;
+}
+
+.loader {
+  position: relative;
+  margin: 0 auto;
+  width: 100px;
+}
+.loader:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.circular {
+  animation: rotate 2s linear infinite;
+  height: 100%;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+@keyframes color {
+  100%,
+  0% {
+    stroke: #d62d20;
+  }
+  40% {
+    stroke: #0057e7;
+  }
+  66% {
+    stroke: #008744;
+  }
+  80%,
+  90% {
+    stroke: #ffa700;
+  }
+}
+
+                  </style>
 
 
 </head>
@@ -12,9 +93,28 @@
 <div class="contain">
 <h1>EPISODES</h1>
 <p>Made By <a href="https://twitter.com/itsMangoPlays">@itsMangoPlays </a></p>
-  <h1 style="text-align:center;font-size:xx-large">FOX,CW,ABC  Episodes</h1>
+  <h1 style="text-align:center;font-size:xx-large">FOX,CW  Episodes</h1>
 
   <input type="text" name="" id="search" oninput="search(this.value)">
+
+
+  <div id="fox" class="showbox">
+  <div class="loader">
+    <svg class="circular" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+  </div>
+</div>
+  <div id="cw" class="showbox">
+  <div class="loader">
+    <svg class="circular" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+  </div>
+</div>
+
+
+
    <ul id="carasoul" class="fanarts-list list-unstyled list-inline">
 </ul>
    </div>
@@ -78,7 +178,7 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 // url (required), options (optional)
-function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
+function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+Math.trunc(s)}
 function rating(rate){
 if (rate.includes('tv-14')) {
 	return "TV-14"
@@ -131,10 +231,10 @@ json = json.sort(function(a, b) {
 function epiformat(s,e){
 
 	if (s < 10) {
-s = 0 + s
+s = '0' + s
 	}
 		if (e < 10) {
-e = 0 + e
+e = '0' + e
 	}
 
 	return 'S' + s + 'E' + e
@@ -210,7 +310,7 @@ console.log(e)
    }
    }
       loadMedia(obj)
-
+document.getElementById('cw').style.display = "none"
    template = ''
    var end = new Date()
 
@@ -232,29 +332,31 @@ console.log(err.message)
 
 
 function fox(range){
-fetch('https://feed.theplatform.com/f/fox.com/metadata?count=true&byCustomValue={fullEpisode}{true}&range=' + range, {
+fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}&range=' + range, {
 	method: 'get'
 }).then(function(response) {
 	return response.json();
 }).then(function(data){
-for(i in data.results){
- 	if (Date.now() > data.results[i].authEndDate) {
-
-  obj.push({img:data.results[i].videoStillURL,
-  	rating:rating(data.results[i].rating),
-  	href: data.results[i].videoURL,
-  	airdate:data.results[i].airdate,
-  	show:data.results[i].series.split('/')[data.results[i].series.split('/').length - 1],
-  	episode:data.results[i].name,
-  	epiformat:epiformat(data.results[i].season,data.results[i].episode),
-  	length:fmtMSS(data.results[i].length),
-  	metadata:rating(data.results[i].rating) + data.results[i].airdate + data.results[i].series.split('/')[data.results[i].series.split('/').length - 1] + data.results[i].name + epiformat(data.results[i].season,data.results[i].episode) + fmtMSS(data.results[i].length)
+	console.log(data)
+for(i in data.entries){
+var date = new Date(data.entries[i].media$availableDate)
+console.log(date)
+  obj.push({img:data.entries[i].media$thumbnails[0].plfile$url,
+  	rating:rating(data.entries[i].media$ratings[0].rating),
+  	href: data.entries[i].media$content[0].plfile$url,
+  	airdate:formatDate(data.entries[i].media$availableDate),
+  	show:data.entries[i].fox$series,
+  	episode:data.entries[i].title,
+  	epiformat:epiformat(data.entries[i].fox$season,data.entries[i].fox$episode),
+  	length:fmtMSS(data.entries[i].media$content[0].plfile$duration),
+  	metadata:rating(data.entries[i].media$ratings[0].rating) + formatDate(data.entries[i].media$availableDate) + data.entries[i].fox$series + data.entries[i].title + epiformat(data.entries[i].fox$season,data.entries[i].fox$episode) + fmtMSS(data.entries[i].media$content[0].plfile$duration)
   })
 
 
 
-}
+
    }
+   document.getElementById('fox').style.display = "none"
          loadMedia(obj)
 
    console.log(obj)
@@ -293,9 +395,10 @@ console.log(e)
   	length:msToTime(showepi.videos.video[a].duration['$']),
   	 metadata:(showepi.videos.video[a].tvrating.rating) + airdate + showepi.videos.video[a].show.title + showepi.videos.video[a].show.title + epiformat(showepi.videos.video[a].season.trackcode.generic.cseason,showepi.videos.video[a].number) + msToTime(showepi.videos.video[a].duration['$'])
 });
-           loadMedia(obj)
 
 }
+           loadMedia(obj)
+
 }
 
 
@@ -333,16 +436,16 @@ fetch('http://feed.theplatform.com/f/OyMl-B/8IyhuVgUXDd_?count=true&form=json&ra
 }).then(function(data){
 	console.log(data.entries)
 for(i in data.entries){
-
+	console.log(data.entries[i].media$ratings)
   obj.push({img:data.entries[i].videoStillURL,
-  	rating:rating(data.entries[i].rating),
+  	rating:rating(data.entries[i].media$ratings[0]),
   	href: data.entries[i].videoURL,
   	airdate:data.entries[i].airdate,
-  	show:data.entries[i].series.split('/')[data.entries[i].series.split('/').length - 1],
+  	show:data.entries[i].nbcu$show,
   	episode:data.entries[i].name,
   	epiformat:epiformat(data.entries[i].season,data.entries[i].episode),
-  	length:fmtMSS(data.results[i].length),
-  	metadata:rating(data.entries[i].rating) + data.entries[i].airdate + data.entries[i].series.split('/')[data.entries[i].series.split('/').length - 1] + data.entries[i].name + epiformat(data.entries[i].season,data.entries[i].episode) + fmtMSS(data.entries[i].length)
+  	length:"--:--",
+  	metadata:rating(data.entries[i].media$ratings[0].rating) + data.entries[i].airdate + data.entries[i].nbcu$show + data.entries[i].name + epiformat(data.entries[i].season,data.entries[i].episode) + fmtMSS(data.entries[i].length)
   })
 
 
