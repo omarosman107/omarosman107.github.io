@@ -370,23 +370,47 @@ body a:hover {
     color: #fff;
     text-align: center;
 }
-
-     .piece:hover .image-crop .overlay {
+@-webkit-keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 70px #fff, 0 0 80px #fff, 0 0 100px #fff, 0 0 150px #fff;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff, 0 0 35px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 75px #fff;
+  }
+}
+     .image-crop:hover .overlay  {
+                  -ms-transform: scale(1); /* IE 9 */
+    -webkit-transform: scale(1); /* Safari */
+    transform: scale(1);
+         
+            -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow:         inset 0 0 10px #000000;
 display: block;
       opacity: 1;
+ text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 70px #fff, 0 0 80px #fff, 0 0 100px #fff, 0 0 150px #fff;
    }
    .piece {
-           -webkit-transition: all .2s ease-in-out;
-      -moz-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out
+           -webkit-transition: all .1s ease-in-out;
+      -moz-transition: all .1s ease-in-out;
+      transition: all .1s ease-in-out
    }
+   .overlay .overlay-btn .fa-play {
 
+   }
 
 img {
 	opacity: 1;
-	transition: opacity 0.3s;
+	 /* transition: opacity 0.3s;  */
 }
 
 img[data-src] {
 	opacity: 0;
+}
+.showbox {
+    display: inline-block;
+}
+.loaderHolder{
+    margin: auto;
+        text-align: center;
 }

@@ -6,8 +6,13 @@
             <link async href="css/feed.css" rel="stylesheet">
                   <link async href="css/font-awesome.min.css" rel="stylesheet">
                   <style type="text/css">
+
+
+
+
+
                   	body {
-  background-color: #eee;
+background-color: #F4F4F4;
 }
 
 .showbox {
@@ -97,7 +102,7 @@
 
   <input type="text" name="" id="search" oninput="search(this.value)">
 
-
+<div class="loaderHolder">
   <div id="fox" class="showbox">
   <div class="loader">
     <svg class="circular" viewBox="25 25 50 50">
@@ -107,10 +112,11 @@
 </div>
   <div id="cw" class="showbox">
   <div class="loader">
-    <svg class="circular" viewBox="25 25 50 50">
+    <svg class="circular" viewBox="25 25 50 50"> 
       <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
     </svg>
   </div>
+</div>
 </div>
 
 
@@ -119,9 +125,12 @@
 </ul>
    </div>
 
-   <script type="text/javascript" src="js/fetch.min.js"></script> 
+   <script type="text/javascript" src="js/fetch.min.js"></script>
+
+
 
 <script>
+
 function addJS(url) {
    var s = document.createElement('script'); // Create a script element
    s.type = "text/javascript"; // optional in html5
@@ -155,6 +164,8 @@ console.log(result.length)
 	loadMedia(result)
 }
 console.log(result.length)
+lazyLoadImages();
+
 	
 
 }
@@ -201,6 +212,50 @@ if (rate.includes('tv-14')) {
 	}
 
 }
+function isElementInViewport (el) {
+
+    var rect = el.getBoundingClientRect();
+
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+    );
+}
+//these handlers will be removed once the images have loaded
+window.addEventListener("DOMContentLoaded", lazyLoadImages);
+window.addEventListener("load", lazyLoadImages);
+window.addEventListener("resize", lazyLoadImages);
+window.addEventListener("scroll", lazyLoadImages);
+
+function lazyLoadImages() {
+  var images = document.querySelectorAll("img[data-src]"),
+      item;
+  // load images that have entered the viewport
+  [].forEach.call(images, function (item) {
+    if (isElementInViewport(item)) {
+      item.setAttribute("src",item.getAttribute("data-src"));
+      item.removeAttribute("data-src")
+    }
+  })
+  // if all the images are loaded, stop calling the handler
+  if (images.length == 0) {
+    window.removeEventListener("DOMContentLoaded", lazyLoadImages);
+    window.removeEventListener("load", lazyLoadImages);
+    window.removeEventListener("resize", lazyLoadImages);
+    window.removeEventListener("scroll", lazyLoadImages);
+  }
+}
+
+ 
+
+window.addEventListener('scroll', function(evt) {
+
+lazyLoadImages();
+
+});
+
 
 function loadMedia(json){
 json = json.sort(function(a, b) {
@@ -220,14 +275,12 @@ json = json.sort(function(a, b) {
       template = '';
 
 
-      [].forEach.call(document.querySelectorAll('img[data-src]'), function(img) {
-	img.setAttribute('src', img.getAttribute('data-src'));
-	img.onload = function() {
-		img.removeAttribute('data-src');
-	};
-});
+
 
 }
+
+
+
 function epiformat(s,e){
 
 	if (s < 10) {
@@ -310,6 +363,8 @@ console.log(e)
    }
    }
       loadMedia(obj)
+      lazyLoadImages();
+
 document.getElementById('cw').style.display = "none"
    template = ''
    var end = new Date()
@@ -340,8 +395,13 @@ fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=js
 	console.log(data)
 for(i in data.entries){
 var date = new Date(data.entries[i].media$availableDate)
-console.log(date)
-  obj.push({img:data.entries[i].media$thumbnails[0].plfile$url,
+console.log(data.entries[i].media$thumbnails)
+var image = data.entries[i].media$thumbnails[5].plfile$url
+if (image.includes('http://')) {
+	image = image.replace('http','https')
+} 
+
+  obj.push({img:image,
   	rating:rating(data.entries[i].media$ratings[0].rating),
   	href: data.entries[i].media$content[0].plfile$url,
   	airdate:formatDate(data.entries[i].media$availableDate),
@@ -358,6 +418,7 @@ console.log(date)
    }
    document.getElementById('fox').style.display = "none"
          loadMedia(obj)
+lazyLoadImages();
 
    console.log(obj)
 
@@ -398,6 +459,8 @@ console.log(e)
 
 }
            loadMedia(obj)
+           lazyLoadImages();
+
 
 }
 
@@ -429,7 +492,7 @@ addJS('https://api.watchabc.go.com/vp2/ws/s/contents/2020/videos/jsonp/001/001/-
 
 
 
-fetch('http://feed.theplatform.com/f/OyMl-B/8IyhuVgUXDd_?count=true&form=json&range=0-40', {
+fetch('https://feed.theplatform.com/f/OyMl-B/8IyhuVgUXDd_?count=true&form=json&range=0-40', {
 	method: 'get'
 }).then(function(response) {
 	return response.json();
