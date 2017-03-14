@@ -20,7 +20,6 @@ background-color: #F4F4F4;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 5%;
 }
 
 .loader {
@@ -89,6 +88,29 @@ background-color: #F4F4F4;
     stroke: #ffa700;
   }
 }
+
+@media (max-width: 800px) {
+  .initialized {
+width: 100%;
+max-width: 100%;
+box-shadow: 0px 0px 0px 0 rgba(107,107,107,.15)
+  }
+
+  .fanarts-list>li .fanart-container {
+     border: 0px
+ 
+}
+
+.fanarts-list>li {
+	    margin:0px;
+
+    margin-top: 12px;
+
+}
+
+
+}
+
 
                   </style>
 
@@ -234,7 +256,7 @@ json = json.sort(function(a, b) {
 	template = ''
  for(i in json){
   
-  template = template + '<li class=initialized ><div class="piece fanart-container"><div class=image-crop><a href="'+json[i].href+'"><img alt="'+json[i].show+'" src="https://placeholdit.imgix.net/~text?txtsize=33&w=300&h=200" data-original="'+json[i].img+'" class"lazy" ></a><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class=secondary-link>'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</div></div>'
+  template = template + '<li class=initialized ><div class="piece fanart-container"><div class=image-crop><a href="player.html?'+json[i].href+'"><img alt="'+json[i].show+'" src="https://placeholdit.imgix.net/~text?txtsize=33&w=300&h=200" data-original="'+json[i].img+'" class"lazy" ></a><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class=secondary-link>'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</div></div>'
       document.getElementById('carasoul').innerHTML = template;
  
 

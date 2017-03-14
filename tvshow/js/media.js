@@ -206,13 +206,10 @@ function fetchfoxjson(value) {
       getShowinfo(data.entries["0"].fox$series)
       showdesc.innerHTML = data.entries["0"].description
          // url (required), options (optional)
-      fetch('https://feed.theplatform.com/f/fox.com/metadata?count=true&byCustomValue={fullEpisode}{true}&range=0-1&q=' + epiname, {
-         method: 'get'
-      }).then(function(response) {
-         return response.json()
-      }).then(function(final) {
-         document.getElementById('progress').style.width = "90%"
-               document.getElementById('downloader').href = final.results["0"].videoURL.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
+              document.getElementById('progress').style.width = "90%"
+              mediaurl = data.entries["0"].media$content["0"].plfile$url
+              console.log(mediaurl)
+               document.getElementById('downloader').href = mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
 
                   jwplayer("myElement1").setup({
   "playlist": [
@@ -220,7 +217,7 @@ function fetchfoxjson(value) {
       "sources": [
         {
           "default": false,
-          "file": final.results["0"].videoURL.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
+          "file": mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
           "type": "hls"
         }
       ]
@@ -234,7 +231,7 @@ function fetchfoxjson(value) {
          $('#progress').hide()
                                    isDone = true
 
-      })
+
   }
    })
 }
