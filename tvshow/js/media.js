@@ -33,7 +33,7 @@ function fetchcwjson(value) {
    var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/206?format=json"
    fetch(url, {
       method: 'get'
-   }).then(function(response) {
+   }).then(function(response) { 
       return response.json();
    }).then(function(data) {
       document.getElementById('progress').style.width = "50%"

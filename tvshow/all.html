@@ -111,6 +111,18 @@ box-shadow: 0px 0px 0px 0 rgba(107,107,107,.15)
 
 }
 
+.visited{
+	color: white;
+}
+
+
+
+.secondary-link:visited {
+color: blue;
+}
+.secondary-link:link {
+    color: green;
+}
 
                   </style>
 
@@ -256,7 +268,7 @@ json = json.sort(function(a, b) {
 	template = ''
  for(i in json){
   
-  template = template + '<li class=initialized ><div class="piece fanart-container"><div class=image-crop><a href="player.html?'+json[i].href+'"><img alt="'+json[i].show+'" src="https://placeholdit.imgix.net/~text?txtsize=33&w=300&h=200" data-original="'+json[i].img+'" class"lazy" ></a><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class=secondary-link>'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</div></div>'
+  template = template + '<li class=initialized ><div class="piece fanart-container"><div class=image-crop><a href="player.html?'+json[i].href+'"><img alt="'+json[i].show+'" src="https://placeholdit.imgix.net/~text?txtsize=33&w=300&h=200" data-original="'+json[i].img+'" class"lazy" ></a><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class="secondary-link">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i class="visited fa fa-check" aria-hidden="true"></i></div></div>'
       document.getElementById('carasoul').innerHTML = template;
  
 
