@@ -347,9 +347,9 @@ body a:hover {
       background-color: rgba(0, 0, 0, .6);
       letter-spacing: 0;
       opacity: 0;
-      -webkit-transition: all .15s ease-in-out;
-    -moz-transition: all .15s ease-in-out;
-    transition: all .15s ease-in-out;
+      -webkit-transition: all .11s ease-in-out;
+    -moz-transition: all .11s ease-in-out;
+    transition: all .11s ease-in-out;
    }
   .fanarts-list>li  .image-crop .overlay a:focus, .posters-list>li .image-crop .overlay a:hover {
       text-decoration: none

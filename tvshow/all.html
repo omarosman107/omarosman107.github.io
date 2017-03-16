@@ -354,7 +354,8 @@ console.log(e)
   	episode:data.videos[i].title,
   	epiformat:epinum,
   	length:data.videos[i].duration,
-  	metadata:data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration
+  	metadata:data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration,
+  	type:"cw"
   })
 
 
@@ -411,7 +412,8 @@ if (image.includes('http://')) {
   	episode:data.entries[i].title,
   	epiformat:epiformat(data.entries[i].fox$season,data.entries[i].fox$episode),
   	length:fmtMSS(data.entries[i].media$content[0].plfile$duration),
-  	metadata:rating(data.entries[i].media$ratings[0].rating) + formatDate(data.entries[i].media$availableDate) + data.entries[i].fox$series + data.entries[i].title + epiformat(data.entries[i].fox$season,data.entries[i].fox$episode) + fmtMSS(data.entries[i].media$content[0].plfile$duration)
+  	metadata:rating(data.entries[i].media$ratings[0].rating) + formatDate(data.entries[i].media$availableDate) + data.entries[i].fox$series + data.entries[i].title + epiformat(data.entries[i].fox$season,data.entries[i].fox$episode) + fmtMSS(data.entries[i].media$content[0].plfile$duration),
+  	type:"fox"
   })
 
 
@@ -456,7 +458,8 @@ console.log(e)
   	episode:showepi.videos.video[a].title,
   	epiformat:epiformat(showepi.videos.video[a].season.trackcode.generic.cseason,showepi.videos.video[a].number),
   	length:msToTime(showepi.videos.video[a].duration['$']),
-  	 metadata:(showepi.videos.video[a].tvrating.rating) + airdate + showepi.videos.video[a].show.title + showepi.videos.video[a].show.title + epiformat(showepi.videos.video[a].season.trackcode.generic.cseason,showepi.videos.video[a].number) + msToTime(showepi.videos.video[a].duration['$'])
+  	 metadata:(showepi.videos.video[a].tvrating.rating) + airdate + showepi.videos.video[a].show.title + showepi.videos.video[a].show.title + epiformat(showepi.videos.video[a].season.trackcode.generic.cseason,showepi.videos.video[a].number) + msToTime(showepi.videos.video[a].duration['$']),
+  	 type:"abc"
 });
 
 }
@@ -510,7 +513,8 @@ for(i in data.entries){
   	episode:data.entries[i].name,
   	epiformat:epiformat(data.entries[i].season,data.entries[i].episode),
   	length:"--:--",
-  	metadata:rating(data.entries[i].media$ratings[0].rating) + data.entries[i].airdate + data.entries[i].nbcu$show + data.entries[i].name + epiformat(data.entries[i].season,data.entries[i].episode) + fmtMSS(data.entries[i].length)
+  	metadata:rating(data.entries[i].media$ratings[0].rating) + data.entries[i].airdate + data.entries[i].nbcu$show + data.entries[i].name + epiformat(data.entries[i].season,data.entries[i].episode) + fmtMSS(data.entries[i].length),
+  	type:"amc"
   })
 
 
