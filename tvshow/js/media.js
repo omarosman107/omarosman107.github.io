@@ -159,7 +159,7 @@ function fetchfoxjson(value) {
 
 
 
-               document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
+               document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false"
 
 
                   jwplayer("myElement1").setup({
@@ -209,7 +209,7 @@ function fetchfoxjson(value) {
               document.getElementById('progress').style.width = "90%"
               mediaurl = data.entries["0"].media$content["0"].plfile$url
               console.log(mediaurl)
-               document.getElementById('downloader').href = mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
+               document.getElementById('downloader').href = mediaurl.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false"
 
                   jwplayer("myElement1").setup({
   "playlist": [

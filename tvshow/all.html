@@ -397,16 +397,21 @@ fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=js
 	console.log(data)
 for(i in data.entries){
 var date = new Date(data.entries[i].media$availableDate)
-console.log(data.entries[i].media$thumbnails)
 var image = data.entries[i].media$thumbnails[5].plfile$url
 if (image.includes('http://')) {
 	image = image.replace('http','https')
 } 
 
+console.log(parseInt(data.entries[i].media$availableDate))
+var date = new Date(parseInt(data.entries[i].media$availableDate))
+date.setDate(date.getDate() - 1)
+
+console.log(date.getTime())
+
   obj.push({img:image,
   	rating:rating(data.entries[i].media$ratings[0].rating),
   	href: data.entries[i].media$content[0].plfile$url,
-  	airdate:formatDate(data.entries[i].media$availableDate),
+  	airdate:formatDate(date.getTime()),
   	show:data.entries[i].fox$series,
   	episode:data.entries[i].title,
   	epiformat:epiformat(data.entries[i].fox$season,data.entries[i].fox$episode),
