@@ -269,10 +269,13 @@ a {
 .fanarts-list>li .image-crop {
     width: 100%;
     overflow: hidden;
-    position: relative
+    position: relative;
+
+    
 }
 .fanarts-list>li .image-crop img {
-    width: 100%
+    width: 100%;
+        background-color: silver;
 }
 
 div:focus {
