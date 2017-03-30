@@ -1,6 +1,22 @@
 var x2js = new X2JS();
 jwplayer.defaults.preload = "auto"
 jwplayer.defaults.autostart = "true"
+
+document.body.onunload = function(){alert('unloaded')
+  localStorage[window.location.search]  = jwplayer().getPosition()
+
+};
+
+window.onunload = function() {
+  localStorage[window.location.search]  = jwplayer().getPosition()
+}
+function resume(){
+                    if(localStorage[window.location.search]){
+  jwplayer().seek(localStorage[window.location.search])
+}
+}
+
+
 var foxwholescript
 if (!String.prototype.includes) {
    String.prototype.includes = function() {

@@ -270,12 +270,22 @@ a {
     width: 100%;
     overflow: hidden;
     position: relative;
+    background-color: silver;
 
     
 }
+@media (min-width: 700px){
+    .fanarts-list>li .image-crop {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+        height: 166px;
+
+    
+}
+}
 .fanarts-list>li .image-crop img {
     width: 100%;
-        background-color: silver;
 }
 
 div:focus {

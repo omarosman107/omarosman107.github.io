@@ -272,6 +272,7 @@ json = json.sort(function(a, b) {
  
 
  }
+ 
 
       template = '';
 
@@ -321,7 +322,8 @@ var template = "";
 
 
 fetch(proxy + show_hub, {
-    method: 'get'
+    method: 'get',
+    cache: "no-store"
 }).then(function(response) {
     return response.json();
 }).then(function(data){
@@ -389,8 +391,9 @@ console.log(err.message)
 
 
 function fox(range){
-fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}&range=' + range, {
-	method: 'get'
+fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}', {
+	method: 'get',
+  cache: "no-store"
 }).then(function(response) {
 	return response.json();
 }).then(function(data){
