@@ -274,20 +274,27 @@ a {
 
     
 }
-@media (min-width: 700px){
+@media (max-width: 800px){
     .fanarts-list>li .image-crop {
     width: 100%;
     overflow: hidden;
     position: relative;
-        height: 166px;
 
     
 }
 }
 .fanarts-list>li .image-crop img {
     width: 100%;
-}
+            height: 166px;
 
+}
+@media (max-width: 800px){
+    .fanarts-list>li .image-crop img {
+    width: 100%;
+            height: 100%;
+
+}
+}
 div:focus {
     outline: 0
 }
