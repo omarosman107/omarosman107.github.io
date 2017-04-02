@@ -14,7 +14,36 @@ function resume(){
                     if(localStorage[window.location.search]){
   jwplayer().seek(localStorage[window.location.search])
 }
+
+  console.log('Checking position cookie!');
+  console.log(Math.abs(jwplayer().getDuration() - currentPosition));
+  if (currentPosition > 0 && Math.abs(jwplayer().getDuration() - currentPosition) > 5) {
+    jwplayer().seek(currentPosition);   
+  }
+
 }
+
+
+
+if (localStorage[window.location.search] == '' || localStorage[window.location.search] == 'undefined') {
+  console.log("No cookie for position found");
+  var currentPosition = 0;
+} else {
+  if (localStorage[window.location.search] == "null") {
+    localStorage[window.location.search] = 0;
+  } else {
+    var currentPosition = localStorage[window.location.search]; 
+  }
+  console.log("Position cookie found: "+localStorage[window.location.search]);
+}
+
+
+
+
+window.onunload = function() {
+   localStorage[window.location.search] = jwplayer().getPosition();
+}
+
 
 
 var foxwholescript
@@ -74,7 +103,7 @@ function fetchcwjson(value) {
  atuostart: true,
  title: data.assetFields.seriesName + " - " + data.assetFields.title
 });
-
+resume()
       document.getElementById('progress').style.width = "100%"
       $('#progress').hide()
                                 isDone = true
@@ -114,6 +143,7 @@ brand = "009"
   aspectratio: "16:9",
  autostart: true
 });
+                     resume()
                document.getElementById('progress').style.width = "100%"
 
 });
@@ -195,6 +225,7 @@ function fetchfoxjson(value) {
   "hlshtml": true
 });
 
+resume()
                  document.getElementById('progress').style.width = "90%"
 
 
@@ -242,6 +273,7 @@ function fetchfoxjson(value) {
   "primary": "html5",
   "hlshtml": true
 });
+                  resume()
        
          document.getElementById('progress').style.width = "100%"
          $('#progress').hide()
@@ -297,6 +329,7 @@ function fetchcbsjson(value) {
   "primary": "html5",
   "hlshtml": true
 });
+                              resume()
       document.getElementById('progress').style.width = "100%"
       $('#progress').hide()
                                 isDone = true
@@ -502,7 +535,7 @@ function fetchnbcjson(value) {
   "hlshtml": true
 });
 
-
+resume()
             document.getElementById('progress').style.width = "100%"
             $('#progress').hide()
                                       isDone = true
@@ -548,6 +581,7 @@ function fetchaswimjson(value) {
   aspectratio: "16:9",
  autostart: true
 });
+  resume()
                                  document.getElementById('downloader').href = videofile
 
                         }
@@ -595,6 +629,7 @@ function fetchamcjson(value) {
   "primary": "html5",
   "hlshtml": true
 });
+                                       resume()
       document.getElementById('progress').style.width = "100%"
       $('#progress').hide()
                                 isDone = true
@@ -649,6 +684,7 @@ console.log(obj)
                         jwplayer("myElement1").setup({
   sources: obj
 });
+                        resume()
                   document.getElementById('progress').style.width = "100%"
                                             isDone = true
 
@@ -704,6 +740,7 @@ $.ajax("https://cors-anywhere.herokuapp.com/http://www.cartoonnetwork.com/cntv/m
   aspectratio: "16:9",
   autoplay: true
 });
+                              resume()
     } 
 });
 
@@ -777,7 +814,7 @@ function fetchfxjson(value) {
   "primary": "html5",
   "hlshtml": true
 });
-
+resume()
                  document.getElementById('progress').style.width = "90%"
 
 
@@ -817,7 +854,7 @@ console.log(final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].spl
   "primary": "html5",
   "hlshtml": true
 });
-       
+      resume() 
          document.getElementById('progress').style.width = "100%"
          $('#progress').hide()
                                    isDone = true
@@ -863,7 +900,7 @@ function fetchlplatjson(value){
   "primary": "html5",
   "hlshtml": true
 });
-
+resume()
 
 
 }
