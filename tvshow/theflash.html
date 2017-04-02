@@ -23,75 +23,131 @@
 <script type="text/javascript">
 jwplayer.defaults.autostart = "true"
 
+function form2Json(str)
+{
+    "use strict";
+    var obj,i,pt,keys,j,ev;
+    if (typeof form2Json.br !== 'function')
+    {
+        form2Json.br = function(repl)
+        {
+            if (repl.indexOf(']') !== -1)
+            {
+                return repl.replace(/\](.+?)(,|$)/g,function($1,$2,$3)
+                {
+                    return form2Json.br($2+'}'+$3);
+                });
+            }
+            return repl;
+        };
+    }
+    str = '{"'+(str.indexOf('%') !== -1 ? decodeURI(str) : str)+'"}';
+    obj = str.replace(/\=/g,'":"').replace(/&/g,'","').replace(/\[/g,'":{"');
+    obj = JSON.parse(obj.replace(/\](.+?)(,|$)/g,function($1,$2,$3){ return form2Json.br($2+'}'+$3);}));
+    pt = ('&'+str).replace(/(\[|\]|\=)/g,'"$1"').replace(/\]"+/g,']').replace(/&([^\[\=]+?)(\[|\=)/g,'"&["$1]$2');
+    pt = (pt + '"').replace(/^"&/,'').split('&');
+    for (i=0;i<pt.length;i++)
+    {
+        ev = obj;
+        keys = pt[i].match(/(?!:(\["))([^"]+?)(?=("\]))/g);
+        for (j=0;j<keys.length;j++)
+        {
+            if (!ev.hasOwnProperty(keys[j]))
+            {
+                if (keys.length > (j + 1))
+                {
+                    ev[keys[j]] = {};
+                }
+                else
+                {
+                    ev[keys[j]] = pt[i].split('=')[1].replace(/"/g,'');
+                    break;
+                }
+            }
+            ev = ev[keys[j]];
+        }
+    }
+    return obj;
+}
+
+
+function drivePLay(id){
+
+
+
+document.getElementById('myElement1').innerHTML = '<iframe frameborder="0" id="player" allowfullscreen="1" style="width: 100%; height: 360px;" src="https://youtube.googleapis.com/embed/?hl=en&modestbranding=1&ps=docs&partnerid=30&autoplay=1&docid='+id+'">'
+
+}
+
 function play(a){
 
 	video = a.getAttribute("playurl")
 	      if (video == '') {
-  window.open(a.getAttribute("alt"), '_blank');
-      }
+  drivePLay(a.getAttribute("alt"));
+      }else{
       jwplayer("myElement1").setup({
   file: video,
   aspectratio: "16:9",
  atuostart: true
 });
-
+}
 }
 	var list = [
 
 {title:"Flashpoint",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=61295"
+alt:"0B7HG9TwTlPJKZ2lSVHlZQW1KeWs"
 
 },
 {title:"Paradox",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=62540"
+alt:"0B7HG9TwTlPJKM3JVTzFYaDQtbUU"
 
 },
 {title:"Magenta",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=63114"
+alt:"0B7HG9TwTlPJKQ182dmIyQm9NaWc"
 
 },
 {title:"The New Rougues",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=63373"
+alt:"0B7HG9TwTlPJKZFAyYXZ6VC1QRTQ"
 },
 {title:"Monster",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=63914"
+alt:"0B7HG9TwTlPJKYTRUWW4wUC1Vc1U"
 },
 {title:"Shade",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=65117"
+alt:"0B7HG9TwTlPJKRHJwX0lBNl9OMzg"
 },
 {title:"Killer Frost",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=66917"
+alt:"0B7HG9TwTlPJKOHI1V0VsZUNWTWM"
 },
 {title:"Invasion!",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=67235"
+alt:"0B7HG9TwTlPJKVm1hWDRxNHVXUHM"
 },
 {title:"The Present",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=67706"
+alt:"0B7HG9TwTlPJKYUc5QTExbXI5MFU"
 },
 {title:"Borrowing Problems from the Future",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=70768"
+alt:"0B7HG9TwTlPJKMWgwa2otbW5XVTA"
 },
 {title:"Dead Or Alive",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=70903"
+alt:"0B7HG9TwTlPJKdHFhbVVTT085eVk"
 },
 {title:"Untouchable",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=71131"
+alt:"0B7HG9TwTlPJKZGVVUDRlalFmRjA"
 },
 {title:"Attack on Gorilla City",
 file:"",
-alt:"https://xmovies8.ru/movie/the-flash-2016-160103/watching.html?episode_id=71663"
+alt:"0B7HG9TwTlPJKTWlaVFNDRHRoZjQ"
 },
 {title:"Attach on Central City",
 file:"https://www.cwtv.com/ioshlskeys/videos/2017/02/27/TheFlash-314-AttackOnCentralCity-T2713114-CW-Stereo_b5a5d54e4.m3u8",
