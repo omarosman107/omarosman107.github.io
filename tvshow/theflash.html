@@ -6,15 +6,30 @@
   <link  async rel="stylesheet" href="css/materialize.min.css">
 <style type="text/css">
 	
-	#myElement1 {
+	.videoContainer {
 		width: 100%;
-		max-width: 600px;
 	}
+	@media (min-width: 950px){
+.videoContainer {
+    width: 60%;
+}
+}
+#myElement1{
+	position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 25px;
+    height: 0;
+}
+.jw-aspect {
+	padding-top: 0% !important;
+}
 </style>
  </head>
  <body>
  <h1>The Flash Season 3</h1>
+ <div class="videoContainer">
            <div id="myElement1"></div>
+           </div>
   <table class="" id="episodes">
 
 
@@ -75,7 +90,7 @@ function drivePLay(id){
 
 
 
-document.getElementById('myElement1').innerHTML = '<iframe frameborder="0" id="player" allowfullscreen="1" style="width: 100%; height: 360px;" src="https://youtube.googleapis.com/embed/?hl=en&modestbranding=1&ps=docs&partnerid=30&autoplay=1&docid='+id+'">'
+document.getElementById('myElement1').innerHTML = '<iframe frameborder="0" id="player" allowfullscreen="1" style="    position: absolute;top: 0;left: 0;width: 100%;height: 100%;" src="https://youtube.googleapis.com/embed/?hl=en&modestbranding=1&ps=docs&partnerid=30&autoplay=1&docid='+id+'">'
 
 }
 
