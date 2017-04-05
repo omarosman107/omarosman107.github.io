@@ -358,7 +358,6 @@ body a:hover {
  .image-crop .overlay {
       /* display: none; */
       position: absolute;
-      border-radius: 3px;
       top: 0;
       bottom: 0;
       left: 0;
