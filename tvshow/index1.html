@@ -10,6 +10,37 @@
    <link async href="css/font-awesome.min.css" rel="stylesheet">
    <title>TVShow Time++</title>
    <style type="text/css">
+   @-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+
+   .turn {
+
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 900ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 900ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 900ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    -o-transition: rotate(3600deg);}
+
+
    .spacer {
       width: 100%;
       padding: 2%;
@@ -795,7 +826,7 @@ color: #ccc;
    <div class="header">
 
       EPISODES TO WATCH <span id="howmuch"></span><a href="#" onclick="tempel='';fetchshows();">
-      <div class="refresh" style=" float: right; width: 24px;">
+      <div id="loadertop" class="refresh" style=" float: right; width: 24px;">
          <i class="fa fa-refresh"></i>
       </div></a>
 
@@ -872,6 +903,8 @@ if ('addEventListener' in document) {
   fetchshows() 
 
   function mark(id,obj) {
+      document.getElementById('loadertop').classList.add("turn");
+
    (obj.parentNode.parentNode.getElementsByClassName('image-crop')[0].getElementsByClassName('progress-bar progress-bar-success uncomplete')[0].style.width =( obj.parentNode.parentNode.getAttribute('data-new') / obj.parentNode.parentNode.getAttribute('data-total') * 100) + '%')
       console.log(obj.parentNode.parentNode.getAttribute('data-total'))
       console.log(obj.parentNode.parentNode.getAttribute('data-new') / obj.parentNode.parentNode.getAttribute('data-total') )
@@ -908,7 +941,8 @@ return ''
 
 
   function fetchshows() {
-   document.getElementById('loader').style.display = "block"
+   document.getElementById('loadertop').classList.add("turn");
+ //  document.getElementById('loader').style.display = "block"
      fetch('https://api.tvshowtime.com/v1/to_watch?access_token=' + accesstoken).then(function(response) {
         return response.json();
      }).then(function(json) {
@@ -945,6 +979,7 @@ var playerurl = medialink
 
         tempel = ""
            document.getElementById('loader').style.display = "none"
+           document.getElementById('loadertop').classList.remove('turn')
      });
   }
 
