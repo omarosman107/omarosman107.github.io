@@ -11,6 +11,10 @@ window.onunload = function() {
   localStorage[window.location.search]  = jwplayer().getPosition()
 }
 function resume(){
+  jwplayer().on('time',function(e){
+document.getElementById('progressplayer').style.width = (e.position / e.duration *100) + "%"
+})
+
                     if(localStorage[window.location.search]){
   jwplayer().seek(localStorage[window.location.search])
 }
@@ -105,7 +109,7 @@ function fetchcwjson(value) {
 });
 resume()
       document.getElementById('progress').style.width = "100%"
-      $('#progress').hide()
+      $('#projpar').hide()
                                 isDone = true
 
    })
@@ -145,6 +149,7 @@ brand = "009"
 });
                      resume()
                document.getElementById('progress').style.width = "100%"
+      $('#projpar').hide()
 
 });
 }
@@ -227,6 +232,7 @@ function fetchfoxjson(value) {
 
 resume()
                  document.getElementById('progress').style.width = "90%"
+      $('#projpar').hide()
 
 
 	}else{
@@ -276,7 +282,7 @@ resume()
                   resume()
        
          document.getElementById('progress').style.width = "100%"
-         $('#progress').hide()
+      $('#projpar').hide()
                                    isDone = true
 
 
@@ -331,7 +337,7 @@ function fetchcbsjson(value) {
 });
                               resume()
       document.getElementById('progress').style.width = "100%"
-      $('#progress').hide()
+      $('#projpar').hide()
                                 isDone = true
 
    });
@@ -389,7 +395,7 @@ function fetchnickjson(value) {
                         playlist.push(newItem);
          }
          document.getElementById('progress').style.width = "100%"
-         $('#progress').hide()
+      $('#projpar').hide()
                                    isDone = true
 
 
@@ -455,7 +461,7 @@ var newItem = {
 
          }
          document.getElementById('progress').style.width = "100%"
-         $('#progress').hide()
+      $('#projpar').hide()
                                    isDone = true
 
 
@@ -537,7 +543,7 @@ function fetchnbcjson(value) {
 
 resume()
             document.getElementById('progress').style.width = "100%"
-            $('#progress').hide()
+      $('#projpar').hide()
                                       isDone = true
 
          }
@@ -586,7 +592,7 @@ function fetchaswimjson(value) {
 
                         }
                         document.getElementById('progress').style.width = "100%"
-                        $('#progress').hide()
+      $('#projpar').hide()
                                                   isDone = true
 
                      }
@@ -631,7 +637,7 @@ function fetchamcjson(value) {
 });
                                        resume()
       document.getElementById('progress').style.width = "100%"
-      $('#progress').hide()
+      $('#projpar').hide()
                                 isDone = true
 
    })
@@ -686,6 +692,8 @@ console.log(obj)
 });
                         resume()
                   document.getElementById('progress').style.width = "100%"
+            $('#projpar').hide()
+
                                             isDone = true
 
 
@@ -748,6 +756,7 @@ $.ajax("https://cors-anywhere.herokuapp.com/http://www.cartoonnetwork.com/cntv/m
 
 
 	      document.getElementById('progress').style.width = "100%"
+      $('#projpar').hide()
 
 });
 }
@@ -816,6 +825,7 @@ function fetchfxjson(value) {
 });
 resume()
                  document.getElementById('progress').style.width = "90%"
+      $('#projpar').hide()
 
 
 	}else{
@@ -856,7 +866,7 @@ console.log(final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].spl
 });
       resume() 
          document.getElementById('progress').style.width = "100%"
-         $('#progress').hide()
+      $('#projpar').hide()
                                    isDone = true
 
       })
@@ -901,6 +911,7 @@ function fetchlplatjson(value){
   "hlshtml": true
 });
 resume()
+      $('#projpar').hide()
 
 
 }
