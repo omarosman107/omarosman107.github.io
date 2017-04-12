@@ -1009,14 +1009,20 @@ return ''
 }).then(function(library){
    console.log(library)
    var perc = 0
+   var ep = 0
+   var wtc = 0
            for (var i = 0; i < library.shows.length; i++) {
             console.log((library.shows[i].seen_episodes / library.shows[i].aired_episodes *100))
             if(!library.shows[i].seen_episodes == 0){
                            perc = perc + (library.shows[i].seen_episodes / library.shows[i].aired_episodes *100)
+                           ep += library.shows[i].aired_episodes
+                           wtc += library.shows[i].seen_episodes
 
             }
 }
-            document.getElementById('progress').style.width = (perc / library.shows.length + '%')
+perc = (wtc / ep *100)
+console.log(perc)
+            document.getElementById('progress').style.width = (perc + '%')
 
 }).catch(function(err) {
 console.log(err)
