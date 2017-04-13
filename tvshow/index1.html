@@ -1012,9 +1012,9 @@ return ''
    var ep = 0
    var wtc = 0
            for (var i = 0; i < library.shows.length; i++) {
-            console.log((library.shows[i].seen_episodes / library.shows[i].aired_episodes *100))
+            console.log((library.shows[i].seen_episodes / library.shows[i].aired_episodes ))
             if(!library.shows[i].seen_episodes == 0){
-                           perc = perc + (library.shows[i].seen_episodes / library.shows[i].aired_episodes *100)
+                           perc = perc + (library.shows[i].seen_episodes / library.shows[i].aired_episodes )
                            ep += library.shows[i].aired_episodes
                            wtc += library.shows[i].seen_episodes
 
