@@ -402,9 +402,7 @@ body a:hover {
     -webkit-transform: scale(1); /* Safari */
     transform: scale(1);
          
-            -moz-box-shadow:    inset 0 0 10px #000000;
-   -webkit-box-shadow: inset 0 0 10px #000000;
-   box-shadow:         inset 0 0 10px #000000;
+
 display: block;
       opacity: 1;
 /* text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 70px #fff, 0 0 80px #fff, 0 0 100px #fff, 0 0 150px #fff;*/

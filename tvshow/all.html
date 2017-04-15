@@ -123,7 +123,54 @@ color: blue;
     color: green;
 }
 
-                  </style>
+
+.bottom {
+
+    position: relative;
+  margin-top: 20px;
+  width: 100%;
+  height: 6px;
+  background-color: #fdba2c;
+    opacity: 0;
+    transition-duration: 200ms;
+
+}
+    .bar {
+  content: "";
+  display: inline;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  left: 50%;
+  text-align: center;
+}
+.bar:nth-child(1) {
+  background-color: #da4733;
+  animation: loading 3s linear infinite;
+}
+.bar:nth-child(2) {
+  background-color: #3b78e7;
+  animation: loading 3s linear 1s infinite;
+}
+.bar:nth-child(3) {
+  background-color: #fdba2c;
+  animation: loading 3s linear 2s infinite;
+}
+
+      
+
+.episode-gradient {
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(5%,rgba(0,0,0,.8)),color-stop(95%,rgba(0,0,0,0)));
+    background-image: -webkit-linear-gradient(bottom,rgba(0,0,0,.8) 5%,rgba(0,0,0,0) 95%);
+    background-image: -moz-linear-gradient(bottom,rgba(0,0,0,.8) 5%,rgba(0,0,0,0) 95%);
+    background-image: -o-linear-gradient(bottom,rgba(0,0,0,.8) 5%,rgba(0,0,0,0) 95%);
+    background-image: linear-gradient(to top,rgba(0,0,0,.8) 5%,rgba(0,0,0,0) 95%);
+    height: 55px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+            </style>
 
  
 </head>
@@ -267,7 +314,7 @@ json = json.sort(function(a, b) {
 	template = ''
  for(i in json){
   
-  template = template + '<li class="initialized '+json[i].type+'" ><div class="piece fanart-container"><div class=image-crop><a href="player.html?'+json[i].href+'"><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" class"lazy" ></a><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class="secondary-link">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i class="visited fa fa-check" aria-hidden="true"></i></div></div>'
+  template = template + '<li class="initialized '+json[i].type+'" ><div class="piece fanart-container"><div class=image-crop><a href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" class"lazy" ></a><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class="secondary-link">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
       document.getElementById('carasoul').innerHTML = template;
  
 

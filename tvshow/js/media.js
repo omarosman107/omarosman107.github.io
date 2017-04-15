@@ -10,10 +10,18 @@ document.body.onunload = function(){alert('unloaded')
 window.onunload = function() {
   localStorage[window.location.search]  = jwplayer().getPosition()
 }
-function resume(){
-  jwplayer().on('time',function(e){
-document.getElementById('progressplayer').style.width = (e.position / e.duration *100) + "%"
-})
+
+function resumePlayback(state){
+        document.getElementsByClassName('resume')[0].style.display = 'none'
+
+      document.getElementsByClassName('resume')[0].style.opacity = 0
+if (state == false) {
+  return ;
+}
+
+
+  if(!localStorage[window.location.search] == '' || !localStorage[window.location.search] == 'undefined'){
+
 
                     if(localStorage[window.location.search]){
   jwplayer().seek(localStorage[window.location.search])
@@ -25,6 +33,30 @@ document.getElementById('progressplayer').style.width = (e.position / e.duration
     jwplayer().seek(currentPosition);   
   }
 
+  }
+
+ 
+
+}
+
+
+
+
+
+function resume(){
+  jwplayer().on('bufferChange',function(e){
+document.getElementById('progressplayer').style.width = (e.bufferPercent) + "%"
+})
+      document.getElementsByClassName('resume')[0].style.opacity = 0
+
+    if(!localStorage[window.location.search] == '' || !localStorage[window.location.search] == 'undefined'){
+
+  document.getElementsByClassName('resume')[0].style.opacity = 1
+  var date = new Date(localStorage[window.location.search] * 1000)
+  document.getElementById('timestamp').innerHTML = date.toISOString().substr(11, 8); 
+}else{
+
+}
 }
 
 
