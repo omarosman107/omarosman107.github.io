@@ -976,11 +976,14 @@ for (index = 0; index < allepisodes.length; ++index) {
 console.log(watched)
 console.log(total)
 document.getElementById('howmuch').innerHTML = "(" +total + ")"
+         document.title =  "(" + total +") " + document.title;
+
+return total
+
 console.log(watched / total *100)
 // document.getElementById('progress').style.width = watched / total * 100 + '%';
 total = 0
 watched = 0
-
 }
 
 function preLoad(url){
@@ -1081,6 +1084,7 @@ return ''
 }).then(function(response) {
   return response.json() 
 }).then(function(library){
+
    console.log(library)
    var perc = 0
    var ep = 0

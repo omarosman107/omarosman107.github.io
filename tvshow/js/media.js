@@ -40,10 +40,12 @@ if (state == false) {
 }
 
 
+function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
 
 
 
 function resume(){
+  jwplayer().pause()
   jwplayer().on('bufferChange',function(e){
 document.getElementById('progressplayer').style.width = (e.bufferPercent) + "%"
 })
@@ -53,7 +55,8 @@ document.getElementById('progressplayer').style.width = (e.bufferPercent) + "%"
 
   document.getElementsByClassName('resume')[0].style.opacity = 1
   var date = new Date(localStorage[window.location.search] * 1000)
-  document.getElementById('timestamp').innerHTML = date.toISOString().substr(11, 8); 
+  document.getElementById('timestamp').innerHTML = fmtMSS(localStorage[window.location.search]).split('.')[0] 
+
 }else{
 
 }
