@@ -1,6 +1,7 @@
 var x2js = new X2JS();
 jwplayer.defaults.preload = "auto"
 jwplayer.defaults.autostart = "true"
+document.getElementsByClassName("resume")[0].onclick = function(){(this.parentNode.removeChild(this))};
 
 document.body.onunload = function(){alert('unloaded')
   localStorage[window.location.search]  = jwplayer().getPosition()
@@ -16,9 +17,7 @@ function resumePlayback(state){
 
       document.getElementsByClassName('resume')[0].style.opacity = 0
 if (state == false) {
-  jwplayer().seek(0)
-    return ;
-
+  return ;
 }
 
 
@@ -26,7 +25,14 @@ if (state == false) {
 
 
                     if(localStorage[window.location.search]){
-  jwplayer().seek(localStorage[window.location.search])
+
+    jwplayer().on('firstFrame',function(e){
+      console.log(e)
+        jwplayer().seek(localStorage[window.location.search])
+
+})
+
+
 }
 
   console.log('Checking position cookie!');
