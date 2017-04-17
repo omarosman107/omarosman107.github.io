@@ -967,6 +967,20 @@ color: #08c908;
         a = 0.69
     return "rgba(" + [r, g, b, a].join(",") + ")";
 }
+
+function returntowatch(){   
+var total = 0;
+var watched = 0;
+var to_watch = 0;
+var allepisodes =  document.getElementsByClassName('piece')
+for (index = 0; index < allepisodes.length; ++index) {
+    watched += (allepisodes[index].getAttribute('data-new') *1);
+    total += (allepisodes[index].getAttribute('data-total') *1)
+    to_watch += (allepisodes[index].getAttribute('data-towatch') *1)
+}
+return to_watch
+}
+
 function prog(){
    
    var total = 0;
@@ -1039,6 +1053,9 @@ if ('addEventListener' in document) {
   fetchshows() 
 
   function mark(id,obj) {
+         document.title =  "(" + (returntowatch() - 1) +") " + "TVShow  Time++";
+   document.getElementById('howmuch').innerHTML = "(" +(returntowatch() - 1) + ")"
+
       document.getElementById('loadertop').classList.add("turn");
 
    (obj.parentNode.parentNode.getElementsByClassName('image-crop')[0].getElementsByClassName('progress-bar progress-bar-success uncomplete')[0].style.width =( obj.parentNode.parentNode.getAttribute('data-new') / obj.parentNode.parentNode.getAttribute('data-total') * 100) + '%')
