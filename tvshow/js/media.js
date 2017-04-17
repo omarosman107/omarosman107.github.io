@@ -16,7 +16,9 @@ function resumePlayback(state){
 
       document.getElementsByClassName('resume')[0].style.opacity = 0
 if (state == false) {
-  return ;
+  jwplayer().seek(0)
+    return ;
+
 }
 
 
