@@ -36,7 +36,11 @@ if (state == false) {
   }
 
  
+setInterval(function(){
+  localStorage[window.location.search]  = jwplayer().getPosition()
 
+}),
+2000
 }
 
 
