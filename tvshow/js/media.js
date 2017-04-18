@@ -3,7 +3,7 @@ jwplayer.defaults.preload = "auto"
 jwplayer.defaults.autostart = "true"
 document.getElementsByClassName("resume")[0].onclick = function(){(this.parentNode.removeChild(this))};
 
-document.body.onunload = function(){alert('unloaded')
+document.body.onunload = function(){
   localStorage[window.location.search]  = jwplayer().getPosition()
 
 };
@@ -21,31 +21,29 @@ if (state == false) {
 }
 
 
-  if(!localStorage[window.location.search] == '' || !localStorage[window.location.search] == 'undefined'){
 
 
                     if(localStorage[window.location.search]){
 
-    jwplayer().on('firstFrame',function(e){
-      console.log(e)
+
         jwplayer().seek(localStorage[window.location.search])
 
-})
+
 
 
 }
 
-  console.log('Checking position cookie!');
-  console.log(Math.abs(jwplayer().getDuration() - currentPosition));
-  if (currentPosition > 0 && Math.abs(jwplayer().getDuration() - currentPosition) > 5) {
-    jwplayer().seek(currentPosition);    
-  }
 
-  }
+  
 
  
 setInterval(function(){
   localStorage[window.location.search]  = jwplayer().getPosition()
+  localStorage[window.location.search + '_perc']  = jwplayer().getPosition() / jwplayer().getDuration() * 100;
+  if (jwplayer().getPosition() == jwplayer().getDuration()) {
+    localStorage[window.location.search + '_perc']  = 0;
+  }
+
 
 }),
 2000
