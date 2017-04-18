@@ -249,7 +249,7 @@ for(channelName in channels){
     isworking = (nworking)
 }
   vidurl = ('urls/dynplayer.html?json=') + encodeURIComponent('{"title":"'+cname +'","play":"' + channels[channelName].src + '"}')
-   template += '<th scope=row><a href="'+vidurl+'">'+ cname+'</a></th><td>' + qual +'</td><td>'+ isworking + "<i class='material-icons'>check_circle</i><td><a class='btn btn-success' href='"+vidurl+"' aria-label=Delete><i class='material-icons'>play_circle_filled</i></tr></a>";
+   template += '<tr><th scope=row><a href="'+vidurl+'">'+ cname+'</a></th><td>' + qual +'</td><td>'+ isworking + "<i class='material-icons'>check_circle</i><td><a class='btn btn-success' href='"+vidurl+"' aria-label=Delete><i class='material-icons'>play_circle_filled</i></tr></a>";
 
 }
   console.log(template)
