@@ -64,7 +64,6 @@ document.getElementById('progressplayer').style.width = (e.bufferPercent) + "%"
     if(!localStorage[window.location.search] == '' || !localStorage[window.location.search] == 'undefined'){
 
   document.getElementsByClassName('resume')[0].style.opacity = 1
-  var date = new Date(localStorage[window.location.search] * 1000)
   document.getElementById('timestamp').innerHTML = fmtMSS(localStorage[window.location.search]).split('.')[0] 
 
 }else{
