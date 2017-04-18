@@ -38,7 +38,7 @@ if (state == false) {
   console.log('Checking position cookie!');
   console.log(Math.abs(jwplayer().getDuration() - currentPosition));
   if (currentPosition > 0 && Math.abs(jwplayer().getDuration() - currentPosition) > 5) {
-    jwplayer().seek(currentPosition);   
+    jwplayer().seek(currentPosition);    
   }
 
   }
