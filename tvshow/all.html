@@ -332,14 +332,16 @@ json = json.sort(function(a, b) {
 })
 	template = ''
  for(i in json){
-  var perc = '0';
-  if(localStorage["?"+json[i].href]){
+  var perc = 0;
+  if(localStorage["?"+json[i].href] == '0'){
     console.log(localStorage["?" + json[i].href + "_perc"])
     perc = localStorage["?" + json[i].href + "_perc"]
+if(perc == "NaN"){
+  console.log('NaN')
+  perc = 0
+}
   }
-  if(perc == undefined){
-    perc = 0}
-  template = template + '<li class="initialized '+json[i].type+'" ><div class="piece fanart-container"><div class=image-crop><a href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style="/* display: none; */height: 4px;position: relative;/* bottom: 0px; */"><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class="secondary-link">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
+  template = template + '<li class="initialized '+json[i].type+'" ><div class="piece fanart-container"><div class=image-crop><a href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style="    height: 0.5vh;"><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2><a href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class="secondary-link">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
       document.getElementById('carasoul').innerHTML = template;
  
 
@@ -445,7 +447,6 @@ document.getElementById('cw').style.display = "none"
    template = ''
    var end = new Date()
 
-   console.log(end.getTime() - start.getTime())
 
 
 }).catch(function(err) {
@@ -469,7 +470,6 @@ fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=js
 }).then(function(response) {
 	return response.json();
 }).then(function(data){
-	console.log(data)
 for(i in data.entries){
 var date = new Date(data.entries[i].media$availableDate)
 var image = data.entries[i].media$thumbnails[5].plfile$url
@@ -477,11 +477,9 @@ if (image.includes('http://')) {
 	image = image.replace('http','https')
 } 
 
-console.log(parseInt(data.entries[i].media$availableDate))
 var date = new Date(parseInt(data.entries[i].media$availableDate))
 date.setDate(date.getDate() - 1)
 
-console.log(date.getTime())
 
   obj.push({img:image,
   	rating:rating(data.entries[i].media$ratings[0].rating),
