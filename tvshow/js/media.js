@@ -34,9 +34,19 @@ if (state == false) {
 }
 
 
-  
+
 
  
+
+}
+
+
+function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
+
+
+function resume(){
+    jwplayer().on('firstFrame',function(e){
+console.log(e)
 setInterval(function(){
   localStorage[window.location.search]  = jwplayer().getPosition()
   localStorage[window.location.search + '_perc']  = jwplayer().getPosition() / jwplayer().getDuration() * 100;
@@ -45,18 +55,14 @@ setInterval(function(){
   }
 
 
-}),
-2000
-}
+},
+2000)
 
-
-function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
-
-
-
-function resume(){
+})
   jwplayer().pause()
   jwplayer().on('bufferChange',function(e){
+
+
 document.getElementById('progressplayer').style.width = (e.bufferPercent) + "%"
 })
       document.getElementsByClassName('resume')[0].style.opacity = 0

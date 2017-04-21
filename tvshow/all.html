@@ -333,11 +333,15 @@ json = json.sort(function(a, b) {
 	template = ''
  for(i in json){
   var perc = 0;
-  if(localStorage["?"+json[i].href] == '0'){
+  if(localStorage["?"+json[i].href] ){
     console.log(localStorage["?" + json[i].href + "_perc"])
     perc = localStorage["?" + json[i].href + "_perc"]
 if(perc == "NaN"){
   console.log('NaN')
+  perc = 0
+}
+if(perc == undefined){
+  console.log('non existent')
   perc = 0
 }
   }
