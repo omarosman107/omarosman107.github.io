@@ -1155,7 +1155,7 @@ console.log(err)
 
   function fetchshows() {
      var tempel = ""
-
+ 
    document.getElementById('loadertop').classList.add("turn");
  //  document.getElementById('loader').style.display = "block"
     progress();
@@ -1163,7 +1163,6 @@ console.log(err)
      fetch('https://api.tvshowtime.com/v1/to_watch?access_token=' + accesstoken).then(function(response) {
         return response.json();
      }).then(function(json) {
-      document.getElementById('howmuch').innerHTML = "(" + json.episodes.length +")";
         finishjson = json
         for (var i = 0; i < json.episodes.length; i++) {
            function newBanner() {
@@ -1191,9 +1190,10 @@ var htmlCode = '<li data-total="'+finishjson.episodes[i].show.aired_episodes+'" 
             tempel +=  htmlCode;
 
         }
+             console.log(div.innerHTML == tempel)
+
                 div.innerHTML = tempel
 
-     console.log(div.innerHTML == tempel)
         document.getElementById('tablediv').style.opacity = "1"
 
            document.getElementById('loader').style.display = "none"

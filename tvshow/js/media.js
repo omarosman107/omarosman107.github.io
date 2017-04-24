@@ -949,6 +949,8 @@ function fetchlplatjson(value){
 
       showdesc.innerHTML = data.description
       })
+                document.getElementById('downloader').href =  value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect"
+
                   jwplayer("myElement1").setup({
   "playlist": [
     {
