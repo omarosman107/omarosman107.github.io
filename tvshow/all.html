@@ -210,7 +210,7 @@ color: blue;
 <p>Made By <a href="https://twitter.com/itsMangoPlays">@itsMangoPlays </a></p>
   <h1 style="text-align:center;font-size:xx-large">FOX,CW  Episodes</h1>
 
-  <input type="text" name="" class="search" placeholder="Search" id="search" oninput="search(this.value)">
+  <input type="text" name="" class="search" placeholder="Search" id="search" oninput="query(this.value)">
 
 <div class="loaderHolder">
   <div id="fox" class="showbox">
@@ -251,9 +251,26 @@ function addJS(url) {
    fs.parentNode.insertBefore(s, fs);
 };
 
+function query(q){
+  console.log(q);
+  for (var i = document.getElementsByClassName('initialized').length - 1; i >= 0; i--) {
+    if( document.getElementsByClassName('initialized')[i].getAttribute('data-query').includes(q.toLowerCase())){
+console.log(    document.getElementsByClassName('initialized')[i].getAttribute('data-query'))
+      document.getElementsByClassName('initialized')[i].style.display = "inline-block"
+
+    }else{
+      document.getElementsByClassName('initialized')[i].style.display = "none"
+    }
+  }
+  lazyLoadImages();
+
+}
+
+
 
 
 function search(val){
+
 function filter(a)
 {
     var match = []
@@ -361,7 +378,15 @@ if(perc == undefined){
   perc = 0
 }
   }
-  template = template + '<li class="initialized '+json[i].type+'" ><div class="piece fanart-container"><div class=image-crop><a href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
+  console.log((perc))
+  function showCheck(){
+if(parseInt(perc) == 100){
+return 1;
+ }
+return 0;
+  }
+  var query = (json[i].show+" "+json[i].episode).toLowerCase();
+  template = template + '<li class="initialized '+json[i].type+'" data-query="'+query +'"><div class="piece fanart-container"><div class=image-crop><a href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
  
 
  }
@@ -439,20 +464,7 @@ epinum = data.videos[i].availability_asset_id.split('-')[data.videos[i].availabi
 console.log(e)
 }
 
-  var perc = 0;
-var link = "?" + data.videos[i].share_url
-  if(localStorage[link] ){
-    console.log(localStorage["?" + link + "_perc"])
-    perc = localStorage["?" + link + "_perc"]
-if(perc == "NaN"){
-  console.log('NaN')
-  perc = 0
-}
-if(perc == undefined){
-  console.log('non existent')
-  perc = 0
-}
-  }
+
 
   obj.push({img:data.videos[i].large_thumbnail,
   	rating:(data.videos[i].rating),
@@ -460,7 +472,6 @@ if(perc == undefined){
   	airdate:data.videos[i].airdate,
   	show:data.videos[i].series_name,
   	episode:data.videos[i].title,
-    percentage:perc,
   	epiformat:epinum,
   	length:data.videos[i].duration,
   	metadata:data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration,
@@ -511,23 +522,8 @@ if (image.includes('http://')) {
 	image = image.replace('http','https')
 } 
 
-var date = new Date(parseInt(data.entries[i].media$availableDate))
-date.setDate(date.getDate() - 1)
 
-  var perc = 0;
-var link = "?" + data.entries[i].media$content[0].plfile$url
-  if(localStorage[link] ){
-    console.log(localStorage["?" + link + "_perc"])
-    perc = localStorage["?" + link + "_perc"]
-if(perc == "NaN"){
-  console.log('NaN')
-  perc = 0
-}
-if(perc == undefined){
-  console.log('non existent')
-  perc = 0
-}
-  }
+  
      
 
 
@@ -537,7 +533,6 @@ if(perc == undefined){
   	airdate:formatDate(date.getTime()),
   	show:data.entries[i].fox$series,
   	episode:data.entries[i].title,
-    percentage:perc,
   	epiformat:epiformat(data.entries[i].fox$season,data.entries[i].fox$episode),
   	length:fmtMSS(data.entries[i].media$content[0].plfile$duration),
   	metadata:rating(data.entries[i].media$ratings[0].rating) + formatDate(data.entries[i].media$availableDate) + data.entries[i].fox$series + data.entries[i].title + epiformat(data.entries[i].fox$season,data.entries[i].fox$episode) + fmtMSS(data.entries[i].media$content[0].plfile$duration),

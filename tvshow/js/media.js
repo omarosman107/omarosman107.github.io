@@ -25,6 +25,9 @@ if (state == false) {
 
                     if(localStorage[window.location.search]){
 
+                    if(parseInt(localStorage[window.location.search + "_perc" == 100])){
+console.log('finished')
+                    }
 
         jwplayer().seek(localStorage[window.location.search])
 
@@ -47,6 +50,7 @@ function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
 function resume(){
     jwplayer().on('firstFrame',function(e){
 console.log(e)
+
 setInterval(function(){
   localStorage[window.location.search]  = jwplayer().getPosition()
   localStorage[window.location.search + '_perc']  = jwplayer().getPosition() / jwplayer().getDuration() * 100;
