@@ -66,7 +66,7 @@ html {
     font-size: 10px
 }
 body {
-    color: #333
+    color: white;
 }
 a {
     text-decoration: none
@@ -250,8 +250,7 @@ a {
     overflow: hidden
 }
 .fanarts-list>li .fanart-container {
-    background-color: #fbfbfb;
-    border: 1px solid #eee;
+    background-color: #1a1a1a;
     padding: 0;
     overflow: hidden;
     position: relative
