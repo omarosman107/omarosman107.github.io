@@ -578,7 +578,7 @@ return 0;
 if (document.getElementsByClassName(json[i].href).length == 0) {
 console.log('worked')
 
-    document.getElementById('watching').innerHTML += '<div class="wtc '+json[i].href+'"><a href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><br> <span>'+json[i].show+'</span></a></div>'
+    document.getElementById('watching').innerHTML += '<div class="wtc '+json[i].href+'"><a href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div></div><br> <span>'+json[i].show+'</span></a></div>'
 }
 
 
