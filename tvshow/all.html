@@ -381,9 +381,14 @@ function addJS(url) {
    fs.parentNode.insertBefore(s, fs);
 };
 
-function query(q){
+function query(q,obj){
+    if (q == null) {
+   q = obj.getAttribute('show')
+  }
+
   document.getElementById('search').value = q
   console.log(q);
+
   var num = 0
   for (var i = document.getElementsByClassName('initialized').length - 1; i >= 0; i--) {
     if( document.getElementsByClassName('initialized')[i].getAttribute('data-query').includes(q.toLowerCase())){
@@ -420,7 +425,7 @@ var showname = "'" + dat.results[0].name + "'"
 var s = "onclick='query('" + showname + "')'"
 console.log("https://image.tmdb.org/t/p/w400" + dat.results[0].backdrop_path)
 console.log(dat.results[0].name)
-document.getElementById('tvShows').innerHTML += '<div class="tvshow"><a href="javascript:" onclick="query('+showname+')"><img width="100%" src="https://image.tmdb.org/t/p/w500'+dat.results[0].backdrop_path+'"> <span>'+dat.results[0].name+'</span></a></div>'
+document.getElementById('tvShows').innerHTML += '<div class="tvshow"><a href="javascript:" show="' + showName +'" onclick="query(null,this)" ><img width="100%" src="https://image.tmdb.org/t/p/w500'+dat.results[0].backdrop_path+'"><br> <span>'+dat.results[0].name+'</span></a></div>'
 
 
 
