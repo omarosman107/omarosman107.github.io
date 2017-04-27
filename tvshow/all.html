@@ -286,12 +286,20 @@ width: 650px;
   }
 
 }
+
 .tvshow{
       display: inline-block;
       text-align: center;
       margin: 12px;
-      width: 175px;
+      width: 250px;
 }
+@media (max-width: 500px ) {
+
+.tvshow{
+  width: 175px;
+}
+}
+
 .shows{
   overflow: scroll;
       white-space: nowrap;
@@ -324,7 +332,6 @@ width: 650px;
 <h1>CONTINUE WATCHING</h1>
 
 <div class="shows" id="watching">
-  
 
 </div>
 <h1>SHOWS</h1>
@@ -551,7 +558,12 @@ return 0;
   }
   if (!perc == 0 ) {
     console.log('watching this episode!')
-    document.getElementById('watching').innerHTML += '<div class="tvshow"><a href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><br> <span>'+json[i].show+'</span></a></div>'
+if (document.getElementsByClassName(json[i].href).length == 0) {
+console.log('worked')
+
+    document.getElementById('watching').innerHTML += '<div class="tvshow '+json[i].href+'"><a href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><br> <span>'+json[i].show+'</span></a></div>'
+}
+
 
 
   }
