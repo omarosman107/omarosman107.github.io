@@ -3,14 +3,6 @@ jwplayer.defaults.preload = "auto"
 jwplayer.defaults.autostart = "true"
 document.getElementsByClassName("resume")[0].onclick = function(){(this.parentNode.removeChild(this))};
 
-document.body.onunload = function(){
-  localStorage[window.location.search]  = jwplayer().getPosition()
-
-};
-
-window.onunload = function() {
-  localStorage[window.location.search]  = jwplayer().getPosition()
-}
 
 function resumePlayback(state){
         document.getElementsByClassName('resume')[0].style.display = 'none'
@@ -61,6 +53,15 @@ setInterval(function(){
 
 },
 2000)
+document.body.onunload = function(){
+  localStorage[window.location.search]  = jwplayer().getPosition()
+
+};
+
+window.onunload = function() {
+  localStorage[window.location.search]  = jwplayer().getPosition()
+}
+
 
 resumePlayback()
         document.getElementsByClassName('resume')[0].style.display = 'none'
