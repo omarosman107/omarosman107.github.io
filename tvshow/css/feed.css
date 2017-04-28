@@ -246,7 +246,6 @@ a {
 .fanarts-list>li {
     padding: 0;
     margin: 12px;
-    left: -40px;
     position: relative;
     vertical-align: top;
     overflow: hidden
