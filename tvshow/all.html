@@ -113,6 +113,11 @@ width: 100%;
 max-width: 100%;
 box-shadow: 0px 0px 0px 0 rgba(107,107,107,.15)
   }
+  #carasoul {
+    margin: auto;
+    width: 100%;
+    padding-left: 0px;
+}
 
   .fanarts-list>li .fanart-container {
      border: 0px
@@ -121,8 +126,8 @@ box-shadow: 0px 0px 0px 0 rgba(107,107,107,.15)
 
 .fanarts-list>li {
 	    margin:0px;
-    left: -40px;
     margin-top: 12px;
+        margin-bottom: 30px;
 
 }
 
@@ -346,7 +351,13 @@ h1, h2 {
   border: 1px;
   border-style: solid;
 }
+body{
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
+}
             </style>
 
 
@@ -436,7 +447,8 @@ function addJS(url) {
 function query(q,obj){
     if (q == null) {
    q = obj.getAttribute('show')
-  }
+//   document.body.style.background = 'url(' + obj.getAttribute('bg') + ") no-repeat center center fixed";
+  };
 
   document.getElementById('search').value = q
   console.log(q);
@@ -474,7 +486,7 @@ if (showName in tvobj) {
 }).then(function(dat){
 var showname = "'" + dat.results[0].name + "'"
 var s = "onclick='query('" + showname + "')'"
-document.getElementById('tvShows').innerHTML += '<div class="tvshow"><a href="javascript:" show="' + showName +'" onclick="query(null,this)" ><img width="100%" src="https://image.tmdb.org/t/p/w500'+dat.results[0].poster_path+'"><br></a></div>'
+document.getElementById('tvShows').innerHTML += '<div class="tvshow"><a href="javascript:" bg="https://image.tmdb.org/t/p/w1000'+dat.results[0].backdrop_path +'" show="' + showName +'" onclick="query(null,this)" ><img width="100%" src="https://image.tmdb.org/t/p/w500'+dat.results[0].poster_path+'"><br></a></div>'
 
 
 
@@ -730,7 +742,7 @@ console.log(err.message)
 
 
 function fox(range){
-fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}&range=0-50', {
+fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}&range=0-100', {
 	method: 'get',
   cache: "no-store"
 }).then(function(response) {
