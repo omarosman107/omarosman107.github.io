@@ -46,6 +46,8 @@ var diziayactive = false
 var cwurl
 
 var sitefunctions = {
+  "asdir=":"fetchaswimjson(url)",
+
 "cwtv.com":"fetchcwjson(url)",
 "diziay.com":"fetchdiziayjson(url)",
 "adultswim.com":"fetchaswimjson(url)",

@@ -628,6 +628,63 @@ resume()
 }
 // AdultSwim
 function fetchaswimjson(value) {
+  if (value.includes('asdir=')) {
+value = value.split('asdir=')[1]
+
+
+
+fetch('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D"http%3A%2F%2Fwww.adultswim.com%2Fvideos%2Fapi%2Fv2%2Fvideos%2F' + value + '%3Ffields%3Dtitle%252Ctype%252Cduration%252Ccollection_title%252Cimages%252Cstream%252Csegments%252Ctitle_id%26iframe%3Dfalse"%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=').then(function(response) {
+                  return response.json();
+               }).then(function(returnedValue) {
+                  document.getElementById('progress').style.width = "75%"
+                  showname.innerHTML = returnedValue.query.results.json.data.collection_title + "- " + returnedValue.query.results.json.data.title
+                                                                        document.title = returnedValue.query.results.json.data.collection_title + "- " + returnedValue.query.results.json.data.title;
+
+              //    showdesc.innerHTML = returnedValue.query.results.video.description
+                                  console.log(returnedValue.query.results.json.data.stream.assets)
+
+
+for (var i = 0; i < returnedValue.query.results.json.data.stream.assets.length; i++) {
+  console.log(returnedValue.query.results.json.data.stream.assets[i]);
+
+if (returnedValue.query.results.json.data.stream.assets[i].mime_type == "application/x-mpegURL") {
+  console.log(returnedValue.query.results.json.data.stream.assets[i].url)
+  videofile = returnedValue.query.results.json.data.stream.assets[i].url
+                             document.getElementById('downloader').href = videofile
+
+                                                         jwplayer("myElement1").setup({
+                                                                  cast:{},
+                                                                  file:videofile,
+ width: "100%",
+  aspectratio: "16:9",
+ autostart: true
+});
+  resume()
+                                 document.getElementById('downloader').href = videofile
+
+                        
+                        document.getElementById('progress').style.width = "100%"
+      $('#projpar').hide()
+
+
+return ; 
+
+}
+}
+
+
+                  // ...
+               })
+
+
+
+
+
+
+
+
+return ; 
+  }
    console.log(value)
    fetch("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%27" + value + '%27%20and%20compat%3D"html5"%20and%20xpath%3D"%2F%2Fscript"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=', {
       method: 'get'

@@ -847,8 +847,79 @@ addJS('https://api.watchabc.go.com/vp2/ws/s/contents/2020/videos/jsonp/001/001/-
 
 // addJS('https://api.watchabc.go.com/vp2/ws/s/contents/2020/shows/jsonp/001/001/-1?callback=useABC')
 
+function fancyTimeFormat(time)
+{   
+    // Hours, minutes and seconds
+    var hrs = ~~(time / 3600);
+    var mins = ~~((time % 3600) / 60);
+    var secs = time % 60;
+
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    var ret = "";
+
+    if (hrs > 0) {
+        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
+}
 
 
+
+
+
+fetch(proxy + 'http://www.adultswim.com/videos/api/v2/videos?fields=title,season_number,collection_title,episode_number,episode,auth,duration,tv_rating,launch_date,type,images,episode,images,title&limit=80&offset=0&sortByDate=DESC&filterByEpisodeType=EPI,TVE&filterByAuthType=true&filterByPlatform=mobile&q=type:episode', {
+    method: 'get',
+    cache: "no-store"
+}).then(function(response) {
+    return response.json(); 
+}).then(function(data){
+var start = new Date()
+
+ for(i in data.data){
+     function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000 * 60);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes;
+}
+
+var epinum 
+try{
+epinum = "S" +data.data[i].season_number +"E" +data.data[i].episode_number
+
+}catch(e){
+console.log(e)
+}
+
+
+
+  obj.push({img:data.data[i].images[0].url,
+    rating:(data.data[i].tv_rating),
+    href: "asdir=" +data.data[i].id,
+    airdate:data.data[i].launch_date,
+    show:data.data[i].collection_title,
+    episode:data.data[i].title,
+    epiformat:epinum,
+    length:fancyTimeFormat(data.data[i].duration),
+    metadata:data.data[i].tv_rating + data.data[i].launch_date + data.data[i].collection_title + data.data[i].title + epinum + data.data[i].duration,
+    type:"adultswim"
+  })
+
+ 
+   }
+      loadMedia(obj)
+      lazyLoadImages();
+
+   template = ''
+   var end = new Date()
+
+
+
+}).catch(function(err) {
+console.log(err.message)
+});
 
 
 
