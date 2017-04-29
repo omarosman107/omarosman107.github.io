@@ -171,9 +171,40 @@ document.getElementById('error').innerHTML = e
 
 
 
+var request = new Request('https://live-fx.mdialog.com/video_assets/fx-east/streams', {
+  method: 'POST', 
+  body: 'application_key=c853b33d85dedff637117a688dce70e3&api_key=54c0353d2f6bc7f465336f76fe579179&sdk_version=5.7.3',
+  headers: new Headers({
+    'Content-Type': 'application/x-www-form-urlencoded'
+  })
+});
+
+// Now use it!
+fetch(request).then(function(response) { 
+return (response.json())
+
+}).then(function(data){
+  console.log(data)
+   channels['FX'].src = (data.manifest.href)
+   channels['FX'].working = true
+   channels['FX'].quality = "HD"
+ converttoHTML()
+
+
+});
+
+
+
+
+
 
 
 var channels = {
+  "FX":{
+  "working":true,
+  "src":"",
+  "quality":"HD"
+},
 "CBSN":{
   "working":true,
   "src":"http://cbsnews-linear.mdialog.com/video_assets/cbsnews.m3u8?api_key=563b80c1ae4ce359830f572d2496a947",
