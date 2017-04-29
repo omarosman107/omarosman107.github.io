@@ -478,15 +478,15 @@ if (showName in tvobj) {
   return ;
 }
   tvobj[(showName)] = ''
-  fetch('https://api.themoviedb.org/3/search/tv?api_key=84ade81a32ab2ef4395fd367ad4ea5be&query=' + showName, {
+  fetch('http://www.omdbapi.com/?t=' + showName, {
     method: 'get',
     cache: "no-store"
 }).then(function(response) {
   return response.json();
 }).then(function(dat){
-var showname = "'" + dat.results[0].name + "'"
+var showname = "'" + dat.Title.name + "'"
 var s = "onclick='query('" + showname + "')'"
-document.getElementById('tvShows').innerHTML += '<div class="tvshow"><a href="javascript:" bg="https://image.tmdb.org/t/p/w1000'+dat.results[0].backdrop_path +'" show="' + showName +'" onclick="query(null,this)" ><img width="100%" src="https://image.tmdb.org/t/p/w500'+dat.results[0].poster_path+'"><br></a></div>'
+document.getElementById('tvShows').innerHTML += '<div class="tvshow"><a href="javascript:" bg="https://image.tmdb.org/t/p/w1000'+dat.Poster +'" show="' + showName +'" onclick="query(null,this)" ><img width="100%" src="'+dat.Poster+'"><br></a></div>'
 
 
 
@@ -852,7 +852,7 @@ function fancyTimeFormat(time)
     // Hours, minutes and seconds
     var hrs = ~~(time / 3600);
     var mins = ~~((time % 3600) / 60);
-    var secs = time % 60;
+    var secs = Math.floor(time % 60);
 
     // Output like "1:01" or "4:03:59" or "123:03:59"
     var ret = "";
@@ -890,7 +890,7 @@ try{
 epinum = "S" +data.data[i].season_number +"E" +data.data[i].episode_number
 
 }catch(e){
-console.log(e)
+console.log(e) 
 }
 
 
@@ -898,7 +898,7 @@ console.log(e)
   obj.push({img:data.data[i].images[0].url,
     rating:(data.data[i].tv_rating),
     href: "asdir=" +data.data[i].id,
-    airdate:data.data[i].launch_date,
+    airdate:formatDate(data.data[i].launch_date),
     show:data.data[i].collection_title,
     episode:data.data[i].title,
     epiformat:epinum,
