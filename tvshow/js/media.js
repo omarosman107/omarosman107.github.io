@@ -160,6 +160,7 @@ function fetchcwjson(value) {
          "src": finalurl 
       }); */
       jwplayer("myElement1").setup({
+        cast:{},
   file: finalurl,
   width: "100%",
   aspectratio: "16:9",
@@ -201,6 +202,8 @@ brand = "009"
                console.log(videourl)
 
                      jwplayer("myElement1").setup({
+                              cast:{},
+
   file: videourl,
   width: "100%",
   aspectratio: "16:9",
@@ -273,6 +276,8 @@ function fetchfoxjson(value) {
 
 
                   jwplayer("myElement1").setup({
+                            cast:{},
+
   "playlist": [
     {
       "sources": [
@@ -324,6 +329,8 @@ resume()
                document.getElementById('downloader').href = mediaurl.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false"
 
                   jwplayer("myElement1").setup({
+                            cast:{},
+
   "playlist": [
     {
       "sources": [
@@ -380,6 +387,8 @@ function fetchcbsjson(value) {
       document.getElementById('downloader').href = videourl
 
                               jwplayer("myElement1").setup({
+                                        cast:{},
+
   "playlist": [
     {
       "sources": [
@@ -459,6 +468,8 @@ function fetchnickjson(value) {
 
 
                         jwplayer("myElement1").setup({
+                                  cast:{},
+
 playlist: playlist
 
 });
@@ -525,6 +536,8 @@ var newItem = {
 
 
                 jwplayer("myElement1").setup({
+                          cast:{},
+
 playlist: playlist
 
 });
@@ -585,6 +598,8 @@ function fetchnbcjson(value) {
             console.log(videofile)
             document.getElementById('downloader').href = videofile
          jwplayer("myElement1").setup({
+                  cast:{},
+
   "playlist": [
     {
       "sources": [
@@ -626,36 +641,46 @@ function fetchaswimjson(value) {
             if (script.includes('_AS_INITIAL_DATA')) {
                eval(final.query.results.script[i])
                console.log(__AS_INITIAL_DATA__.show.sluggedVideo.id)
-               fetch("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D%27https%3A%2F%2Fwww.adultswim.com%2Fvideos%2Fapi%2Fv0%2Fassets%3Fplatform%3Ddesktop%26id%3D" + __AS_INITIAL_DATA__.show.sluggedVideo.id + '%27%20%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=').then(function(response) {
+               fetch('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D"http%3A%2F%2Fwww.adultswim.com%2Fvideos%2Fapi%2Fv2%2Fvideos%2F' + __AS_INITIAL_DATA__.show.sluggedVideo.id + '%3Ffields%3Dtitle%252Ctype%252Cduration%252Ccollection_title%252Cimages%252Cstream%252Csegments%252Ctitle_id%26iframe%3Dfalse"%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=').then(function(response) {
                   return response.json();
                }).then(function(returnedValue) {
                   document.getElementById('progress').style.width = "75%"
-                  showname.innerHTML = returnedValue.query.results.video.franchise + "- " + returnedValue.query.results.video.title
-                                                                        document.title = returnedValue.query.results.video.franchise + "- " + returnedValue.query.results.video.title
+                  showname.innerHTML = returnedValue.query.results.json.data.collection_title + "- " + returnedValue.query.results.json.data.title
+                                                                        document.title = returnedValue.query.results.json.data.collection_title + "- " + returnedValue.query.results.json.data.title;
 
-                  showdesc.innerHTML = returnedValue.query.results.video.description
-                  for (var i = returnedValue.query.results.video.files.file.length; i >= 0; i--) {
-                     if (returnedValue.query.results.video.files.file[i - 1].content.includes("m3u8")) {
-                        if (returnedValue.query.results.video.files.file[i - 1].type == "hd") {
-                           var videofile = returnedValue.query.results.video.files.file[i - 1].content
-                           document.getElementById('downloader').href = videofile
+              //    showdesc.innerHTML = returnedValue.query.results.video.description
+                                  console.log(returnedValue.query.results.json.data.stream.assets)
+
+
+for (var i = 0; i < returnedValue.query.results.json.data.stream.assets.length; i++) {
+  console.log(returnedValue.query.results.json.data.stream.assets[i]);
+
+if (returnedValue.query.results.json.data.stream.assets[i].mime_type == "application/x-mpegURL") {
+  console.log(returnedValue.query.results.json.data.stream.assets[i].url)
+  videofile = returnedValue.query.results.json.data.stream.assets[i].url
+                             document.getElementById('downloader').href = videofile
 
                                                          jwplayer("myElement1").setup({
-  file: videofile,
-  width: "100%",
+                                                                  cast:{},
+                                                                  file:videofile,
+ width: "100%",
   aspectratio: "16:9",
  autostart: true
 });
   resume()
                                  document.getElementById('downloader').href = videofile
 
-                        }
+                        
                         document.getElementById('progress').style.width = "100%"
       $('#projpar').hide()
-                                                  isDone = true
 
-                     }
-                  }
+
+return ; 
+
+}
+}
+
+
                   // ...
                })
             }
@@ -680,6 +705,8 @@ function fetchamcjson(value) {
 
  
                                        jwplayer("myElement1").setup({
+                                                cast:{},
+
   "playlist": [
     {
       "sources": [
@@ -747,6 +774,8 @@ for (var i = ajaxinfo.success.length - 1; i >= 0; i--) {
 }
 console.log(obj)
                         jwplayer("myElement1").setup({
+                                  cast:{},
+
   sources: obj
 });
                         resume()
@@ -802,6 +831,8 @@ $.ajax("https://cors-anywhere.herokuapp.com/http://www.cartoonnetwork.com/cntv/m
      success: function(result){
         console.log(result.querySelector('token').innerHTML);
                               jwplayer("myElement1").setup({
+                                        cast:{},
+
   file: 'http://androidhls-secure.cdn.turner.com/toon/big' + tohtml(apidat,'xml').querySelector('file[bitrate="androidphone"]').innerHTML +'?hdnea=' +result.querySelector('token').innerHTML,
   width: "100%",
   aspectratio: "16:9",
@@ -867,6 +898,8 @@ function fetchfxjson(value) {
 
 
                   jwplayer("myElement1").setup({
+                            cast:{},
+
   "playlist": [
     {
       "sources": [
@@ -909,6 +942,8 @@ console.log(final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].spl
                document.getElementById('downloader').href = final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
 
                   jwplayer("myElement1").setup({
+                            cast:{},
+
   "playlist": [
     {
       "sources": [
@@ -957,6 +992,8 @@ function fetchlplatjson(value){
                 document.getElementById('downloader').href =  value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect"
 
                   jwplayer("myElement1").setup({
+                            cast:{},
+
   "playlist": [
     {
       "sources": [
