@@ -351,13 +351,26 @@ h1, h2 {
   border: 1px;
   border-style: solid;
 }
+.tvshow:active{
+  border: 1px;
+  border-style: solid;
+}
 body{
     -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+color:white !important;
+background-color: #141414 !important;
 
 }
+
+.list-inline>li {
+    display: inline-block;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
             </style>
 
 
@@ -414,10 +427,31 @@ body{
    <ul id="carasoul" class="fanarts-list list-unstyled list-inline">
 </ul>
    </div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div id="vplayer" class="modal-body">
 
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
    <script type="text/javascript" src="js/fetch.min.js"></script>
 
- 
+
+ <!-- <link async rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<-->
 <script>
 
 function results(num){
@@ -571,7 +605,7 @@ if (rate.includes('tv-14')) {
 
 }
 var myLazyLoad = new LazyLoad({
-    threshold: 500,
+    threshold: 500, 
     });
 
 
@@ -579,7 +613,41 @@ function lazyLoadImages() {
 myLazyLoad.update()
 }
 
+function loadPlayer(url){
+  console.log(url)
+  link = url.href
+  window.location = url.href;
+  return ; 
+$("#myModal").modal()
 
+if (link.includes('cwtv')) {
+
+  // url (required), options (optional)
+fetch('http://metaframe.digitalsmiths.tv/v2/CWtv/assets/'+link.split('=')[1]+'/partner/206?format=json', {
+  method: 'get'
+}).then(function(response) {
+  return response.json();
+}).then(function(data){
+  url = data.videos.variantplaylist.uri
+ jwplayer("vplayer").setup({
+      file:url,
+ });
+
+
+}).catch(function(err) {
+alert('something bad happened :(')});
+}
+if (link.includes('theplatform')) {
+  console.log(link.split('?')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false")
+ jwplayer("vplayer").setup({
+      file:link.split('?')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
+      type: "hls"
+ });
+
+
+}
+  return false;
+}
 
 
 function loadMedia(json){
@@ -612,7 +680,7 @@ return 0;
 if (document.getElementsByClassName(json[i].href).length == 0) {
 console.log('worked')
 
-    document.getElementById('watching').innerHTML += '<div class="wtc '+json[i].href+'"><a href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><br> <span>'+json[i].show+'</span></a></div>'
+    document.getElementById('watching').innerHTML += '<div class="wtc '+json[i].href+'"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><br> <span>'+json[i].show+'</span></a></div>'
 }
 
 
@@ -620,7 +688,7 @@ console.log('worked')
   }
   tvlist(json[i].show)
   var query = (json[i].metadata+" "+json[i].episode).toLowerCase();
-  template = template + '<li class="initialized '+json[i].type+'" data-query="'+query +'"><div class="piece fanart-container"><div class=image-crop><a href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
+  template = template + '<li class="initialized '+json[i].type+'" data-query="'+query +'"><div class="piece fanart-container"><div class=image-crop><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
  
 
  }
@@ -932,11 +1000,13 @@ console.log(err.message)
 
 
 
-
-
-
    fox('0-25')
+//$('#myModal').on('hidden.bs.modal', function () {
+//jwplayer().stop();
+//});
 
+</script>
+<script type="text/javascript">
 
 </script>
 </body></html>

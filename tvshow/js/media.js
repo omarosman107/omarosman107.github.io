@@ -103,9 +103,6 @@ if (localStorage[window.location.search] == '' || localStorage[window.location.s
 
 
 
-window.onunload = function() {
-   localStorage[window.location.search] = jwplayer().getPosition();
-}
 
 
 
@@ -159,11 +156,14 @@ function fetchcwjson(value) {
          "type": "application/x-mpegURL",
          "src": finalurl 
       }); */
+      console.log( data.images.cwtv832x502.uri)
       jwplayer("myElement1").setup({
         cast:{},
   file: finalurl,
   width: "100%",
   aspectratio: "16:9",
+          image: data.images.cwtv832x502.uri,
+
  atuostart: true,
  title: data.assetFields.seriesName + " - " + data.assetFields.title
 });
