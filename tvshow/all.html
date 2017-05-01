@@ -7,6 +7,56 @@
                   <link async href="css/font-awesome.min.css" rel="stylesheet">
                   <style type="text/css">
 
+.spinner {
+  animation: rotator 1.4s linear infinite;
+}
+
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+.path {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@keyframes colors {
+  0% {
+    stroke: #ffffff;
+  }
+  25% {
+    stroke: #ffffff;
+  }
+  50% {
+    stroke: #ffffff;
+  }
+  75% {
+    stroke: #ffffff;
+  }
+  100% {
+    stroke: #ffffff;
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    transform: rotate(450deg);
+  }
+}
+
 
 .w3-progress-container {
     width: 100%;
@@ -62,13 +112,6 @@ background-color: #141414;
   left: 0;
   right: 0;
   margin: auto;
-}
-
-.path { 
-  stroke-dasharray: 1, 200;
-  stroke-dashoffset: 0;
-  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-  stroke-linecap: round;
 }
 
 @keyframes rotate {
@@ -347,14 +390,13 @@ h1, h2 {
     font-family: ProximaNovaSB, "Helvetica Neue", Helvetica, Arial, sans-serif;
     padding: 13px;
 }
-.tvshow:hover{
+
+.tvshow:active, .tvshow:focus{
   border: 1px;
   border-style: solid;
+
 }
-.tvshow:active{
-  border: 1px;
-  border-style: solid;
-}
+
 body{
     -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -370,6 +412,8 @@ background-color: #141414 !important;
     padding-right: 0px !important;
     padding-left: 0px !important;
 }
+
+
 
             </style>
 
@@ -406,6 +450,10 @@ background-color: #141414 !important;
 
 
 <div class="loaderHolder">
+<svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+   <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+</svg>
+
   <div id="fox" class="showbox">
   <div class="loader">
     <svg class="circular" viewBox="25 25 50 50">
@@ -427,24 +475,7 @@ background-color: #141414 !important;
    <ul id="carasoul" class="fanarts-list list-unstyled list-inline">
 </ul>
    </div>
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div id="vplayer" class="modal-body">
 
-        </div>
-
-      </div>
-      
-    </div>
-  </div>
    <script type="text/javascript" src="js/fetch.min.js"></script>
 
 
@@ -520,7 +551,7 @@ if (showName in tvobj) {
 }).then(function(dat){
 var showname = "'" + dat.Title.name + "'"
 var s = "onclick='query('" + showname + "')'"
-document.getElementById('tvShows').innerHTML += '<div class="tvshow"><a href="javascript:" bg="https://image.tmdb.org/t/p/w1000'+dat.Poster +'" show="' + showName +'" onclick="query(null,this)" ><img width="100%" src="'+dat.Poster+'"><br></a></div>'
+document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  bg="https://image.tmdb.org/t/p/w1000'+dat.Poster +'" show="' + showName +'" onclick="query(null,this)" ><img width="100%" src="'+dat.Poster+'"><br></a></div>'
 
 
 
@@ -680,7 +711,7 @@ return 0;
 if (document.getElementsByClassName(json[i].href).length == 0) {
 console.log('worked')
 
-    document.getElementById('watching').innerHTML += '<div class="wtc '+json[i].href+'"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><br> <span>'+json[i].show+'</span></a></div>'
+    document.getElementById('watching').innerHTML += '<div tabindex="1" class="wtc '+json[i].href+'"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><br> <span>'+json[i].show+'</span></a></div>'
 }
 
 
