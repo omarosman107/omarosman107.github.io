@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HLS Demo1</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/1.8.2/plyr.css">
+  </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <body>
+    <video preload="none" id="player" autoplay controls crossorigin></video>
+    url: <input type="text" id="streamURL" value="https://www.cwtv.com/ioshlskeys/videos/2017/04/26/Supernatural-1219-TheFuture-T1319969-CW-Stereo_a17963bf1.m3u8">
+    <script src="https://cdn.plyr.io/1.8.2/plyr.js"></script>
+    <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
+    <script type="text/javascript">
+
+      (function () {
+  loadStream($('#streamURL').val())
+})();
+
+$(document).ready(function() {
+  $('#streamURL').change(function()           { loadStream($('#streamURL').val());});
+})
+
+function loadStream(url) {
+    var video = document.querySelector('#player');
+  var url = document.querySelector('#streamURL').value;
+video.src = url;
+  if (Hls.isSupported()) {
+    var config = {
+      autoStartLoad: true,
+      startPosition : -1,
+      capLevelToPlayerSize: false,
+      debug: false,
+      defaultAudioCodec: undefined,
+      maxBufferLength: 30,
+      maxMaxBufferLength: 50,
+      maxBufferSize: 60*1000*1000,
+      maxBufferHole: 0.5,
+      maxSeekHole: 2,
+      seekHoleNudgeDuration: 0.01,
+      maxFragLookUpTolerance: 0.2,
+      liveSyncDurationCount: 3,
+      liveMaxLatencyDurationCount: 10,
+      enableWorker: true,
+      enableSoftwareAES: true,
+      manifestLoadingTimeOut: 10000,
+      manifestLoadingMaxRetry: 6,
+      manifestLoadingRetryDelay: 500,
+      manifestLoadingMaxRetryTimeout : 64000,
+      startLevel: -1,
+      levelLoadingTimeOut: 10000,
+      levelLoadingMaxRetry: 6,
+      levelLoadingRetryDelay: 500,
+      levelLoadingMaxRetryTimeout: 64000,
+      fragLoadingTimeOut: 20000,
+      fragLoadingMaxRetry: 6,
+      fragLoadingRetryDelay: 500,
+      fragLoadingMaxRetryTimeout: 64000,
+      startFragPrefech: false,
+      appendErrorMaxRetry: 3,
+      enableCEA708Captions: true,
+      stretchShortVideoTrack: false,
+      forceKeyFrameOnDiscontinuity: true,
+      abrEwmaFastLive: 5.0,
+      abrEwmaSlowLive: 9.0,
+      abrEwmaFastVoD: 4.0,
+      abrEwmaSlowVoD: 15.0,
+      abrEwmaDefaultEstimate: 500000,
+      abrBandWidthFactor: 0.8,
+      abrBandWidthUpFactor: 0.7,
+      minAutoBitrate: 0
+  };
+    
+    var hls = new Hls(config);
+    hls.loadSource(url);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+      video.play();
+    });
+  }
+  console.log(video)
+video.onprogress = function(e) {
+  console.log(e)
+};
+ var video =  plyr.setup(video);
+console.log(video)
+     video.on('loadedmetadata', function(event) {
+  var instance = event.detail.plyr;
+  console.log(event)
+});
+        video.on('progress', function(event) {
+  var instance = event.detail.plyr;
+  console.log(event)
+});
+
+}
+    </script>
+  </body>
+</html>

@@ -3,6 +3,19 @@ jwplayer.defaults.preload = "auto"
 jwplayer.defaults.autostart = "true"
 document.getElementsByClassName("resume")[0].onclick = function(){(this.parentNode.removeChild(this))};
 
+function loadURL(url,type){
+
+      jwplayer("myElement1").setup({
+        cast:{},
+  file: url,
+  width: "100%",
+  aspectratio: "16:9",
+type:type
+});
+
+
+resume();
+}
 
 function resumePlayback(state){
         document.getElementsByClassName('resume')[0].style.display = 'none'
@@ -31,15 +44,19 @@ console.log('finished')
 
 
 
- 
-
-}
+ }
 
 
 function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
 
 
 function resume(){
+  jwplayer().on('error', function(e) {
+console.log(e)
+});
+
+
+
     jwplayer().on('firstFrame',function(e){
 console.log(e)
 
