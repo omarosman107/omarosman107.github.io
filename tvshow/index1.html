@@ -958,7 +958,8 @@ color: #08c908;
 <div id="projpar" class="w3-progress-container" style="/* display: none; */"><div id="progress" class="w3-progressbar" style="width: 0%;"></div></div>
    <div class="header">
 
-      EPISODES TO WATCH <span id="howmuch"></span><a href="#" onclick="tempel='';fetchshows();">
+      EPISODES TO WATCH <span id="howmuch"></span><span style="color: #ccc;
+    font-family: ProximaNova;" id="howmuchtime"></span><a href="#" onclick="tempel='';fetchshows();">
       <div id="loadertop" class="refresh" style=" float: right; width: 24px;">
          <i class="fa fa-refresh"></i>
       </div></a>
@@ -1126,6 +1127,34 @@ function spdpg(url){
 return ''
 
 }
+function secondsToString(seconds)
+{
+var numdays = Math.floor(seconds / 86400);
+var numhours = Math.floor((seconds % 86400) / 3600);
+var numminutes = Math.floor(((seconds % 86400) % 3600) / 60);
+var numseconds = ((seconds % 86400) % 3600) % 60;
+return numdays + " days " + numhours + " hours " + numminutes + " minutes";
+}
+function dateDiff(timestamp){
+    var d = Math.abs(timestamp - new Date().getTime()) / 1000;                 // delta
+    var r = {};                                                                // result
+    var s = {                                                                  // structure
+        year: 31536000,
+        month: 2592000,
+        week: 604800, // uncomment row to ignore
+        day: 86400,   // feel free to add your own row
+        hour: 3600,
+        minute: 60,
+        second: 1
+    };
+
+    Object.keys(s).forEach(function(key){
+        r[key] = Math.floor(d / s[key]);
+        d -= r[key] * s[key];
+    });
+    
+    return r;
+};
 
 function progress(){
    fetch('https://api.tvshowtime.com/v1/library?access_token=' + accesstoken, {
@@ -1137,14 +1166,31 @@ function progress(){
    var perc = 0
    var ep = 0
    var wtc = 0
+   var mnts = 0
            for (var i = 0; i < library.shows.length; i++) {
-            if(!library.shows[i].seen_episodes == 0){
+            if(!library.shows[i].seen_episodes == 0 && library.shows[i].archived == true ){
                            perc = perc + (library.shows[i].aired_episodes - library.shows[i].seen_episodes )
                            ep += library.shows[i].aired_episodes
                            wtc += library.shows[i].seen_episodes
+                           mnts += (library.shows[i].aired_episodes - library.shows[i].seen_episodes) * library.shows[i].runtime
+                           if ((library.shows[i].aired_episodes - library.shows[i].seen_episodes) * library.shows[i].runtime < 0) {
+console.log(library.shows[i])
+
+                           }
+                           console.log( (library.shows[i].aired_episodes - library.shows[i].seen_episodes) * library.shows[i].runtime )
 
             }
 }
+console.log(mnts)
+var minutes = mnts
+  var h = Math.floor(minutes / 60);
+  var m = minutes % 60;
+  h = h < 10 ? '0' + h : h;
+  m = m < 10 ? '0' + m : m;
+  console.log( h,  m);
+
+document.getElementById('howmuchtime').innerHTML = " | " + secondsToString(minutes * 60)
+
 perc = (wtc / ep *100)
             document.getElementById('progress').style.width = (perc + '%')
 
@@ -1179,7 +1225,7 @@ console.log(err)
            }
            if (mathleft >= 1) {
               mathleft = "+ " + mathleft + ' episodes'
-           }
+           } 
            var newEpi = '<div class="new">NEW<\/div>';
            if (finishjson.episodes[i].is_new == true) {
               mathleft = newEpi
