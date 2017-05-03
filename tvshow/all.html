@@ -541,15 +541,15 @@ if (showName in tvobj) {
   return ;
 }
   tvobj[(showName)] = ''
-  fetch('http://www.omdbapi.com/?t=' + showName, {
+  fetch('https://cors-anywhere.herokuapp.com/https://api.tozelabs.com/v2/show?q=' + showName , {
     method: 'get',
     cache: "no-store"
 }).then(function(response) {
   return response.json();
 }).then(function(dat){
-var showname = "'" + dat.Title.name + "'"
+var showname = "'" +dat["0"].stripped_name + "'"
 var s = "onclick='query('" + showname + "')'"
-document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  bg="https://image.tmdb.org/t/p/w1000'+dat.Poster +'" show="' + showName +'" onclick="query(null,this)" ><img width="100%" src="'+dat.Poster+'"><br></a></div>'
+document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  bg="" show="' + dat["0"].stripped_name +'" onclick="query(null,this)" ><img width="100%" src="'+dat["0"].all_images.poster[3]+'"><br></a></div>'
 
 
 

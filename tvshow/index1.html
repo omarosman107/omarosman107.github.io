@@ -1168,16 +1168,15 @@ function progress(){
    var wtc = 0
    var mnts = 0
            for (var i = 0; i < library.shows.length; i++) {
-            if(!library.shows[i].seen_episodes == 0 && library.shows[i].archived == true ){
+
+            if(!library.shows[i].seen_episodes == 0 ){
+
                            perc = perc + (library.shows[i].aired_episodes - library.shows[i].seen_episodes )
                            ep += library.shows[i].aired_episodes
                            wtc += library.shows[i].seen_episodes
-                           mnts += (library.shows[i].aired_episodes - library.shows[i].seen_episodes) * library.shows[i].runtime
-                           if ((library.shows[i].aired_episodes - library.shows[i].seen_episodes) * library.shows[i].runtime < 0) {
-console.log(library.shows[i])
+                                       mnts = mnts +  ((library.shows[i].aired_episodes - library.shows[i].seen_episodes) * library.shows[i].runtime);
+                                          console.log(library.shows[i].runtime , (library.shows[i].aired_episodes - library.shows[i].seen_episodes), library.shows[i].name)
 
-                           }
-                           console.log( (library.shows[i].aired_episodes - library.shows[i].seen_episodes) * library.shows[i].runtime )
 
             }
 }
