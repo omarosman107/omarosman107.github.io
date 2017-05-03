@@ -538,18 +538,33 @@ var tvobj = {}
 function tvlist(showName){
 
 if (showName in tvobj) {
+  return 'Already In.';
+}
+/*if (localStorage[showName + "_json-image"]) {
+    console.log( 'Already In Cache.');
+
+  var image = localStorage[showName + "_json-image"]
+    var name = localStorage[showName + "_json-name"]
+
+
+  document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  bg="" show="' + name +'" onclick="query(null,this)" ><img width="100%" src="'+image+'"><br></a></div>'
   return ;
 }
+*/
   tvobj[(showName)] = ''
   fetch('https://cors-anywhere.herokuapp.com/https://api.tozelabs.com/v2/show?q=' + showName , {
     method: 'get',
-    cache: "no-store"
+    cache: "force-cache"
 }).then(function(response) {
   return response.json();
 }).then(function(dat){
 var showname = "'" +dat["0"].stripped_name + "'"
 var s = "onclick='query('" + showname + "')'"
-document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  bg="" show="' + dat["0"].stripped_name +'" onclick="query(null,this)" ><img width="100%" src="'+dat["0"].all_images.poster[3]+'"><br></a></div>'
+document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  bg="" show="' + showName +'" onclick="query(null,this)" ><img width="100%" src="'+dat["0"].all_images.poster[3]+'"><br></a></div>'
+localStorage[showName + "_json-image"] = dat["0"].all_images.poster[3]
+localStorage[showName + "_json-name"] = dat["0"].stripped_name
+
+
 
 
 
@@ -696,9 +711,7 @@ if(perc == "NaN"){
 if(perc == undefined){
   perc = 0
 }
-  }
-  console.log((perc))
-  function showCheck(){
+  }  function showCheck(){
 if(parseInt(perc) == 100){
 return 1; 
  }
