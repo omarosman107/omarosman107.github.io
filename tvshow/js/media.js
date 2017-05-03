@@ -1,7 +1,10 @@
 var x2js = new X2JS();
-jwplayer.defaults.preload = "auto"
-jwplayer.defaults.autostart = "true"
+var player=videojs('LS');
+
+//jwplayer.defaults.preload = "auto"
+//jwplayer.defaults.autostart = "true"
 document.getElementsByClassName("resume")[0].onclick = function(){(this.parentNode.removeChild(this))};
+
 
 function loadURL(url,type){
 
@@ -34,7 +37,7 @@ if (state == false) {
 console.log('finished')
                     }
 
-        jwplayer().seek(localStorage[window.location.search])
+player.currentTime(localStorage[window.location.search])
 
 
 
@@ -51,19 +54,21 @@ function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
 
 
 function resume(){
-  jwplayer().on('error', function(e) {
-console.log(e)
-});
 
 
+function on_progress( event ) {
+    console.log( 'buffered',(player.bufferedEnd() / player.duration() *100) + "%" );
+    document.getElementById('progressplayer').style.width = (player.bufferedEnd() / player.duration() *100) + "%" 
+    // it will log always 0
+}
 
-    jwplayer().on('firstFrame',function(e){
-console.log(e)
+player.on( 'progress', on_progress );
+
 
 setInterval(function(){
-  localStorage[window.location.search]  = jwplayer().getPosition()
-  localStorage[window.location.search + '_perc']  = jwplayer().getPosition() / jwplayer().getDuration() * 100;
-  if (jwplayer().getPosition() == jwplayer().getDuration()) {
+  localStorage[window.location.search]  = player.currentTime()
+  localStorage[window.location.search + '_perc']  = player.currentTime() / player.duration() * 100;
+  if (player.currentTime() == player.duration()) {
     localStorage[window.location.search + '_perc']  = 0;
   }
 
@@ -71,27 +76,19 @@ setInterval(function(){
 },
 2000)
 document.body.onunload = function(){
-  localStorage[window.location.search]  = jwplayer().getPosition()
+  localStorage[window.location.search]  = player.currentTime()
 
 };
 
 window.onunload = function() {
-  localStorage[window.location.search]  = jwplayer().getPosition()
+  localStorage[window.location.search]  = player.currentTime()
 }
 
 
 resumePlayback()
         document.getElementsByClassName('resume')[0].style.display = 'none'
 
-
-})
-  jwplayer().pause()
-  jwplayer().on('bufferChange',function(e){
-
-
-document.getElementById('progressplayer').style.width = (e.bufferPercent) + "%"
-})
-//      document.getElementsByClassName('resume')[0].style.opacity = 0
+      document.getElementsByClassName('resume')[0].style.opacity = 0
 
     if(!localStorage[window.location.search] == '' || !localStorage[window.location.search] == 'undefined'){
 
@@ -174,16 +171,11 @@ function fetchcwjson(value) {
          "src": finalurl 
       }); */
       console.log( data.images.cwtv832x502.uri)
-      jwplayer("myElement1").setup({
-        cast:{},
-  file: finalurl,
-  width: "100%",
-  aspectratio: "16:9",
-          image: data.images.cwtv832x502.uri,
 
- atuostart: true,
- title: data.assetFields.seriesName + " - " + data.assetFields.title
-});
+      player.src({"type":"application/x-mpegURL", "src":finalurl});
+   player.play();
+
+
 resume()
       document.getElementById('progress').style.width = "100%"
       $('#projpar').hide()
@@ -218,14 +210,10 @@ brand = "009"
                document.getElementById('downloader').href = videourl
                console.log(videourl)
 
-                     jwplayer("myElement1").setup({
-                              cast:{},
 
-  file: videourl,
-  width: "100%",
-  aspectratio: "16:9",
- autostart: true
-});
+
+                           player.src({"type":"application/x-mpegURL", "src":videourl});
+   player.play();
                      resume()
                document.getElementById('progress').style.width = "100%"
       $('#projpar').hide()
@@ -291,25 +279,8 @@ function fetchfoxjson(value) {
 
                document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false"
 
-
-                  jwplayer("myElement1").setup({
-                            cast:{},
-
-  "playlist": [
-    {
-      "sources": [
-        {
-          "default": false,
-          "file": value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
-          "type": "hls",
-          "autoplay": true
-        }
-      ]
-    }
-  ],
-  "primary": "html5",
-  "hlshtml": true
-});
+                        player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"});
+   player.play();
 
 resume()
                  document.getElementById('progress').style.width = "90%"
@@ -345,23 +316,9 @@ resume()
               console.log(mediaurl)
                document.getElementById('downloader').href = mediaurl.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false"
 
-                  jwplayer("myElement1").setup({
-                            cast:{},
 
-  "playlist": [
-    {
-      "sources": [
-        {
-          "default": false,
-          "file": mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
-          "type": "hls"
-        }
-      ]
-    }
-  ],
-  "primary": "html5",
-  "hlshtml": true
-});
+                                          player.src({"type":"application/x-mpegURL", "src":mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"});
+   player.play();
                   resume()
        
          document.getElementById('progress').style.width = "100%"
@@ -403,23 +360,8 @@ function fetchcbsjson(value) {
       videourl = "https://link.theplatform.com/s/dJ5BDC/media/guid/2198311517/" + searchValue + "?mbr=true&manifest=m3u&form=json"
       document.getElementById('downloader').href = videourl
 
-                              jwplayer("myElement1").setup({
-                                        cast:{},
-
-  "playlist": [
-    {
-      "sources": [
-        {
-          "default": false,
-          "file": videourl,
-          "type": "hls"
-        }
-      ]
-    }
-  ],
-  "primary": "html5",
-  "hlshtml": true
-});
+                                                       player.src({"type":"application/x-mpegURL", "src":videourl});
+   player.play();
                               resume()
       document.getElementById('progress').style.width = "100%"
       $('#projpar').hide()
@@ -613,25 +555,9 @@ function fetchnbcjson(value) {
             mediaurl = jsonfirst
             var videofile = mediaurl.split('?')[0] + "?manifest=m3u&mbr=true&metafile=false"
             console.log(videofile)
-            document.getElementById('downloader').href = videofile
-         jwplayer("myElement1").setup({
-                  cast:{},
 
-  "playlist": [
-    {
-      "sources": [
-        {
-          "default": false,
-          "file": videofile,
-          "type": "hls"
-        }
-      ]
-    }
-  ],
-  "primary": "html5",
-  "hlshtml": true
-});
-
+                                                            player.src({"type":"application/x-mpegURL", "src":videofile});
+   player.play();
 resume()
             document.getElementById('progress').style.width = "100%"
       $('#projpar').hide()
@@ -668,14 +594,8 @@ if (returnedValue.query.results.json.data.stream.assets[i].mime_type == "applica
   console.log(returnedValue.query.results.json.data.stream.assets[i].url)
   videofile = returnedValue.query.results.json.data.stream.assets[i].url
                              document.getElementById('downloader').href = videofile
-
-                                                         jwplayer("myElement1").setup({
-                                                                  cast:{},
-                                                                  file:videofile,
- width: "100%",
-  aspectratio: "16:9",
- autostart: true
-});
+                                                                                                                     player.src({"type":"application/x-mpegURL", "src":videofile});
+   player.play();
   resume()
                                  document.getElementById('downloader').href = videofile
 
@@ -726,14 +646,8 @@ if (returnedValue.query.results.json.data.stream.assets[i].mime_type == "applica
   console.log(returnedValue.query.results.json.data.stream.assets[i].url)
   videofile = returnedValue.query.results.json.data.stream.assets[i].url
                              document.getElementById('downloader').href = videofile
-
-                                                         jwplayer("myElement1").setup({
-                                                                  cast:{},
-                                                                  file:videofile,
- width: "100%",
-  aspectratio: "16:9",
- autostart: true
-});
+                                                            player.src({"type":"application/x-mpegURL", "src":videofile});
+   player.play();
   resume()
                                  document.getElementById('downloader').href = videofile
 
@@ -770,24 +684,9 @@ function fetchamcjson(value) {
       showdesc.innerHTML = data.query.results.meta[1].content
             document.getElementById('downloader').href = "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false'
 
- 
-                                       jwplayer("myElement1").setup({
-                                                cast:{},
+   player.src({"type":"application/x-mpegURL", "src":"https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false'});
+   player.play();
 
-  "playlist": [
-    {
-      "sources": [
-        {
-          "default": false,
-          "file": "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false',
-          "type": "hls"
-        }
-      ]
-    }
-  ],
-  "primary": "html5",
-  "hlshtml": true
-});
                                        resume()
       document.getElementById('progress').style.width = "100%"
       $('#projpar').hide()
@@ -897,14 +796,10 @@ $.ajax("https://cors-anywhere.herokuapp.com/http://www.cartoonnetwork.com/cntv/m
     'type': 'GET',
      success: function(result){
         console.log(result.querySelector('token').innerHTML);
-                              jwplayer("myElement1").setup({
-                                        cast:{},
 
-  file: 'http://androidhls-secure.cdn.turner.com/toon/big' + tohtml(apidat,'xml').querySelector('file[bitrate="androidphone"]').innerHTML +'?hdnea=' +result.querySelector('token').innerHTML,
-  width: "100%",
-  aspectratio: "16:9",
-  autoplay: true
-});
+
+                                                    player.src({"type":"application/x-mpegURL", "src":'http://androidhls-secure.cdn.turner.com/toon/big' + tohtml(apidat,'xml').querySelector('file[bitrate="androidphone"]').innerHTML +'?hdnea=' +result.querySelector('token').innerHTML});
+   player.play();
                               resume()
     } 
 });
@@ -964,24 +859,9 @@ function fetchfxjson(value) {
                document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
 
 
-                  jwplayer("myElement1").setup({
-                            cast:{},
 
-  "playlist": [
-    {
-      "sources": [
-        {
-          "default": false,
-          "file": value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
-          "type": "hls",
-          "autoplay": true
-        }
-      ]
-    }
-  ],
-  "primary": "html5",
-  "hlshtml": true
-});
+                      player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"});
+   player.play();
 resume()
                  document.getElementById('progress').style.width = "90%"
       $('#projpar').hide()
@@ -1008,23 +888,9 @@ final = (JSON.parse(tohtml(final).getElementById('seo-data').innerHTML))
 console.log(final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].split('?')[0])
                document.getElementById('downloader').href = final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"
 
-                  jwplayer("myElement1").setup({
-                            cast:{},
 
-  "playlist": [
-    {
-      "sources": [
-        {
-          "default": false,
-          "file": final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
-          "type": "hls"
-        }
-      ]
-    }
-  ],
-  "primary": "html5",
-  "hlshtml": true
-});
+    player.src({"type":"application/x-mpegURL", "src":final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"});
+   player.play();
       resume() 
          document.getElementById('progress').style.width = "100%"
       $('#projpar').hide()
@@ -1058,23 +924,10 @@ function fetchlplatjson(value){
       })
                 document.getElementById('downloader').href =  value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect"
 
-                  jwplayer("myElement1").setup({
-                            cast:{},
 
-  "playlist": [
-    {
-      "sources": [
-        {
-          "default": false,
-          "file": value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect",
-          "type": "hls"
-        }
-      ]
-    }
-  ],
-  "primary": "html5",
-  "hlshtml": true
-});
+
+    player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect"});
+   player.play();
 resume()
       $('#projpar').hide()
 
