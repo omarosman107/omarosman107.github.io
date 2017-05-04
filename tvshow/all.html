@@ -377,9 +377,8 @@ width: 650px;
   background-color: rgba(102, 102, 102, .5)
 }
 ::-webkit-scrollbar-track {
-  background-color: #000;
-
-}
+    background-color: rgba(0, 0, 0, 0.12);
+  }
 ::-webkit-scrollbar-thumb {
   background-color: transparent
 }
@@ -552,7 +551,7 @@ if (showName in tvobj) {
 }
 */
   tvobj[(showName)] = ''
-  fetch('https://cors-anywhere.herokuapp.com/https://api.tozelabs.com/v2/show?q=' + showName , {
+  fetch('https://cors-anywhere.herokuapp.com/https://api.tozelabs.com/v2/show?limit=1&q=' + showName , {
     method: 'get',
     cache: "force-cache"
 }).then(function(response) {
