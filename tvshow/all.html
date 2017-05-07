@@ -107,15 +107,20 @@ function query(q,obj){
 console.log(    document.getElementsByClassName('initialized')[i].getAttribute('data-query'))
       document.getElementsByClassName('initialized')[i].style.display = "inline-block"
       num += 1
+        lazyLoadImages();
+
 
     }else{
       document.getElementsByClassName('initialized')[i].style.display = "none"
     }
+
+
   }
-    lazyLoadImages();
 
 
   results(num )
+  lazyLoadImages();
+
 
 } 
 
@@ -291,6 +296,7 @@ $(".shows").scroll(function() {
 lazyLoadImages();
 });
 
+
 function loadMedia(json){
 json = json.sort(function(a, b) {
     a = new Date(a.airdate);
@@ -322,7 +328,7 @@ console.log('worked')
  //  document.getElementById('watching').innerHTML += '<div tabindex="1" class="wtc '+json[i].href+'"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><br> <span>'+json[i].show+'</span></a></div>'
 
 
-   document.getElementById('watching').innerHTML += '<li style="width: 280px;margin: 11px;" class="initialized"><div class="piece fanart-container"><div class="image-crop"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="Reign" src="'+json[i].img+'" class"lazy"="" class="loaded" ></a><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show+'</a><a href="javascript:"><i style="/* opacity:0; */color:rgb(127, 218, 99);position: relative;left: 82px;top: 21px;" class="visited fa fa-check" aria-hidden="true"></i></a></div><div class="bottom"></div></div></li>'
+   document.getElementById('watching').innerHTML += '<li style="width: 280px;margin: 11px;" class="initialized"><div class="piece fanart-container"><div class="image-crop"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'" src="'+json[i].img+'" data-original-set="'+json[i].imgdyn+'" class"lazy"="" class="loaded" ></a><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show+'</a><a href="javascript:"><i style="    /* opacity: 0; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"></i></a></div><div class="bottom"></div></div></li>'
 
 }
 
@@ -333,7 +339,7 @@ console.log('worked')
 
   tvlist(json[i].show)
   var query = (json[i].metadata+" "+json[i].episode).toLowerCase();
-  template = template + '<li  class="initialized '+json[i].type+'" data-query="'+query +'"><div  class="piece fanart-container"><div class=image-crop><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
+  template = template + '<li  class="initialized '+json[i].type+'" data-query="'+query +'"><div  class="piece fanart-container"><div class=image-crop><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" data-original-set="'+json[i].imgdyn+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
  
 
  }
@@ -416,6 +422,7 @@ console.log(e)
 
   obj.push({img:data.videos[i].large_thumbnail,
   	rating:(data.videos[i].rating),
+    imgdyn:'',
   	href: data.videos[i].share_url,
   	airdate:data.videos[i].airdate,
   	show:data.videos[i].series_name,
@@ -466,15 +473,26 @@ fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=js
 for(i in data.entries){
 var date = new Date(data.entries[i].media$availableDate)
 var image = data.entries[i].media$thumbnails[5].plfile$url
-if (image.includes('http://')) {
 	image = image.replace('http','https')
-} 
+
+
 
 
  date.setDate(date.getDate()-1);
-     
-//setTimeout(function(){  $(".shows").owlCarousel()
-//},2000)
+
+
+
+
+
+var srcset = ''
+for (var z = data.entries[i].media$thumbnails.length - 1; z >= 0; z--) {
+  var img = data.entries[i].media$thumbnails[z].plfile$url
+  img = img.replace('http','https')
+
+  srcset +=  img +' ' + data.entries[i].media$thumbnails[z].plfile$width+ 'w ,  ';
+
+}
+console.log(srcset)
 
   obj.push({img:image,
   	rating:rating(data.entries[i].media$ratings[0].rating),
@@ -485,7 +503,9 @@ if (image.includes('http://')) {
   	epiformat:epiformat(data.entries[i].fox$season,data.entries[i].fox$episode),
   	length:fmtMSS(data.entries[i].media$content[0].plfile$duration),
   	metadata:rating(data.entries[i].media$ratings[0].rating) + formatDate(data.entries[i].media$availableDate) + data.entries[i].fox$series + data.entries[i].title + epiformat(data.entries[i].fox$season,data.entries[i].fox$episode) + fmtMSS(data.entries[i].media$content[0].plfile$duration),
-  	type:"fox"
+  	type:"fox",
+  imgdyn:srcset
+
   })
 
 
