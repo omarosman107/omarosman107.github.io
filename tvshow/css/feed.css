@@ -819,12 +819,16 @@ body a:hover {
  .nav a i {
    }
 .image-crop .overlay .overlay-btn {
-    display: block;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+      
     height: 100%;
-    line-height: 185px;
     font-size: 40px;
     color: #fff;
     text-align: center;
+
+      
 }
 @-webkit-keyframes neon1 {
   from {
@@ -951,6 +955,7 @@ img[data-src] {
     page-break-after: avoid;
   }
 }
+
 
 .playbutton:hover{
         animation-timing-function:ease-in-out;
