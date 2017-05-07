@@ -100,12 +100,10 @@ function query(q,obj){
   };
 
   document.getElementById('search').value = q
-  console.log(q);
 
   var num = 0
   for (var i = document.getElementsByClassName('initialized').length - 1; i >= 0; i--) {
     if( document.getElementsByClassName('initialized')[i].getAttribute('data-query').includes(q.toLowerCase())){
-console.log(    document.getElementsByClassName('initialized')[i].getAttribute('data-query'))
       document.getElementsByClassName('initialized')[i].style.display = "inline-block"
       num += 1
         lazyLoadImages();
@@ -160,9 +158,8 @@ if (showName in tvobj) {
 }).then(function(response) {
   return response.json();
 }).then(function(dat){
-  console.log(dat.query.results.json.all_images.poster._[3])
 document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  bg="" show="' + showName +'" onclick="query(null,this)" ><img width="100%" src="'+dat.query.results.json.all_images.poster._[3]+'"><br></a></div>'
-localStorage[showName + "_json-image"] = dat.query.results.json.all_images.poster._[3]
+// localStorage[showName + "_json-image"] = dat.query.results.json.all_images.poster._[3]
 // localStorage[showName + "_json-name"] = dat.query.results.json.all_images.poster._[3]
 
 
@@ -195,11 +192,9 @@ var result = filter(obj);
 
 if (result.length == 0) {
 document.getElementById('carasoul').innerHTML = "No results found :("
-console.log(result.length)
 	}else{
 	loadMedia(result)
 }
-console.log(result.length)
 lazyLoadImages();
 
 	
@@ -259,7 +254,6 @@ myLazyLoad.update()
 }
 
 function loadPlayer(url){
-  console.log(url)
   link = url.href
   window.location = url.href;
   return ; 
@@ -283,7 +277,6 @@ fetch('http://metaframe.digitalsmiths.tv/v2/CWtv/assets/'+link.split('=')[1]+'/p
 alert('something bad happened :(')});
 }
 if (link.includes('theplatform')) {
-  console.log(link.split('?')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false")
  jwplayer("vplayer").setup({
       file:link.split('?')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
       type: "hls"
@@ -317,20 +310,18 @@ if(perc == undefined){
   perc = 0
 }
   }  function showCheck(){
-if(parseInt(perc) == 100){
+if(parseInt(perc) > 99){
 return 1; 
  }
 return 0;
   }
-  if (!perc == 0 ) {
-    console.log('watching this episode!')
+  if (!perc == 0) {
 if (document.getElementsByClassName(json[i].href).length == 0) {
-console.log('worked')
 
  //  document.getElementById('watching').innerHTML += '<div tabindex="1" class="wtc '+json[i].href+'"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><br> <span>'+json[i].show+'</span></a></div>'
 
 
-   document.getElementById('watching').innerHTML += '<li style="width: 280px;margin: 11px;" class="initialized"><div class="piece fanart-container"><div class="image-crop"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'" src="'+json[i].img+'" data-original-set="'+json[i].imgdyn+'" class"lazy" class="loaded" ></a><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show+'</a><a href="javascript:"><i style="    /* opacity: 0; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"></i></a></div><div class="bottom"></div></div></li>'
+   document.getElementById('watching').innerHTML += '<li style="width: 280px;margin: 11px;" class="initialized '+json[i].href+'"><div class="piece fanart-container"><div class="image-crop"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'" src="'+json[i].img+'" data-original-set="'+json[i].imgdyn+'" class"lazy" class="loaded" ></a><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show+'</a><a href="javascript:"><i style="    /* opacity: '+showCheck()+'; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"></i></a></div><div class="bottom"></div></div></li>'
 
 }
 
@@ -420,7 +411,18 @@ epinum = data.videos[i].availability_asset_id.split('-')[data.videos[i].availabi
 console.log(e)
 }
 
-
+var episode_data = {img:data.videos[i].large_thumbnail,
+    rating:(data.videos[i].rating),
+    imgdyn:'',
+    href: data.videos[i].share_url,
+    airdate:data.videos[i].airdate,
+    show:data.videos[i].series_name,
+    episode:data.videos[i].title,
+    epiformat:epinum,
+    length:data.videos[i].duration,
+    metadata:data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration,
+    type:"cw"
+  }
 
   obj.push({img:data.videos[i].large_thumbnail,
   	rating:(data.videos[i].rating),
@@ -494,7 +496,6 @@ for (var z = data.entries[i].media$thumbnails.length - 1; z >= 0; z--) {
   srcset +=  img +' ' + data.entries[i].media$thumbnails[z].plfile$width+ 'w ,  ';
 
 }
-console.log(srcset)
 
   obj.push({img:image,
   	rating:rating(data.entries[i].media$ratings[0].rating),
@@ -518,7 +519,6 @@ console.log(srcset)
          loadMedia(obj)
 lazyLoadImages();
 
-   console.log(obj)
 
 }).catch(function(err) {
 console.log(err)
@@ -566,7 +566,6 @@ console.log(e)
 
 
 function useABC(json){
-console.log(json)
 
 for(i in json.shows.show){
 addJS('https://api.watchabc.go.com/vp2/ws/s/contents/2020/videos/jsonp/001/001/-1/'+json.shows.show[i]['@id']+'/-1/-1/-1/-1?callback=procABC')
