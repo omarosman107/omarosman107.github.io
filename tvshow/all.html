@@ -7,464 +7,6 @@
                   <link async href="css/font-awesome.min.css" rel="stylesheet">
                   <style type="text/css">
 
-.spinner {
-  animation: rotator 1.4s linear infinite;
-}
-
-@keyframes rotator {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(270deg);
-  }
-}
-.path {
-  stroke-dasharray: 187;
-  stroke-dashoffset: 0;
-  transform-origin: center;
-  animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
-}
-
-@keyframes colors {
-  0% {
-    stroke: #ffffff;
-  }
-  25% {
-    stroke: #ffffff;
-  }
-  50% {
-    stroke: #ffffff;
-  }
-  75% {
-    stroke: #ffffff;
-  }
-  100% {
-    stroke: #ffffff;
-  }
-}
-@keyframes dash {
-  0% {
-    stroke-dashoffset: 187;
-  }
-  50% {
-    stroke-dashoffset: 46.75;
-    transform: rotate(135deg);
-  }
-  100% {
-    stroke-dashoffset: 187;
-    transform: rotate(450deg);
-  }
-}
-
-
-.w3-progress-container {
-    width: 100%;
-    height: 0.6vh;
-    opacity:1;
-
-}
-.w3-progressbar {
-    background-color: #e50914;
-        height: 100%;
-    line-height: inherit;
-        -moz-transition: width 500ms ease-out,opacity 500ms linear;
-    -webkit-transition: width 500ms ease-out,opacity 500ms linear;
-    transition: width 500ms ease-out,opacity 500ms linear;
-    -moz-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    will-change: width,opacity;
-     transition-duration: 400ms;
-}
-
-
-                  	body {
-background-color: #141414;
-}
-
-.showbox {
-  top: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.loader {
-  position: relative;
-  margin: 0 auto;
-  width: 100px;
-}
-.loader:before {
-  content: '';
-  display: block;
-  padding-top: 100%;
-}
-
-.circular {
-  animation: rotate 2s linear infinite;
-  height: 100%;
-  transform-origin: center center;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@keyframes dash {
-  0% {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -35px;
-  }
-  100% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -124px;
-  }
-}
-@keyframes color {
-  100%,
-  0% {
-    stroke: #d62d20;
-  }
-  40% {
-    stroke: #0057e7;
-  }
-  66% {
-    stroke: #008744;
-  }
-  80%,
-  90% {
-    stroke: #ffa700;
-  }
-}
-
-@media (max-width: 600px) {
-  .initialized {
-width: 100%;
-max-width: 100%;
-box-shadow: 0px 0px 0px 0 rgba(107,107,107,.15)
-  }
-  #carasoul {
-    margin: auto;
-    width: 100%;
-    padding-left: 0px;
-}
-
-  .fanarts-list>li .fanart-container {
-     border: 0px
- 
-}
-
-.fanarts-list>li {
-	    margin:0px;
-    margin-top: 34px;
-        margin-bottom: 30px;
-
-}
-
-
-}
-
-.visited{
-	color: white;
-}
-
-
-
-.secondary-link:visited {
-color: blue;
-}
-.secondary-link:link {
-    color: green;
-}
-
-
-.bottom {
-
-    position: relative;
-  margin-top: 20px;
-  width: 100%;
-  height: 6px;
-  background-color: #fdba2c;
-    opacity: 0;
-    transition-duration: 200ms;
-
-}
-    .bar {
-  content: "";
-  display: inline;
-  position: absolute;
-  width: 0;
-  height: 100%;
-  left: 50%;
-  text-align: center;
-}
-.bar:nth-child(1) {
-  background-color: #da4733;
-  animation: loading 3s linear infinite;
-}
-.bar:nth-child(2) {
-  background-color: #3b78e7;
-  animation: loading 3s linear 1s infinite;
-}
-.bar:nth-child(3) {
-  background-color: #fdba2c;
-  animation: loading 3s linear 2s infinite;
-}
-
-      
-
-.episode-gradient {
-    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(5%,rgba(0,0,0,.8)),color-stop(95%,rgba(0,0,0,0)));
-    background-image: -webkit-linear-gradient(bottom,rgba(0,0,0,.8) 5%,rgba(0,0,0,0) 95%);
-    background-image: -moz-linear-gradient(bottom,rgba(0,0,0,.8) 5%,rgba(0,0,0,0) 95%);
-    background-image: -o-linear-gradient(bottom,rgba(0,0,0,.8) 5%,rgba(0,0,0,0) 95%);
-    background-image: linear-gradient(to top,rgba(0,0,0,.8) 5%,rgba(0,0,0,0) 95%);
-    height: 55px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
-  select,
-  textarea,
-  input {
-    font-size: 16px;
-  }
-}
-.box{
-  margin:  auto;
-  height: 50px;
-  margin-top: 100px;
-  margin-bottom: 100px;
-      padding-left: 10px;
-    padding-right: 10px
-}
-
-/* Search 1 - bg change*/
-.container-1{
-  width: 100%;
-  vertical-align: middle;
-  white-space: nowrap;
-  position: relative;
-}
-.container-1 input#search{
-  width: 100%;
-  height: 50px;
-  background: #2b303b;
-  border: none;
-  font-size: 16px;
-  float: left;
-  color: #262626;
-  padding-left: 45px;
-  -webkit-border-radius: 1000px;
-  -moz-border-radius: 1000px;
-  border-radius: 1000px;
-  
-  -webkit-transition: all .55s ease;
-  -moz-transition: all .55s ease;
-  -ms-transition: all .55s ease;
-  -o-transition: all .55s ease;
-  transition: all .55s ease;
-}
-
-.container-1 input#search::-webkit-input-placeholder {
-   color: #65737e;
-}
-.container-1 input#search:-moz-placeholder { /* Firefox 18- */
-   color: #65737e;  
-}
-.container-1 input#search::-moz-placeholder {  /* Firefox 19+ */
-   color: #65737e;  
-}
-.container-1 input#search:-ms-input-placeholder {  
-   color: #65737e;  
-}
-
-.container-1 .icon{
-  position: absolute;
-  top: 50%;
-  margin-left: 17px;
-  margin-top: 17px;
-  z-index: 1;
-  color: #4f5b66;
-}
-
-  /* ANIMATION EFFECTS */
-  .container-1 input#search:focus, .container-1 input#search:active{
-    outline:none;
-    background: #ffffff;
-  }
-
-  #results {
-text-align: center !important;
-margin: auto;
-padding-top: 2px;
-  }
-.piece:hover{
-      border-style: solid;
-    border-width: 1px;
-
-
-}
-input[type='search'],
-input[type='number'],
-textarea {
-  font-size: 16px;
-}
-
-@media (min-width: 500px ) {
-  .box{
-width: 650px;
-  }
-
-}
-
-.tvshow{
-      display: inline-block;
-      text-align: center;
-      margin: 12px;
-      width: 160px;
-}
-@media (max-width: 500px ) {
-
-.tvshow{
-  width: 110px;
-}
-}
-.wtc{
-      display: inline-block;
-      text-align: center;
-      margin: 12px;
-      width: 250px;
-}
-@media (max-width: 500px ) {
-
-.wtc{
-  width: 160px;
-}
-}
-
-.shows{
-  overflow: scroll;
-      white-space: nowrap;
-          overflow-x: scroll;
-    overflow-y: hidden;
-        width: auto;
-        -webkit-overflow-scrolling: touch;
-
-}
-::-webkit-scrollbar {
-  background-color: transparent;
-  width: 16px
-}
-::-webkit-scrollbar-thumb {
-  border: 4px solid transparent;
-  border-radius: 8px;
-  background-clip: content-box;
-  background-color: rgba(102, 102, 102, .5)
-}
-::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0.12);
-  }
-::-webkit-scrollbar-thumb {
-  background-color: transparent
-}
-::-webkit-scrollbar-thumb {
-  background-color: #666!important
-}
-h1, h2 {
-    font-family: ProximaNovaSB, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    padding: 13px;
-}
-
-.tvshow:active, .tvshow:focus{
-  border: 1px;
-  border-style: solid;
-
-}
-
-body{
-    -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-color:white !important;
-background-color: #141414 !important;
-
-}
-
-.list-inline>li {
-    display: inline-block;
-    padding-right: 0px !important;
-    padding-left: 0px !important;
-}
-
-
-
-
-.spinner1 {
-  animation: rotator 1.4s linear infinite;
-}
-
-@keyframes rotator {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(270deg);
-  }
-}
-.path {
-  stroke-dasharray: 187;
-  stroke-dashoffset: 0;
-  transform-origin: center;
-  animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
-}
-
-@keyframes colors {
-  0% {
-    stroke: #ffffff;
-  }
-  25% {
-    stroke: #ffffff;
-  }
-  50% {
-    stroke: #ffffff;
-  }
-  75% {
-    stroke: #ffffff;
-  }
-  100% {
-    stroke: #ffffff;
-  }
-}
-@keyframes dash {
-  0% {
-    stroke-dashoffset: 187;
-  }
-  50% {
-    stroke-dashoffset: 46.75;
-    transform: rotate(135deg);
-  }
-  100% {
-    stroke-dashoffset: 187;
-    transform: rotate(450deg);
-  }
-}
-
 
             </style>
 
@@ -490,7 +32,7 @@ background-color: #141414 !important;
 </div>
 <h1>CONTINUE WATCHING</h1>
 
-<div class="shows" id="watching">
+<div class="fanarts-list list-unstyled list-inline shows" id="watching">
 
 </div>
 <h1>SHOWS</h1>
@@ -518,7 +60,7 @@ background-color: #141414 !important;
    </div>
 
    <script type="text/javascript" src="js/fetch.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
  <!-- <link async rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -578,6 +120,16 @@ console.log(    document.getElementsByClassName('initialized')[i].getAttribute('
 } 
 
 var tvobj = {}
+
+function tvstQ(q){
+  q = encodeURIComponent(q);
+ var query = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select all_images.poster from json where url="https://api.tozelabs.com/v2/show?limit=1&q=' +q + '"') + '&format=json&_maxage=36000';
+
+
+return query;
+}
+
+
 function tvlist(showName){
 
 if (showName in tvobj) {
@@ -595,17 +147,17 @@ if (showName in tvobj) {
 }
 */
   tvobj[(showName)] = ''
-  fetch('https://cors-anywhere.herokuapp.com/https://api.tozelabs.com/v2/show?limit=1&q=' + showName , {
+  var url = tvstQ(showName) 
+  fetch(url , {
     method: 'get',
     cache: "force-cache"
 }).then(function(response) {
   return response.json();
 }).then(function(dat){
-var showname = "'" +dat["0"].stripped_name + "'"
-var s = "onclick='query('" + showname + "')'"
-document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  bg="" show="' + showName +'" onclick="query(null,this)" ><img width="100%" src="'+dat["0"].all_images.poster[3]+'"><br></a></div>'
-localStorage[showName + "_json-image"] = dat["0"].all_images.poster[3]
-localStorage[showName + "_json-name"] = dat["0"].stripped_name
+  console.log(dat.query.results.json.all_images.poster._[3])
+document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  bg="" show="' + showName +'" onclick="query(null,this)" ><img width="100%" src="'+dat.query.results.json.all_images.poster._[3]+'"><br></a></div>'
+localStorage[showName + "_json-image"] = dat.query.results.json.all_images.poster._[3]
+// localStorage[showName + "_json-name"] = dat.query.results.json.all_images.poster._[3]
 
 
 
@@ -765,19 +317,23 @@ return 0;
 if (document.getElementsByClassName(json[i].href).length == 0) {
 console.log('worked')
 
-    document.getElementById('watching').innerHTML += '<div tabindex="1" class="wtc '+json[i].href+'"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><br> <span>'+json[i].show+'</span></a></div>'
+   document.getElementById('watching').innerHTML += '<div tabindex="1" class="wtc '+json[i].href+'"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><br> <span>'+json[i].show+'</span></a></div>'
+
+
 }
 
 
 
   }
+
+
   tvlist(json[i].show)
   var query = (json[i].metadata+" "+json[i].episode).toLowerCase();
-  template = template + '<li class="initialized '+json[i].type+'" data-query="'+query +'"><div class="piece fanart-container"><div class=image-crop><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
+  template = template + '<li  class="initialized '+json[i].type+'" data-query="'+query +'"><div  lass="piece fanart-container"><div class=image-crop><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"><span class="episode-gradient"></span><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch"><i class="fa fa-play"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+json[i].length +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
  
 
  }
- 
+
       document.getElementById('carasoul').innerHTML = template;
       template = '';
 
@@ -825,15 +381,17 @@ var template = "";
 
 
 
+ var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub+ '"') + '&format=json';
 
-fetch(proxy + show_hub, {
+
+fetch(  show_hub, {
     method: 'get',
     cache: "no-store"
 }).then(function(response) {
     return response.json(); 
 }).then(function(data){
 var start = new Date()
-
+data = data.query.results.json
  for(i in data.videos){
    if(data.videos[i].fullep == 1){
      function millisToMinutesAndSeconds(millis) {
