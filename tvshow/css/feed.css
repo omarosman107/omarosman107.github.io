@@ -951,6 +951,14 @@ img[data-src] {
     page-break-after: avoid;
   }
 }
+
+.playbutton:hover{
+        animation-timing-function:ease-in-out;
+
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 70px #fff, 0 0 80px #fff, 0 0 100px #fff, 0 0 150px #fff;
+        -webkit-animation-duration: .5s; /* Safari 4.0 - 8.0 */
+    animation-duration: .5s;
+}
 @media (max-width: 800px) {
 
   .fanarts-list>li .image-crop {
