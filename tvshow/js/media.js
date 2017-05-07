@@ -36,6 +36,7 @@ if (state == false) {
                     if(parseInt(localStorage[window.location.search + "_perc" == 100])){
 console.log('finished')
                     }
+    player.play();
 
 player.currentTime(localStorage[window.location.search])
 
