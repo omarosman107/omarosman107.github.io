@@ -326,7 +326,9 @@ color: blue;
 .container-1 input#search:-ms-input-placeholder {  
    color: #65737e;  
 }
-
+.nextContainer {
+    margin-bottom: 80px;
+}
 .container-1 .icon{
   position: absolute;
   top: 50%;
@@ -334,6 +336,9 @@ color: blue;
   margin-top: 14px;
   z-index: 1;
   color: #4f5b66;
+}
+.btn-floating {
+    color: #777;
 }
 
   /* ANIMATION EFFECTS */

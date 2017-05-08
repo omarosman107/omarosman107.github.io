@@ -10,7 +10,15 @@
 
 
             </style>
+ <!-- Compiled and minified CSS -->
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+          
 
 
 
@@ -41,8 +49,14 @@
   
 
 </div>
-  <input type="button" id="left-button" class="leftArrow" value="left">
-  <input type="button" id="right-button" class="rightArrow" value="right">
+<div class="nextContainer">
+    <a id="left-buttontv"  class="btn-floating btn-large waves-effect waves-light red" value="left"><i class="material-icons">chevron_left</i></a>
+
+    <a id="right-buttontv" class="btn-floating btn-large waves-effect waves-light red"  style="float: right;" value="right"><i class="material-icons">chevron_right</i></a>
+  
+</div>
+
+
 
 
 <div class="loaderHolder">
@@ -78,19 +92,32 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <-->
 <script>
+function is_touch_device() {
+  return 'ontouchstart' in window        // works on most browsers 
+      || navigator.maxTouchPoints;       // works on IE10/11 and Surface
+};
+if(is_touch_device){
+            $('#left-buttontv').hide()
+            $('#right-buttontv').hide()
+
+}
+$('#left-buttontv').show()
+            $('#right-buttontv').show()
  $(function () {
         var outer = $('#tvShows');
 
-        $('#left-button').click(function () {
+        $('#left-buttontv').click(function () {
            var leftPos = outer.scrollLeft();
-           outer.animate({ scrollLeft: leftPos - 800 }, 800);
+           outer.animate({ scrollLeft: leftPos - 900 }, 200);
         });
 
-        $('#right-button').click(function () {
+        $('#right-buttontv').click(function () {
            var leftPos = outer.scrollLeft();
-           outer.animate({ scrollLeft: leftPos + 800 }, 800);
+           outer.animate({ scrollLeft: leftPos + 900 }, 200);
         });
      });
+
+
 
 function results(num){
   var res = num + " results found"
@@ -311,9 +338,28 @@ if (link.includes('theplatform')) {
 }
 $(".shows").scroll(function() {
 lazyLoadImages();
+
 });
 
 
+    $('#tvShows').scroll( function() {
+        var $width = $('#tvShows').outerWidth()
+        var $scrollWidth = $('#tvShows')[0].scrollWidth; 
+        var $scrollLeft = $('#tvShows').scrollLeft();
+            $('#right-buttontv').css({opacity: 100})
+
+        if ($scrollWidth - $width === $scrollLeft){
+            console.log('right end');
+            $('#right-buttontv').fadeTo('fast',0 )
+        }
+                        $('#left-buttontv').css({opacity: 100})
+
+        if ($scrollLeft===0){
+            console.log('left end');
+                        $('#left-buttontv').fadeTo('fast',0 )
+
+        }
+    });
 
 function loadMedia(json){
 json = json.sort(function(a, b) {
