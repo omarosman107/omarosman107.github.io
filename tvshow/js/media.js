@@ -259,7 +259,7 @@ if (value.includes('abc.go.com/vidcode=')) {
 
 // FOX Fetch
 function fetchfoxjson(value) {
-	if (value.includes('link.theplatform.com/s/fox-mobile/')) {
+	if (value.includes('link.theplatform.com/s/fox.com/')) {
 
  fetch(value.split('?')[0] + "?format=preview", {
          method: 'get'

@@ -965,6 +965,26 @@ img[data-src] {
   80% { transform: scale(0.95) }
   100% { transform: scale(1.00) }
 }
+.logo{
+    width: 75px;
+        margin: auto;
+}
+.normal:hover {
+    display:none;
+
+}
+.white{
+opacity: .50;
+    transition-duration: 400ms;
+}
+.white:hover{
+    display: block;
+    opacity: 1;
+}
+.header {
+    text-align: center;
+    margin: auto;
+}
 
 .playbutton{
        -webkit-transition: all 200ms ease-in;
