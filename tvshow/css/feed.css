@@ -380,7 +380,7 @@ textarea {
 .shows{
   overflow: scroll;
       white-space: nowrap;
-          overflow-x: scroll;
+          overflow-x: auto;
     overflow-y: hidden;
         width: auto;
         -webkit-overflow-scrolling: touch;
