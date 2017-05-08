@@ -381,7 +381,7 @@ textarea {
   overflow: scroll;
       white-space: nowrap;
           overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: auto;
         width: auto;
         -webkit-overflow-scrolling: touch;
 
@@ -973,6 +973,10 @@ img[data-src] {
 .logo{
     width: 75px;
         margin: auto;
+    opacity: .50;
+        transition-duration: 400ms;
+
+
 }
 .normal:hover {
     display:none;
@@ -982,7 +986,7 @@ img[data-src] {
 opacity: .50;
     transition-duration: 400ms;
 }
-.white:hover{
+.logo:hover{
     display: block;
     opacity: 1;
 }
