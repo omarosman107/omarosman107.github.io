@@ -41,6 +41,8 @@
   
 
 </div>
+  <input type="button" id="left-button" class="leftArrow" value="left">
+  <input type="button" id="right-button" class="rightArrow" value="right">
 
 
 <div class="loaderHolder">
@@ -76,6 +78,19 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <-->
 <script>
+ $(function () {
+        var outer = $('#tvShows');
+
+        $('#left-button').click(function () {
+           var leftPos = outer.scrollLeft();
+           outer.animate({ scrollLeft: leftPos - 800 }, 800);
+        });
+
+        $('#right-button').click(function () {
+           var leftPos = outer.scrollLeft();
+           outer.animate({ scrollLeft: leftPos + 800 }, 800);
+        });
+     });
 
 function results(num){
   var res = num + " results found"
