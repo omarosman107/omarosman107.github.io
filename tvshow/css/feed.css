@@ -353,11 +353,14 @@ margin: auto;
 padding-top: 2px;
   }
 .piece:hover{
-      border-style: solid;
+    transition-duration: 200ms ;
+    position: relative;
     border-width: 1px;
+    border-style: solid;
 
 
 }
+
 input[type='search'],
 input[type='number'],
 textarea {
@@ -381,7 +384,7 @@ textarea {
   overflow: scroll;
       white-space: nowrap;
           overflow-x: auto;
-    overflow-y: auto;
+    overflow-y: hidden;
         width: auto;
         -webkit-overflow-scrolling: touch;
 
@@ -411,7 +414,7 @@ h1, h2 {
 }
 
 .tvshow:active, .tvshow:focus{
-  border: 1px;
+  border-bottom: 1px;
   border-style: solid;
 
 }
