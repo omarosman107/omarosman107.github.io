@@ -87,6 +87,8 @@ window.onunload = function() {
 }
 };
 
+    vid.play();
+
 function on_progress( event ) {
     console.log( 'buffered',(player.bufferedEnd() / player.duration() *100) + "%" );
     document.getElementById('progressplayer').style.width = (player.bufferedEnd() / player.duration() *100) + "%" 
