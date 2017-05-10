@@ -63,6 +63,7 @@ vid.onloadedmetadata = function() {
 console.log('metadata loaded!');
 var d = Math.floor(vid.duration);
 resumePlayback()
+alert('started playback')
 
 console.log(d)
 setInterval(function(){
