@@ -19,9 +19,13 @@ type:type
 
 resume();
 }
+var played = false;
 
 function resumePlayback(state){
-        document.getElementsByClassName('resume')[0].style.display = 'none'
+  if (played == false) {
+
+
+    document.getElementsByClassName('resume')[0].style.display = 'none'
 
       document.getElementsByClassName('resume')[0].style.opacity = 0
 if (state == false) {
@@ -37,11 +41,15 @@ if (state == false) {
 console.log('finished')
                     }
 
+
 player.currentTime(localStorage[window.location.search])
-
-
+played = true;
+ 
 }
 
+
+  }
+    
 
 
 
@@ -50,19 +58,15 @@ player.currentTime(localStorage[window.location.search])
 
 function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
 
-
 function resume(){
 
 
 
 var vid = document.getElementById('LS_html5_api');
 vid.oncanplay = function() {
-console.log('metadata loaded!');
-var d = Math.floor(vid.duration);
+  var played = true;
 resumePlayback()
-alert('started playback')
 
-console.log(d)
 setInterval(function(){
   localStorage[window.location.search]  = player.currentTime()
   localStorage[window.location.search + '_perc']  = player.currentTime() / player.duration() * 100;
