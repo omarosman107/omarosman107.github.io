@@ -56,7 +56,7 @@ function resume(){
 
 
 var vid = document.getElementById('LS_html5_api');
-vid.onloadedmetadata = function() {
+vid.oncanplay = function() {
 console.log('metadata loaded!');
 var d = Math.floor(vid.duration);
 resumePlayback()
