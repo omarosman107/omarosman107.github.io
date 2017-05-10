@@ -37,12 +37,7 @@ if (state == false) {
 console.log('finished')
                     }
 
-player.addEventListener('canplay', function() {
-      player.play();
-
 player.currentTime(localStorage[window.location.search])
-});
-
 
 
 }
