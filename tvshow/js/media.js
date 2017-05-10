@@ -294,9 +294,9 @@ function fetchfoxjson(value) {
 
 
 
-               document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false"
+               document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false&auth="
 
-                        player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"});
+                        player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false&auth="});
    player.play();
 
 resume()
@@ -331,10 +331,10 @@ resume()
               document.getElementById('progress').style.width = "90%"
               mediaurl = data.entries["0"].media$content["0"].plfile$url
               console.log(mediaurl)
-               document.getElementById('downloader').href = mediaurl.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false"
+               document.getElementById('downloader').href = mediaurl.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false&auth="
 
 
-                                          player.src({"type":"application/x-mpegURL", "src":mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"});
+                                          player.src({"type":"application/x-mpegURL", "src":mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false&auth="});
    player.play();
                   resume()
        
@@ -933,17 +933,17 @@ function fetchlplatjson(value){
       }).then(function(data) {
          document.getElementById('progress').style.width = "100%"
 
-      showname.innerHTML =   data.title
+      showname.innerHTML =   data.categories[0].name.split('/')[1] +' - ' +   data.title
 
-                        document.title = data.title
+                        document.title = data.categories[0].name.split('/')[1] +' - '+ data.title
 
       showdesc.innerHTML = data.description
       })
-                document.getElementById('downloader').href =  value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect"
+                document.getElementById('downloader').href =  value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect&auth="
 
 
 
-    player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect"});
+    player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect&auth="});
    player.play();
 resume()
       $('#projpar').hide()

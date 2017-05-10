@@ -60,6 +60,7 @@ var sitefunctions = {
 "nbc.com":"fetchnbcjson(url)",
 "cartoonnetwork.com":"fetchcartoonnjson(url)",
 "fox.com":"fetchfoxjson(url)",
+
 "link.theplatform.com":"fetchlplatjson(url)",
 "fxnetworks.com":"fetchfxjson(url)"
 
@@ -180,6 +181,10 @@ if (tv == "fox.com") {
 }
 if (tv == "cwtv.com") {
 	url = cwurl
+
+}
+if (tv == "abc.go.com") {
+  url = cwurl
 
 }
 console.log(url)
