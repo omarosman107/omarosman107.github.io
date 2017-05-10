@@ -38,7 +38,7 @@ console.log('finished')
                     }
     player.play();
 
-addEventListener('canplay', function() {
+player.addEventListener('canplay', function() {
 player.currentTime(localStorage[window.location.search])
 });
 
