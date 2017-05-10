@@ -57,15 +57,14 @@ function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
 function resume(){
 
 
-function on_progress( event ) {
-    console.log( 'buffered',(player.bufferedEnd() / player.duration() *100) + "%" );
-    document.getElementById('progressplayer').style.width = (player.bufferedEnd() / player.duration() *100) + "%" 
-    // it will log always 0
-}
 
-player.on( 'progress', on_progress );
+var vid = document.getElementById('LS_html5_api');
+vid.onloadedmetadata = function() {
+console.log('metadata loaded!');
+var d = Math.floor(vid.duration);
+resumePlayback()
 
-
+console.log(d)
 setInterval(function(){
   localStorage[window.location.search]  = player.currentTime()
   localStorage[window.location.search + '_perc']  = player.currentTime() / player.duration() * 100;
@@ -76,6 +75,7 @@ setInterval(function(){
 
 },
 2000)
+
 document.body.onunload = function(){
   localStorage[window.location.search]  = player.currentTime()
 
@@ -84,9 +84,21 @@ document.body.onunload = function(){
 window.onunload = function() {
   localStorage[window.location.search]  = player.currentTime()
 }
+};
+
+function on_progress( event ) {
+    console.log( 'buffered',(player.bufferedEnd() / player.duration() *100) + "%" );
+    document.getElementById('progressplayer').style.width = (player.bufferedEnd() / player.duration() *100) + "%" 
+    // it will log always 0
+}
+
+player.on( 'progress', on_progress );
 
 
-resumePlayback()
+
+
+
+
         document.getElementsByClassName('resume')[0].style.display = 'none'
 
       document.getElementsByClassName('resume')[0].style.opacity = 0
