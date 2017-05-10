@@ -169,6 +169,14 @@ document.getElementById('error').innerHTML = e
 document.getElementById('error').innerHTML = e
 });
 
+    fetch('https://cors-anywhere.herokuapp.com/https://www.filmon.com/api-v2/channel/3731?protocol=hls').then(function(response) {
+  return response.json();
+}).then(function(r) {
+ channels['The CW'].src = "http://tmg.ustreamix.com/tmg.m3u8?stream=the-cw-tv&token=" + (r.data.streams[1].url)
+ converttoHTML()
+}).catch(function(e){
+document.getElementById('error').innerHTML = e
+});
 
 
 
@@ -223,7 +231,7 @@ var channels = {
 },
 "The CW":{
 "working":true,
-"src":"http://wgntribune-lh.akamaihd.net/i/WGNPrimary_1@304622/master.m3u8",
+"src":"",
 "quality":"HD"
 },
 "NBC SPORTS":{
