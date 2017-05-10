@@ -66,6 +66,7 @@ var vid = document.getElementById('LS_html5_api');
 vid.oncanplay = function() {
   var played = true;
 resumePlayback()
+player.play()
 
 setInterval(function(){
   localStorage[window.location.search]  = player.currentTime()
