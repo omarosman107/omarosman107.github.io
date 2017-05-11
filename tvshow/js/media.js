@@ -387,8 +387,8 @@ function fetchcbsjson(value) {
    });
 }
 // Nickelodeon
-var playlist = ""
 var arr = ''
+                                var playlist = []
 
 function fetchnickjson(value) {
    document.getElementById('progress').style.width = "35%"
@@ -405,7 +405,6 @@ function fetchnickjson(value) {
          document.getElementById('progress').style.width = "60%"
 
 
-         	                      var playlist = []
 
          if (data.query.results.rss.channel.item.length > 1) {
                 showname.innerHTML = data.query.results.rss.channel.title + " - " +data.query.results.rss.channel.item[0].title
@@ -414,27 +413,21 @@ function fetchnickjson(value) {
             for (var i = 0; i < data.query.results.rss.channel.item.length; i++) {
 
 
- 
           var newItem = {
-                file: gatherData(data.query.results.rss.channel.item[i].group.content.url + "?format=json&acceptMethods=hls"),
-                type: "hls"
+                src: gatherData(data.query.results.rss.channel.item[i].group.content.url + "?format=json&acceptMethods=hls"),
+                type: "application/x-mpegURL"
             };
                         playlist.push(newItem);
 
             }
 
-
-
-         //   player.playlist(eval("[" + (arr.substring(0, arr.length - 1)) + "]"))
-           // player.load();
-            // player.play();
          }
          if (data.query.results.rss.channel.item.length == 1) {
                 showname.innerHTML = data.query.results.rss.channel.title + " - " +data.query.results.rss.channel.item.title
                                           document.title =  data.query.results.rss.channel.title + " - " +data.query.results.rss.channel.item.title
             var newItem = {
-                file: gatherData(data.query.results.rss.channel.item.group.content.url + "?format=json&acceptMethods=hls"),
-                type: "hls"
+                src: gatherData(data.query.results.rss.channel.item.group.content.url + "?format=json&acceptMethods=hls"),
+                type: "application/x-mpegURL"
             };
                         playlist.push(newItem);
          }
@@ -443,13 +436,11 @@ function fetchnickjson(value) {
                                    isDone = true
 
 
-                        jwplayer("myElement1").setup({
-                                  cast:{},
 
-playlist: playlist
+                        player.playlist(playlist)
+                        player.load()
+                        player.playlist.autoadvance(0);
 
-});
-                        jwplayer("myElement1").load(playlist);
       });
    });
 }
@@ -459,12 +450,12 @@ function gatherData(info) {
    var xhttp = new XMLHttpRequest();
    xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-         xml = this.responseText;
-         var jsonfirst = (JSON.parse(this.response)).package.video.item[0].rendition[(JSON.parse(this.response)).package.video.item[0].rendition.length - 1].src
+         xml = JSON.parse(this.responseText);
+         //var jsonfirst = (JSON.parse(this.response)).package.video.item[0].rendition[(JSON.parse(this.response)).package.video.item[0].rendition.length - 1].src
+         var jsonfirst = xml.package.video.item["0"].rendition["0"].src
          console.log(jsonfirst)
-         videourl = jsonfirst.replace("rtmpe://cp5289.edgefcs.net/ondemand/mtvnorigin/", "http://viacommtvstrmfs.fplive.net/")
-         document.getElementById('downloader').href = videourl
-         final = videourl
+         final = jsonfirst
+         player.src()
       };
    }
    xhttp.open("GET", info, false);
