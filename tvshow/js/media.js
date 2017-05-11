@@ -294,9 +294,9 @@ function fetchfoxjson(value) {
 
 
 
-               document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false&auth="
+               document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false&switch=https"
 
-                        player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false&auth="});
+                        player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false&switch=https"});
    player.play();
 
 resume()
@@ -331,10 +331,10 @@ resume()
               document.getElementById('progress').style.width = "90%"
               mediaurl = data.entries["0"].media$content["0"].plfile$url
               console.log(mediaurl)
-               document.getElementById('downloader').href = mediaurl.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false&auth="
+               document.getElementById('downloader').href = mediaurl.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false"
 
 
-                                          player.src({"type":"application/x-mpegURL", "src":mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false&auth="});
+                                          player.src({"type":"application/x-mpegURL", "src":mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"});
    player.play();
                   resume()
        
@@ -930,11 +930,11 @@ function fetchlplatjson(value){
 
       showdesc.innerHTML = data.description
       })
-                document.getElementById('downloader').href =  value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect&auth="
+                document.getElementById('downloader').href =  value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect"
 
 
 
-    player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect&auth="});
+    player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect"});
    player.play();
 resume()
       $('#projpar').hide()
