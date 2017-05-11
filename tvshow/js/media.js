@@ -73,6 +73,8 @@ setInterval(function(){
   localStorage[window.location.search + '_perc']  = player.currentTime() / player.duration() * 100;
   if (player.currentTime() == player.duration()) {
     localStorage[window.location.search + '_perc']  = 0;
+    localStorage.removeItem(window.location.search + '_perc')
+        localStorage.removeItem(window.location.search )
   }
 
 
