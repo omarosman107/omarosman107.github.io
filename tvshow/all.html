@@ -503,7 +503,8 @@ data = data.query.results.json
 var epinum = data.videos[i].episode
 try{
 epinum = data.videos[i].availability_asset_id.split('-')[data.videos[i].availability_asset_id.split('-').length - 1]
-
+var s = (data.videos[i].availability_asset_id.split('-')[data.videos[i].availability_asset_id.split('-').length - 1].split('E')[0].split('S')[1])
+var e = (data.videos[i].availability_asset_id.split('-')[data.videos[i].availability_asset_id.split('-').length - 1].split('E')[1])
 }catch(e){
 console.log(e)
 }
@@ -515,7 +516,7 @@ var episode_data = {img:data.videos[i].large_thumbnail,
     airdate:data.videos[i].airdate,
     show:data.videos[i].series_name,
     episode:data.videos[i].title,
-    epiformat:epinum,
+    epiformat:epiformat(s,e),
     length:data.videos[i].duration,
     metadata:data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration,
     type:"cw"
