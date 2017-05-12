@@ -445,7 +445,8 @@ if (document.getElementsByClassName(json[i].href).length == 0) {
 
 
 function epiformat(s,e){
-
+s = parseInt(s)
+e = parseInt(e)
 	if (s < 10) {
 s = '0' + s
 	}
