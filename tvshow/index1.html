@@ -1226,10 +1226,7 @@ console.log(err)
            if (mathleft >= 1) {
               mathleft = "+ " + mathleft + ' episodes'
            } 
-           var newEpi = '<div class="new">NEW<\/div>';
-           if (finishjson.episodes[i].is_new == true) {
-              mathleft = newEpi
-           }
+
            var medialink = "player.html?" + finishjson.episodes[i].show.name.replace("(2015)", "") + " , " + finishjson.episodes[i].name;
 var playerurl = medialink
    console.log(finishjson.episodes[i].show.images.poster)

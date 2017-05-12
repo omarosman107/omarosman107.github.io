@@ -416,6 +416,30 @@ h1, h2 {
     padding: 13px;
 }
 
+.new-label {
+      position: absolute;
+      top: 24px;
+      left: -24px;
+      width: 68px;
+      height: 34px;
+      -webkit-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      background-color: gold;
+      color: rgba(39, 39, 39, .8);
+      font-family: ProximaNovaSB;
+      font-size: 12px;
+      text-transform: uppercase;
+      z-index: 0;
+      -webkit-transform-origin: 0 0;
+      -moz-transform-origin: 0 0;
+      -ms-transform-origin: 0 0;
+      -o-transform-origin: 0 0;
+      padding-top: 16px;
+      text-align: center
+   }
 .tvshow:active, .tvshow:focus{
   border-bottom: 1px;
   border-style: solid;
