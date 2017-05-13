@@ -365,10 +365,21 @@ padding-top: 2px;
 
 }
 
-.piece:hover .secondary-link {
-    color:blue
+.piece:hover a.episode-name   {
+                color: #656464 !important;
 }
+.piece:hover a.secondary-link   {
+               color: #656464 !important;
+}
+.tvshow:hover{
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
 
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    transform: scale(1.1);
+    
+}
 input[type='search'],
 input[type='number'],
 textarea {
@@ -898,8 +909,8 @@ body a:hover {
   }
 }
      .image-crop:hover .overlay  { /* IE 9 */
-    -webkit-transform: scale(1); /* Safari */
-    transform: scale(1);
+    -webkit-transform: scale(1.5); /* Safari */
+    transform: scale(1.5);
          
 
 display: block;
@@ -917,13 +928,22 @@ display: block;
 
    }
 
+         
+         
 img {
 	opacity: 1;
-	 /* transition: opacity 0.3s;  */
+	  transition: opacity 0.3s;  
 }
 
 img[data-src] {
 	/* opacity: 0; */
+}
+.image-crop:hover  img{
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+               -webkit-transition: all .1s ease-in-out;
+      -moz-transition: all .1s ease-in-out;
+      transition: all .1s ease-in-out
 }
 .showbox {
     display: inline-block;
