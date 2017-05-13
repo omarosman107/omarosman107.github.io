@@ -449,6 +449,7 @@ h1, h2 {
 }
 
 .new-label {
+    border-radius: 2px;
       position: absolute;
       top: 24px;
       left: -24px;
