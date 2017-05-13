@@ -204,7 +204,15 @@ function tvstQ(q){
 
 return query;
 }
+function yqltheTVDB(q){
+  q = encodeURIComponent(q);
+ var query = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="http://skyhook.sonarr.tv/v1/tvdb/search/en/?term=' +q + '"') + '&format=json&_maxage=36000';
 
+
+return query;
+}
+
+var tvdbimg = 'https://thetvdb.com/banners/posters/279121-50.jpg'
 
 function tvlist(showName){
 
@@ -222,8 +230,10 @@ if (showName in tvobj) {
   return ;
 }
 */
+
   tvobj[(showName)] = ''
   var url = tvstQ(showName) 
+  
   fetch(url , {
     method: 'get',
     cache: "force-cache"
@@ -240,6 +250,44 @@ document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow
 
 
 });
+
+/*
+  fetch(yqltheTVDB(showName) , {
+    method: 'get',
+    cache: "force-cache"
+}).then(function(response) {
+  return response.json();
+}).then(function(json){
+var newDate = new Date('1-1-70')
+var showJson = {}
+for (var i = 0; i < json.query.results.json.json.length; i++){
+if(newDate < new Date(json.query.results.json.json[i].firstAired)){console.log('newer')
+newDate = new Date(json.query.results.json.json[i].firstAired)
+showJson = json.query.results.json.json[i]
+}
+for (var x = showJson.images.length - 1; x >= 0; x--) {
+  if(showJson.images[x].coverType == "Poster" ){
+
+
+document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="query(null,this)" ><img width="100%" alt="'+showName+'" src="'+showJson.images[x].url+'"><br></a></div>'
+// localStorage[showName + "_json-image"] = dat.query.results.json.all_images.poster._[3]
+// localStorage[showName + "_json-name"] = dat.query.results.json.all_images.poster._[3]
+        return false;
+  }
+}
+
+
+}
+
+
+
+
+
+
+
+
+});
+*/
 }
 
 function search(val){
@@ -408,7 +456,6 @@ var	template = ''
     var min = Math.floor(leftSec/(60));
     var leftSec = leftSec - min * 60;
 
-console.log(days)
 
   if (days <= 1 ) {
     return '<div class="new-label"> New</div>'
