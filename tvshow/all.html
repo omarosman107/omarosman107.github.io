@@ -631,7 +631,8 @@ fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=js
 }).then(function(data){
 for(i in data.entries){
 var date = new Date(data.entries[i].media$availableDate)
-var image = data.entries[i].media$thumbnails[5].plfile$url
+var image = data.entries[i].media$thumbnails[10].plfile$url
+
 	image = image.replace('http','https')
 
 
