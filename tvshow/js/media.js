@@ -419,8 +419,14 @@ function fetchnickjson(value) {
 
 
           var newItem = {
-                src: gatherData(data.query.results.rss.channel.item[i].group.content.url + "?format=json&acceptMethods=hls"),
+            sources: [{
+
+               src: gatherData(data.query.results.rss.channel.item[i].group.content.url + "?format=json&acceptMethods=hls"),
                 type: "application/x-mpegURL"
+
+
+            }]
+               
             };
                         playlist.push(newItem);
 
@@ -445,6 +451,8 @@ function fetchnickjson(value) {
                         player.playlist(playlist)
                         player.load()
                         player.playlist.autoadvance(0);
+                          document.getElementById('blockLoader').style.opacity = "0"
+    document.getElementById('blockLoader').style.display = 'none'
 
       });
    });
