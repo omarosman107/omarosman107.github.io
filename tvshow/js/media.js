@@ -64,6 +64,9 @@ function resume(){
 
 var vid = document.getElementById('LS_html5_api');
 vid.oncanplay = function() {
+  document.getElementById('blockLoader').style.opacity = "0"
+    document.getElementById('blockLoader').style.display = 'none'
+
   var played = true;
 resumePlayback()
 player.play()
