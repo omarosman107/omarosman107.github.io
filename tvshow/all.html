@@ -620,9 +620,56 @@ console.log(err)
 
 
  
+ var nickAPI = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="http://www.nick.com/data/episodes.json?apiKey=jukebox.nick.com"') + '&format=json';
+
+function nick(){
+fetch(nickAPI, {
 
 
+}).then(function(response){
+return response.json();
 
+}).then(function(json){
+  json = json.query.results.json
+for(i in json.stream){
+
+for(a in json.stream[i].items){
+try{
+
+var  S =  json.stream[i].items[a].data.duration;
+var times = S.split(":");
+var minutes = times[0];
+var seconds = times[1];
+seconds = parseInt(seconds, 10) + (parseInt(minutes, 10) * 60);
+
+  obj.push({img:json.stream[i].items[a].data.images.thumbnail['r16-9'],
+    rating:'TV-14',
+    href: 'nick.com' + json.stream[i].items[a].data.url,
+    airdate:formatDate(json.stream[i].items[a].data.datePosted.source),
+    show:json.stream[i].items[a].data.seriesTitle,
+    episode:json.stream[i].items[a].data.shortTitle,
+    epiformat:json.stream[i].items[a].data.episode,
+    length:fmtMSS(seconds),
+    metadata:json.stream[i].items[a].data.seriesTitle + json.stream[i].items[a].data.shortTitle,
+    type:"nick",
+  imgdyn:''
+
+  })
+
+
+}catch(e){
+console.log(e)
+}
+
+}
+}
+
+}).catch(function(e){
+  console.log(e)
+})
+
+}
+nick()
 
 
 
