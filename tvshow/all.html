@@ -542,12 +542,13 @@ var cors_show_hub = 'https://crossorigin.me/'  + show_hub
 
  var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub+ '"') + '&format=json';
 loaders()
-fetch(   cors_show_hub, {
+fetch(  show_hub, {
     method: 'get',
     cache: "no-store"
 }).then(function(response) {
     return response.json(); 
 }).then(function(data){
+  data = data.query.results.json
 var start = new Date()
 
  for(i in data.videos){
