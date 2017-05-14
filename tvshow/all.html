@@ -224,11 +224,11 @@ if (showName in tvobj) {
 }).then(function(response) {
   return response.json();
 }).then(function(dat){
-document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="query(null,this)" ><img width="100%" alt="'+showName+'" class"lazy" src="'+dat.query.results.json.all_images.poster._[3]+'"><br></a></div>'
+document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="query(null,this)" ><img width="100%" alt="'+showName+'" class="lazy" data-original="'+dat.query.results.json.all_images.poster._[3]+'"><br></a></div>'
 // localStorage[showName + "_json-image"] = dat.query.results.json.all_images.poster._[3]
 // localStorage[showName + "_json-name"] = dat.query.results.json.all_images.poster._[3]
 
-
+lazyLoadImages()
 
 
 
@@ -348,7 +348,7 @@ if (rate.includes('tv-14')) {
 
 }
 var myLazyLoad = new LazyLoad({
-    threshold: 500, 
+    threshold: 100, 
     });
 
 
@@ -486,7 +486,7 @@ if (json[i].imgdyn == '') {
 
 } 
 
-  template = template + '<li  class="initialized '+json[i].type+'" data-query="'+query +'"><div  class="piece fanart-container"><div class=image-crop>'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"></span><img alt="'+json[i].show+'"  '+img+' data-original-set="'+json[i].imgdyn+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch '+json[i].episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+timeofPlayback +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
+  template = template + '<li  class="initialized '+json[i].type+'" data-query="'+query +'"><div  class="piece fanart-container"><div class=image-crop>'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"></span><img alt="'+json[i].show+'"  '+img+' data-original-set="'+json[i].imgdyn+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch '+json[i].episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="query(null,this)" show="'+json[i].show+'" href="javascript:" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+timeofPlayback +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
  
 
  }
