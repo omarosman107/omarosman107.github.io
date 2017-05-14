@@ -299,9 +299,9 @@ function fetchfoxjson(value) {
 
 
 
-               document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false&switch=https"
+               document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false"
 
-                        player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false&switch=https"});
+                        player.src({"type":"application/x-mpegURL", "src":value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"});
    player.play();
 
 resume()
