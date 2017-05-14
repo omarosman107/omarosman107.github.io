@@ -480,8 +480,13 @@ if (document.getElementsByClassName(json[i].href).length == 0) {
   tvlist(json[i].show)
   var query = (json[i].metadata+" "+json[i].episode).toLowerCase();
  timeofPlayback = json[i].length.split(':')[0] + 'm'
+ var img = ''
+if (json[i].imgdyn == '') {
+  img = 'data-original="'+json[i].img+'"'
 
-  template = template + '<li  class="initialized '+json[i].type+'" data-query="'+query +'"><div  class="piece fanart-container"><div class=image-crop>'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"></span><img alt="'+json[i].show+'"  data-original="'+json[i].img+'" data-original-set="'+json[i].imgdyn+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch '+json[i].episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+timeofPlayback +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
+} 
+
+  template = template + '<li  class="initialized '+json[i].type+'" data-query="'+query +'"><div  class="piece fanart-container"><div class=image-crop>'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"></span><img alt="'+json[i].show+'"  '+img+' data-original-set="'+json[i].imgdyn+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch '+json[i].episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+json[i].airdate+' | ' + json[i].rating + ' | '+timeofPlayback +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
  
 
  }
@@ -680,15 +685,35 @@ var image = data.entries[i].media$thumbnails[10].plfile$url
 
 
 var srcset = ''
+var srcobj = []
 for (var z = data.entries[i].media$thumbnails.length - 1; z >= 0; z--) {
   var img = data.entries[i].media$thumbnails[z].plfile$url
   img = img.replace('http','https')
+  srcobj.push({src:img,width:data.entries[i].media$thumbnails[z].plfile$width})
 
-  srcset +=  img +' ' + data.entries[i].media$thumbnails[z].plfile$width+ 'w ,  ';
+  // srcset +=  img +' ' + data.entries[i].media$thumbnails[z].plfile$width+ 'w ,  ';
 
 }
 
-  obj.push({img:image,
+srcobj = srcobj.sort(function(a, b){
+    if(a.width < b.width) return -1;
+    if(a.width > b.width) return 1;
+    return 0;
+})
+
+console.log(srcobj)
+console.log(srcset)
+srcobj = srcobj.reverse()
+for (var y = srcobj.length - 1; y >= 0; y--) {
+
+srcset +=  srcobj[y].src +' ' + srcobj[y].width+ 'w ,  ';
+
+}
+
+
+console.log(srcobj)
+
+  obj.push({img:'',
   	rating:rating(data.entries[i].media$ratings[0].rating),
   	href: data.entries[i].media$content[0].plfile$url,
   	airdate:formatDate(date.getTime()),
