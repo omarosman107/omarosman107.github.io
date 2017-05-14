@@ -366,6 +366,12 @@ padding-top: 2px;
 
 
 }
+.piece{
+    border-radius:2px;
+}
+.image-crop{
+    border-radius: 2px 2px 0px 0px;
+}
 
 .piece:hover a.episode-name   {
                 color: #656464 !important;
@@ -770,7 +776,8 @@ a {
     margin: 12px;
     position: relative;
     vertical-align: top;
-    overflow: hidden
+    overflow: hidden;
+    border-radius:2px;
 }
 .fanarts-list>li .fanart-container {
     background-color: #1a1a1a;
