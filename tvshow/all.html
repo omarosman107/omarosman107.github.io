@@ -224,7 +224,7 @@ if (showName in tvobj) {
 }).then(function(response) {
   return response.json();
 }).then(function(dat){
-document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="query(null,this)" ><img width="100%" alt="'+showName+'" class="lazy" data-original="'+dat.query.results.json.all_images.poster._[3]+'"><br></a></div>'
+document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="query(null,this)" ><img width="100%" alt="'+showName+'" class="lazy" data-original="'+dat.query.results.json.all_images.poster._[3]+'"></a></div>'
 // localStorage[showName + "_json-image"] = dat.query.results.json.all_images.poster._[3]
 // localStorage[showName + "_json-name"] = dat.query.results.json.all_images.poster._[3]
 
