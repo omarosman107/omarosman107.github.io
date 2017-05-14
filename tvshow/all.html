@@ -55,13 +55,7 @@
 
 
 
-<div class="loaderHolder">
-<svg id="fox" class="spinner1" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-   <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-</svg>
-<svg id="cw"  class="spinner1" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-   <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-</svg>
+<div id="loaderHolder" class="loaderHolder">
 
 
 </div>
@@ -138,7 +132,18 @@ function addJS(url) {
    var fs = document.getElementsByTagName('script')[0]; // Get the first script
    fs.parentNode.insertBefore(s, fs);
 };
+function loaders(atr){
 
+  if (atr == 'remove') {
+var child = document.getElementsByClassName('spinner')[0]
+    document.getElementById('loaderHolder').removeChild(child)
+
+return;
+  }
+
+  document.getElementById('loaderHolder').innerHTML += '<svg  class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>'
+
+}
 function query(q,obj){
     if (q == null) {
    q = obj.getAttribute('show')
@@ -534,7 +539,7 @@ var template = "";
 
  var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub+ '"') + '&format=json';
 
-
+loaders()
 fetch(  show_hub, {
     method: 'get',
     cache: "no-store"
@@ -585,8 +590,8 @@ var episode_data = {img:data.videos[i].large_thumbnail,
       loadMedia(obj)
       lazyLoadImages();
 
-document.getElementById('cw').style.display = "none"
-   template = ''
+loaders('remove'); 
+  template = ''
    var end = new Date()
 
 
@@ -600,7 +605,7 @@ console.log(err)
 
  
  var nickAPI = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="http://www.nick.com/data/episodes.json?apiKey=jukebox.nick.com"') + '&format=json';
-
+loaders()
 function nick(){
 fetch(nickAPI, {
 
@@ -635,13 +640,16 @@ seconds = parseInt(seconds, 10) + (parseInt(minutes, 10) * 60);
 
   })
 
-
 }catch(e){
 console.log(e)
 }
 
 }
+
+
 }
+loaders('remove');
+
 
 }).catch(function(e){
   console.log(e)
@@ -651,7 +659,7 @@ console.log(e)
 nick()
 
 
-
+loaders()
 function fox(range){
 fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}&range=0-100', {
 	method: 'get',
@@ -701,7 +709,7 @@ for (var z = data.entries[i].media$thumbnails.length - 1; z >= 0; z--) {
 
 
    }
-   document.getElementById('fox').style.display = "none"
+loaders('remove');
          loadMedia(obj)
 lazyLoadImages();
 
