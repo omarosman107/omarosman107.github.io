@@ -534,18 +534,18 @@ var template = "";
 
 
 
+var cors_show_hub = 'https://crossorigin.me/'  + show_hub
 
  var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub+ '"') + '&format=json';
-
 loaders()
-fetch(  show_hub, {
+fetch(   cors_show_hub, {
     method: 'get',
     cache: "no-store"
 }).then(function(response) {
     return response.json(); 
 }).then(function(data){
 var start = new Date()
-data = data.query.results.json
+
  for(i in data.videos){
    if(data.videos[i].fullep == 1){
      function millisToMinutesAndSeconds(millis) {
