@@ -73,11 +73,8 @@ new_hls.off(Hls.Events.ERROR,onPlaybackError);
 
 vid.oncanplay = function() {
   document.getElementById('blockLoader').style.opacity = "0"
-  setTimeout(function(){
-    document.getElementById('blockLoader').style.display = 'none'
-
-
-  },400)
+  document.getElementById('blockLoader').style.display='absolute';
+    document.getElementById('blockLoader').style.zIndex ='-99999';
 
   var played = true;
 resumePlayback()
