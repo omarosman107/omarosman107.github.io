@@ -32,7 +32,7 @@ if (state == false) {
   return ;
 }
 
-
+ 
 
 
                     if(localStorage[window.location.search]){
@@ -63,13 +63,6 @@ function resume(){
 
 
 var vid = document.getElementById('LS_html5_api');
-var hls = new Hls()
-hls.on(Hls.Events.ERROR,onPlaybackError);
-function onPlaybackError(event,data) {
-console.log("HLS Error "+data.type);
-console.log("HLS Error Object "+data);
-new_hls.off(Hls.Events.ERROR,onPlaybackError);
-}
 
 vid.oncanplay = function() {
   document.getElementById('blockLoader').style.opacity = "0"
