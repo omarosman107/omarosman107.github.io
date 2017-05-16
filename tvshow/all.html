@@ -269,6 +269,8 @@ fetch(url , {
 
 
 
+}).catch(function(e){
+  console.log(e)
 });
 }
 
@@ -711,7 +713,6 @@ console.log(err)
 
  
  var nickAPI = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="http://www.nick.com/data/episodes.json?apiKey=jukebox.nick.com"') + '&format=json';
-loaders()
 function nick(){
 fetch(nickAPI, {
 }).then(function(response){
@@ -772,7 +773,6 @@ loaders('remove');
 })
 
 }
-nick()
 
 
 loaders()
@@ -793,9 +793,7 @@ showsTemp[data.entries[i].fox$series] = data.entries[i].fox$series
 }
 
 var date = new Date(data.entries[i].media$availableDate)
-var image = data.entries[i].media$thumbnails[10].plfile$url
 
-	image = image.replace('http','https')
 
 
 
