@@ -778,6 +778,8 @@ a {
     position: relative;
     vertical-align: top;
     overflow: hidden;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.17), 0 0 8px 0 rgba(0,0,0,0.12);
+
     border-radius:2px;
 }
 .fanarts-list>li .fanart-container {
@@ -795,6 +797,12 @@ a {
     width: 90%;
         border-radius: 3px;
     max-width: 300px;
+        -webkit-transition: all 150ms ease-out;
+    -moz-transition: all 150ms ease-out;
+    transition: all 150ms ease-out;
+}
+.initialized:hover{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.17), 0 0 8px 0 rgba(0,0,0,0.12) !important;
 }
 
 
@@ -989,6 +997,8 @@ img[data-src] {
     margin: 0px;
     margin-top: 34px;
     margin-bottom: 30px;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.17), 0 0 8px 0 rgba(0,0,0,0.12);
+
   }
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) {
