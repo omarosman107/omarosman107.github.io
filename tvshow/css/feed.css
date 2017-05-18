@@ -881,6 +881,7 @@ body a:hover {
     padding: 5px 0
 }
  .image-crop .overlay {
+         background: radial-gradient(farthest-corner at 50% 50%,rgba(50,50,50,.5) 50%,#323232 100%);
       /* display: none; */
       position: absolute;
       top: 0;
@@ -888,12 +889,11 @@ body a:hover {
       left: 0;
       right: 0;
       overflow: hidden;
-      background-color: rgba(0, 0, 0, .6);
       letter-spacing: 0;
       opacity: 0;
       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-      -webkit-transition: all .11s ease-in-out;
-    transition: all .11s ease-in-out;
+      -webkit-transition: all .23s ease-in-out;
+    transition: all .23s ease-in-out;
    }
   .fanarts-list>li  .image-crop .overlay a:focus, .posters-list>li .image-crop .overlay a:hover {
       text-decoration: none
@@ -917,6 +917,15 @@ body a:hover {
     text-align: center;
 
       
+}
+.w3-progress-container{
+    -webkit-transition: all .18s ease-in-out;
+    transition: all .18s ease-in-out;
+        -moz-transition: all .18s ease-out;
+
+}
+.image-crop:hover .w3-progress-container {
+    bottom: -12px;
 }
 @-webkit-keyframes neon1 {
   from {
@@ -956,9 +965,15 @@ img {
 img[data-src] {
 	/* opacity: 0; */
 }
+.image-crop:hover {
+ /*           border: 3px solid #cc7b19; */
+
+}
 .image-crop:hover  img{
-    transform: scale(1.05);
+    
+ /*   transform: scale(1.05);
     -webkit-transform: scale(1.05);
+    */
                -webkit-transition: all .1s ease-in-out;
       -moz-transition: all .1s ease-in-out;
       transition: all .1s ease-in-out
@@ -1127,8 +1142,12 @@ opacity: .50;
     width: 100%;
     overflow: hidden;
     position: relative;
-          min-height: 208px;
   }
+    .fanarts-list>li .image-crop:hover{ 
+
+        border: 5px solid ;
+    
+    }
 
   .fanarts-list>li .image-crop img {
     width: 100%;
