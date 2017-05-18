@@ -770,7 +770,7 @@ a {
 @-moz-document url-prefix() {}
 .fanarts-list {
     font-size: 0;
-    letter-spacing: -1px
+    letter-spacing: -1px;
 }
 .fanarts-list>li {
     padding: 0;
@@ -880,6 +880,10 @@ body a:hover {
     font-family: ProximaNova;
     padding: 5px 0
 }
+.tvshow:hover{
+             background: radial-gradient(farthest-corner at 50% 50%,rgba(50,50,50,.5) 50%,#323232 100%);
+
+}
  .image-crop .overlay {
          background: radial-gradient(farthest-corner at 50% 50%,rgba(50,50,50,.5) 50%,#323232 100%);
       /* display: none; */
@@ -966,7 +970,7 @@ img[data-src] {
 	/* opacity: 0; */
 }
 .image-crop:hover {
- /*           border: 3px solid #cc7b19; */
+            border: 3px solid #cc7b19; 
 
 }
 .image-crop:hover  img{
@@ -1145,7 +1149,6 @@ opacity: .50;
   }
     .fanarts-list>li .image-crop:hover{ 
 
-        border: 5px solid ;
     
     }
 
