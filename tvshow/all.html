@@ -129,11 +129,17 @@ function addJS(url) {
    var fs = document.getElementsByTagName('script')[0]; // Get the first script
    fs.parentNode.insertBefore(s, fs);
 };
+  document.getElementById('loaderHolder').innerHTML += '<svg  class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>'
+var num = 0
 function loaders(atr){
 
   if (atr == 'remove') {
+    num = num - 1
+    if (num - 1 == -1) {
 var child = document.getElementsByClassName('spinner')[0]
     document.getElementById('loaderHolder').removeChild(child)
+    }
+
 
 if (document.getElementsByClassName('spinner').length == 0) {
 
@@ -141,7 +147,8 @@ if (document.getElementsByClassName('spinner').length == 0) {
 return;
   }
 
-  document.getElementById('loaderHolder').innerHTML += '<svg  class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>'
+
+  num  = num + 1
 
 }
 function query(q,obj){
@@ -840,7 +847,6 @@ loadMedia(finalObj)
 })
 
 }
-nick()
 
 loaders()
 function fox(range){
