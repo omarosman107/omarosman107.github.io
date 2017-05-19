@@ -176,6 +176,41 @@ function query(q,obj){
 
     
 
+
+function showQuery(q,obj){
+    if (q == null) {
+   q = obj.getAttribute('show')
+//   document.body.style.background = 'url(' + obj.getAttribute('bg') + ") no-repeat center center fixed";
+  };
+
+  document.getElementById('search').value = q
+
+  var num = 0
+  for (var i = document.getElementsByClassName('initialized').length - 1; i >= 0; i--) {
+    if( document.getElementsByClassName('initialized')[i].getAttribute('ShowName').includes(q)){
+      document.getElementsByClassName('initialized')[i].style.display = "inline-block"
+      num += 1
+        lazyLoadImages();
+
+
+    }else{
+      document.getElementsByClassName('initialized')[i].style.display = "none"
+    }
+
+
+  }
+
+
+  results(num )
+  lazyLoadImages();
+
+
+} 
+
+    
+
+
+
 var tvobj = {}
 
 
@@ -262,7 +297,7 @@ fetch(url , {
   }
   */
 
-  document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="query(null,this)" ><img width="100%" alt="'+showName+'" src="'+dat.query.results.json.all_images.poster._[3]+'"></a></div>'
+  document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="showQuery(null,this)" ><img width="100%" alt="'+showName+'" src="'+dat.query.results.json.all_images.poster._[3]+'"></a></div>'
 
 
 
@@ -430,7 +465,7 @@ lazyLoadImages();
         }
     });
 function loadQuick(json){
-
+var temp = ''
 
  function newBanner(){
   var date1 = new Date();    
@@ -479,7 +514,7 @@ return 0;
 
 if (document.getElementsByClassName(json.href).length == 0) {
 
-   document.getElementById('watching').innerHTML += '<li style="width: 280px;margin: 11px;" class=" card initialized '+json.href+'"><a href="#"><div class="piece fanart-container"><div class="image-crop">'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json.href+'"></span><img  src="'+json.img+'" alt="'+json.episode+'" data-original-set="'+json.imgdyn+'" class"lazy" class="loaded" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json.href+'" class="overlay-btn zoom-btn "  title="Watch '+json.episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json.href+'">'+json.episode+'</a></h2><a onclick="loadPlayer(this)" href="" class="secondary-link show-name">'+json.show+'</a><a href="javascript:"><i style="    /* opacity: '+showCheck()+'; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"></i></a></div><div class="bottom"></div></div></a></li>'
+   document.getElementById('watching').innerHTML  += '<li style="width: 280px;margin: 11px;" class=" card initialized '+json.href+'"><a href="#"><div class="piece fanart-container"><div class="image-crop">'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json.href+'"></span><img  src="'+json.img+'" alt="'+json.episode+'" data-original-set="'+json.imgdyn+'" class"lazy" class="loaded" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json.href+'" class="overlay-btn zoom-btn "  title="Watch '+json.episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json.href+'">'+json.episode+'</a></h2><a onclick="loadPlayer(this)" href="" class="secondary-link show-name">'+json.show+'</a><a href="javascript:"><i style="    /* opacity: '+showCheck()+'; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"></i></a></div><div class="bottom"></div></div></a></li>'
 
 
 }
@@ -503,7 +538,6 @@ var month2 = formatter.format(date);
 
 var FDate = month2 +' ' + date.getUTCDate() +' '+ date.getUTCFullYear()
 
-console.log(FDate)
 
   document.getElementById('carasoul').innerHTML += '<li  aired="'+json.airdate+'" class="initialized '+json.type+'" data-query="'+query +'"><div  class="piece fanart-container"><div class=image-crop>'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json.href+'"></span><img alt="'+json.show+'"  '+img+' data-original-set="'+json.imgdyn+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json.href+'" class="overlay-btn zoom-btn " title="Watch '+json.episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json.href+'">'+json.episode+'</a></h2><a onclick="query(null,this)" show="'+json.show+'" href="javascript:" class="secondary-link show-name">'+json.show +'</a><div class=more-infos></div><p>'+FDate+' | ' + json.rating + ' | '+timeofPlayback +' | '+json.epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
  
@@ -548,7 +582,7 @@ var	template = ''
     var leftSec = leftSec - min * 60;
 
 
-  if (days <= 1 ) {
+  if (days < 1 ) {
     return '<div class="new-label"> New</div>'
   }else{
   return ''
@@ -606,17 +640,16 @@ var month2 = formatter.format(date);
 
 var FDate = month2 +' ' + date.getUTCDate() +' '+ date.getUTCFullYear()
 
-console.log(FDate)
 
 
 
 
-  template = template + '<li  class="initialized '+json[i].type+'" data-query="'+query +'"><div  class="piece fanart-container"><div class=image-crop>'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"></span><img alt="'+json[i].show+'"  '+img+' data-original-set="'+json[i].imgdyn+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch '+json[i].episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="query(null,this)" show="'+json[i].show+'" href="javascript:" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+FDate+' | ' + json[i].rating + ' | '+timeofPlayback +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
+  template = template + '<li  aired="'+json[i].airdate+'"  ShowName="'+json[i].show+'" class="initialized '+json[i].type+'" data-query="'+query +'"><div  class="piece fanart-container"><div class=image-crop>'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"></span><img alt="'+json[i].show+'"  '+img+' data-original-set="'+json[i].imgdyn+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch '+json[i].episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="query(null,this)" show="'+json[i].show+'" href="javascript:" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+FDate+' | ' + json[i].rating + ' | '+timeofPlayback +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
  
 
  }
 
-      document.getElementById('carasoul').innerHTML = template;
+      document.getElementById('carasoul').innerHTML += template;
       template = '';
 
 
@@ -676,6 +709,7 @@ fetch(  show_hub, {
   data = data.query.results.json
 var start = new Date()
 var showsTemp = {}
+var finalObj = []
  for(i in data.videos){
    if(data.videos[i].fullep == 1){
 if (!showsTemp[data.videos[i].series_name]) {
@@ -712,7 +746,7 @@ var episode_data = {img:data.videos[i].large_thumbnail,
     type:"cw"
   }
 
-  loadQuick(episode_data)
+  finalObj.push(episode_data)
 
 
 
@@ -721,6 +755,8 @@ var episode_data = {img:data.videos[i].large_thumbnail,
 
    }
    }
+   console.log(finalObj)
+   loadMedia(finalObj)
       lazyLoadImages();
       sortCards()
 
@@ -748,6 +784,7 @@ return response.json();
 }).then(function(json){
   json = json.query.results.json
   var showsTemp = {}
+  var finalObj = []
 
 for(i in json.stream){
 
@@ -767,7 +804,7 @@ var seconds = times[1];
 seconds = parseInt(seconds, 10) + (parseInt(minutes, 10) * 60);
 tvlist(json.stream[i].items[a].data.seriesTitle)
 
-  loadQuick({img:json.stream[i].items[a].data.images.thumbnail['r16-9'],
+  finalObj.push({img:json.stream[i].items[a].data.images.thumbnail['r16-9'],
     rating:'TV-14',
     href: 'nick.com' + json.stream[i].items[a].data.url,
     airdate:formatDate(json.stream[i].items[a].data.datePosted.source),
@@ -791,9 +828,10 @@ console.log(e)
 
 
 }
+
 sortCards()
 loaders('remove');
-
+loadMedia(fina)
 
 }).catch(function(e){
   console.log(e)
@@ -811,7 +849,7 @@ fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=js
 	return response.json();
 }).then(function(data){
     var showsTemp = {}
-
+var finalObj = []
 for(i in data.entries){
 if (!showsTemp[data.entries[i].fox$series]) {
 
@@ -857,7 +895,7 @@ srcset +=  srcobj[y].src +' ' + srcobj[y].width+ 'w ,  ';
 
 
 
-  loadQuick({img:'',
+  finalObj.push({img:'',
   	rating:rating(data.entries[i].media$ratings[0].rating),
   	href: data.entries[i].media$content[0].plfile$url,
   	airdate:formatDate(date.getTime()),
@@ -878,7 +916,9 @@ tvlist(data.entries[i].fox$series)
    }
 
 loaders('remove');
+loadMedia(finalObj)
 sortCards()
+
 lazyLoadImages();
 
 
