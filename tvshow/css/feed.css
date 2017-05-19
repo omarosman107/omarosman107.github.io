@@ -382,7 +382,7 @@ padding-top: 2px;
 .tvshow:hover{
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
-
+opacity: 1;
     transition: all 0.2s;
     -webkit-transition: all 0.2s;
     transform: scale(1.1);
@@ -395,6 +395,7 @@ textarea {
 }
 
 .tvshow{
+    opacity: .8;
       display: inline-block;
       text-align: center;
       margin: 12px;
@@ -1138,7 +1139,7 @@ opacity: .50;
     transform: scale(1);   
 }
 * {
-    transition: all 300ms ease-in-out;
+    transition: all 100ms ease-in-out;
 }
 .playbutton:hover{
     /*  animation: bounce 1s .5s ease;*/
