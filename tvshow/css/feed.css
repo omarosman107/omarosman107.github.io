@@ -772,6 +772,13 @@ a {
     font-size: 0;
     letter-spacing: -1px;
 }
+
+::selection {
+  background: #ffb7b7; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #ffb7b7; /* Gecko Browsers */
+}
 .fanarts-list>li {
     padding: 0;
     margin: 12px;
