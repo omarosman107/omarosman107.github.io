@@ -1,0 +1,16 @@
+== EXPERIMENTAL ==
+
+
+ADULTSWIM: Some episodes don't have images 
+ABC:Extreme Slowness and bugginess
+
+
+== CHANGELOG ==
+
+Just made the loading way faster.
+--
+Added loading spinners which are dynamic
+--
+Added Nick
+--
+

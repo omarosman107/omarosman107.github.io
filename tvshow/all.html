@@ -67,7 +67,7 @@
   <img  width="100%" src="logow.svg">  
 
 </div>
-
+<a href="log.txt"><span>Changelog</span></a>
 </div>
    </div>
 
@@ -777,6 +777,8 @@ console.log(err)
  
  var nickAPI = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="http://www.nick.com/data/episodes.json?apiKey=jukebox.nick.com"') + '&format=json';
 function nick(){
+  loaders();
+
 fetch(nickAPI, {
 }).then(function(response){
 return response.json();
@@ -831,14 +833,14 @@ console.log(e)
 
 sortCards()
 loaders('remove');
-loadMedia(fina)
+loadMedia(finalObj)
 
 }).catch(function(e){
   console.log(e)
 })
 
 }
-
+nick()
 
 loaders()
 function fox(range){
@@ -928,6 +930,7 @@ console.log(err)
 });
 }
 function procABC(showepi){
+  var showObj = []
 
 for(a in showepi.videos.video){
  var thumb 
@@ -946,7 +949,7 @@ thumb = showepi.videos.video[a].thumbnails.thumbnail[0].$		}
 	}catch(e){
 console.log(e)
 	}
-  loadQuick({img:thumb,
+  showObj.push({img:thumb,
   	rating:(showepi.videos.video[a].tvrating.rating),
   	href: "abc.go.com/vidcode=" + showepi.videos.video[a]['@id'],
   	airdate:airdate,
@@ -960,7 +963,7 @@ console.log(e)
 
 }
            lazyLoadImages();
-
+loadMedia(showObj)
 loaders('remove');
 sortCards()
 
