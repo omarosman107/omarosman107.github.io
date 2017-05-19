@@ -362,8 +362,7 @@ padding-top: 2px;
 .piece:hover{
     transition-duration: 200ms ;
     position: relative;
-    border-width: 1px;
-    border-style: solid;
+
 
 
 }
@@ -977,7 +976,7 @@ img[data-src] {
 	/* opacity: 0; */
 }
 .image-crop:hover {
-            border: 3px solid #cc7b19; 
+        /*    border: 3px solid #cc7b19; */
 
 }
 .image-crop:hover  img{
@@ -1137,6 +1136,9 @@ opacity: .50;
     -moz-transform: scale(1);
     transition: all 200ms ease-in;
     transform: scale(1);   
+}
+* {
+    transition: all 300ms ease-in-out;
 }
 .playbutton:hover{
     /*  animation: bounce 1s .5s ease;*/
