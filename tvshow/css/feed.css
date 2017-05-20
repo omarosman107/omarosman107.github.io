@@ -395,6 +395,8 @@ textarea {
 }
 
 .tvshow{
+      will-change: opacity;
+
     opacity: .8;
       display: inline-block;
       text-align: center;
@@ -809,6 +811,8 @@ a {
     transition: all 150ms ease-out;
 }
 .initialized:hover{
+          will-change: box-shadow;
+
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.17), 0 0 8px 0 rgba(0,0,0,0.12) !important;
 }
 
@@ -903,8 +907,8 @@ body a:hover {
       letter-spacing: 0;
       opacity: 0;
       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-      -webkit-transition: all .23s ease-in-out;
-    transition: all .23s ease-in-out;
+      -webkit-transition: all .23s ease-out;
+    transition: all .23s ease-out;
    }
   .fanarts-list>li  .image-crop .overlay a:focus, .posters-list>li .image-crop .overlay a:hover {
       text-decoration: none
@@ -996,10 +1000,15 @@ img[data-src] {
     margin: auto;
         text-align: center;
 }
+.initialized{
+                will-change: width;
 
+}
 @media (max-width: 600px) {
 
   .initialized {
+            will-change: width;
+
           border-radius: 0px;
     width: 100%;
     max-width: 100%;
