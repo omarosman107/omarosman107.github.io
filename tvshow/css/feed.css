@@ -823,7 +823,7 @@ a {
 }
 .fanarts-list>li .image-crop img {
     width: 100%;
-    min-height: 166px;
+    min-height: 100px;
 }
 
 div:focus {
