@@ -622,7 +622,7 @@ if (document.getElementsByClassName(json[i].href).length == 0) {
  //  document.getElementById('watching').innerHTML += '<div tabindex="1" class="wtc '+json[i].href+'"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><br> <span>'+json[i].show+'</span></a></div>'
 
 
-   document.getElementById('watching').innerHTML += '<li style="width: 280px;margin: 11px;" class=" card initialized '+json[i].href+'"><a href="#"><div style="    height: 280px;" class="piece fanart-container"><div class="image-crop">'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"></span><img  src="'+json[i].img+'" alt="'+json[i].episode+'" data-original-set="'+json[i].imgdyn+'" class"lazy" class="loaded" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn "  title="Watch '+json[i].episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="" class="secondary-link show-name">'+json[i].show+'</a><a href="javascript:"><i style="    /* opacity: '+showCheck()+'; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"></i></a></div><div class="bottom"></div></div></a></li>'
+   document.getElementById('watching').innerHTML += '<li style="width: 280px;margin: 11px;" class=" card initialized '+json[i].href+'"><a href="#"><div style="    height: 280px;" class="piece fanart-container"><div class="image-crop">'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"></span><img       sizes="(min-width: 600px) 25vw, (min-width: 500px) 50vw, 100vw"   alt="'+json[i].episode+'" data-original-set="'+json[i].imgdyn+'" class"lazy" class="loaded" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn "  title="Watch '+json[i].episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="loadPlayer(this)" href="" class="secondary-link show-name">'+json[i].show+'</a><a href="javascript:"><i style="    /* opacity: '+showCheck()+'; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"></i></a></div><div class="bottom"></div></div></a></li>'
 
 }
 
@@ -652,7 +652,7 @@ var FDate = month2 +' ' + date.getUTCDate() +' '+ date.getUTCFullYear()
 
 
 
-  template = template + '<li  aired="'+json[i].airdate+'"  ShowName="'+json[i].show+'" class="initialized '+json[i].type+'" data-query="'+query +'"><div  class="piece fanart-container"><div class=image-crop>'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"></span><img alt="'+json[i].show+'"  '+img+' data-original-set="'+json[i].imgdyn+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch '+json[i].episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="query(null,this)" show="'+json[i].show+'" href="javascript:" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+FDate+' | ' + json[i].rating + ' | '+timeofPlayback +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
+  template = template + '<li  aired="'+json[i].airdate+'"  ShowName="'+json[i].show+'" class="initialized '+json[i].type+'" data-query="'+query +'"><div  class="piece fanart-container"><div class=image-crop>'+newBanner()+'<a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'"></span><img       sizes="(min-width: 600px) 25vw, (min-width: 500px) 50vw, 100vw" alt="'+json[i].show+'"  '+img+' data-original-set="'+json[i].imgdyn+'" class"lazy" ></a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"></span><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch '+json[i].episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="player.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="query(null,this)" show="'+json[i].show+'" href="javascript:" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+FDate+' | ' + json[i].rating + ' | '+timeofPlayback +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div>'
  
 
  }
@@ -740,10 +740,11 @@ var e = (data.videos[i].availability_asset_id.split('-')[data.videos[i].availabi
 }catch(e){
 console.log(e)
 }
+var dyn = data.videos[i].large_thumbnail + " 720w  ,"  + data.videos[i].medium_thumbnail + ' 210w'
 tvlist(data.videos[i].series_name)
-var episode_data = {img:data.videos[i].large_thumbnail,
+var episode_data = {img:data.videos[i].medium_thumbnail,
     rating:(data.videos[i].rating),
-    imgdyn:'',
+    imgdyn:dyn,
     href: data.videos[i].share_url,
     airdate:data.videos[i].airdate,
     show:data.videos[i].series_name,
@@ -898,7 +899,7 @@ srcobj = srcobj.sort(function(a, b){
 srcobj = srcobj.reverse()
 for (var y = srcobj.length - 1; y >= 0; y--) {
 
-srcset +=  srcobj[y].src +' ' + srcobj[y].width+ 'w ,  ';
+srcset +=  'https://d1r1anxoiubeog.cloudfront.net/' + srcobj[y].src +' ' + srcobj[y].width+ 'w ,  ';
 
 }
 

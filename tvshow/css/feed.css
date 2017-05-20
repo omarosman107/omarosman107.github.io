@@ -1138,6 +1138,7 @@ opacity: .50;
     transition: all 200ms ease-in;
     transform: scale(1);   
 }
+
 * {
     transition: all 100ms ease-in-out;
 }
