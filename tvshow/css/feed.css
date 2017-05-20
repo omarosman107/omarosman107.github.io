@@ -1002,7 +1002,7 @@ img[data-src] {
 }
 .initialized{
                 will-change: width;
-
+transition: all 300ms ease-out;
 }
 @media (max-width: 600px) {
 
