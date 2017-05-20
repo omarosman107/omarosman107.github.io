@@ -1182,6 +1182,22 @@ opacity: .50;
         height: 165px;
     }
 }
+.sixteen-nine {
+  position: absolute;
+}
+.sixteen-nine:before {
+  display: block;
+  content: "";
+  width: 100%;
+  padding-top: 56.25%;
+}
+.sixteen-nine > .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 @media (max-width: 800px) {
 
   .fanarts-list>li .image-crop {
@@ -1197,6 +1213,5 @@ opacity: .50;
   .fanarts-list>li .image-crop img {
     width: 100%;
     height: auto;
-          min-height: 170px;
   }
 }
