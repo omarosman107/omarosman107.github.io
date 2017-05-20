@@ -827,7 +827,6 @@ a {
 }
 .fanarts-list>li .image-crop img {
     width: 100%;
-    min-height: 100px;
 }
 
 div:focus {
@@ -1004,6 +1003,24 @@ img[data-src] {
                 will-change: width;
 transition: all 300ms ease-out;
 }
+.imageBG {
+    width:100%;
+    height: 100%;
+}
+.loaded {
+    opacity: 1 !important;
+}
+.cover{
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover!important;
+    background-position: 50%;
+    opacity: 0;
+    -webkit-transition: opacity .3s ease;
+    transition: opacity .3s ease;
+}
+
 @media (max-width: 600px) {
 
   .initialized {
@@ -1159,6 +1176,11 @@ opacity: .50;
       /*  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 70px #fff, 0 0 80px #fff, 0 0 100px #fff, 0 0 150px #fff;
         -webkit-animation-duration: .5s; /* Safari 4.0 - 8.0 */
     animation-duration: .5s;
+}
+@media (min-width: 801px){
+    .cover {
+        height: 165px;
+    }
 }
 @media (max-width: 800px) {
 
