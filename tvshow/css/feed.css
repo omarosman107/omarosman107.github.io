@@ -766,7 +766,7 @@ body {
 
 #progress {
         animation-name: fadein;
-    animation-duration: .6s;
+    animation-duration: .3s;
 }
 
 .initialized:hover {
