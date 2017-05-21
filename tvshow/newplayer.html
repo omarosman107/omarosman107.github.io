@@ -30,6 +30,111 @@
   .PlayerControlLabelFont { color : #FFFFFF; } 
   div.PlayerControlLabelHoverFont { color : #00b4ff !important; } 
   div.PlayerControlLabelSelectedFont { color : #000000 !important; } 
+
+ .nf-loading-spinner {
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    top: 1px;
+    bottom: 1px;
+    margin: auto;
+    text-align: center;
+    background-image: url(https://assets.nflxext.com/en_us/pages/wiplayer/site-spinner.png);
+    width: 7vh;
+    height: 7vh;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    -webkit-animation: load_spinner .9s linear infinite;
+    -moz-animation: load_spinner .9s linear infinite;
+    -o-animation: load_spinner .9s linear infinite;
+    animation: load_spinner .9s linear infinite;
+    min-width: 5rem;
+    min-height: 5rem;
+}
+
+@-webkit-keyframes load_spinner {
+    0% {
+        -webkit-transform: rotateZ(0);
+        /*!rtl:ignore*/
+        transform: rotateZ(0)/*!rtl:ignore*/
+    }
+    50% {
+        -webkit-transform: rotateZ(180deg);
+        /*!rtl:ignore*/
+        transform: rotateZ(180deg)/*!rtl:ignore*/
+    }
+    100% {
+        -webkit-transform: rotateZ(360deg);
+        /*!rtl:ignore*/
+        transform: rotateZ(360deg)/*!rtl:ignore*/
+    }
+}
+@-moz-keyframes load_spinner {
+    0% {
+        -moz-transform: rotateZ(0);
+        /*!rtl:ignore*/
+        transform: rotateZ(0)/*!rtl:ignore*/
+    }
+    50% {
+        -moz-transform: rotateZ(180deg);
+        /*!rtl:ignore*/
+        transform: rotateZ(180deg)/*!rtl:ignore*/
+    }
+    100% {
+        -moz-transform: rotateZ(360deg);
+        /*!rtl:ignore*/
+        transform: rotateZ(360deg)/*!rtl:ignore*/
+    }
+}
+@-o-keyframes load_spinner {
+    0% {
+        -o-transform: rotateZ(0);
+        /*!rtl:ignore*/
+        transform: rotateZ(0)/*!rtl:ignore*/
+    }
+    50% {
+        -o-transform: rotateZ(180deg);
+        /*!rtl:ignore*/
+        transform: rotateZ(180deg)/*!rtl:ignore*/
+    }
+    100% {
+        -o-transform: rotateZ(360deg);
+        /*!rtl:ignore*/
+        transform: rotateZ(360deg)/*!rtl:ignore*/
+    }
+}
+@keyframes load_spinner {
+    0% {
+        -webkit-transform: rotateZ(0);
+        /*!rtl:ignore*/
+        -moz-transform: rotateZ(0);
+        /*!rtl:ignore*/
+        -o-transform: rotateZ(0);
+        /*!rtl:ignore*/
+        transform: rotateZ(0)/*!rtl:ignore*/
+    }
+    50% {
+        -webkit-transform: rotateZ(180deg);
+        /*!rtl:ignore*/
+        -moz-transform: rotateZ(180deg);
+        /*!rtl:ignore*/
+        -o-transform: rotateZ(180deg);
+        /*!rtl:ignore*/
+        transform: rotateZ(180deg)/*!rtl:ignore*/
+    }
+    100% {
+        -webkit-transform: rotateZ(360deg);
+        /*!rtl:ignore*/
+        -moz-transform: rotateZ(360deg);
+        /*!rtl:ignore*/
+        -o-transform: rotateZ(360deg);
+        /*!rtl:ignore*/
+        transform: rotateZ(360deg)/*!rtl:ignore*/
+    }
+}
+
   </style>
   <meta charset="utf-8">
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -59,8 +164,8 @@
   </style>
 </head>
 <body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-228681 node-type-video watch 781817411654 7684601088 internal-show-page adobe-pass-subscribe-processed mvpd-setup-processed embed-ae-processed adobe-pass-events-processed pdk-player-events-processed addFollowUs-processed">
-  &gt;
-
+<div id="projpar" class="w3-progress-container"><div id="progress" class="w3-progressbar" style="width:0%;"></div></div>
+<div class="resume"></div>
   <div id="skip-link">
     <a class="element-invisible element-focusable" href="#main" role="link">Skip to main content</a>
   </div><!-- Begin Tealium Integration -->
@@ -83,17 +188,7 @@
             </g>
           </g></svg></a>
         </div>
-        <div class="logo-container">
-          <a class="logo" href="/" rel="home" title="Home"><img alt="Home" src="/logow.svg" style=""></a> <a class="big-logo" href="/" rel="home" title="Home"><svg height="50px" version="1.1" viewbox="0 0 114 50" width="114px" xmlns="http://www.w3.org/2000/svg">
-          <g fill="#fff" fill-rule="evenodd" id="svg-logo" sketch:type="MSPage" stroke="none" stroke-width="1">
-            <title>Fox Logo</title>
-            <description>
-              Fox Logo
-            </description>
-            <defs></defs>
-            <path d="M52.9017778,0.851578947 C65.7457778,0.851578947 76.1071111,11.8252632 76.1071111,25.3778947 C76.1071111,38.9305263 65.7457778,49.9042105 52.9017778,49.9042105 C40.0071111,49.9042105 29.5951111,38.9831579 29.5951111,25.3778947 C29.5951111,11.8252632 40.0071111,0.851578947 52.9017778,0.851578947 L52.9017778,0.851578947 Z M-0.222222222,50.6673684 L-0.222222222,-0.0694736842 L29.0377778,-0.0694736842 L29.9244444,13.8515789 L13.5591111,13.8515789 L13.5591111,20.5094737 L26.9351111,20.5094737 L26.9351111,34.22 L13.5591111,34.22 L13.5591111,50.6673684 L-0.222222222,50.6673684 L-0.222222222,50.6673684 Z M113.220444,50.5094737 L98.5524444,24.3252632 L111.953778,0.141052632 L97.1337778,0.141052632 L91.1804444,10.9042105 L85.1004444,0.141052632 L70.0017778,0.141052632 L83.5551111,24.4568421 L69.1151111,50.5094737 L83.9351111,50.5094737 L90.9271111,37.9305263 L98.0204444,50.5094737 L113.220444,50.5094737 L113.220444,50.5094737 Z M56.9044444,35.4305263 L56.9044444,15.3252632 C56.9044444,12.9305263 55.2071111,10.9042105 52.9017778,10.9042105 C50.7991111,10.9042105 49.0004444,12.9305263 49.0004444,15.3252632 L49.0004444,35.4305263 C49.0004444,37.6673684 50.7991111,39.5357895 52.9017778,39.5357895 C55.2071111,39.5357895 56.9044444,37.9305263 56.9044444,35.4305263 L56.9044444,35.4305263 L56.9044444,35.4305263 Z" fill="#fff" id="svg-logo" sketch:type="MSShapeGroup"></path>
-          </g></svg></a>
-        </div>
+
         <div class="header-elements-container">
           <a class="sidr-button-close" href="#sidr-main">Close</a>
           <div class="main-nav"></div>
@@ -121,40 +216,45 @@
                       
           
                       </div>
-                      <div  id="video-player" style="width: 100%; height: 100%;">
-     
+                      <div style="width: 100%; height: 100%;">
+             <div id="">
+  <div id="blockLoader" class="videoContainer video-js  vjs-16-9 " style="position: absolute;
+      background-color: #141414;     -webkit-transition: opacity 500ms ease; transition: opacity 500ms ease,z-index 500ms ease;   z-index: 1999999999;" >
+      <div class="nf-loading-spinner"></div>
+   </div>
+             <video width="100%" height="100%" id=LS x-webkit-airplay="allow" preload="auto"  autoplay playsinline  class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls="controls">
+</video>
+<div class="w3-progress-container" style="height: 0.1em;"><div id="progressplayer" class="w3-progressbar" style="width:0%;background-color: #7fda63;"></div></div>
+   <a id="downloader"><button>Play in browser</button></a> 
+
+</div>
                       </div>
 
-                      <div id="video-mobile-overlay" style="display: none;">
-                        <div class="overlay-inner">
-                          <h4>Want Full Episodes?</h4>
-     
-                      </div>
-                    </div>
+            
                   </div>
                   <div class="panel-pane pane-block pane-fox-panels-video-header">
                     <div class="pane-content">
                       <div class="video-meta">
                         <div class="video-title-header">
                           <div class="show-avatar-container">
-                            <div class="field field-name-field-avatar-image field-type-image field-label-hidden">
-                              <a href="/the-simpsons"><img height="160" src="http://www.fox.com/sites/default/files/styles/full_episodes_show_avatar/public/Avatar-Simpsons.jpg?itok=5vmJ6RSS" typeof="foaf:Image" width="160"></a>
+                            <div >
+                              <a class="showImg"><img height="160"   typeof="foaf:Image" width="160"></a>
                             </div>
                           </div>
                           <div class="video-title-info">
-                            <h3 class="video-show-title"><a class="external-processed" href="http://www.fox.com/the-simpsons">The Simpsons</a> <span class="show-tune-in">Sunday 8/7c May 21</span></h3>
-                            <h3 class="video-title">The Town <span class="video-duration">(22 min)</span></h3>
-                            <p>Season 28, Episode 3 | Aired 10-09-16 | TV-PG LS</p>
+                            <h3 class="video-show-title"><a class="external-processed"  id="showname" href="http://www.fox.com/the-simpsons">The Simpsons</a> <span class="show-tune-in">Sunday 8/7c May 21</span></h3>
+                            <h3 class="video-title" id="epname">The Town <span class="video-duration"></span></h3>
                           </div>
                         </div>
                         <div class="video-info">
                           <div class="more-info flash active">
                             <div class="more-info-inner">
-                              <div class="more-sub-text">
+                              <div id="showdesc" class="more-sub-text">
                                 <p>Homer plans a family “hate-cation” trip to Boston in an attempt to show Bart that Boston is a terrible city.</p>
                               </div>
                             </div>
                           </div>
+
                         </div>
                       </div>
          
@@ -192,5 +292,25 @@
 
     </div>
   </div>
+   <link rel="stylesheet" href="css/video-js.min.css" /></head>
+<script type="text/javascript" src="js/video.min.js"></script>
+<script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script> 
+<script type="text/javascript" src="js/videojs-hlsjs.js"></script>
+<!-- > <script type="text/javascript" src="js/videojs-contrib-hls.min.js"></script> <!-->
+<script type="text/javascript" src="js/videojs-playlist.min.js"></script>
+
+    <script type="text/javascript" src="js/fetch.min.js"></script>
+
+
+   <script  src="js/xml2json.js" type="text/javascript">
+   </script> 
+
+
+
+   <script  src="js/jquery.min.js"></script> 
+
+   <script  src="js/media.js" type="text/javascript">   </script> 
+
+   <script  src="js/player.js" type="text/javascript"></script> 
 </body>
 </html>

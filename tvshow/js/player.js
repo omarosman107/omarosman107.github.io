@@ -222,6 +222,13 @@ $(window).on('hashchange', function() {
 
 
 });
+function tvstQ(q){
+  q = encodeURIComponent(q);
+ var query = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select all_images.poster from json where url="https://api.tozelabs.com/v2/show?limit=1&q=' +q + '"') + '&format=json&_maxage=360000';
+
+
+return query;
+}
 
  function getShowinfo(name) {
 
@@ -237,7 +244,7 @@ document.getElementsByClassName('showImg')[0].innerHTML = '<img width="100%" src
 
     }
   };
-  showFetch.open("GET", 'https://query.yahooapis.com/v1/public/yql?q=select%20all_images.poster%20from%20json%20where%20url%3D%22https%3A%2F%2Fapi.tozelabs.com%2Fv2%2Fshow%3Flimit%3D1%26q%3D'+name+'%22&format=json&_maxage=360000' , true);
+  showFetch.open("GET",  tvstQ(name), true);
   showFetch.send();
   
 

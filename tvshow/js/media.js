@@ -3,9 +3,12 @@ var player=videojs('LS');
 
 //jwplayer.defaults.preload = "auto"
 //jwplayer.defaults.autostart = "true"
-document.getElementsByClassName("resume")[0].onclick = function(){(this.parentNode.removeChild(this))};
 
-
+function meta(s,e,a){
+  document.getElementById('season').innerHTML = s
+  document.getElementById('episode').innerHTML = e
+  document.getElementById('airdate').innerHTML = a
+}
 function loadURL(url,type){
 
       jwplayer("myElement1").setup({
@@ -72,6 +75,7 @@ var vid = document.getElementById('LS_Hlsjs_api');
 
 
 vid.oncanplay = function() {
+//  document.getElementsByClassName('video-duration')[0].innerHTML = "( " + Math.round(vid.duration / 60) + " min )"
   document.getElementById('blockLoader').style.opacity = "0"
   document.getElementById('blockLoader').style.display='absolute';
     document.getElementById('blockLoader').style.zIndex ='-99999';
@@ -192,11 +196,12 @@ function fetchcwjson(value) {
 
       console.log(finalurl)
       getShowinfo(data.assetFields.seriesName)
-      showname.innerHTML = data.assetFields.seriesName + " - " + data.assetFields.title
+      showname.innerHTML = data.assetFields.seriesName 
       showdesc.innerHTML = data.assetFields.description
       document.title = data.assetFields.seriesName + " - " + data.assetFields.title
       document.getElementById('progress').style.width = "60%"
       document.getElementById('downloader').href = finalurl
+
     /*  player.src({
          "type": "application/x-mpegURL",
          "src": finalurl 
@@ -208,6 +213,7 @@ function fetchcwjson(value) {
 
 
 resume()
+document.getElementById('epname').innerHTML =  data.assetFields.title
       document.getElementById('progress').style.width = "100%"
       $('#projpar').hide()
                                 isDone = true
@@ -220,7 +226,7 @@ var videourl
 function om(data){
 	console.log(data.video[0].assets.asset[0].value)
 	            document.getElementById('progress').style.width = "60%"
-            showname.innerHTML = data.video[0].show.title + "- " + data.video[0].title
+            showname.innerHTML = data.video[0].show.title 
             showdesc.innerHTML = data.video[0].longdescription
                   document.title = data.video[0].show.title + "- " + data.video[0].title
 
@@ -246,6 +252,8 @@ brand = "009"
                            player.src({"type":"application/x-mpegURL", "src":videourl});
    player.play();
                      resume()
+                     document.getElementById('epname').innerHTML = data.video[0].title
+
                document.getElementById('progress').style.width = "100%"
       $('#projpar').hide()
 
@@ -351,6 +359,9 @@ resume()
                                           player.src({"type":"application/x-mpegURL", "src":mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false"});
    player.play();
                   resume()
+
+                                       document.getElementById('epname').innerHTML = (data.entries["0"].title)
+
        
          document.getElementById('progress').style.width = "100%"
       $('#projpar').hide()
@@ -946,7 +957,9 @@ function fetchlplatjson(value){
       }).then(function(data) {
          document.getElementById('progress').style.width = "100%"
 
-      showname.innerHTML =   data.categories[0].name.split('/')[1] +' - ' +   data.title
+      showname.innerHTML =   data.categories[0].name.split('/')[1] 
+                                             document.getElementById('epname').innerHTML = data.title
+
 
                         document.title = data.categories[0].name.split('/')[1] +' - '+ data.title
 
