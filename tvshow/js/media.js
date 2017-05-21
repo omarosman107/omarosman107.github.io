@@ -306,7 +306,7 @@ function fetchfoxjson(value) {
       }).then(function(data) {
          document.getElementById('progress').style.width = "100%"
 
-      showname.innerHTML = toTitleCase(data['fox$showcode'].replace('-',' ')) + " - " + data.title
+      showname.innerHTML = toTitleCase(data['fox$showcode'].replace('-',' ')) 
                         document.title = toTitleCase(data['fox$showcode'].replace('-',' ')) + " - " + data.title
 
       showdesc.innerHTML = data.description
@@ -344,7 +344,7 @@ resume()
    	}else{
       document.getElementById('progress').style.width = "50%"
       epiname = (data.entries["0"].title)
-      showname.innerHTML = data.entries["0"].fox$series + " - " + (data.entries["0"].title)
+      showname.innerHTML = data.entries["0"].fox$series 
                               document.title = data.entries["0"].fox$series + " - " + (data.entries["0"].title)
 
       getShowinfo(data.entries["0"].fox$series)
@@ -981,6 +981,7 @@ function raw(url){
 url = url.split('_=')[1]
 console.log(url)
       showname.innerHTML = url;
+               document.getElementById('downloader').href = url
 
     player.src({"type":"application/x-mpegURL", "src":url});
    player.play();
