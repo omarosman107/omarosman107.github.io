@@ -962,6 +962,7 @@ function fetchlplatjson(value){
 
 
                         document.title = data.categories[0].name.split('/')[1] +' - '+ data.title
+getShowinfo(data.categories[0].name.split('/')[1])
 
       showdesc.innerHTML = data.description
       })

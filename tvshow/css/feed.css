@@ -739,8 +739,8 @@ body {
 }
 
 .fanarts-list>li .fanart-container {
-    background-color: #1a1a1a;
-    padding: 0;
+    background-color: rgba(26, 26, 26, 0.43);
+    padding: 0; 
     overflow: hidden;
     position: relative;
     border: 1px solid #1d1d1d
