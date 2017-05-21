@@ -227,20 +227,19 @@ $(window).on('hashchange', function() {
 
 
 var showFetch = new XMLHttpRequest();
-/**
+
  showFetch.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 
    var data = JSON.parse(this.responseText)
 console.log(data)
-document.getElementsByClassName('showImg')[0].innerHTML = '<img width="100%" src="'+ data.image.medium   +'">'
-console.log(data.rating.average / 2)
+document.getElementsByClassName('showImg')[0].innerHTML = '<img width="100%" src="'+ data.query.results.json.all_images.poster._[3]   +'">'
 
     }
   };
-  showFetch.open("GET", 'http://api.tvmaze.com/singlesearch/shows?q=' +  name, true);
+  showFetch.open("GET", 'https://query.yahooapis.com/v1/public/yql?q=select%20all_images.poster%20from%20json%20where%20url%3D%22https%3A%2F%2Fapi.tozelabs.com%2Fv2%2Fshow%3Flimit%3D1%26q%3D'+name+'%22&format=json&_maxage=360000' , true);
   showFetch.send();
-  */
+  
 
 
 }
