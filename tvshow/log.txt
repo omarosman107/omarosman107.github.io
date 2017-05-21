@@ -3,10 +3,19 @@
 
 ADULTSWIM: Some episodes don't have images 
 ABC:Extreme Slowness and bugginess
+PLAYER:New design 
 
 
 == CHANGELOG ==
 
+cards shrink if holding on them
+--
+the image quality changes if your on pc or phones 
+--
+cards are bigger
+--
+Progress Animation :)
+--
 Just made the loading way faster.
 --
 Added loading spinners which are dynamic
