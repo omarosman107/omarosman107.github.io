@@ -64,6 +64,13 @@ function resume(){
 
 var vid = document.getElementById('LS_html5_api');
 
+if (Hls) {
+var vid = document.getElementById('LS_Hlsjs_api');
+
+  LS_Hlsjs_api
+}
+
+
 vid.oncanplay = function() {
   document.getElementById('blockLoader').style.opacity = "0"
   document.getElementById('blockLoader').style.display='absolute';
@@ -956,7 +963,16 @@ resume()
 
 
 }
+function raw(url){
+  console.log(url)
+url = url.split('_=')[1]
+console.log(url)
+      showname.innerHTML = url;
 
+    player.src({"type":"application/x-mpegURL", "src":url});
+   player.play();
+resume()
+}
 
 
 

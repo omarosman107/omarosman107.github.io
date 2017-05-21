@@ -46,6 +46,7 @@ var diziayactive = false
 var cwurl
 
 var sitefunctions = {
+  "rawFile":"raw(url)",
   "asdir=":"fetchaswimjson(url)",
 
 "cwtv.com":"fetchcwjson(url)",
