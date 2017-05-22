@@ -747,7 +747,7 @@ body {
 }
 
 .initialized:active {
-    transform: scale(.95)
+    transform: scale(.98)
 }
 
 .initialized {
