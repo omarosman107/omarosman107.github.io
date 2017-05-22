@@ -3,7 +3,10 @@ var player=videojs('LS');
 
 //jwplayer.defaults.preload = "auto"
 //jwplayer.defaults.autostart = "true"
+function bg(url){
+   document.getElementById('blockLoader').style.background = 'url(' +url+ ")"
 
+}
 function meta(s,e,a){
   document.getElementById('season').innerHTML = s
   document.getElementById('episode').innerHTML = e
@@ -70,9 +73,13 @@ var vid = document.getElementById('LS_html5_api');
 if (Hls) {
 var vid = document.getElementById('LS_Hlsjs_api');
 
-  LS_Hlsjs_api
-}
 
+}
+var vid = document.getElementById(player.el().children[0].id);
+
+vid.onerror = function(e) {
+  alert(e)
+}
 
 vid.oncanplay = function() {
 //  document.getElementsByClassName('video-duration')[0].innerHTML = "( " + Math.round(vid.duration / 60) + " min )"
@@ -206,7 +213,8 @@ function fetchcwjson(value) {
          "type": "application/x-mpegURL",
          "src": finalurl 
       }); */
-      console.log( data.images.cwtv832x502.uri)
+
+      bg( data.images.cwtv1920x1080.uri)
 
       player.src({"type":"application/x-mpegURL", "src":finalurl});
    player.play();
@@ -346,6 +354,7 @@ resume()
       epiname = (data.entries["0"].title)
       showname.innerHTML = data.entries["0"].fox$series 
                               document.title = data.entries["0"].fox$series + " - " + (data.entries["0"].title)
+      bg(data.entries["0"].media$thumbnails[0].plfile$url)
 
       getShowinfo(data.entries["0"].fox$series)
       showdesc.innerHTML = data.entries["0"].description
