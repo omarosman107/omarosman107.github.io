@@ -572,7 +572,12 @@ h1 {
 h2 {
   font-size: 3.0vh;
 }
-
+#blockLoader { 
+    transition: opacity 500ms ease, z-index 500ms ease;
+    z-index: 99999999;
+    padding-top: 56.25%;
+    background-size: contain;
+ }
 
     .nf-loading-spinner {
     position: absolute;
