@@ -182,12 +182,18 @@ function query(q,obj){
   for (var i = document.getElementsByClassName('initialized').length - 1; i >= 0; i--) {
     if( document.getElementsByClassName('initialized')[i].getAttribute('data-query').includes(q.toLowerCase())){
       document.getElementsByClassName('initialized')[i].style.display = "inline-block"
+                  document.getElementsByClassName('initialized')[i].style.opacity = "1"
+
       num += 1
         lazyLoadImages();
 
 
     }else{
-      document.getElementsByClassName('initialized')[i].style.display = "none"
+            document.getElementsByClassName('initialized')[i].style.opacity = "0"
+
+
+          document.getElementsByClassName('initialized')[i].style.display = "none"
+
     }
 
 
