@@ -1028,9 +1028,9 @@ for (index = 0; index < allepisodes.length; ++index) {
 document.getElementById('howmuch').innerHTML = "(" +to_watch + ")"
          document.title =  "(" + to_watch +") " + "TVShow  Time++";
 
-return total
+return  watched / total * 100 + '%';
 
-// document.getElementById('progress').style.width = watched / total * 100 + '%';
+document.getElementById('progress').style.width = watched / total * 100 + '%';
 total = 0
 watched = 0
 }
@@ -1162,7 +1162,7 @@ function dateDiff(timestamp){
     return r;
 };
 
-function progress(){
+/*function progress(){
    fetch('https://api.tvshowtime.com/v1/library?access_token=' + accesstoken, {
    method: 'get'
 }).then(function(response) {
@@ -1203,13 +1203,12 @@ perc = (wtc / ep *100)
 console.log(err)
 });
 }
-
+*/
   function fetchshows() {
      var tempel = ""
  
    document.getElementById('loadertop').classList.add("turn");
  //  document.getElementById('loader').style.display = "block"
-    progress();
 
      fetch('https://api.tvshowtime.com/v1/to_watch?access_token=' + accesstoken).then(function(response) {
         return response.json();
@@ -1230,9 +1229,9 @@ console.log(err)
 airing = ' airing'
            }
            
-           if (mathleft == 0 || mathleft == -1) {
-              mathleft = "last!"
-           }
+  //         if (mathleft == 0 || mathleft == -1) {
+    //          mathleft = "last!"
+      //     }
            if (mathleft >= 1) {
               mathleft = "+ " + mathleft + ' episodes'
            } 
@@ -1265,7 +1264,7 @@ var htmlCode = '<li data-total="'+finishjson.episodes[i].show.aired_episodes+'" 
 
            document.getElementById('loader').style.display = "none"
            document.getElementById('loadertop').classList.remove('turn')
-           prog()
+       document.getElementById('progress').style.width = prog()
 
           
 
