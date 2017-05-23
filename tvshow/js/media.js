@@ -970,7 +970,7 @@ function fetchlplatjson(value){
          return response.json()
       }).then(function(data) {
          document.getElementById('progress').style.width = "100%"
-
+bg(data.defaultThumbnailUrl)
       showname.innerHTML =   data.categories[0].name.split('/')[1] 
                                              document.getElementById('epname').innerHTML = data.title
 

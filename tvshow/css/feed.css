@@ -361,10 +361,9 @@ body {
 
 .tvshow:hover {
     -webkit-animation-duration: 2s;
-    animation-duration: 2s;
     opacity: 1;
-    transition: all .2s;
-    -webkit-transition: all .2s;
+    transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
     transform: scale(1.1)
 }
 
@@ -380,7 +379,7 @@ input[type=number],input[type=search],textarea {
 
 .tvshow {
     will-change: opacity;
-    opacity: .8;
+    opacity: .4;
     box-shadow: 1px 0 0 1px rgba(0,0,0,.33);
     width: 160px
 }
