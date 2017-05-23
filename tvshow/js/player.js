@@ -224,7 +224,7 @@ $(window).on('hashchange', function() {
 });
 function tvstQ(q){
   q = encodeURIComponent(q);
- var query = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select all_images.poster from json where url="https://api.tozelabs.com/v2/show?limit=1&q=' +q + '"') + '&format=json&_maxage=360000';
+ var query = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="https://api.tozelabs.com/v2/show?limit=1&q=' +q + '"') + '&format=json&_maxage=360000';
 
 
 return query;
@@ -241,6 +241,7 @@ var showFetch = new XMLHttpRequest();
    var data = JSON.parse(this.responseText)
 console.log(data)
 document.getElementsByClassName('showImg')[0].innerHTML = '<img width="100%" src="'+ data.query.results.json.all_images.poster._[3]   +'">'
+document.getElementById('showname').href =  "https://www.tvtime.com/en/show/" + data.query.results.json.id
 
     }
   };

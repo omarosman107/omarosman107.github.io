@@ -7,6 +7,13 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+
+made player buffer go away a little
+--
+fixed some bugs!
+--
+changed show name  font
+--
 added an go back up button
 --
 made cards less smaller when active
