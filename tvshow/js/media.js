@@ -1,5 +1,10 @@
-var x2js = new X2JS();
+// var x2js = new X2JS();
 var player=videojs('LS');
+
+
+
+
+
 
 //jwplayer.defaults.preload = "auto"
 //jwplayer.defaults.autostart = "true"

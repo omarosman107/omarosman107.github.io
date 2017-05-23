@@ -1,6 +1,52 @@
 /*! videojs-hls - v0.0.0 - 2015-9-24
  * Copyright (c) 2015 benjipott
  * Licensed under the Apache-2.0 license. */
+    var config = {
+      autoStartLoad: true,
+      startPosition : -1,
+      capLevelToPlayerSize: false,
+      debug: false,
+      defaultAudioCodec: undefined,
+      maxBufferLength: 30,
+      maxMaxBufferLength: 50,
+      maxBufferSize: 60*1000*1000,
+      maxBufferHole: 0.5,
+      maxSeekHole: 2,
+      seekHoleNudgeDuration: 0.01,
+      maxFragLookUpTolerance: 0.2,
+      liveSyncDurationCount: 3,
+      liveMaxLatencyDurationCount: 10,
+      enableWorker: true,
+      enableSoftwareAES: true,
+      manifestLoadingTimeOut: 10000,
+      manifestLoadingMaxRetry: 6,
+      manifestLoadingRetryDelay: 500,
+      manifestLoadingMaxRetryTimeout : 64000,
+      startLevel: -1,
+      levelLoadingTimeOut: 10000,
+      levelLoadingMaxRetry: 6,
+      levelLoadingRetryDelay: 500,
+      levelLoadingMaxRetryTimeout: 64000,
+      fragLoadingTimeOut: 20000,
+      fragLoadingMaxRetry: 6,
+      fragLoadingRetryDelay: 500,
+      fragLoadingMaxRetryTimeout: 64000,
+      startFragPrefech: false,
+      appendErrorMaxRetry: 3,
+      enableCEA708Captions: true,
+      stretchShortVideoTrack: false,
+      forceKeyFrameOnDiscontinuity: true,
+      abrEwmaFastLive: 5.0,
+      abrEwmaSlowLive: 9.0,
+      abrEwmaFastVoD: 4.0,
+      abrEwmaSlowVoD: 15.0,
+      abrEwmaDefaultEstimate: 500000,
+      abrBandWidthFactor: 0.8,
+      abrBandWidthUpFactor: 0.7,
+      minAutoBitrate: 0
+  };
+
+var  hls = new Hls(config);
 (function (window, videojs, Hls, document, undefined) {
   'use strict';
   /**
@@ -13,7 +59,8 @@
 
   var Hlsjs = videojs.extend(Html5, {
     createEl : function () {
-      this.hls_ = new Hls();
+      
+      this.hls_ = hls
       this.el_ = Html5.prototype.createEl.apply(this, arguments);
 
       this.hls_.on(Hls.Events.MEDIA_ATTACHED, videojs.bind(this, this.onMediaAttached));
