@@ -1,7 +1,20 @@
 
 <!DOCTYPE html><html class=''>
 <head>
+<!--
+<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+<script type="text/javascript">
+   // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+  var config = {
+    apiKey: " AIzaSyC5rQaFbnCg0eI-7BavdI_CGHPPuQFhuis",
+    authDomain: " tv-stream-5f331.firebaseapp.com",
+    databaseURL: "https://tv-stream-5f331.firebaseio.com"
+     };
+  firebase.initializeApp(config);
 
+</script>
+-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
             <link async href="css/feed.css" rel="stylesheet">
@@ -81,7 +94,22 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <-->
 <script>
-
+function logIn(u,p){
+  firebase.auth().signInWithEmailAndPassword(u,p).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+console.log(error)
+  // ...
+});
+firebase.auth().onAuthStateChanged(firebaseUser => {
+if(firebaseUser){
+console.log(firebaseUser)
+}else{
+console.log('not logged in')
+}
+})
+}
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
@@ -583,6 +611,18 @@ var FDate = month2 +' ' + date.getUTCDate() +' '+ date.getUTCFullYear()
 
 
 
+function arrayUnique(array) {
+    var a = array.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i] === a[j])
+                a.splice(j--, 1);
+        }
+    }
+
+    return a;
+}
+
 
 
 
@@ -590,6 +630,7 @@ var FDate = month2 +' ' + date.getUTCDate() +' '+ date.getUTCFullYear()
 
 
 function loadMedia(json){
+obj = arrayUnique(obj.concat(json))
 json = json.sort(function(a, b) {
     a = new Date(a.airdate);
     b = new Date(b.airdate);
@@ -615,7 +656,7 @@ var	template = ''
     var leftSec = leftSec - min * 60;
 
 
-  if (days < 1 ) {
+  if (days <= 1 ) {
     return '<div class="new-label"> New</div>'
   }else{
   return ''

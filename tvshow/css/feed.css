@@ -448,7 +448,7 @@ h1,h2 {
     font-family: ProximaNovaSB;
     font-size: 12px;
     text-transform: uppercase;
-    z-index: 0;
+    z-index: 1;
     -webkit-transform-origin: 0 0;
     -moz-transform-origin: 0 0;
     -ms-transform-origin: 0 0;
@@ -773,7 +773,8 @@ body {
     margin-bottom: 16px;
     width: 90%;
     border-radius: 3px;
-    max-width: 350px;
+    max-width: 23%;
+    min-width: 260px;
     -webkit-transition: all .15s cubic-bezier(.33,.66,.66,1);
     transition: all .15s cubic-bezier(.33,.66,.66,1);
     -webkit-backface-visibility: hidden;
@@ -896,6 +897,7 @@ body a:hover {
 }
 
 .image-crop .overlay {
+    z-index: 2;
     position: absolute;
     top: 0;
     bottom: 0;
