@@ -1,6 +1,12 @@
 // var x2js = new X2JS();
 var player=videojs('LS');
-
+player.ready(function() {
+  this.hotkeys({
+    volumeStep: 0.1,
+    seekStep: 5,
+    enableModifiersForNumbers: false
+  });
+});
 
 
 
