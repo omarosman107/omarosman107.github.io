@@ -78,16 +78,21 @@
 }
 
 .w3-progress-container {
-    width: 100%;
+        width: 90%;
     height: .6vh;
     opacity: 1;
-    bottom: 0;
+    bottom: 5px;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     background: rgba(0,0,0,.27);
-    position: absolute
+    position: relative;
+    margin: auto;
+
+    border-radius: 5px;
+  
 }
 
 .w3-progressbar {
+        border-radius: 5px 0px 0px 5px;
     background-color: #e50914;
     height: 100%;
     line-height: inherit;
