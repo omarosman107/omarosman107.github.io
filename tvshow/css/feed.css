@@ -362,8 +362,8 @@ body {
 .tvshow:hover {
     -webkit-animation-duration: 2s;
     opacity: 1;
-    transition: all .1s ease-in-out;
-    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s cubic-bezier(.03,.98,.52,.99);
+    -webkit-transition: all .1s cubic-bezier(.03,.98,.52,.99);
     transform: scale(1.1)
 }
 

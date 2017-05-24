@@ -329,7 +329,7 @@ fetch(url , {
   }
   */
 
-  document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="showQuery(null,this)" ><img width="100%" alt="'+showName+'" src="'+dat.query.results.json.all_images.poster._[4]+'"></a></div>'
+  document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="showQuery(null,this)" ><img width="100%" alt="'+showName+'" src="'+dat.query.results.json.all_images.poster._[4]+'"></a></div>'
 
 
 
