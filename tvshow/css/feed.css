@@ -735,7 +735,6 @@ body {
     position: relative;
     vertical-align: top;
     overflow: hidden;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,.17),0 0 8px 0 rgba(0,0,0,.12);
     border-radius: 2px
 }
 
@@ -770,12 +769,21 @@ body {
   background-color: #555;
 }
 .initialized {
-    box-shadow: 0 1px 2px rgba(0,0,0,.1);
+        box-shadow: -1px 0 2px 0 rgba(0,0,0,0.12), 1px 0 2px 0 rgba(0,0,0,0.12), 0 1px 1px 0 rgba(0,0,0,0.24);
+    margin-bottom: 16px;
     width: 90%;
     border-radius: 3px;
     max-width: 350px;
-    -webkit-transition: all 150ms ease-out;
-    -moz-transition: all 150ms ease-out
+    -webkit-transition: all .15s cubic-bezier(.33,.66,.66,1);
+    transition: all .15s cubic-bezier(.33,.66,.66,1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 @keyframes fadein {
     from {width:0%;}
@@ -789,8 +797,22 @@ body {
 }
 
 .initialized:hover {
+        -webkit-transition: all .15s cubic-bezier(.33,.66,.66,1);
+    transition: all .15s cubic-bezier(.33,.66,.66,1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+         box-shadow: -2px 0 2px 0 rgba(0,0,0,0.16), 2px 0 2px 0 rgba(0,0,0,0.16), 0 2px 2px 0 rgba(0,0,0,0.23);
+    -webkit-transform: translate3d(0,-3px,0);
+    transform: translate3d(0,-3px,0);
+    
+    
     will-change: box-shadow;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,.17),0 0 8px 0 rgba(0,0,0,.12)!important
 }
 
 .fanarts-list>li .image-crop {
