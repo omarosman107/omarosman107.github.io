@@ -210,7 +210,22 @@ font-style: normal;
 #LS {
   opacity: 0;
 }
+.error {
+ position: absolute;
+    left: 1px;
+    right: 1px;
+    top: 1px;
+    bottom: 1px;
+    margin: auto;
+    text-align: center;
+    width: 7vh;
+    height: 7vh;
 
+    font-size: -webkit-xxx-large !important;
+    color: yellow;
+    min-width: 5rem;
+    min-height: 5rem;
+}
   </style>
 
   <style type="text/css" href="css/normalize.css"></style>
@@ -314,12 +329,18 @@ font-style: normal;
       </div>
     </footer>
   </div>
-
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
    <link rel="stylesheet" href="css/video-js.min.css" /></head>
 <script type="text/javascript" src="js/video.min.js"></script>
 <script type="text/javascript" src="js/videojs.hotkeys.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script> 
+<script type="text/javascript">
+  function error(e,d){
+    console.log(e,d)
+    document.getElementById('blockLoader').innerHTML = '<i class="fa fa-exclamation-triangle error" aria-hidden="true"></i>'
+  }
+</script>
 <script type="text/javascript" src="js/videojs-hlsjs.js"></script>
 <!-- > <script type="text/javascript" src="js/videojs-contrib-hls.min.js"></script> <!-->
 <script type="text/javascript" src="js/videojs-playlist.min.js"></script>
