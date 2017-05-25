@@ -16,7 +16,7 @@
 
     background-color: #141414!important;
 }
- .nf-loading-spinner {
+ .nf-loading-spinner,.vjs-loading-spinner {
     position: absolute;
     left: 1px;
     right: 1px;
@@ -197,6 +197,20 @@ font-weight: : 100;
 font-style: normal;
 
 }
+
+.vjs-loading-spinner{display:none;position:absolute;top:50%;left:50%;font-size:7em;line-height:0;
+     border: 0px solid rgba(43,51,63,.7) !important; 
+         margin: auto !important;
+         top: 0px !important;
+         left: 0px !important;
+}
+.vjs-default-skin .vjs-loading-spinner:before{
+  /*content:"\e01e";font-family:VideoJS;*/position:absolute;top:0;left:0;text-align:center;text-shadow:0 0 .1em #000}
+
+#LS {
+  opacity: 0;
+}
+
   </style>
 
   <style type="text/css" href="css/normalize.css"></style>

@@ -93,6 +93,7 @@ vid.onerror = function(e) {
 }
 
 vid.oncanplay = function() {
+  document.getElementById('LS').style.opacity = 1
 //  document.getElementsByClassName('video-duration')[0].innerHTML = "( " + Math.round(vid.duration / 60) + " min )"
   document.getElementById('blockLoader').style.opacity = "0"
   document.getElementById('blockLoader').style.display='absolute';
