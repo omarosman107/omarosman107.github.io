@@ -1015,7 +1015,7 @@ function foxsite(url){
   url = url.split('_=')[1]
 var fox = document.referrer
 console.log(fox)
-
+console.log(url.split('&auth=')[1])
  fetch("https://feed.theplatform.com/f/fox.com/fullepisodes?form=json&range=1-1&byCustomValue={fox:freewheelId}{" + fox.split('watch/')[1].split("/")[0] + "}", {
       method: 'get'
    }).then(function(response) {
@@ -1027,6 +1027,21 @@ console.log(fox)
                      document.getElementById('progress').style.width = "100%"
 }else{
       document.getElementById('progress').style.width = "50%"
+
+var a = data.entries[0].media$content[0].plfile$url + '&auth=' + url.split('&auth=')[1] + '&format=redirect&manifest=m3u'
+if(new Date(data.entries[0].fox$authEndDate) < new Date()){
+  var a = data.entries[0].media$content[0].plfile$url + '&format=redirect&manifest=m3u'
+
+}
+  console.log(a )
+
+               document.getElementById('downloader').href = a
+
+    player.src({"type":"application/x-mpegURL", "src":a});
+   player.play();
+resume()
+
+
       epiname = (data.entries["0"].title)
       showname.innerHTML = data.entries["0"].fox$series 
                               document.title = data.entries["0"].fox$series + " - " + (data.entries["0"].title)
@@ -1050,13 +1065,6 @@ console.log(fox)
 
 
 
-  console.log(url )
-
-               document.getElementById('downloader').href = url
-
-    player.src({"type":"application/x-mpegURL", "src":url});
-   player.play();
-resume()
 
 }
 
