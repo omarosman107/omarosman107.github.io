@@ -1034,7 +1034,9 @@ console.log(url.split('&auth=')[1])
       document.getElementById('progress').style.width = "50%"
 
 var a = data.entries[0].media$content[0].plfile$url + '&auth=' + url.split('&auth=')[1] + '&format=redirect&manifest=m3u'
-if(new Date(data.entries[0].fox$requiresAuth) == true){
+
+if(url.split('&auth=')[1] == undefined){
+  alert('able to play')
   var a = data.entries[0].media$content[0].plfile$url + '&format=redirect&manifest=m3u'
 
 }
