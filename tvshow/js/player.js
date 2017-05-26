@@ -193,9 +193,11 @@ if (tv == "abc.go.com") {
 
 }
 console.log(url)
+     
              eval(sitefunctions[tv]);
              isDone = true
              break;
+
 }
 
 

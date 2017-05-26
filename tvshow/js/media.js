@@ -317,6 +317,8 @@ if (value.includes('abc.go.com/vidcode=')) {
 
 // FOX Fetch
 function fetchfoxjson(value) {
+          document.getElementById('orginVisit').href = value
+             document.getElementById('orginVisit').innerHTML = value
 	if (value.includes('link.theplatform.com/s/fox.com/')) {
 
  fetch(value.split('?')[0] + "?format=preview", {
@@ -1014,6 +1016,9 @@ resume()
 function foxsite(url){
   url = url.split('_=')[1]
 var fox = document.referrer
+        document.getElementById('orginVisit').href = fox
+             document.getElementById('orginVisit').innerHTML = fox
+
 console.log(fox)
 console.log(url.split('&auth=')[1])
  fetch("https://feed.theplatform.com/f/fox.com/fullepisodes?form=json&range=1-1&byCustomValue={fox:freewheelId}{" + fox.split('watch/')[1].split("/")[0] + "}", {
