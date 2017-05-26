@@ -50,6 +50,7 @@ var cwurl
 
 var sitefunctions = {
   "rawFile":"raw(url)",
+  "foxorgin":"foxsite(url)",
   "asdir=":"fetchaswimjson(url)",
 
 "cwtv.com":"fetchcwjson(url)",

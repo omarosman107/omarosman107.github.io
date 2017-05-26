@@ -1011,7 +1011,54 @@ resume()
 }
 
 
+function foxsite(url){
+  url = url.split('_=')[1]
+var fox = document.referrer
+console.log(fox)
 
+ fetch("https://feed.theplatform.com/f/fox.com/fullepisodes?form=json&range=1-1&byCustomValue={fox:freewheelId}{" + fox.split('watch/')[1].split("/")[0] + "}", {
+      method: 'get'
+   }).then(function(response) {
+      return response.json()
+   }).then(function(data) {
+    console.log(data.entryCount)
+    if (data.entryCount == 0) {
+            showname.innerHTML = "THIS VIDEO IS NOT AVALIABLE"
+                     document.getElementById('progress').style.width = "100%"
+}else{
+      document.getElementById('progress').style.width = "50%"
+      epiname = (data.entries["0"].title)
+      showname.innerHTML = data.entries["0"].fox$series 
+                              document.title = data.entries["0"].fox$series + " - " + (data.entries["0"].title)
+      bg(data.entries["0"].media$thumbnails[0].plfile$url)
+
+      getShowinfo(data.entries["0"].fox$series)
+      showdesc.innerHTML = data.entries["0"].description
+
+
+                                       document.getElementById('epname').innerHTML = (data.entries["0"].title)
+
+       
+         document.getElementById('progress').style.width = "100%"
+      $('#projpar').hide()
+                                   isDone = true
+
+
+  }
+   })
+
+
+
+
+  console.log(url )
+
+               document.getElementById('downloader').href = url
+
+    player.src({"type":"application/x-mpegURL", "src":url});
+   player.play();
+resume()
+
+}
 
 
 
