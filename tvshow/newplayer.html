@@ -337,14 +337,18 @@ font-style: normal;
 <script type="text/javascript" src="js/video.min.js"></script>
 <script type="text/javascript" src="js/videojs.hotkeys.min.js"></script>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.5.3/videojs-contrib-hls.min.js"></script>
+<!-->
 <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script> 
+<script type="text/javascript" src="js/videojs-hlsjs.js"></script>
+<!-->
 <script type="text/javascript">
   function error(e,d){
     console.log(e,d)
     document.getElementById('blockLoader').innerHTML = '<i class="fa fa-exclamation-triangle error" aria-hidden="true"></i>'
   }
 </script>
-<script type="text/javascript" src="js/videojs-hlsjs.js"></script>
 <!-- > <script type="text/javascript" src="js/videojs-contrib-hls.min.js"></script> <!-->
 <script type="text/javascript" src="js/videojs-playlist.min.js"></script>
 
