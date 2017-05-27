@@ -382,6 +382,8 @@ input[type=number],input[type=search],textarea {
     opacity: .4;
     box-shadow: 1px 0 0 1px rgba(0,0,0,.33);
     width: 10vw;
+        background: url(https://d36rlb2fgh8cjd.cloudfront.net/default-images/default-poster-q80.jpg);
+    background-size: cover;
 }
 
 .tvshow,.tvshow img {
@@ -820,6 +822,9 @@ body {
     overflow: hidden;
     position: relative;
 background-color: #393838;
+        background: url(https://d36rlb2fgh8cjd.cloudfront.net/default-images/landscape-default-q80.jpg);
+    background-size: cover;
+
 }
 
 .fanarts-list>li .image-crop img {
