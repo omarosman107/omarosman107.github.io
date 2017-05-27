@@ -822,8 +822,9 @@ body {
     overflow: hidden;
     position: relative;
 background-color: #393838;
-        background: url(https://d36rlb2fgh8cjd.cloudfront.net/default-images/landscape-default-q80.jpg);
+      /*  background: url(https://d36rlb2fgh8cjd.cloudfront.net/default-images/landscape-default-q80.jpg);
     background-size: cover;
+    */
 
 }
 
