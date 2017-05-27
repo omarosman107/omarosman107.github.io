@@ -883,7 +883,7 @@ body a:hover {
 }
 
 .fanarts-list>li .fanart-details p {
-    width: 193px;
+    width: 75%;
     margin: 5px auto 0;
     border-top: 1px solid #ececec;
     color: #777;
