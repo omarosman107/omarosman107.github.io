@@ -373,14 +373,15 @@ input[type=number],input[type=search],textarea {
 .tvshow,.wtc {
     display: inline-block;
     text-align: center;
-    margin: 12px
+    margin: 12px;
+    
 }
 
 .tvshow {
-    will-change: opacity;
+    will-change: opacity,width,transform;
     opacity: .4;
     box-shadow: 1px 0 0 1px rgba(0,0,0,.33);
-    width: 160px
+    width: 10vw;
 }
 
 .tvshow,.tvshow img {
@@ -772,8 +773,7 @@ body {
     margin-bottom: 16px;
     width: 90%;
     border-radius: 3px;
-    max-width: 23%;
-    min-width: 260px;
+    width: 25vw;
     -webkit-transition: all .15s cubic-bezier(.33,.66,.66,1);
     transition: all .15s cubic-bezier(.33,.66,.66,1);
     -webkit-backface-visibility: hidden;
@@ -1041,14 +1041,11 @@ body a:hover {
     }
 }
 
-@media (max-width:500px) {
+@media (max-width:700px) {
     .tvshow {
-        width: 110px
+        width: 22vw;
     }
 
-    .wtc {
-        width: 160px
-    }
 }
 
 @media print {
