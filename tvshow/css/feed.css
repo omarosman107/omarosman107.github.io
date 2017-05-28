@@ -808,7 +808,7 @@ body {
     transform-style: preserve-3d;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-         box-shadow: -2px 0 2px 0 rgba(0,0,0,0.16), 2px 0 2px 0 rgba(0,0,0,0.16), 0 2px 2px 0 rgba(0,0,0,0.23);
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
     -webkit-transform: translate3d(0,-3px,0);
     transform: translate3d(0,-3px,0);
     
