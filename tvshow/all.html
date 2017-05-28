@@ -1036,7 +1036,7 @@ var e = (data.videos[i].availability_asset_id.split('-')[data.videos[i].availabi
 }catch(e){
 console.log(e)
 }
-var dyn = 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url=' + data.videos[i].large_thumbnail + " 720w  ,"  + 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url=' + data.videos[i].medium_thumbnail + ' 210w'
+var dyn =  data.videos[i].large_thumbnail + " 720w  ,"   + data.videos[i].medium_thumbnail + ' 210w'
 tvlist(data.videos[i].series_name)
 var episode_data = {img:data.videos[i].medium_thumbnail,
     rating:(data.videos[i].rating),
@@ -1194,8 +1194,9 @@ srcobj = srcobj.sort(function(a, b){
 
 srcobj = srcobj.reverse()
 for (var y = srcobj.length - 1; y >= 0; y--) {
+  var google =   'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url='
 cdn = 'https://d1r1anxoiubeog.cloudfront.net/' 
-srcset +=  'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url=' + srcobj[y].src +' ' + srcobj[y].width+ 'w ,  ';
+srcset += cdn + srcobj[y].src +' ' + srcobj[y].width+ 'w ,  ';
 
 }
 
