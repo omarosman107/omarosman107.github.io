@@ -1170,7 +1170,7 @@ btn-floating:hover {
 }
 
 * {
-    transition: all 100ms ease-in-out
+    /* transition: all 100ms ease-in-out */
 }
 
 .playbutton:hover {

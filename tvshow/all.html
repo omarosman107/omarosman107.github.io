@@ -127,6 +127,82 @@ h1, h2 {
     padding-left: 10px;
     padding-right: 10px
 }
+.spinner {
+    -webkit-animation: rotator 1.4s linear infinite;
+    animation: rotator 1.4s linear infinite
+}
+
+@-webkit-keyframes rotator {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(270deg);
+        transform: rotate(270deg)
+    }
+}
+
+@keyframes rotator {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(270deg);
+        transform: rotate(270deg)
+    }
+}
+
+@-webkit-keyframes colors {
+    0%,25%,50%,75%,to {
+        stroke: #fff
+    }
+}
+
+@keyframes colors {
+    0%,25%,50%,75%,to {
+        stroke: #fff
+    }
+}
+
+@-webkit-keyframes dash {
+    0% {
+        stroke-dashoffset: 187
+    }
+
+    50% {
+        stroke-dashoffset: 46.75;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg)
+    }
+
+    to {
+        stroke-dashoffset: 187;
+        -webkit-transform: rotate(450deg);
+        transform: rotate(450deg)
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 187
+    }
+
+    50% {
+        stroke-dashoffset: 46.75;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg)
+    }
+
+    to {
+        stroke-dashoffset: 187;
+        -webkit-transform: rotate(450deg);
+        transform: rotate(450deg)
+    }
+}
 
 </style>
 
@@ -310,7 +386,7 @@ return;
   }
 
 
-  num  = num + 1
+  num++
 
 }
 function query(q,obj){
