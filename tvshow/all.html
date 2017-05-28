@@ -262,13 +262,31 @@ h1, h2 {
    </div>
         <script async type="text/javascript" src="https://cdn.rawgit.com/asvd/dragscroll/master/dragscroll.js"></script>
 
-   <script type="text/javascript" src="js/fetch.min.js"></script>
 
  <!-- <link async rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <-->
 <script>
+
+
+function addJS(url) {
+   var s = document.createElement('script'); // Create a script element
+   s.type = "text/javascript"; // optional in html5
+   s.async = true; // asynchronous? true/false
+   s.src = url;
+   var fs = document.getElementsByTagName('script')[0]; // Get the first script
+   fs.parentNode.insertBefore(s, fs);
+};
+
+
+ 
+
+if (window.fetch) {}else{
+
+  addJS('js/fetch.min.js');
+}
+
  // https://github.com/filamentgroup/loadCSS
     !function(e){"use strict"
     var n=function(n,t,o){function i(e){return f.body?e():void setTimeout(function(){i(e)})}var d,r,a,l,f=e.document,s=f.createElement("link"),u=o||"all"
