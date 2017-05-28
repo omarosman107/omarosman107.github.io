@@ -470,6 +470,9 @@ myLazyLoad.update()
 
 function loadPlayer(url){
   link = url.href
+  window.location = url.href;
+  return ; 
+$("#myModal").modal()
 
 if (link.includes('cwtv')) {
 
@@ -502,8 +505,6 @@ $(".shows").scroll(function() {
 lazyLoadImages();
 
 });
-
-
 
 
     $('#tvShows').scroll( function() {
