@@ -15,7 +15,7 @@ player.ready(function() {
 //jwplayer.defaults.preload = "auto"
 //jwplayer.defaults.autostart = "true"
 function bg(url){
-   document.getElementById('blockLoader').style.background = 'url(https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url=' +url+ ")"
+   document.getElementById('blockLoader').style.background = 'url(' +url+ ")"
 
 }
 function meta(s,e,a){
