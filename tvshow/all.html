@@ -1148,7 +1148,7 @@ loadMedia(finalObj)
 
 loaders()
 function fox(range){
-fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}&range=0-50', {
+fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}', {
 	method: 'get',
   cache: "no-store"
 }).then(function(response) {
@@ -1389,7 +1389,7 @@ console.log(err.message)
 
 
 
-   fox('0-25')
+   fox('0-200')
 //$('#myModal').on('hidden.bs.modal', function () {
 //jwplayer().stop();
 //});
