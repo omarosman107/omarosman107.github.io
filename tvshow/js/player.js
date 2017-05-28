@@ -192,6 +192,9 @@ if (tv == "abc.go.com") {
   url = cwurl
 
 }
+
+document.getElementById('orginVisit').innerHTML = url
+document.getElementById('orginVisit').href = url
 console.log(url)
      
              eval(sitefunctions[tv]);
