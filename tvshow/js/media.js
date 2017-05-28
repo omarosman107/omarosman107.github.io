@@ -71,8 +71,24 @@ played = true;
 
 
  }
+  function pad(n) {
+     return (n < 10) ? ("0" + n) : n;
+  }
+function endTime(){
+  var t = new Date();
+t.setSeconds(t.getSeconds() + player.duration() - player.currentTime());
+
+  var h = t.getHours();
+  var ap = 'AM'
+  if(h > 12 ){
+    h = h - 12
+     ap = 'PM'
+     }
+  var m = pad(t.getMinutes());
 
 
+document.querySelector('.endTime').innerHTML = 'Ends at: ' + h + ':' + m + ' ' + ap
+}
 function fmtMSS(s){return(s-(s%=60))/60+(9<s?':':':0')+s}
 
 function resume(){
@@ -102,8 +118,11 @@ vid.oncanplay = function() {
   var played = true;
 resumePlayback()
 player.play()
+  endTime()
 
 setInterval(function(){
+    endTime()
+
   localStorage[window.location.search]  = player.currentTime()
   localStorage[window.location.search + '_perc']  = player.currentTime() / player.duration() * 100;
   if (player.currentTime() == player.duration()) {
