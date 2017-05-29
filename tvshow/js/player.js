@@ -9,11 +9,7 @@ function addJS(url) {
    var fs = document.getElementsByTagName('script')[0]; // Get the first script
    fs.parentNode.insertBefore(s, fs);
 };
-$('showname').bind('DOMNodeInserted DOMNodeRemoved', function() {
-  alert('changed');
-});
 
- 
 
 if (window.fetch) {}else{
 

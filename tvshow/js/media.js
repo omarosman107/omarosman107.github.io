@@ -1051,11 +1051,13 @@ console.log(url.split('&auth=')[1])
                      document.getElementById('progress').style.width = "100%"
 }else{
       document.getElementById('progress').style.width = "50%"
+if(url.split('&auth=').length == 1){
 
+}
 var a = data.entries[0].media$content[0].plfile$url + '&auth=' + url.split('&auth=')[1] + '&format=redirect&manifest=m3u'
 
 if(url.split('&auth=')[1] == undefined){
-  alert('able to play')
+  alert('not able to play')
   var a = data.entries[0].media$content[0].plfile$url + '&format=redirect&manifest=m3u'
 
 }
