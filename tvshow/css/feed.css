@@ -385,8 +385,9 @@ input[type=number],input[type=search],textarea {
     opacity: .4;
     box-shadow: 1px 0 0 1px rgba(0,0,0,.33);
     width: 10vw;
-        background: url(https://d36rlb2fgh8cjd.cloudfront.net/default-images/default-poster-q80.jpg);
     background-size: cover;
+    border-radius: 2px;
+    box-shadow: 0 0 2px #787878;
 }
 
 .tvshow,.tvshow img {
@@ -467,7 +468,6 @@ h1,h2 {
 }
 
 .tvshow:active,.tvshow:focus,.tvshow:hover {
-    box-shadow: 3px 3px 2px rgba(0,0,0,.2)
 }
 
 .list-inline>li {
