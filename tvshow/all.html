@@ -301,7 +301,7 @@ function addJS(url) {
 
  
 
-if (window.fetch) {}else{
+if (!window.fetch){
 
   addJS('js/fetch.min.js');
 }
