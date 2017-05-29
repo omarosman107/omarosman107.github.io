@@ -1142,7 +1142,7 @@ loadMedia(finalObj)
 
 loaders()
 function fox(range){
-fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}&bust='  +(new Date()).getTime(), {
+fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}', {
 	method: 'get',
   cache: "no-store"
 }).then(function(response) {
