@@ -996,7 +996,7 @@ var template = "";
 
 var cors_show_hub = 'https://crossorigin.me/'  + show_hub
 
- var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub+ '"') + '&format=json';
+ var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub+ '"') + '&format=json&bust=' +(new Date()).getTime();
 loaders()
 fetch(  show_hub, {
     method: 'get',
@@ -1074,7 +1074,7 @@ console.log(err)
 
 
  
- var nickAPI = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="http://www.nick.com/data/episodes.json?apiKey=jukebox.nick.com"') + '&format=json';
+ var nickAPI = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="http://www.nick.com/data/episodes.json?apiKey=jukebox.nick.com"') + '&format=json&bust=' + (new Date()).getTime();
 function nick(){
   loaders();
 
@@ -1142,7 +1142,7 @@ loadMedia(finalObj)
 
 loaders()
 function fox(range){
-fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}', {
+fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}&bust='  +(new Date()).getTime(), {
 	method: 'get',
   cache: "no-store"
 }).then(function(response) {
