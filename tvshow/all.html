@@ -297,14 +297,8 @@ function addJS(url) {
    var fs = document.getElementsByTagName('script')[0]; // Get the first script
    fs.parentNode.insertBefore(s, fs);
 };
+addJS('js/fetch.min.js');
 
-
- 
-
-if (!window.fetch){
-
-  addJS('js/fetch.min.js');
-}
 
  // https://github.com/filamentgroup/loadCSS
     !function(e){"use strict"
