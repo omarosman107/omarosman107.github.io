@@ -7,6 +7,11 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+
+fixed more bugs
+--
+more animations!!
+--
 if you click on the show name in the player it takes you to the show page.
 --
 made player buffer go away a little
