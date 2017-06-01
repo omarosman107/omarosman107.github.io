@@ -439,7 +439,6 @@ function query(q,obj){
 
 
     }else{
-            document.getElementsByClassName('initialized')[i].style.opacity = "0"
 
 
           document.getElementsByClassName('initialized')[i].style.display = "none"
@@ -471,8 +470,8 @@ function showQuery(q,obj){
   for (var i = document.getElementsByClassName('initialized').length - 1; i >= 0; i--) {
     if( document.getElementsByClassName('initialized')[i].getAttribute('ShowName').includes(q)){
       document.getElementsByClassName('initialized')[i].style.display = "inline-block"
+
       num += 1
-        lazyLoadImages();
 
 
     }else{
@@ -587,7 +586,6 @@ fetch(url , {
 
 
 }).catch(function(e){
-  console.log(e)
 });
 }
 
@@ -895,7 +893,6 @@ if(perc == undefined){
   perc = 0
 }
   }  function showCheck(){
-    console.log(perc)
 if(perc > 99){
 return 1; 
 alert('finished')
@@ -931,7 +928,11 @@ if (json[i].imgdyn == '') {
 
 
 var formatter = new Intl.DateTimeFormat("en", { month: "short" })
+if (json[i].airdate == 'NaN-NaN-NaN') {
+json[i].airdate = '2017-01-01'
+console.log(json[i].airdate)
 
+}
 var date = new Date(json[i].airdate)
 
 var month2 = formatter.format(date);
@@ -1054,7 +1055,6 @@ var episode_data = {img:data.videos[i].medium_thumbnail,
 
    }
    }
-   console.log(finalObj)
    loadMedia(finalObj)
       lazyLoadImages();
       sortCards()
@@ -1104,8 +1104,16 @@ var minutes = times[0];
 var seconds = times[1];
 seconds = parseInt(seconds, 10) + (parseInt(minutes, 10) * 60);
 tvlist(json.stream[i].items[a].data.seriesTitle)
-
-  finalObj.push({img:json.stream[i].items[a].data.images.thumbnail['r16-9'],
+var date = formatDate(json.stream[i].items[a].data.datePosted.source)
+if (date == 'NaN-NaN-NaN') {
+  date = formatDate('1/1/2017')
+  console.log(date)
+}
+console.log(json.stream[i].items[a].data.images.thumbnail['r16-9'])
+var image  = json.stream[i].items[a].data.images.thumbnail['r16-9'].split('=')
+image[1] = '0.40';
+image = image.join();  
+  finalObj.push({img:image,
     rating:'TV-14',
     href: 'nick.com' + json.stream[i].items[a].data.url,
     airdate:formatDate(json.stream[i].items[a].data.datePosted.source),
@@ -1121,7 +1129,6 @@ tvlist(json.stream[i].items[a].data.seriesTitle)
 
 
 }catch(e){
-console.log(e)
 
 }
 
@@ -1135,7 +1142,6 @@ loaders('remove');
 loadMedia(finalObj)
 
 }).catch(function(e){
-  console.log(e)
 })
 
 }
@@ -1385,6 +1391,7 @@ console.log(err.message)
 
 
    fox('0-200')
+   nick()
 //$('#myModal').on('hidden.bs.modal', function () {
 //jwplayer().stop();
 //});
