@@ -146,11 +146,12 @@ document.getElementById('table').innerHTML = data
 }
 
 
-    fetch('https://cors-anywhere.herokuapp.com/https://www.filmon.com/api-v2/channel/3734?protocol=hls').then(function(response) {
+    fetch(
+'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="https://https://www.filmon.com/api-v2/channel/3734?protocol=hls"') + '&format=json').then(function(response) {
   // Convert to JSON
   return response.json();
 }).then(function(r) {
- channels.SNTV.src = (r.data.streams[1].url)
+ channels.SNTV.src = (r.query.results.json.data.streams[1].url)
  converttoHTML()
 }).catch(function(e){
 document.getElementById('error').innerHTML = e
@@ -158,12 +159,11 @@ document.getElementById('error').innerHTML = e
 
 
 
-
-    fetch('https://cors-anywhere.herokuapp.com/https://www.filmon.com/api-v2/channel/3731?protocol=hls').then(function(response) {
+    fetch('https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="https://www.filmon.com/api-v2/channel/3731?protocol=hls"') + '&format=json').then(function(response) {
   return response.json();
 }).then(function(r) {
-  console.log(r.data.streams[1].url)
- channels['Universal TV Somali'].src = (r.data.streams[1].url)
+  console.log(r.query.results.json.data.streams[1].url)
+ channels['Universal TV Somali'].src = (r.query.results.json.data.streams[1].url)
  converttoHTML()
 }).catch(function(e){
 document.getElementById('error').innerHTML = e
@@ -204,15 +204,6 @@ return (response.json())
 
 
 
-    fetch("http://link.theplatform.com/s/fox-stg/media/_27vMU66ZIdI?mbr=true&affiliate=WSYM&assetTypes=eastern&format=redirect&formats=Text&auth=%3CsignatureInfo%3EpSjKAX0TakaaFO5wazJ68vSJJ7GTXG5uXmBXkCOSCPuMjLWO36eLcOe58%2Bz4aQYP1Fl63m8sRyzm8jgHt3360GJdShg%2FytYTYFN0ay5%2BAIKxR9jfj%2FY%2FTutdwPJMoeKv14K8IDWy0bphL9llnyaV%2FeZ3Iom4wk4pJvBqhPuRX7A%3D%3CsignatureInfo%3E%3CauthToken%3E%3CsessionGUID%3E5d6eb1e94f98c6d49fb095aac16e7bfd%3C%2FsessionGUID%3E%3CrequestorID%3Efbc-fox%3C%2FrequestorID%3E%3CresourceID%3E%3C!%5BCDATA%5B%3Crss%20version%3D%222.0%22%20xmlns%3Amedia%3D%22http%3A%2F%2Fsearch.yahoo.com%2Fmrss%2F%22%3E%3Cchannel%3E%3Ctitle%3Efbc-fox%3C%2Ftitle%3E%3C%2Fchannel%3E%3C%2Frss%3E%5D%5D%3E%3C%2FresourceID%3E%3Cttl%3E420000%3C%2Fttl%3E%3CissueTime%3E2017-05-22%2018%3A28%3A16%20-0700%3C%2FissueTime%3E%3CmvpdId%3ETempPass_fbcfox_5min%3C%2FmvpdId%3E%3C%2FauthToken%3E"
-).then(function(response) {
-  return response.json();
-}).then(function(r) {
- channels['FOX'].src = r.playURL
- converttoHTML()
-}).catch(function(e){
-document.getElementById('error').innerHTML = e
-});
 
 
 
@@ -223,11 +214,7 @@ var channels = {
   "src":"",
   "quality":"HD"
 },
-  "FOX":{
-  "working":true,
-  "src":"",
-  "quality":"HD"
-},
+
 "CBSN":{
   "working":true,
   "src":"http://cbsnews-linear.mdialog.com/video_assets/cbsnews.m3u8?api_key=563b80c1ae4ce359830f572d2496a947",
