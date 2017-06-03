@@ -91,7 +91,7 @@ font-style: normal;
 
 .w3-progress-container {
     width: 100%;
-    height: .6vh;
+    height: 5px;
     opacity: 1;
     bottom: 0;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
@@ -793,6 +793,7 @@ body {
     width: 90%;
     border-radius: 3px;
     width: 25vw;
+    min-width: 290px;
     -webkit-transition: all .15s cubic-bezier(.33,.66,.66,1);
     transition: all .15s cubic-bezier(.33,.66,.66,1);
     -webkit-backface-visibility: hidden;
@@ -1066,7 +1067,7 @@ body a:hover {
 
 @media (max-width:700px) {
     .tvshow {
-        width: 22vw;
+    width: 28vw;
     }
 
 }
@@ -1222,4 +1223,9 @@ transition: all 1s cubic-bezier(0.12, 0.49, 0.9, 3.59);
         width: 100%;
         height: auto
     }
+}
+.fanarts-list>li .fanart-details .infos {
+    height: 20px;
+    margin: 20px auto 0;
+    overflow: hidden;
 }

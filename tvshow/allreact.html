@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ReactJS episodes</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+	.cover {
+		opacity: 1 !important;
+	}
+</style>
+<link rel="stylesheet" type="text/css" href="css/feed.css">
+<p style="    padding-top: 20px;
+    padding-left: 25px;">Made By <a href="https://twitter.com/itsMangoPlays">@itsMangoPlays </a></p>
+  <a href="#" onclick="query('')"><h1 style="text-align:center;font-size:xx-large;padding-top: 100px;">EPISODES</h1></a>
+<div id="loaderHolder" class="loaderHolder"></div>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-level-up" aria-hidden="true"></i>
+</button>
+
+<div class="box">
+  <div class="container-1">
+      <span class="icon"><i class="fa fa-search"></i></span>
+      <input oninput="query(this.value)"  type="search" id="search" placeholder="Search..." />
+  </div>
+  <span id="results"></span>
+</div>
+
+<h1>CONTINUE WATCHING</h1>
+
+<div   onscroll="lazyLoadImages()" style="height: auto;padding: 15px;" class=" fanarts-list list-unstyled list-inline shows dragscroll" id="watching">
+
+</div>
+<h1>SHOWS</h1>
+<div onscroll="lazyLoadImages()" class="shows dragscroll" id="tvShows">
+  
+
+</div>
+<div style="display: none;" class="nextContainer">
+    <a id="left-buttontv"  class="btn-floating btn-large waves-effect waves-light red" value="left"><i class="material-icons">chevron_left</i></a>
+
+    <a id="right-buttontv" class="btn-floating btn-large waves-effect waves-light red"  style="float: right;" value="right"><i class="material-icons">chevron_right</i></a>
+  
+</div>
+<div class=" fanarts-list list-unstyled list-inline shows dragscroll" id="app"></div>
+
+
+
+
+<div class="header">
+<hr>
+<div class="logo ">
+
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="100%" viewBox="0 0 800.000000 800.000000"
+ preserveAspectRatio="xMidYMid meet">
+<metadata>
+Created by potrace 1.13, written by Peter Selinger 2001-2015
+</metadata>
+<g transform="translate(0.000000,800.000000) scale(0.100000,-0.100000)"
+fill="#ffffff" stroke="none">
+<path d="M230 4980 l0 -1040 1191 0 1191 0 -4 -187 c-3 -182 -4 -190 -32 -251
+-52 -112 -148 -177 -298 -202 -40 -6 -429 -10 -1055 -10 l-993 0 0 -485 0
+-486 1238 4 c906 3 1258 7 1317 16 288 44 485 109 636 212 224 151 335 356
+360 659 6 78 9 624 7 1465 l-3 1340 -587 3 -588 2 0 -550 0 -550 -605 0 -605
+0 0 550 0 550 -585 0 -585 0 0 -1040z"/>
+<path d="M4220 5530 l0 -490 590 0 590 0 0 -1630 0 -1630 590 0 590 0 0 1630
+0 1630 595 0 595 0 0 490 0 490 -1775 0 -1775 0 0 -490z"/>
+</g>
+</svg>
+
+
+
+</div>
+<a href="log.txt"><span>Changelog</span></a>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react-dom.js"></script>
+</head>
+<body>
+
+<script>
+
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var HelloMessage = function (_React$Component) {
+	_inherits(HelloMessage, _React$Component);
+
+	function HelloMessage() {
+		_classCallCheck(this, HelloMessage);
+
+		return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+	}
+
+
+	HelloMessage.prototype.render = function render() {
+		console.log(this)
+ var perc = 0;
+  if(localStorage["?"+JSON.parse(this.props.json).href] ){
+    perc = localStorage["?" + JSON.parse(this.props.json).href + "_perc"]
+if(perc == "NaN"){
+  perc = 0;
+}
+if(perc == undefined){
+  perc = 0
+}
+}
+		return React.createElement(
+			"li",
+			{ className: "initialized" },
+			React.createElement(
+				"div",
+				{ className: "piece fanart-container" },
+				React.createElement(
+					"div",
+					{ className: "image-crop sixteen-nine" },
+					React.createElement(
+						"a",
+						{ href: "newplayer.html?" + JSON.parse(this.props.json).href},
+						React.createElement("div", { className: "imageBG" }),
+						React.createElement("img", { className: "cover sixteen-nine", 'srcSet': JSON.parse(this.props.json).imgdyn }),
+						React.createElement("i", { "aria-hidden": "true", className: "fa fa-play-circle-o" })
+					),
+					React.createElement("span", { className: "episode-gradient" }),
+					React.createElement(
+						"div",
+						{ className: "w3-progress-container", id: "projpar" },
+						React.createElement("div", { className: "w3-progressbar", id: "progress", style: { width: perc + "%" } })
+					),
+					React.createElement(
+						"div",
+						{ className: "overlay" },
+						React.createElement(
+							"a",
+							{ className: "overlay-btn zoom-btn", href: "newplayer.html?" + JSON.parse(this.props.json).href },
+							React.createElement("i", { className: "fa fa-play playbutton" })
+						)
+					)
+				),
+				React.createElement(
+					"div",
+					{ className: "episode-details fanart-details" },
+					React.createElement(
+						"h2",
+						null,
+						React.createElement(
+							"a",
+							{ className: "episode-name", href: "newplayer.html?" + JSON.parse(this.props.json).href},
+			JSON.parse(this.props.json).episode
+						)
+					),
+					React.createElement(
+						"a",
+						{ className: "secondary-link show-name", href: "javascript:", 'onClick': "showQuery" },
+			JSON.parse(this.props.json).show
+					),
+					React.createElement(
+						"p",
+						{ className: "infos" },
+
+JSON.parse(this.props.json).airdate+' | ' + JSON.parse(this.props.json).rating + ' | '+JSON.parse(this.props.json).length.split(':')[0] + 'm' +' | '+JSON.parse(this.props.json).epiformat
+					),
+				),
+				React.createElement(
+					"div",
+					{ className: "bottom" },
+					React.createElement("div", { className: "bar" }),
+					React.createElement("div", { className: "bar" }),
+					React.createElement("div", { className: "bar" })
+				)
+			)
+		);
+
+		return React.createElement(
+			"div",
+			null,
+			JSON.parse(this.props.json).show
+		);
+	};
+
+	return HelloMessage;
+}(React.Component);
+
+
+
+
+
+
+
+//# sourceURL=pen.js
+</script>
+<script type="text/javascript">
+	function epiformat(s,e){
+s = parseInt(s)
+e = parseInt(e)
+	if (s < 10) {
+s = '0' + s
+	}
+		if (e < 10) {
+e = '0' + e
+	}
+
+	return 'S' + s + 'E' + e
+}
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+} 
+
+ function msToTime(duration) {
+        var milliseconds = parseInt((duration%1000)/100)
+            , seconds = parseInt((duration/1000)%60)
+            , minutes = parseInt((duration/(1000*60))%60)
+            , hours = parseInt((duration/(1000*60*60))%24);
+
+        hours = (hours < 10) ? "0" + hours : hours;
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        return  minutes + ":" + seconds ;
+    }
+
+
+var show_hub = 'http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_hub'
+
+ var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub+ '"') + '&format=json&bust=' +(new Date()).getTime();
+fetch(  show_hub, {
+    method: 'get',
+    cache: "no-store"
+}).then(function(response) {
+    return response.json(); 
+}).then(function(data){
+  data = data.query.results.json
+var start = new Date()
+var showsTemp = {}
+var finalObj = []
+ for(i in data.videos){
+   if(data.videos[i].fullep == 1){
+if (!showsTemp[data.videos[i].series_name]) {
+
+showsTemp[data.videos[i].series_name] = data.videos[i].series_name
+
+}
+
+     function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000 * 60);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes;
+}
+
+var epinum = data.videos[i].episode
+try{
+epinum = data.videos[i].availability_asset_id.split('-')[data.videos[i].availability_asset_id.split('-').length - 1]
+var s = (data.videos[i].availability_asset_id.split('-')[data.videos[i].availability_asset_id.split('-').length - 1].split('E')[0].split('S')[1])
+var e = (data.videos[i].availability_asset_id.split('-')[data.videos[i].availability_asset_id.split('-').length - 1].split('E')[1])
+}catch(e){
+console.log(e)
+}
+var dyn =  data.videos[i].large_thumbnail + " 720w  ,"   + data.videos[i].medium_thumbnail + ' 210w'
+var episode_data = {img:data.videos[i].medium_thumbnail,
+    rating:(data.videos[i].rating),
+    imgdyn:dyn,
+    href: data.videos[i].share_url,
+    airdate:data.videos[i].airdate,
+    show:data.videos[i].series_name,
+    episode:data.videos[i].title,
+    epiformat:epiformat(s,e),
+    length:data.videos[i].duration,
+    metadata:data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration,
+    type:"cw"
+  }
+  console.log(episode_data)
+ReactDOM.render(React.createElement(HelloMessage, { json: JSON.stringify(episode_data)}), app);
+
+
+
+
+     
+
+   }
+   }
+
+   var end = new Date()
+
+
+
+}).catch(function(err) {
+console.log(err)
+
+});
+
+
+
+</script>
+</body></html>
