@@ -97,11 +97,6 @@ function resume(){
 
 var vid = document.getElementById('LS_html5_api');
 
-if (Hls) {
-var vid = document.getElementById('LS_Hlsjs_api');
-
-
-}
 var vid = document.getElementById(player.el().children[0].id);
 
 vid.onerror = function(e) {
