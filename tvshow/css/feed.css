@@ -1008,8 +1008,7 @@ body a:hover {
 }
 
 .loaded {
-    will-change: opacity;
-    opacity: 1!important
+    opacity: 1 !important;
 }
 
 .cover {
@@ -1019,8 +1018,9 @@ body a:hover {
     background-size: cover!important;
     background-position: 50%;
     opacity: 0;
-    -webkit-transition: opacity .3s ease;
-    transition: opacity .3s ease
+    -webkit-transition: opacity .2s ease;
+    transition: opacity .2s ease
+        will-change: opacity;
 }
 
 @media (max-width:600px) {
