@@ -105,7 +105,7 @@ var vid = document.getElementById('LS_Hlsjs_api');
 var vid = document.getElementById(player.el().children[0].id);
 
 vid.onerror = function(e) {
-  alert(e)
+  error(e)
 }
 
 vid.oncanplay = function() {
