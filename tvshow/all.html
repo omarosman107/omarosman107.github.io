@@ -210,6 +210,9 @@
     margin: auto;
     padding-top: 140px;
 }
+.contain {
+  display: none
+}
   </style>
   <title>EPISODES - We provide the best streaming site.</title>
 </head>
@@ -250,7 +253,6 @@
       <div class="logo">
         <svg preserveaspectratio="xMidYMid meet" version="1.0" viewbox="0 0 800.000000 800.000000" width="100%" xmlns="http://www.w3.org/2000/svg">
         <metadata>
-          Created by potrace 1.13, written by Peter Selinger 2001-2015
         </metadata>
         <g fill="#ffffff" stroke="none" transform="translate(0.000000,800.000000) scale(0.100000,-0.100000)">
           <path d="M230 4980 l0 -1040 1191 0 1191 0 -4 -187 c-3 -182 -4 -190 -32 -251 -52 -112 -148 -177 -298 -202 -40 -6 -429 -10 -1055 -10 l-993 0 0 -485 0 -486 1238 4 c906 3 1258 7 1317 16 288 44 485 109 636 212 224 151 335 356 360 659 6 78 9 624 7 1465 l-3 1340 -587 3 -588 2 0 -550 0 -550 -605 0 -605 0 0 550 0 550 -585 0 -585 0 0 -1040z"></path>
@@ -549,7 +551,8 @@ function loaders(atr) {
 
       }
       document.getElementsByClassName('lScreen')[0].style.display = 'none'
-      lazyLoadImages()
+      document.querySelector('.contain').style.display = 'block';
+            lazyLoadImages()
 
 
     }
@@ -572,14 +575,15 @@ function makeid() {
 function query(q) {
   var num = 0
   setTimeout(function() {
-    for (i in obj) {
-      if (obj[i].metadata.toLowerCase().includes(q.toLowerCase())) {
+for (var i = 0, len = obj.length; i < len; i++) {
+ if (obj[i].metadata.toLowerCase().includes(q.toLowerCase())) {
         document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block'
         num = num + 1
       } else {
         document.getElementsByClassName(obj[i].id)[0].style.display = 'none'
       }
-    }
+}
+
     results(num)
     lazyLoadImages();
   }, 10)
@@ -614,14 +618,16 @@ function showQuery(q, o) {
   document.getElementById('search').value = q
   var num = 0
   setTimeout(function() {
-    for (i in obj) {
-      if (obj[i].show.toLowerCase().includes(q.toLowerCase())) {
+for (var i = 0, len = obj.length; i < len; i++) {
+
+   if (obj[i].show.toLowerCase().includes(q.toLowerCase())) {
         document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block'
         num = num + 1
       } else {
         document.getElementsByClassName(obj[i].id)[0].style.display = 'none'
       }
-    }
+}
+
     scrollShows()
     lazyLoadImages()
     results(num)
@@ -722,7 +728,98 @@ function search(val) {
 }
 
 function sortCards() {
-  var p = document.getElementById('carasoul');
+
+
+/*
+
+var sorted = obj.sort(function(a, b) {
+  var a = new Date(a.airdate)
+  var b = new Date(b.airdate)
+  if (a < b) {
+    return -1;
+  }
+  if (a > b) {
+    return 1;
+  }
+  return 0;
+}).reverse();
+var c = '';
+
+      var formatter = new Intl.DateTimeFormat( {
+      month: "short"
+    })
+              var date1 = new Date();
+
+sorted.forEach(function(json){
+
+          var date2 = new Date(json.airdate);
+
+    function newBanner() {
+      //Customise date2 for your required future time
+      var diff = (date2 - date1) / 1000;
+      var diff = Math.abs(Math.floor(diff));
+      var days = Math.floor(diff / (24 * 60 * 60));
+      var leftSec = diff - days * 24 * 60 * 60;
+      var hrs = Math.floor(leftSec / (60 * 60));
+      var leftSec = leftSec - hrs * 60 * 60;
+      var min = Math.floor(leftSec / (60));
+      var leftSec = leftSec - min * 60;
+      if (days <= 1) {
+        return '<div class="new-label"> New<\/div>'
+      } else {
+        return ''
+      }
+    }
+    var perc = 0;
+    if (localStorage["?" + json.href]) {
+      perc = localStorage["?" + json.href + "_perc"]
+      if (perc == "NaN") {
+        perc = 0
+      }
+      if (perc == undefined) {
+        perc = 0
+      }
+    }
+
+    function showCheck() {
+      if (perc > 99) {
+        return 1;
+        alert('finished')
+      }
+      return 0;
+    }
+
+    var query = (json.metadata + " " + json.episode).toLowerCase();
+    timeofPlayback = json.length.split(':')[0] + 'm'
+    var img = ''
+    if (json.imgdyn == '') {
+      img = 'data-original="' + json.img + '"'
+    }
+
+    if (json.airdate == 'NaN-NaN-NaN') {
+      json.airdate = '2017-01-01'
+    }
+
+    date2.setDate(date2.getDate() + 1);
+    var month2 = formatter.format(date2);
+
+
+
+        var FDate = month2 + ' ' + date2.getUTCDate() + ' ' + date2.getUTCFullYear()
+    FDate = month2
+    var e = '<li  aired="' + json.airdate + '"  ShowName="' + json.show + '" class="initialized ' + json.type + '  ' + json.id + '" data-query="' + query + '"><div  class="piece fanart-container"><div class="image-crop sixteen-nine">' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '"><\/span><div class="imageBG"><\/div><img     class="cover sixteen-nine"  sizes="(min-width: 600px) 25vw, (min-width: 500px) 50vw, 100vw" alt="' + json.show + '"  ' + img + ' data-original-set="' + json.imgdyn + '" class"lazy1" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '" class="overlay-btn zoom-btn " title="Watch ' + json.episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '">' + json.episode + '<\/a><\/h2><a onclick="showQuery(null,this)" show="' + json.show + '" href="javascript:" class="secondary-link show-name">' + json.show + '<\/a><div class=more-infos><\/div><p>' + FDate + ' | ' + json.rating + ' | ' + timeofPlayback + ' | ' + json.epiformat + '<\/p><i style="opacity:' + showCheck() + ';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"><\/i><\/div><div class="bottom"><div class="bar"><\/div><div class="bar"><\/div><div class="bar"><\/div><\/div><\/div><\/li>'
+
+    c = c + (e);
+});
+document.getElementById('carasoul').innerHTML = (c);
+lazyLoadImages()
+
+
+*/
+
+
+var p = document.getElementById('carasoul')
+
   Array.prototype.slice.call(p.children).map(function(x) {
     return p.removeChild(x);
   }).sort(function(x, y) {
@@ -909,6 +1006,8 @@ function arrayUnique(array) {
       var formatter = new Intl.DateTimeFormat( {
       month: "short"
     })
+              var date1 = new Date();
+
 function loadMedia(json) {
 
   obj = arrayUnique(obj.concat(json))
@@ -919,7 +1018,6 @@ function loadMedia(json) {
   })
   var template = ''
   var watching = ''
-        var date1 = new Date();
 
   for (i in json) {
           var date2 = new Date(json[i].airdate);
