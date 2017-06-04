@@ -465,32 +465,41 @@ document.getElementsByClassName(obj[i].id)[0].style.display = 'none'
     
 
 
-function showQuery(q,obj){
+function showQuery(q,o){
     if (q == null) {
-   q = obj.getAttribute('show')
+   q = o.getAttribute('show')
 //   document.body.style.background = 'url(' + obj.getAttribute('bg') + ") no-repeat center center fixed";
   };
 
   document.getElementById('search').value = q
 
-  var num = 0
-  for (var i = document.getElementsByClassName('initialized').length - 1; i >= 0; i--) {
-    if( document.getElementsByClassName('initialized')[i].getAttribute('ShowName').includes(q)){
-      document.getElementsByClassName('initialized')[i].style.display = "inline-block"
 
-      num += 1
+var num = 0
+  setTimeout(function(){
 
-
-    }else{
-      document.getElementsByClassName('initialized')[i].style.display = "none"
-    }
+ for (i in obj){
 
 
-  }
+if(obj[i].show.toLowerCase().includes(q.toLowerCase())){
 
+document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block'
+num = num + 1
+
+}else{
+document.getElementsByClassName(obj[i].id)[0].style.display = 'none'
+
+}
+}
+lazyLoadImages()
 
   results(num )
-  lazyLoadImages();
+
+
+
+  },10)
+
+
+
 
 
 } 
