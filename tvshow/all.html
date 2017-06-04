@@ -464,7 +464,10 @@ document.getElementsByClassName(obj[i].id)[0].style.display = 'none'
 
     
 
-
+function scrollShows(){
+  element = document.getElementById("carasoul")
+element.scrollIntoView(true);
+}
 function showQuery(q,o){
     if (q == null) {
    q = o.getAttribute('show')
@@ -490,6 +493,7 @@ document.getElementsByClassName(obj[i].id)[0].style.display = 'none'
 
 }
 }
+scrollShows()
 lazyLoadImages()
 
   results(num )
