@@ -420,37 +420,44 @@ return;
   num++
 
 }
-function query(q,obj){
-    if (q == null) {
-   q = obj.getAttribute('show')
-//   document.body.style.background = 'url(' + obj.getAttribute('bg') + ") no-repeat center center fixed";
-  };
 
-  document.getElementById('search').value = q
+function makeid()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 96; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+function query(q){
+    document.getElementById('search').value = q
 
   var num = 0
-  for (var i = document.getElementsByClassName('initialized').length - 1; i >= 0; i--) {
-    if( document.getElementsByClassName('initialized')[i].getAttribute('data-query').includes(q.toLowerCase())){
-      document.getElementsByClassName('initialized')[i].style.display = "inline-block"
-                  document.getElementsByClassName('initialized')[i].style.opacity = "1"
+  setTimeout(function(){
 
-      num += 1
-        lazyLoadImages();
+ for (i in obj){
 
 
-    }else{
+if(obj[i].metadata.toLowerCase().includes(q.toLowerCase())){
 
+document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block'
+num = num + 1
 
-          document.getElementsByClassName('initialized')[i].style.display = "none"
+}else{
+document.getElementsByClassName(obj[i].id)[0].style.display = 'none'
 
-    }
-
-
-  }
-
+}
+}
 
   results(num )
   lazyLoadImages();
+
+
+
+  },10)
+ 
 
 
 } 
@@ -930,7 +937,6 @@ if (json[i].imgdyn == '') {
 var formatter = new Intl.DateTimeFormat("en", { month: "short" })
 if (json[i].airdate == 'NaN-NaN-NaN') {
 json[i].airdate = '2017-01-01'
-console.log(json[i].airdate)
 
 }
 var date = new Date(json[i].airdate)
@@ -943,7 +949,7 @@ var FDate = month2 +' ' + date.getUTCDate() +' '+ date.getUTCFullYear()
 
 
 
-  template = template + '<li  aired="'+json[i].airdate+'"  ShowName="'+json[i].show+'" class="initialized '+json[i].type+'" data-query="'+query +'"><div  class="piece fanart-container"><div class="image-crop sixteen-nine">'+newBanner()+'<a onclick="loadPlayer(this)" href="newplayer.html?'+json[i].href+'"></span><div class="imageBG"></div><img     class="cover sixteen-nine"  sizes="(min-width: 600px) 25vw, (min-width: 500px) 50vw, 100vw" alt="'+json[i].show+'"  '+img+' data-original-set="'+json[i].imgdyn+'" class"lazy1" ><i class="fa fa-play-circle-o" aria-hidden="true"></i></a><span class="episode-gradient"></span><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch '+json[i].episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="showQuery(null,this)" show="'+json[i].show+'" href="javascript:" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+FDate+' | ' + json[i].rating + ' | '+timeofPlayback +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div></li>'
+  template = template + '<li  aired="'+json[i].airdate+'"  ShowName="'+json[i].show+'" class="initialized '+json[i].type+'  '+json[i].id+'" data-query="'+query +'"><div  class="piece fanart-container"><div class="image-crop sixteen-nine">'+newBanner()+'<a onclick="loadPlayer(this)" href="newplayer.html?'+json[i].href+'"></span><div class="imageBG"></div><img     class="cover sixteen-nine"  sizes="(min-width: 600px) 25vw, (min-width: 500px) 50vw, 100vw" alt="'+json[i].show+'"  '+img+' data-original-set="'+json[i].imgdyn+'" class"lazy1" ><i class="fa fa-play-circle-o" aria-hidden="true"></i></a><span class="episode-gradient"></span><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"></div></div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?'+json[i].href+'" class="overlay-btn zoom-btn " title="Watch '+json[i].episode+'"><i class="fa fa-play playbutton"></i></a></div></div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?'+json[i].href+'">'+json[i].episode+'</a></h2><a onclick="showQuery(null,this)" show="'+json[i].show+'" href="javascript:" class="secondary-link show-name">'+json[i].show +'</a><div class=more-infos></div><p>'+FDate+' | ' + json[i].rating + ' | '+timeofPlayback +' | '+json[i].epiformat+'</p><i style="opacity:'+showCheck()+';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"></i></div><div class="bottom"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div></div></li>'
  
 
  }
@@ -1036,6 +1042,7 @@ tvlist(data.videos[i].series_name)
 var episode_data = {img:data.videos[i].medium_thumbnail,
     rating:(data.videos[i].rating),
     imgdyn:dyn,
+    id:makeid(),
     href: data.videos[i].share_url,
     airdate:data.videos[i].airdate,
     show:data.videos[i].series_name,
@@ -1107,15 +1114,14 @@ tvlist(json.stream[i].items[a].data.seriesTitle)
 var date = formatDate(json.stream[i].items[a].data.datePosted.source)
 if (date == 'NaN-NaN-NaN') {
   date = formatDate('1/1/2017')
-  console.log(date)
 }
-console.log(json.stream[i].items[a].data.images.thumbnail['r16-9'])
 var image  = json.stream[i].items[a].data.images.thumbnail['r16-9'].split('=')
 image[1] = '0.40';
 image = image.join();  
   finalObj.push({img:image,
     rating:'TV-14',
     href: 'nick.com' + json.stream[i].items[a].data.url,
+    id:makeid(),
     airdate:formatDate(json.stream[i].items[a].data.datePosted.source),
     show:json.stream[i].items[a].data.seriesTitle,
     episode:json.stream[i].items[a].data.shortTitle,
@@ -1208,6 +1214,7 @@ srcset += cdn + srcobj[y].src +' ' + srcobj[y].width+ 'w ,  ';
   	airdate:formatDate(date.getTime()),
   	show:data.entries[i].fox$series,
   	episode:data.entries[i].title,
+    id:makeid(),
   	epiformat:epiformat(data.entries[i].fox$season,data.entries[i].fox$episode),
   	length:fmtMSS(data.entries[i].media$content[0].plfile$duration),
   	metadata:rating(data.entries[i].media$ratings[0].rating) + formatDate(data.entries[i].media$availableDate) + data.entries[i].fox$series + data.entries[i].title + epiformat(data.entries[i].fox$season,data.entries[i].fox$episode) + fmtMSS(data.entries[i].media$content[0].plfile$duration),
@@ -1260,6 +1267,7 @@ console.log(e)
   	airdate:airdate,
   	show:showepi.videos.video[a].show.title,
   	episode:showepi.videos.video[a].title,
+    id:makeid(),
   	epiformat:epiformat(showepi.videos.video[a].season.trackcode.generic.cseason,showepi.videos.video[a].number),
   	length:msToTime(showepi.videos.video[a].duration['$']),
   	 metadata:(showepi.videos.video[a].tvrating.rating) + airdate + showepi.videos.video[a].show.title + showepi.videos.video[a].show.title + epiformat(showepi.videos.video[a].season.trackcode.generic.cseason,showepi.videos.video[a].number) + msToTime(showepi.videos.video[a].duration['$']),
