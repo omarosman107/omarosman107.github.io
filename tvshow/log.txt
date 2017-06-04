@@ -7,7 +7,12 @@ PLAYER:New design
 
 
 == CHANGELOG ==
-
+show images are bigger on mobile
+--
+screen scrolls down when you click on a show
+--
+made search faster
+--
 fixed more bugs
 --
 more animations!!
