@@ -7,6 +7,12 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+performance improvements
+--
+search saves your query if you go back
+--
+images load more efficently
+--
 show images are bigger on mobile
 --
 screen scrolls down when you click on a show
