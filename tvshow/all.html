@@ -519,7 +519,9 @@ function loaders(atr) {
     if (num - 1 == -1) {
       var child = document.getElementsByClassName('spinner')[0]
       document.getElementById('loaderHolder').removeChild(child)
+      query(document.getElementById('search').value)
       lazyLoadImages()
+
 
     }
     if (document.getElementsByClassName('spinner').length == 0) {
