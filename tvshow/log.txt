@@ -7,6 +7,9 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+
+new launcher
+--
 performance improvements
 --
 search saves your query if you go back
