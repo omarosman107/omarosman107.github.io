@@ -220,9 +220,7 @@
 <div class="lScreen">
 <div class="Logoloading">
           <svg preserveaspectratio="xMidYMid meet" version="1.0" viewbox="0 0 800.000000 800.000000" width="100%" xmlns="http://www.w3.org/2000/svg">
-        <metadata>
-          Created by potrace 1.13, written by Peter Selinger 2001-2015
-        </metadata>
+
         <g fill="#ffffff" stroke="none" transform="translate(0.000000,800.000000) scale(0.100000,-0.100000)">
           <path d="M230 4980 l0 -1040 1191 0 1191 0 -4 -187 c-3 -182 -4 -190 -32 -251 -52 -112 -148 -177 -298 -202 -40 -6 -429 -10 -1055 -10 l-993 0 0 -485 0 -486 1238 4 c906 3 1258 7 1317 16 288 44 485 109 636 212 224 151 335 356 360 659 6 78 9 624 7 1465 l-3 1340 -587 3 -588 2 0 -550 0 -550 -605 0 -605 0 0 550 0 550 -585 0 -585 0 0 -1040z"></path>
           <path d="M4220 5530 l0 -490 590 0 590 0 0 -1630 0 -1630 590 0 590 0 0 1630 0 1630 595 0 595 0 0 490 0 490 -1775 0 -1775 0 0 -490z"></path>
@@ -243,7 +241,7 @@
     <h1>CONTINUE WATCHING</h1>
     <div class=" fanarts-list list-unstyled list-inline shows dragscroll" id="watching" onscroll="lazyLoadImages()" style="height: auto;padding: 15px;"></div>
     <h1>SHOWS</h1>
-    <div class="shows dragscroll" id="tvShows" onscroll="lazyLoadImages()"></div>
+    <div class="shows dragscroll" id="tvShows" ></div>
     <div class="nextContainer" style="display: none;">
       <a class="btn-floating btn-large waves-effect waves-light red" id="left-buttontv"><i class="material-icons">chevron_left</i></a> <a class="btn-floating btn-large waves-effect waves-light red" id="right-buttontv" style="float: right;"><i class="material-icons">chevron_right</i></a>
     </div>
@@ -261,7 +259,6 @@
       </div><a href="log.txt"><span>Changelog</span></a>
     </div>
   </div>
-  <script async src="js/dragscroll.js" type="text/javascript">
   </script> 
   <script src="js/fetch.min.js" type="text/javascript">
   </script> <!-- <link async rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -277,10 +274,9 @@ function addJS(url) {
   var fs = document.getElementsByTagName('script')[0]; // Get the first script
   fs.parentNode.insertBefore(s, fs);
 };
-addJS('js/fetch.min.js');
 // https://github.com/filamentgroup/loadCSS
 ! function(e) {
-  "use strict"
+  "use strict";
   var n = function(n, t, o) {
     function i(e) {
       return f.body ? e() : void setTimeout(function() {
@@ -289,12 +285,12 @@ addJS('js/fetch.min.js');
     }
     var d, r, a, l, f = e.document,
       s = f.createElement("link"),
-      u = o || "all"
+      u = o || "all";
     return t ? d = t : (r = (f.body || f.getElementsByTagName("head")[0]).childNodes, d = r[r.length - 1]), a = f.styleSheets, s.rel = "stylesheet", s.href = n, s.media = "only x", i(function() {
       d.parentNode.insertBefore(s, t ? d : d.nextSibling)
     }), l = function(e) {
       for (var n = s.href, t = a.length; t--;)
-        if (a[t].href === n) return e()
+        if (a[t].href === n) return e();
       setTimeout(function() {
         l(e)
       })
@@ -303,9 +299,9 @@ addJS('js/fetch.min.js');
     }), s.onloadcssdefined = l, l(function() {
       s.media !== u && (s.media = u)
     }), s
-  }
+  };
   "undefined" != typeof exports ? exports.loadCSS = n : e.loadCSS = n
-}("undefined" != typeof global ? global : this)
+}("undefined" != typeof global ? global : this);
 var stylesheet = loadCSS("css/feed.css");
 
 function logIn(u, p) {
@@ -379,155 +375,8 @@ function results(num) {
     res = ""
   }
   document.getElementById('results').innerHTML = res
-}! function(a, b) {
-  "function" == typeof define && define.amd ? define([], b) : "object" == typeof exports ? module.exports = b() : a.LazyLoad = b()
-}(this, function() {
-  function a() {
-    k || (j = {
-      elements_selector: "img",
-      container: window,
-      threshold: 300,
-      throttle: 150,
-      data_src: "original",
-      data_srcset: "original-set",
-      class_loading: "loading",
-      class_loaded: "loaded",
-      skip_invisible: !0,
-      callback_load: null,
-      callback_error: null,
-      callback_set: null,
-      callback_processed: null
-    }, k = !0)
-  }
-
-  function b(a, b, c) {
-    function d() {
-      return window.innerWidth || l.documentElement.clientWidth || document.body.clientWidth
-    }
-
-    function e() {
-      return window.innerHeight || l.documentElement.clientHeight || document.body.clientHeight
-    }
-
-    function f(a) {
-      return a.getBoundingClientRect().top + m - l.documentElement.clientTop
-    }
-
-    function g(a) {
-      return a.getBoundingClientRect().left + n - l.documentElement.clientLeft
-    }
-
-    function h() {
-      var d;
-      return d = b === window ? e() + m : f(b) + b.offsetHeight, d <= f(a) - c
-    }
-
-    function i() {
-      var e;
-      return e = b === window ? d() + window.pageXOffset : g(b) + d(), e <= g(a) - c
-    }
-
-    function j() {
-      var d;
-      return d = b === window ? m : f(b), d >= f(a) + c + a.offsetHeight
-    }
-
-    function k() {
-      var d;
-      return d = b === window ? n : g(b), d >= g(a) + c + a.offsetWidth
-    }
-    var l, m, n;
-    return l = a.ownerDocument, m = window.pageYOffset || l.body.scrollTop, n = window.pageXOffset || l.body.scrollLeft, !(h() || j() || i() || k())
-  }
-
-  function c() {
-    var a = new Date;
-    return a.getTime()
-  }
-
-  function d(a, b) {
-    var c, d = {};
-    for (c in a) a.hasOwnProperty(c) && (d[c] = a[c]);
-    for (c in b) b.hasOwnProperty(c) && (d[c] = b[c]);
-    return d
-  }
-
-  function e(a) {
-    return Array.prototype.slice.call(a)
-  }
-
-  function f(a, b) {
-    var c = a.parentElement;
-    if ("PICTURE" === c.tagName)
-      for (var d = 0; d < c.children.length; d++) {
-        var e = c.children[d];
-        if ("SOURCE" === e.tagName) {
-          var f = e.getAttribute("data-" + b);
-          f && e.setAttribute("srcset", f)
-        }
-      }
-  }
-
-  function g(a, b, c) {
-    var d = a.tagName,
-      e = a.getAttribute("data-" + c);
-    if ("IMG" === d) {
-      f(a, b);
-      var g = a.getAttribute("data-" + b);
-      return g && a.setAttribute("srcset", g), void(e && a.setAttribute("src", e))
-    }
-    return "IFRAME" === d ? void(e && a.setAttribute("src", e)) : void(e && (a.style.backgroundImage = "url(" + e + ")"))
-  }
-
-  function h(a, b) {
-    return function() {
-      return a.apply(b, arguments)
-    }
-  }
-
-  function i(b) {
-    a(), this._settings = d(j, b), this._queryOriginNode = this._settings.container === window ? document : this._settings.container, this._previousLoopTime = 0, this._loopTimeout = null, this._handleScrollFn = h(this.handleScroll, this), window.addEventListener("resize", this._handleScrollFn), this.update()
-  }
-  var j, k = !1;
-  return i.prototype._showOnAppear = function(a) {
-    function b() {
-      a.removeEventListener("load", c), a.classList.remove(d.class_loading), d.callback_error && d.callback_error(a)
-    }
-
-    function c() {
-      null !== d && (d.callback_load && d.callback_load(a), a.classList.remove(d.class_loading), a.classList.add(d.class_loaded), a.removeEventListener("load", c), a.removeEventListener("error", b))
-    }
-    var d = this._settings;
-    "IMG" !== a.tagName && "IFRAME" !== a.tagName || (a.addEventListener("load", c), a.addEventListener("error", b), a.classList.add(d.class_loading)), g(a, d.data_srcset, d.data_src), d.callback_set && d.callback_set(a)
-  }, i.prototype._loopThroughElements = function() {
-    var a, c, d = this._settings,
-      e = this._elements,
-      f = e ? e.length : 0,
-      g = [];
-    for (a = 0; a < f; a++) c = e[a], d.skip_invisible && null === c.offsetParent || b(c, d.container, d.threshold) && (this._showOnAppear(c), g.push(a), c.wasProcessed = !0);
-    for (; g.length > 0;) e.splice(g.pop(), 1), d.callback_processed && d.callback_processed(e.length);
-    0 === f && this._stopScrollHandler()
-  }, i.prototype._purgeElements = function() {
-    var a, b, c = this._elements,
-      d = c.length,
-      e = [];
-    for (a = 0; a < d; a++) b = c[a], b.wasProcessed && e.push(a);
-    for (; e.length > 0;) c.splice(e.pop(), 1)
-  }, i.prototype._startScrollHandler = function() {
-    this._isHandlingScroll || (this._isHandlingScroll = !0, this._settings.container.addEventListener("scroll", this._handleScrollFn))
-  }, i.prototype._stopScrollHandler = function() {
-    this._isHandlingScroll && (this._isHandlingScroll = !1, this._settings.container.removeEventListener("scroll", this._handleScrollFn))
-  }, i.prototype.handleScroll = function() {
-    var a, b, d;
-    this._settings && (b = c(), d = this._settings.throttle, 0 !== d ? (a = d - (b - this._previousLoopTime), a <= 0 || a > d ? (this._loopTimeout && (clearTimeout(this._loopTimeout), this._loopTimeout = null), this._previousLoopTime = b, this._loopThroughElements()) : this._loopTimeout || (this._loopTimeout = setTimeout(h(function() {
-      this._previousLoopTime = c(), this._loopTimeout = null, this._loopThroughElements()
-    }, this), a))) : this._loopThroughElements())
-  }, i.prototype.update = function() {
-    this._elements = e(this._queryOriginNode.querySelectorAll(this._settings.elements_selector)), this._purgeElements(), this._loopThroughElements(), this._startScrollHandler()
-  }, i.prototype.destroy = function() {
-    window.removeEventListener("resize", this._handleScrollFn), this._loopTimeout && (clearTimeout(this._loopTimeout), this._loopTimeout = null), this._stopScrollHandler(), this._elements = null, this._queryOriginNode = null, this._settings = null
-  }, i
-});
+}
+!function(e,t){"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?module.exports=t():e.LazyLoad=t()}(this,function(){function e(){c||(d={elements_selector:"img",container:window,threshold:300,throttle:150,data_src:"original",data_srcset:"original-set",class_loading:"loading",class_loaded:"loaded",skip_invisible:!0,callback_load:null,callback_error:null,callback_set:null,callback_processed:null},c=!0)}function t(e,t,i){function o(){return window.innerWidth||h.documentElement.clientWidth||document.body.clientWidth}function a(){return window.innerHeight||h.documentElement.clientHeight||document.body.clientHeight}function s(e){return e.getBoundingClientRect().top+u-h.documentElement.clientTop}function n(e){return e.getBoundingClientRect().left+m-h.documentElement.clientLeft}function r(){var o;return o=t===window?a()+u:s(t)+t.offsetHeight,o<=s(e)-i}function l(){var a;return a=t===window?o()+window.pageXOffset:n(t)+o(),a<=n(e)-i}function d(){var o;return o=t===window?u:s(t),o>=s(e)+i+e.offsetHeight}function c(){var o;return o=t===window?m:n(t),o>=n(e)+i+e.offsetWidth}var h,u,m;return h=e.ownerDocument,u=window.pageYOffset||h.body.scrollTop,m=window.pageXOffset||h.body.scrollLeft,!(r()||d()||l()||c())}function i(){var e=new Date;return e.getTime()}function o(e,t){var i,o={};for(i in e)e.hasOwnProperty(i)&&(o[i]=e[i]);for(i in t)t.hasOwnProperty(i)&&(o[i]=t[i]);return o}function a(e){return Array.prototype.slice.call(e)}function s(e,t){var i=e.parentElement;if("PICTURE"===i.tagName)for(var o=0;o<i.children.length;o++){var a=i.children[o];if("SOURCE"===a.tagName){var s=a.getAttribute("data-"+t);s&&a.setAttribute("srcset",s)}}}function n(e,t,i){var o=e.tagName,a=e.getAttribute("data-"+i);if("IMG"===o){s(e,t);var n=e.getAttribute("data-"+t);return n&&e.setAttribute("srcset",n),void(a&&e.setAttribute("src",a))}return"IFRAME"===o?void(a&&e.setAttribute("src",a)):void(a&&(e.style.backgroundImage="url("+a+")"))}function r(e,t){return function(){return e.apply(t,arguments)}}function l(t){e(),this._settings=o(d,t),this._queryOriginNode=this._settings.container===window?document:this._settings.container,this._previousLoopTime=0,this._loopTimeout=null,this._handleScrollFn=r(this.handleScroll,this),window.addEventListener("resize",this._handleScrollFn),this.update()}var d,c=!1;return l.prototype._showOnAppear=function(e){function t(){e.removeEventListener("load",i),e.classList.remove(o.class_loading),o.callback_error&&o.callback_error(e)}function i(){null!==o&&(o.callback_load&&o.callback_load(e),e.classList.remove(o.class_loading),e.classList.add(o.class_loaded),e.removeEventListener("load",i),e.removeEventListener("error",t))}var o=this._settings;"IMG"!==e.tagName&&"IFRAME"!==e.tagName||(e.addEventListener("load",i),e.addEventListener("error",t),e.classList.add(o.class_loading)),n(e,o.data_srcset,o.data_src),o.callback_set&&o.callback_set(e)},l.prototype._loopThroughElements=function(){var e,i,o=this._settings,a=this._elements,s=a?a.length:0,n=[];for(e=0;s>e;e++)i=a[e],o.skip_invisible&&null===i.offsetParent||t(i,o.container,o.threshold)&&(this._showOnAppear(i),n.push(e),i.wasProcessed=!0);for(;n.length>0;)a.splice(n.pop(),1),o.callback_processed&&o.callback_processed(a.length);0===s&&this._stopScrollHandler()},l.prototype._purgeElements=function(){var e,t,i=this._elements,o=i.length,a=[];for(e=0;o>e;e++)t=i[e],t.wasProcessed&&a.push(e);for(;a.length>0;)i.splice(a.pop(),1)},l.prototype._startScrollHandler=function(){this._isHandlingScroll||(this._isHandlingScroll=!0,this._settings.container.addEventListener("scroll",this._handleScrollFn))},l.prototype._stopScrollHandler=function(){this._isHandlingScroll&&(this._isHandlingScroll=!1,this._settings.container.removeEventListener("scroll",this._handleScrollFn))},l.prototype.handleScroll=function(){var e,t,o;this._settings&&(t=i(),o=this._settings.throttle,0!==o?(e=o-(t-this._previousLoopTime),0>=e||e>o?(this._loopTimeout&&(clearTimeout(this._loopTimeout),this._loopTimeout=null),this._previousLoopTime=t,this._loopThroughElements()):this._loopTimeout||(this._loopTimeout=setTimeout(r(function(){this._previousLoopTime=i(),this._loopTimeout=null,this._loopThroughElements()},this),e))):this._loopThroughElements())},l.prototype.update=function(){this._elements=a(this._queryOriginNode.querySelectorAll(this._settings.elements_selector)),this._purgeElements(),this._loopThroughElements(),this._startScrollHandler()},l.prototype.destroy=function(){window.removeEventListener("resize",this._handleScrollFn),this._loopTimeout&&(clearTimeout(this._loopTimeout),this._loopTimeout=null),this._stopScrollHandler(),this._elements=null,this._queryOriginNode=null,this._settings=null},l});
 
 function addJS(url) {
   var s = document.createElement('script'); // Create a script element
@@ -547,18 +396,14 @@ function loaders(atr) {
       var child = document.getElementsByClassName('spinner')[0]
       document.getElementById('loaderHolder').removeChild(child)
       if (!document.getElementById('search').value == '') {
-      query(document.getElementById('search').value)
-
+        query(document.getElementById('search').value)
       }
       document.getElementsByClassName('lScreen')[0].style.display = 'none'
       document.querySelector('.contain').style.display = 'block';
-            lazyLoadImages()
-
-
+     // lazyLoadImages()
     }
     if (document.getElementsByClassName('spinner').length == 0) {
-            lazyLoadImages()
-
+     // lazyLoadImages()
     }
     return;
   }
@@ -575,15 +420,14 @@ function makeid() {
 function query(q) {
   var num = 0
   setTimeout(function() {
-for (var i = 0, len = obj.length; i < len; i++) {
- if (obj[i].metadata.toLowerCase().includes(q.toLowerCase())) {
+    for (var i = 0, len = obj.length; i < len; i++) {
+      if (obj[i].metadata.toLowerCase().includes(q.toLowerCase())) {
         document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block'
         num = num + 1
       } else {
         document.getElementsByClassName(obj[i].id)[0].style.display = 'none'
       }
-}
-
+    }
     results(num)
     lazyLoadImages();
   }, 10)
@@ -618,16 +462,14 @@ function showQuery(q, o) {
   document.getElementById('search').value = q
   var num = 0
   setTimeout(function() {
-for (var i = 0, len = obj.length; i < len; i++) {
-
-   if (obj[i].show.toLowerCase().includes(q.toLowerCase())) {
+    for (var i = 0, len = obj.length; i < len; i++) {
+      if (obj[i].show.toLowerCase() == (q.toLowerCase())) {
         document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block'
         num = num + 1
       } else {
         document.getElementsByClassName(obj[i].id)[0].style.display = 'none'
       }
-}
-
+    }
     scrollShows()
     lazyLoadImages()
     results(num)
@@ -635,26 +477,7 @@ for (var i = 0, len = obj.length; i < len; i++) {
 }
 var tvobj = {}
 
-function YQLQuery(query, callback) {
-  this.query = query;
-  this.callback = callback || function() {};
-  this.fetch = function() {
-    if (!this.query || !this.callback) {
-      throw new Error('YQLQuery.fetch(): Parameters may be undefined');
-    }
-    var scriptEl = document.createElement('script'),
-      uid = 'yql' + +new Date(),
-      encodedQuery = encodeURIComponent(this.query.toLowerCase()),
-      instance = this;
-    YQLQuery[uid] = function(json) {
-      instance.callback(json);
-      delete YQLQuery[uid];
-      document.body.removeChild(scriptEl);
-    };
-    scriptEl.src = 'http://query.yahooapis.com/v1/public/yql?q=' + encodedQuery + '&format=json&callback=YQLQuery.' + uid;
-    document.body.appendChild(scriptEl);
-  };
-}
+
 
 function tvstQ(q) {
   q = encodeURIComponent(q);
@@ -728,98 +551,95 @@ function search(val) {
 }
 
 function sortCards() {
+  /*
 
+  var sorted = obj.sort(function(a, b) {
+    var a = new Date(a.airdate)
+    var b = new Date(b.airdate)
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
+  }).reverse();
+  var c = '';
 
-/*
+        var formatter = new Intl.DateTimeFormat( {
+        month: "short"
+      })
+                var date1 = new Date();
 
-var sorted = obj.sort(function(a, b) {
-  var a = new Date(a.airdate)
-  var b = new Date(b.airdate)
-  if (a < b) {
-    return -1;
-  }
-  if (a > b) {
-    return 1;
-  }
-  return 0;
-}).reverse();
-var c = '';
+  sorted.forEach(function(json){
 
-      var formatter = new Intl.DateTimeFormat( {
-      month: "short"
-    })
-              var date1 = new Date();
+            var date2 = new Date(json.airdate);
 
-sorted.forEach(function(json){
-
-          var date2 = new Date(json.airdate);
-
-    function newBanner() {
-      //Customise date2 for your required future time
-      var diff = (date2 - date1) / 1000;
-      var diff = Math.abs(Math.floor(diff));
-      var days = Math.floor(diff / (24 * 60 * 60));
-      var leftSec = diff - days * 24 * 60 * 60;
-      var hrs = Math.floor(leftSec / (60 * 60));
-      var leftSec = leftSec - hrs * 60 * 60;
-      var min = Math.floor(leftSec / (60));
-      var leftSec = leftSec - min * 60;
-      if (days <= 1) {
-        return '<div class="new-label"> New<\/div>'
-      } else {
-        return ''
+      function newBanner() {
+        //Customise date2 for your required future time
+        var diff = (date2 - date1) / 1000;
+        var diff = Math.abs(Math.floor(diff));
+        var days = Math.floor(diff / (24 * 60 * 60));
+        var leftSec = diff - days * 24 * 60 * 60;
+        var hrs = Math.floor(leftSec / (60 * 60));
+        var leftSec = leftSec - hrs * 60 * 60;
+        var min = Math.floor(leftSec / (60));
+        var leftSec = leftSec - min * 60;
+        if (days <= 1) {
+          return '<div class="new-label"> New<\/div>'
+        } else {
+          return ''
+        }
       }
-    }
-    var perc = 0;
-    if (localStorage["?" + json.href]) {
-      perc = localStorage["?" + json.href + "_perc"]
-      if (perc == "NaN") {
-        perc = 0
+      var perc = 0;
+      if (localStorage["?" + json.href]) {
+        perc = localStorage["?" + json.href + "_perc"]
+        if (perc == "NaN") {
+          perc = 0
+        }
+        if (perc == undefined) {
+          perc = 0
+        }
       }
-      if (perc == undefined) {
-        perc = 0
+
+      function showCheck() {
+        if (perc > 99) {
+          return 1;
+          alert('finished')
+        }
+        return 0;
       }
-    }
 
-    function showCheck() {
-      if (perc > 99) {
-        return 1;
-        alert('finished')
+      var query = (json.metadata + " " + json.episode).toLowerCase();
+      timeofPlayback = json.length.split(':')[0] + 'm'
+      var img = ''
+      if (json.imgdyn == '') {
+        img = 'data-original="' + json.img + '"'
       }
-      return 0;
-    }
 
-    var query = (json.metadata + " " + json.episode).toLowerCase();
-    timeofPlayback = json.length.split(':')[0] + 'm'
-    var img = ''
-    if (json.imgdyn == '') {
-      img = 'data-original="' + json.img + '"'
-    }
+      if (json.airdate == 'NaN-NaN-NaN') {
+        json.airdate = '2017-01-01'
+      }
 
-    if (json.airdate == 'NaN-NaN-NaN') {
-      json.airdate = '2017-01-01'
-    }
-
-    date2.setDate(date2.getDate() + 1);
-    var month2 = formatter.format(date2);
+      date2.setDate(date2.getDate() + 1);
+      var month2 = formatter.format(date2);
 
 
 
-        var FDate = month2 + ' ' + date2.getUTCDate() + ' ' + date2.getUTCFullYear()
-    FDate = month2
-    var e = '<li  aired="' + json.airdate + '"  ShowName="' + json.show + '" class="initialized ' + json.type + '  ' + json.id + '" data-query="' + query + '"><div  class="piece fanart-container"><div class="image-crop sixteen-nine">' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '"><\/span><div class="imageBG"><\/div><img     class="cover sixteen-nine"  sizes="(min-width: 600px) 25vw, (min-width: 500px) 50vw, 100vw" alt="' + json.show + '"  ' + img + ' data-original-set="' + json.imgdyn + '" class"lazy1" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '" class="overlay-btn zoom-btn " title="Watch ' + json.episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '">' + json.episode + '<\/a><\/h2><a onclick="showQuery(null,this)" show="' + json.show + '" href="javascript:" class="secondary-link show-name">' + json.show + '<\/a><div class=more-infos><\/div><p>' + FDate + ' | ' + json.rating + ' | ' + timeofPlayback + ' | ' + json.epiformat + '<\/p><i style="opacity:' + showCheck() + ';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"><\/i><\/div><div class="bottom"><div class="bar"><\/div><div class="bar"><\/div><div class="bar"><\/div><\/div><\/div><\/li>'
+          var FDate = month2 + ' ' + date2.getUTCDate() + ' ' + date2.getUTCFullYear()
+      FDate = month2
+      var e = '<li  aired="' + json.airdate + '"  ShowName="' + json.show + '" class="initialized ' + json.type + '  ' + json.id + '" data-query="' + query + '"><div  class="piece fanart-container"><div class="image-crop sixteen-nine">' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '"><\/span><div class="imageBG"><\/div><img     class="cover sixteen-nine"  sizes="(min-width: 600px) 25vw, (min-width: 500px) 50vw, 100vw" alt="' + json.show + '"  ' + img + ' data-original-set="' + json.imgdyn + '" class"lazy1" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '" class="overlay-btn zoom-btn " title="Watch ' + json.episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '">' + json.episode + '<\/a><\/h2><a onclick="showQuery(null,this)" show="' + json.show + '" href="javascript:" class="secondary-link show-name">' + json.show + '<\/a><div class=more-infos><\/div><p>' + FDate + ' | ' + json.rating + ' | ' + timeofPlayback + ' | ' + json.epiformat + '<\/p><i style="opacity:' + showCheck() + ';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"><\/i><\/div><div class="bottom"><div class="bar"><\/div><div class="bar"><\/div><div class="bar"><\/div><\/div><\/div><\/li>'
 
-    c = c + (e);
-});
-document.getElementById('carasoul').innerHTML = (c);
-lazyLoadImages()
-
-
-*/
+      c = c + (e);
+  });
+  document.getElementById('carasoul').innerHTML = (c);
+  lazyLoadImages()
 
 
-var p = document.getElementById('carasoul')
+  */
+  setTimeout(function(e){
 
+  var p = document.getElementById('carasoul')
   Array.prototype.slice.call(p.children).map(function(x) {
     return p.removeChild(x);
   }).sort(function(x, y) {
@@ -831,6 +651,8 @@ var p = document.getElementById('carasoul')
   }).forEach(function(x) {
     p.appendChild(x);
   });
+  },10)
+
 }
 var theflash = 'http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_the-flash'
 var show_hub = 'http://images.cwtv.com/feed/mobileapp/videos/apiversion_7/show_hub'
@@ -873,11 +695,11 @@ function rating(rate) {
   }
 }
 var myLazyLoad = new LazyLoad({
-  threshold: 100,
+  threshold: 300,
 });
 
 function lazyLoadImages() {
-   myLazyLoad.update()
+  myLazyLoad.update()
 }
 
 function loadPlayer(url) {
@@ -929,7 +751,6 @@ function loadPlayer(url) {
        }
    });
    */
-
 function loadQuick(json) {
   var temp = ''
 
@@ -997,19 +818,12 @@ function arrayUnique(array) {
   }
   return a;
 }
-
-
-
-
-
-
-      var formatter = new Intl.DateTimeFormat( {
-      month: "short"
-    })
-              var date1 = new Date();
+var formatter = new Intl.DateTimeFormat({
+  month: "short"
+})
+var date1 = new Date();
 
 function loadMedia(json) {
-
   obj = arrayUnique(obj.concat(json))
   json = json.sort(function(a, b) {
     a = new Date(a.airdate);
@@ -1018,9 +832,8 @@ function loadMedia(json) {
   })
   var template = ''
   var watching = ''
-
   for (i in json) {
-          var date2 = new Date(json[i].airdate);
+    var date2 = new Date(json[i].airdate);
 
     function newBanner() {
       //Customise date2 for your required future time
@@ -1059,7 +872,7 @@ function loadMedia(json) {
     if (!perc == 0) {
       if (document.getElementsByClassName(json[i].href).length == 0) {
         //  document.getElementById('watching').innerHTML += '<div tabindex="1" class="wtc '+json[i].href+'"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"><\/div><\/div><br> <span>'+json[i].show+'<\/span><\/a><\/div>'
-        watching += '<li style="width: 280px;margin: 11px;" class=" card  ' + json[i].href + '"><a href="#"><div style="    height: 280px;" class="piece fanart-container"><div class="image-crop sixteen-nine">' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '"><\/span><div class="imageBG"><\/div><img    class="cover sixteen-nine "   sizes="(min-width: 600px) 25vw, (min-width: 500px) 50vw, 100vw"   alt="' + json[i].episode  + '" data-original-set="' + json[i].imgdyn + '" class"" class="cover" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '" class="overlay-btn zoom-btn "  title="Watch ' + json[i].episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '">' + json[i].episode + '<\/a><\/h2><a onclick="showQuery(null,this)"  show="' + json[i].show + '" href="javascript:" class="secondary-link show-name">' + json[i].show + '<\/a><a href="javascript:"><i style="    /* opacity: ' + showCheck() + '; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"><\/i><\/a><\/div><div class="bottom"><\/div><\/div><\/a><\/li>'
+        watching += '<li style="width: 280px;margin: 11px;" class=" card  ' + json[i].href + '"><a href="#"><div style="    height: 280px;" class="piece fanart-container"><div class="image-crop sixteen-nine">' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '"><\/span><div class="imageBG"><\/div><img    class="cover sixteen-nine "   sizes="(min-width: 600px) 25vw, (min-width: 500px) 50vw, 100vw"   alt="' + json[i].episode + '" data-original-set="' + json[i].imgdyn + '" class"" class="cover" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '" class="overlay-btn zoom-btn "  title="Watch ' + json[i].episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '">' + json[i].episode + '<\/a><\/h2><a onclick="showQuery(null,this)"  show="' + json[i].show + '" href="javascript:" class="secondary-link show-name">' + json[i].show + '<\/a><a href="javascript:"><i style="    /* opacity: ' + showCheck() + '; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"><\/i><\/a><\/div><div class="bottom"><\/div><\/div><\/a><\/li>'
       }
     }
     var query = (json[i].metadata + " " + json[i].episode).toLowerCase();
@@ -1068,15 +881,10 @@ function loadMedia(json) {
     if (json[i].imgdyn == '') {
       img = 'data-original="' + json[i].img + '"'
     }
-
     if (json[i].airdate == 'NaN-NaN-NaN') {
       json[i].airdate = '2017-01-01'
     }
-
     date2.setDate(date2.getDate() + 1);
-
-
-
     var month2 = formatter.format(date2);
     var FDate = month2 + ' ' + date2.getUTCDate() + ' ' + date2.getUTCFullYear()
     FDate = month2
@@ -1084,13 +892,8 @@ function loadMedia(json) {
   }
   document.getElementById('watching').innerHTML += watching
   document.getElementById('carasoul').innerHTML += template;
-
-
-
-
   template = '';
-        lazyLoadImages()
-
+  lazyLoadImages()
 }
 
 function epiformat(s, e) {
@@ -1256,10 +1059,10 @@ function fox(range) {
         var img = data.entries[i].media$thumbnails[z].plfile$url
         img = img.replace('http', 'https')
         srcobj.push({
-            src: img,
-            width: data.entries[i].media$thumbnails[z].plfile$width
-          })
-          // srcset +=  img +' ' + data.entries[i].media$thumbnails[z].plfile$width+ 'w ,  ';
+          src: img,
+          width: data.entries[i].media$thumbnails[z].plfile$width
+        })
+        srcset += img + ' ' + data.entries[i].media$thumbnails[z].plfile$width + 'w ,  ';
       }
       srcobj = srcobj.sort(function(a, b) {
         if (a.width < b.width) return -1;
@@ -1267,11 +1070,12 @@ function fox(range) {
         return 0;
       })
       srcobj = srcobj.reverse()
-      for (var y = srcobj.length - 1; y >= 0; y--) {
-        var google = 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url='
-        cdn = 'https://d1r1anxoiubeog.cloudfront.net/'
-        srcset += cdn + srcobj[y].src + ' ' + srcobj[y].width + 'w ,  ';
-      }
+        /* for (var y = srcobj.length - 1; y >= 0; y--) {
+          var google = 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url='
+          cdn = 'https://d1r1anxoiubeog.cloudfront.net/'
+          srcset += cdn + srcobj[y].src + ' ' + srcobj[y].width + 'w ,  ';
+        }
+        */
       finalObj.push({
         img: '',
         rating: rating(data.entries[i].media$ratings[0].rating),
