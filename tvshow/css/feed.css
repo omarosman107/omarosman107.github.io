@@ -299,11 +299,14 @@ body {
     border: 0;
     font-size: 16px;
     float: left;
-    color: #262626;
+    color: #ffffff;
     padding-left: 45px;
     border-radius: 1000px;
     -webkit-transition: all .55s ease;
     transition: all .55s ease
+}
+.container-1 input#search:focus {
+    color: #262626;
 }
 
 .container-1 input#search::-webkit-input-placeholder {
