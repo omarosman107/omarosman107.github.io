@@ -367,10 +367,9 @@ body {
 }
 
 .tvshow:hover {
-    -webkit-animation-duration: 2s;
+
     opacity: 1;
-    transition: all .1s cubic-bezier(.03,.98,.52,.99);
-    -webkit-transition: all .1s cubic-bezier(.03,.98,.52,.99);
+
     transform: scale(1)
 }
 
@@ -379,6 +378,7 @@ input[type=number],input[type=search],textarea {
 }
 
 .tvshow,.wtc {
+
     display: inline-block;
     text-align: center;
     margin: 12px;
@@ -386,7 +386,9 @@ input[type=number],input[type=search],textarea {
 }
 
 .tvshow {
-    will-change: opacity,width,transform;
+    -webkit-transition: all 0.3s cubic-bezier(.03,.98,.52,.99);
+    transition: all 0.3s cubic-bezier(.03,.98,.52,.99);
+    will-change: opacity,transform;
     opacity: .4;
     box-shadow: 1px 0 0 1px rgba(0,0,0,.33);
     width: 10vw;
@@ -394,8 +396,7 @@ input[type=number],input[type=search],textarea {
     border-radius: 2px;
     box-shadow: 0 0 2px #787878;
     transform: scale(0.9);
-        transition: all 100ms ease-in-out;
-}
+ }
 
 .tvshow,.tvshow img {
     border-radius: 3px
@@ -790,7 +791,7 @@ body {
     width: 90%;
     border-radius: 3px;
     width: 25vw;
-    min-width: 290px;
+    min-width: 300px;
     -webkit-transition: all .15s cubic-bezier(.33,.66,.66,1);
     transition: all .15s cubic-bezier(.33,.66,.66,1);
     -webkit-backface-visibility: hidden;
