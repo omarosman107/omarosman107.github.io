@@ -229,7 +229,7 @@
 
 </div>
   <div class="contain">
-    <p style=" padding-top: 20px; padding-left: 25px;">Made By <a href="https://twitter.com/itsMangoPlays">@itsMangoPlays</a></p><a href="#" onclick="query('')">
+    <p style=" padding-top: 20px; padding-left: 25px;">Made By <a href="https://twitter.com/itsMangoPlays">@itsMangoPlays</a></p><a href="#" onclick="showAll('')">
     <h1 style="text-align:center;font-size:xx-large;padding-top: 100px;">EPISODES</h1></a>
     <button id="myBtn" onclick="topFunction()" title="Go to top"><i aria-hidden="true" class="fa fa-level-up"></i></button>
     <div class="box">
@@ -435,7 +435,21 @@ function query(q) {
     lazyLoadImages();
   }, 10)
 }
+function showAll(q){
+    document.getElementById('search').value = '';
 
+  var num = 0
+  setTimeout(function() {
+    for (var i = 0, len = obj.length; i < len; i++) {
+        document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block'
+        num = num + 1
+      }
+ results(num)
+    lazyLoadImages();
+  }, 10)
+
+
+}
 function scrollShows() {
   element = document.getElementById("carasoul")
 
