@@ -403,6 +403,9 @@ function loaders(atr) {
       }
       document.getElementsByClassName('lScreen')[0].style.display = 'none'
       document.querySelector('.contain').style.display = 'block';
+
+console.log('done')
+
      // lazyLoadImages()
     }
     if (document.getElementsByClassName('spinner').length == 0) {
@@ -425,10 +428,14 @@ function query(q) {
   setTimeout(function() {
     for (var i = 0, len = obj.length; i < len; i++) {
       if (obj[i].metadata.toLowerCase().includes(q.toLowerCase())) {
-        document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block'
+        document.getElementsByClassName(obj[i].id)[0].style.opacity = '1'
+                document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block';
+
         num = num + 1
       } else {
-        document.getElementsByClassName(obj[i].id)[0].style.display = 'none'
+        document.getElementsByClassName(obj[i].id)[0].style.opacity = '0'
+                        document.getElementsByClassName(obj[i].id)[0].style.display = 'none';
+
       }
     }
     results(num)
@@ -441,7 +448,9 @@ function showAll(q){
   var num = 0
   setTimeout(function() {
     for (var i = 0, len = obj.length; i < len; i++) {
-        document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block'
+        document.getElementsByClassName(obj[i].id)[0].style.opacity = '1'
+                        document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block'
+
         num = num + 1
       }
  results(num)
@@ -481,10 +490,14 @@ function showQuery(q, o) {
   setTimeout(function() {
     for (var i = 0, len = obj.length; i < len; i++) {
       if (obj[i].show.toLowerCase() == (q.toLowerCase())) {
-        document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block'
+        document.getElementsByClassName(obj[i].id)[0].style.opacity = '1'
+                        document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block';
+
         num = num + 1
       } else {
-        document.getElementsByClassName(obj[i].id)[0].style.display = 'none'
+        document.getElementsByClassName(obj[i].id)[0].style.opacity = '0'
+                document.getElementsByClassName(obj[i].id)[0].style.display = 'none';
+
       }
     }
     scrollShows()
@@ -721,32 +734,8 @@ function lazyLoadImages() {
 
 function loadPlayer(url) {
   link = url.href
-  window.location = url.href;
-  return;
-  $("#myModal").modal()
-  if (link.includes('cwtv')) {
-    // url (required), options (optional)
-    fetch('http://metaframe.digitalsmiths.tv/v2/CWtv/assets/' + link.split('=')[1] + '/partner/206?format=json', {
-      method: 'get'
-    }).then(function(response) {
-      return response.json();
-    }).then(function(data) {
-      url = data.videos.variantplaylist.uri
-      jwplayer("vplayer").setup({
-        file: url,
-      });
-    }).catch(function(err) {
-      alert('something bad happened :(')
-    });
-  }
-  if (link.includes('theplatform')) {
-    jwplayer("vplayer").setup({
-      file: link.split('?')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false",
-      type: "hls"
-    });
-  }
   return false;
-}
+ }
 /*
 
    $('#tvShows').scroll( function() {
@@ -905,7 +894,7 @@ function loadMedia(json) {
     var month2 = formatter.format(date2);
     var FDate = month2 + ' ' + date2.getUTCDate() + ' ' + date2.getUTCFullYear()
     FDate = month2
-    template = template + '<li  aired="' + json[i].airdate + '"  ShowName="' + json[i].show + '" class="initialized ' + json[i].type + '  ' + json[i].id + '" data-query="' + query + '"><div  class="piece fanart-container"><div class="image-crop sixteen-nine">' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '"><\/span><div class="imageBG"><\/div><img     class="cover sixteen-nine"  sizes="(min-width: 600px) 25vw, (min-width: 500px) 50vw, 100vw" alt="' + json[i].show + '"  ' + img + ' data-original-set="' + json[i].imgdyn + '" class"lazy1" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '" class="overlay-btn zoom-btn " title="Watch ' + json[i].episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '">' + json[i].episode + '<\/a><\/h2><a onclick="showQuery(null,this)" show="' + json[i].show + '" href="javascript:" class="secondary-link show-name">' + json[i].show + '<\/a><div class=more-infos><\/div><p>' + FDate + ' | ' + json[i].rating + ' | ' + timeofPlayback + ' | ' + json[i].epiformat + '<\/p><i style="opacity:' + showCheck() + ';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"><\/i><\/div><div class="bottom"><div class="bar"><\/div><div class="bar"><\/div><div class="bar"><\/div><\/div><\/div><\/li>'
+    template = template + '<li  aired="' + json[i].airdate + '"  ShowName="' + json[i].show + '" class="initialized  ' + json[i].type + '  ' + json[i].id + '" data-query="' + query + '"><div  class="piece fanart-container"><div class="image-crop sixteen-nine">' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '"><\/span><div class="imageBG"><\/div><img     class="cover sixteen-nine"  sizes="(min-width: 600px) 25vw, (min-width: 500px) 50vw, 100vw" alt="' + json[i].show + '"  ' + img + ' data-original-set="' + json[i].imgdyn + '" class"lazy1" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '" class="overlay-btn zoom-btn " title="Watch ' + json[i].episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '">' + json[i].episode + '<\/a><\/h2><a onclick="showQuery(null,this)" show="' + json[i].show + '" href="javascript:" class="secondary-link show-name">' + json[i].show + '<\/a><div class=more-infos><\/div><p>' + FDate + ' | ' + json[i].rating + ' | ' + timeofPlayback + ' | ' + json[i].epiformat + '<\/p><i style="opacity:' + showCheck() + ';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"><\/i><\/div><div class="bottom"><div class="bar"><\/div><div class="bar"><\/div><div class="bar"><\/div><\/div><\/div><\/li>'
   }
   document.getElementById('watching').innerHTML += watching
   document.getElementById('carasoul').innerHTML += template;
