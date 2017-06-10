@@ -278,6 +278,7 @@
 function playHover(element){
   hovering = setTimeout(function(){
     var video = element.querySelector('video')
+    console.log(video)
     var url = element.getAttribute('url')
 
       if(Hls.isSupported()) {
@@ -285,9 +286,10 @@ function playHover(element){
     hls.attachMedia(video);
     hls.on(Hls.Events.MANIFEST_PARSED,function() {
       video.play();
-          element.querySelector('.cover').style.display = 'none';
 
   });
+              element.querySelector('.cover').style.display = 'none';
+
  }
 if (url.includes('cwtv.com')) {
 var stripped = url.split('?')[1].split('=')[1]
@@ -316,8 +318,9 @@ if (url.includes('theplatform')) {
 
 
 
-return 0;
   },2000)
+
+
 }
 function stopHover(element){
 clearTimeout(hovering);
