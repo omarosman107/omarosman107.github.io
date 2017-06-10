@@ -234,10 +234,10 @@
     <button id="myBtn" onclick="topFunction()" title="Go to top"><i aria-hidden="true" class="fa fa-level-up"></i></button>
     <div class="box">
       <div class="container-1">
-        <span class="icon"><i class="fa fa-search"></i></span> <input id="search" oninput="query(this.value)" placeholder="Search..." type="search">
+        <span class="icon"><i class="fa fa-search"></i></span> <input id="search" placeholder="Search..." type="search">
       </div><span id="results"></span>
     </div>
-    <h1>CONTINUE WATCHING</h1>
+    <h1 id="wtcTxt">CONTINUE WATCHING</h1>
     <div class=" fanarts-list list-unstyled list-inline shows dragscroll" id="watching" onscroll="lazyLoadImages()" style="height: auto;padding: 15px;"></div>
     <h1>SHOWS</h1>
     <div class="shows dragscroll" id="tvShows" ></div>
@@ -269,6 +269,27 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <-->
   <script defer >
+  // Get the input box
+var textInput = document.getElementById('search');
+
+// Init a timeout variable to be used below
+var timeout = null;
+
+// Listen for keystroke events
+textInput.onkeyup = function (e) {
+
+    // Clear the timeout if it has already been set.
+    // This will prevent the previous task from executing
+    // if it has been less than <MILLISECONDS>
+    clearTimeout(timeout);
+
+    // Make a new timeout set to go off in 800ms
+    timeout = setTimeout(function () {
+      query(textInput.value)
+    }, 200);
+};
+
+
 function addJS(url) {
   var s = document.createElement('script'); // Create a script element
   s.type = "text/javascript"; // optional in html5
@@ -400,6 +421,9 @@ function loaders(atr) {
       document.getElementById('loaderHolder').removeChild(child)
       if (!document.getElementById('search').value == '') {
         query(document.getElementById('search').value)
+      }
+      if (document.getElementById('watching').children.length == 0) {
+        document.getElementById('wtcTxt').style.display = 'none'
       }
       document.getElementsByClassName('lScreen')[0].style.display = 'none'
       document.querySelector('.contain').style.display = 'block';
@@ -877,7 +901,7 @@ function loadMedia(json) {
       return 0;
     }
     var done = perc > 99
-    if (!done && perc > 0.2) {
+    if (!done && perc > 0.4) {
       if (document.getElementsByClassName(json[i].href).length == 0) {
         //  document.getElementById('watching').innerHTML += '<div tabindex="1" class="wtc '+json[i].href+'"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"><\/div><\/div><br> <span>'+json[i].show+'<\/span><\/a><\/div>'
         watching += '<li style="width: 280px;margin: 11px;" class=" card  ' + json[i].href + '"><a href="#"><div style="    height: 280px;" class="piece fanart-container"><div class="image-crop sixteen-nine">' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '"><\/span><div class="imageBG"><\/div><img    class="cover sixteen-nine "   sizes="(min-width: 600px) 25vw, (min-width: 500px) 50vw, 100vw"   alt="' + json[i].episode + '" data-original-set="' + json[i].imgdyn + '" class"" class="cover" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '" class="overlay-btn zoom-btn "  title="Watch ' + json[i].episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '">' + json[i].episode + '<\/a><\/h2><a onclick="showQuery(null,this)"  show="' + json[i].show + '" href="javascript:" class="secondary-link show-name">' + json[i].show + '<\/a><a href="javascript:"><i style="    /* opacity: ' + showCheck() + '; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"><\/i><\/a><\/div><div class="bottom"><\/div><\/div><\/a><\/li>'
