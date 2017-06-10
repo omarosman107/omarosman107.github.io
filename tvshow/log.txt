@@ -7,6 +7,10 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+preview video on hover
+--
+fixed bugs
+--
 tvshow icons have way smooth animations
 --
 new launcher
