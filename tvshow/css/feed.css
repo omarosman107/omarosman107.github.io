@@ -857,7 +857,6 @@ body a:hover {
 
 .initialized {
     will-change: width;
-    transition: all 300ms ease-out
 }
 
 .imageBG {
