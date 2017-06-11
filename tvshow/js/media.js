@@ -15,7 +15,7 @@ player.ready(function() {
 //jwplayer.defaults.preload = "auto"
 //jwplayer.defaults.autostart = "true"
 function bg(url){
-   document.getElementById('blockLoader').style.background = 'url(' +url+ ")"
+   document.getElementById('blockLoader').style.background = 'linear-gradient(rgba(0, 0, 0, 0.34),  rgba(0, 0, 0, 0.7)),url(' +url+ ")"
 
 }
 function meta(s,e,a){
