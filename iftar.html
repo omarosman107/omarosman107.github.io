@@ -8,21 +8,23 @@
 <span id="error" class="errors"></span>
 <script type="text/javascript">
 var url = 'http://api.aladhan.com/timingsByCity?city=Lansing&country=US&method=1'
-	  fetch(url, {
-    method: 'get'
-  }).then(function(response) {
-    return response.json();
-  }).then(function(data) {
+
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    	var data = JSON.parse(this.responseText)
   	var date = new Date(data.data.timings.Maghrib +" "+data.data.date.readable)
   	console.log(date)
 console.log(date.getMonth())
 console.log(date.getFullYear())
 console.log(data.data.timings.Maghrib.split(':')[0],data.data.timings.Maghrib.split(':')[1])
 window.location.href = ('https://www.timeanddate.com/scripts/gocountdown.php?theme=generic&msg=Iftar&font=cursive&month='+(date.getMonth() + 1) +'&day='+date.getDate()+'&year='+date.getFullYear()+'&hour='+data.data.timings.Maghrib.split(':')[0]+'&min='+data.data.timings.Maghrib.split(':')[1]+'&sec=&p0=126&p0txt=Lansing&ud=0')
-  }).catch(function(e) {
-document.getElementById('error').innerHTML = e;
-  });
 
+    }
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
 
 </script>
 </body>
