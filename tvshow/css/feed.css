@@ -298,12 +298,7 @@ body {
 
 .image-crop {
     border-radius: 2px 2px 0 0;
-        background: #27c4f5 -webkit-gradient(linear,left top,right top,from(#27c4f5),color-stop(#a307ba),color-stop(#fd8d32),color-stop(#70c050),to(#27c4f5));
-    background: #27c4f5 -webkit-linear-gradient(left,#27c4f5,#a307ba,#fd8d32,#70c050,#27c4f5);
-    background: #27c4f5 linear-gradient(to right,#27c4f5,#a307ba,#fd8d32,#70c050,#27c4f5);
-    background-size: 500%;
-    -webkit-animation: 2s linear infinite barprogress,.3s fadein;
-    animation: 2s linear infinite barprogress,.3s fadein;
+
     width: 100%;
 }
 
@@ -714,8 +709,15 @@ body {
     width: 100%;
     overflow: hidden;
     position: relative;
-background-color: #393838;
-      /*  background: url(https://d36rlb2fgh8cjd.cloudfront.net/default-images/landscape-default-q80.jpg);
+background: #232526; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #232526, #414345); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #232526, #414345); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+    background-size: 500%;
+
+    
+    
+    /*  background: url(https://d36rlb2fgh8cjd.cloudfront.net/default-images/landscape-default-q80.jpg);
     background-size: cover;
     */
 
