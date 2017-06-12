@@ -1092,7 +1092,7 @@ resume()
 }
 
 
-function watchseries(value){
+function tvzion(value){
   console.log(value)
   // url (required), options (optional)
 fetch("https://cors-anywhere.herokuapp.com/" + value, {
@@ -1103,37 +1103,15 @@ fetch("https://cors-anywhere.herokuapp.com/" + value, {
   var body = document.createElement("BODY");
 body.innerHTML = data
 console.log(body.querySelector('.breadcrumb').querySelectorAll('a')[1].innerHTML)
-      getShowinfo(body.querySelector('.breadcrumb').querySelectorAll('a')[1].innerHTML)
-      showname.innerHTML = body.querySelector('.breadcrumb').querySelectorAll('a')[1].innerHTML
-      document.getElementById('epname').innerHTML = body.querySelector('.page_title').innerHTML
 
-      showdesc.innerHTML = body.querySelector('.video-page-desc').innerHTML
-      document.title = body.querySelector('title').innerHTML
-      document.getElementById('progress').style.width = "60%"
+      showname.innerHTML = body.querySelector('[itemprop]').getAttribute('content')
+      document.getElementById('epname').innerHTML = body.querySelector('.inline-block').innerText.split('(')[1].split(')')[0]
 
+      showdesc.innerHTML = body.querySelector('p').innerText
+      document.title = body.querySelector('.breadcrumb').querySelectorAll('a')[1].innerHTML
+            getShowinfo(body.querySelector('[itemprop]').getAttribute('content'))
 
-
-fetch("https://cors-anywhere.herokuapp.com/" + body.querySelector('iframe').getAttribute('data-src').split(' ').join('') , {
-  method: 'get'
-}).then(function(response) {
-  return response.text()
-}).then(function(media){
-  var iframe = document.createElement("BODY");
-iframe.innerHTML = media
-console.log(iframe.querySelector('source').getAttribute('src'))
-a = iframe.querySelector('source').getAttribute('src')
-               document.getElementById('downloader').href = a
-
-    player.src({"type":"application/x-mpegURL", "src":a});
-   player.play();
-resume()
-
-      document.getElementById('progress').style.width = "100%"
-
-      document.getElementById('progress').style.display = "none"
-
-
-})
+      document.getElementById('progress').style.width = "60%";
 
 
 

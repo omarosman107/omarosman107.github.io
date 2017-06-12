@@ -64,7 +64,7 @@ var sitefunctions = {
 
 "link.theplatform.com":"fetchlplatjson(url)",
 "fxnetworks.com":"fetchfxjson(url)",
-"watchseries.do":"watchseries(url)"
+"tvzion.pro":"tvzion(url)"
 
 
 
