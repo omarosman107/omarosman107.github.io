@@ -248,7 +248,6 @@ console.log(data)
 document.getElementsByClassName('showImg')[0].href = "https://www.tvtime.com/en/show/" + data.query.results.json.id
 document.getElementsByClassName('showImg')[0].innerHTML = '<img width="100%" src="'+ data.query.results.json.all_images.poster._[3]   +'">'
 document.getElementById('showname').href =  "https://www.tvtime.com/en/show/" + data.query.results.json.id
-document.getElementById('showname').innerHTML =  data.query.results.json.name 
 //+ '<br><span class="rating">Rating: '+data.query.results.json.mean_rate*2+' / 10</span>'
 
 
