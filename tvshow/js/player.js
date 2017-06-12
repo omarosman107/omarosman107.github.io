@@ -63,7 +63,8 @@ var sitefunctions = {
 "fox.com":"fetchfoxjson(url)",
 
 "link.theplatform.com":"fetchlplatjson(url)",
-"fxnetworks.com":"fetchfxjson(url)"
+"fxnetworks.com":"fetchfxjson(url)",
+"watchseries.do":"watchseries(url)"
 
 
 
