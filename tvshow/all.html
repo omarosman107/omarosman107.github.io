@@ -945,12 +945,16 @@ function loadMedia(json) {
       var diff = (date2 - date1) / 1000;
       var diff = Math.abs(Math.floor(diff));
       var days = Math.floor(diff / (24 * 60 * 60));
+    var infuture = (date2 > date1)
+    console.log(infuture)
+      if (days == 0 ) {
+        return '<div class="new-label"> New<\/div>';
+      } 
+      if (infuture) {
+                return '<div class="new-label">Unaired<\/div>';
 
-      if (days == 0) {
-        return '<div class="new-label"> New<\/div>'
-      } else {
-        return ''
       }
+      return '';
     }
     var perc = 0;
     if (localStorage["?" + json[i].href]) {
