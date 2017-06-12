@@ -7,6 +7,8 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+
+--
 preview video on hover
 --
 fixed bugs
