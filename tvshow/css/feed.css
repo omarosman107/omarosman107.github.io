@@ -228,7 +228,7 @@ body {
 .container-1 input#search {
     width: 100%;
     height: 50px;
-    background: #2b303b;
+    background: rgba(255, 255, 255, 0.04);
     border: 0;
     font-size: 16px;
     float: left;
@@ -623,7 +623,7 @@ body {
 }
 
 .fanarts-list>li .fanart-container {
-    background-color: rgba(26, 26, 26, 0.43);
+    background-color: rgba(26, 26, 26, 0.21);
     padding: 0; 
     overflow: hidden;
     position: relative;
@@ -701,12 +701,8 @@ body {
     width: 100%;
     overflow: hidden;
     position: relative;
-background: #232526; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #232526, #414345); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #232526, #414345); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: rgba(0, 0, 0, 0.28);
     
-    background-size: 500%;
-
     
     
     /*  background: url(https://d36rlb2fgh8cjd.cloudfront.net/default-images/landscape-default-q80.jpg);

@@ -202,7 +202,13 @@
     height: 100%;
     background: #111111;
         position: fixed;
-        z-index: 7;
+        z-index: 99999;
+
+        transition:opacity 0.6s ease, width 0.6s ease, z-index 0.6s;  
+
+}
+.contain{
+  z-index: 2;
 }
 .Logoloading {
     width: 25%;
@@ -632,7 +638,8 @@ function loaders(atr) {
       if (document.getElementById('watching').children.length == 0) {
         document.getElementById('wtcTxt').style.display = 'none'
       }
-      document.getElementsByClassName('lScreen')[0].style.display = 'none'
+      document.getElementsByClassName('lScreen')[0].style.opacity = '0'
+            document.getElementsByClassName('lScreen')[0].style.zIndex = '-99999'
       document.querySelector('.contain').style.display = 'block';
 
 
