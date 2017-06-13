@@ -7,7 +7,9 @@ PLAYER:New design
 
 
 == CHANGELOG ==
-
+scrollbar transparent
+--
+new theme
 --
 preview video on hover
 --
