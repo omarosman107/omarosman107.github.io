@@ -404,6 +404,7 @@ lesshat-selector {
       </div><a href="log.txt"><span>Changelog</span></a>
     </div>
   </div>
+
   </script> 
   <script  src="js/fetch.min.js" type="text/javascript">
 
@@ -417,7 +418,7 @@ lesshat-selector {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <-->
-  <script defer >
+  <script  >
   var hovering;
 
 function playHover(element){
@@ -729,7 +730,6 @@ function showQuery(q, o) {
   };
   document.getElementById('search').value = q
   var num = 0
-  setTimeout(function() {
     for (var i = 0, len = obj.length; i < len; i++) {
       if (obj[i].show.toLowerCase() == (q.toLowerCase())) {
         document.getElementsByClassName(obj[i].id)[0].style.opacity = '1'
@@ -745,7 +745,6 @@ function showQuery(q, o) {
     scrollShows()
     lazyLoadImages()
     results(num)
-  }, 10)
 }
 var tvobj = {}
 
