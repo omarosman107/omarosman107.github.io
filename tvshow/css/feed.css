@@ -493,7 +493,7 @@ body {
     line-height: 1.428571429;
     margin: 0;
     padding: 0 0 1px;
-    background: #111111;
+    background: #101010;
     font-family: ProximaNova,"Helvetica Neue",Helvetica,Arial,sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
@@ -622,15 +622,17 @@ body {
     position: relative;
     vertical-align: top;
     overflow: hidden;
-    border-radius: 2px
+    border-radius: 2px;
+    border: 1px solid #141414;
+    background: #111111;
+
+
 }
 
 .fanarts-list>li .fanart-container {
-    background-color: rgba(26, 26, 26, 0.21);
     padding: 0; 
     overflow: hidden;
     position: relative;
-    border: 1px solid rgba(29, 29, 29, 0.2);
 }
 
 
@@ -870,7 +872,8 @@ body a:hover {
         border-radius: 0;
         width: 100%;
         max-width: 100%;
-        box-shadow: 0 0 0 0 rgba(107,107,107,.15)
+        box-shadow: 0 0 0 0 rgba(107,107,107,.15);
+        
     }
 
     .initialized:hover a {
@@ -880,7 +883,8 @@ body a:hover {
     #carasoul {
         margin: auto;
         width: 100%;
-        padding-left: 0
+        padding-left: 0;
+            padding: 1px 8px 0;
     }
 
     .fanarts-list>li .fanart-container {
