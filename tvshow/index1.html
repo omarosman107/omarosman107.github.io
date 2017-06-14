@@ -1286,7 +1286,7 @@ return response.json()
 console.log(json)
         for (var i = 0; i < json.episodes.length; i++) {
          console.log(document.querySelector('li[name*="'+json.episodes[i].show.id+'"]') == null)
-         if (document.querySelector('li[name*="'+json.episodes[i].show.id+'"]') == null) {
+         if (document.querySelector('li[name*="'+json.episodes[i].show.id+'"]') == null || true) {
             var medialink = 'https://www.tvtime.com/en/show/'+json.episodes[i].show.id+'/episode/' + json.episodes[i].id;
 
                        var mathleft = ''
