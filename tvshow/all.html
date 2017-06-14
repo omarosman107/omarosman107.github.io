@@ -345,7 +345,14 @@ lesshat-selector {
 [not-existing] {
   zoom: 1;
 }
-
+@media (max-width: 600px) {
+      #carasoul {
+        margin: auto;
+        width: 100%;
+        padding-left: 0;
+            padding: 1px 8px 0;
+    }
+}
 
   </style>
   <title>EPISODES - We provide the best streaming site.</title>
@@ -798,7 +805,7 @@ function tvlist(showName) {
     }catch(e){
      console.log(e)
     }
-
+ 
      }
      */
     document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="' + dat.query.results.json.all_images.poster._[4] + '"><\/a><\/div>'
