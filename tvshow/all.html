@@ -314,9 +314,9 @@ body {
 }
 #particles-background {
   background: #2c2d44;
-  background-image: -moz-linear-gradient(45deg, #3f3251 2%, #002025 100%);
-  background-image: -webkit-linear-gradient(45deg, #3f3251 2%, #002025 100%);
-  background-image: linear-gradient(45deg, #3f3251 2%, #002025 100%);
+  background-image: -moz-linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+  background-image: -webkit-linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+  background-image: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
 }
 lesshat-selector {
   -lh-property: 0; } 
@@ -345,13 +345,20 @@ lesshat-selector {
 [not-existing] {
   zoom: 1;
 }
-@media (max-width: 600px) {
-      #carasoul {
-        margin: auto;
-        width: 100%;
-        padding-left: 0;
-            padding: 1px 8px 0;
-    }
+@media (max-width: 600px){
+
+}
+body {
+  overflow-y: scroll;
+    font-size: 16px;
+    line-height: 1.428571429;
+    margin: 0;
+    padding: 0 0 1px;
+    font-family: ProximaNova,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+    width: 100%;
 }
 
   </style>
