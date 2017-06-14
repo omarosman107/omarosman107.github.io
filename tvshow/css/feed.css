@@ -630,7 +630,7 @@ body {
     padding: 0; 
     overflow: hidden;
     position: relative;
-    border: 1px solid #1d1d1d
+    border: 1px solid rgba(29, 29, 29, 0.2);
 }
 
 
@@ -658,7 +658,7 @@ body {
     border-radius: 3px;
     width: 25vw;
     min-width: 300px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 1px rgba(0,0,0,.1), 0 1px 8px rgba(0,0,0,.1);
     -webkit-transition: all 0.3s cubic-bezier(.03,.98,.52,.99);
     transition: all 0.3s cubic-bezier(.03,.98,.52,.99);
     will-change: opacity,transform;
@@ -757,18 +757,22 @@ body a:hover {
 .fanarts-list>li .fanart-details .more-infos {
     height: 20px;
     width: 193px;
-    margin: 5px auto 0;
-    overflow: hidden
+    margin: 20px auto 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.19);
 }
 
 .fanarts-list>li .fanart-details p {
     width: 75%;
     margin: 5px auto 0;
-    border-top: 1px solid #ececec;
     color: #777;
     font-size: 13px;
     font-family: ProximaNova;
     padding: 5px 0
+}
+.cardBorder {
+    width: 193px;
+    margin: 20px auto 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.19);
 }
 
 .image-crop .overlay,.tvshow:hover {
@@ -1051,7 +1055,6 @@ transition: all 1s cubic-bezier(0.12, 0.49, 0.9, 3.59);
 
 
 body{
- background: #263238;
 
 }
 
