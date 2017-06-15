@@ -1042,7 +1042,27 @@ var xhr = new XMLHttpRequest();
 xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
     var json = (JSON.parse(this.responseText));
+   console.log(json.member["0"].videoRelease.url + '&auth=' + url.split('&auth=')[1])
    console.log(json)
+bg(json.member["0"].images.still.HD)
+      getShowinfo(json.member["0"].alternativeHeadline)
+      showname.innerHTML = json.member["0"].alternativeHeadline
+      showdesc.innerHTML = json.member["0"].description
+      document.getElementById('epname').innerHTML = json.member["0"].name
+
+      document.title = json.member["0"].alternativeHeadline + " - " + json.member["0"].name
+
+ fetch(json.member["0"].videoRelease.url + '&auth=' + url.split('&auth=')[1], {
+         method: 'get'
+      }).then(function(response) {
+         return response.json()
+      }).then(function(data) {
+
+    player.src({"type":"application/x-mpegURL", "src":data.playURL});
+resume()
+
+      });
+
   }
 });
 
@@ -1052,7 +1072,7 @@ xhr.open("GET", externalToApi);
 xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 
 
-xhr.send(data);
+xhr.send(null);
 
 
 
