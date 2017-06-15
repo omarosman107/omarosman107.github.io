@@ -818,7 +818,6 @@ color: #dad6d6;
     transition: all .1s ease-in-out
 }
 .image-crop:hover img{
-    filter: blur(10px);
 }
 .image-crop:hover .overlay {
     -webkit-transform: scale(1.5);
