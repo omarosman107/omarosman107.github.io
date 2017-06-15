@@ -812,7 +812,14 @@ color: #dad6d6;
     bottom: 0px;
     opacity: 0;
 }
-
+.image-crop img{
+-webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out
+}
+.image-crop:hover img{
+    filter: blur(10px);
+}
 .image-crop:hover .overlay {
     -webkit-transform: scale(1.5);
     transform: scale(1.5);
@@ -822,9 +829,7 @@ color: #dad6d6;
 }
 
 .image-crop:hover img {
-    -webkit-transition: all .1s ease-in-out;
-    -moz-transition: all .1s ease-in-out;
-    transition: all .1s ease-in-out
+    
 }
 
 
