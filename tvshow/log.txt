@@ -7,6 +7,11 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+
+loader has a different background
+--
+significantly faster load times
+--
 scrollbar transparent
 --
 new theme

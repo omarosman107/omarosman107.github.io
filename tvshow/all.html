@@ -226,12 +226,7 @@ body .vertical-centered-box .content {
   text-align: left;
   font-size: 0;
 }
-* {
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
-}
+
 body {
   background: #2c2d44;
 }
@@ -1268,7 +1263,7 @@ function nick() {
 loaders()
 
 function fox(range) {
-  fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}&range=0-100', {
+  fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}&range=0-75', {
     method: 'get',
     cache: "no-store"
   }).then(function(response) {
@@ -1280,7 +1275,7 @@ function fox(range) {
       if (!showsTemp[data.entries[i].fox$series]) {
         showsTemp[data.entries[i].fox$series] = data.entries[i].fox$series
       }
-      var date = new Date(data.entries[i].media$availableDate)
+      var date = new Date(data.entries[i].pubDate)
       date.setDate(date.getDate() - 1);
       var srcset = ''
       var srcobj = []

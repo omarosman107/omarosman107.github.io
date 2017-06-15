@@ -330,8 +330,9 @@ input[type=search] {
     width: 10vw;
     background-size: cover;
     border-radius: 2px;
-    box-shadow: 0 0 2px #787878;
     transform: scale(0.9);
+    box-shadow: 0 1px 1px rgba(0,0,0,.1), 0 1px 8px rgba(0,0,0,.1);
+    margin: 0 auto 6px;
  }
 .initialized{
         will-change: transform,box-shadow;
@@ -406,7 +407,8 @@ h1,h2 {
 
 #carasoul {
     margin: auto;
-    width: 100%
+    width: 100%;
+    padding: 20px;
 }
 
 html {
