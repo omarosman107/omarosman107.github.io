@@ -1035,7 +1035,7 @@ var fox = document.referrer
 
 console.log(fox.split('watch/')[1].split("/")[0])
 console.log(url.split('&auth=')[1])
-  var externalToApi = 'https://api.fox.com/fbc-content/v3/video?externalId=853172291669'
+  var externalToApi = 'https://api.fox.com/fbc-content/v3/video?externalId=' + fox.split('watch/')[1].split("/")[0]
 
 var xhr = new XMLHttpRequest();
 
