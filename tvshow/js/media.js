@@ -1033,9 +1033,39 @@ var fox = document.referrer
         document.getElementById('orginVisit').href = fox
              document.getElementById('orginVisit').innerHTML = fox
 
-console.log(fox)
+console.log(fox.split('watch/')[1].split("/")[0])
 console.log(url.split('&auth=')[1])
- fetch("https://feed.theplatform.com/f/fox.com/fullepisodes?form=json&range=1-1&byCustomValue={fox:freewheelId}{" + fox.split('watch/')[1].split("/")[0] + "}", {
+  var externalToApi = 'https://api.fox.com/fbc-content/v3/video?externalId=853172291669'
+
+var xhr = new XMLHttpRequest();
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    var json = (JSON.parse(this.responseText));
+   console.log(json)
+  }
+});
+
+
+xhr.open("GET", externalToApi);
+
+xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
+
+
+xhr.send(data);
+
+
+
+
+
+
+
+
+
+
+
+
+/* fetch("https://feed.theplatform.com/f/fox.com/fullepisodes?form=json&range=1-1&byCustomValue={fox:freewheelId}{" + fox.split('watch/')[1].split("/")[0] + "}", {
       method: 'get'
    }).then(function(response) {
       return response.json()
@@ -1084,6 +1114,7 @@ resume()
 
   }
    })
+   */
 
 
 

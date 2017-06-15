@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+	<title>FOX NEW API</title>
+	<style type="text/css">
+		.show {
+    max-width: 300px;
+    display: inline-block;
+}
+.scroller {
+
+white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
+}
+body{
+	    background-color: #1b1b1b;
+margin: 0px;
+padding: 0px;
+color: white;
+
+}
+.showData li{
+
+
+width: 100%;
+max-width: 300px;
+display: inline-block;
+margin: 10px;
+}
+
+
+
+	</style>
+
+
+
+
+
+</head>
+<body>
+<div class="scroller" id="scroll"></div>
+<div class="showData" id="showdata"></div>
+<script type="text/javascript">
+	
+	var externalToApi = 'https://api.fox.com/fbc-content/v3/video?externalId=853172291669'
+var shows = 'https://api.fox.com/fbc-content/v3/screens/find'
+var newest = 'https://api.fox.com/fbc-content/v3/screenpanels/58d57fd0880f910001a9fb82/items' 
+var data = null;
+function loadInfo(thing){
+document.getElementById('showdata').innerHTML = ''
+	console.log('https://api.fox.com/fbc-content/v3/screens/series-detail/'+thing.id)
+var loadShow = new XMLHttpRequest();
+loadShow.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    var showinfo = (JSON.parse(this.responseText));
+console.log(showinfo)
+var season = showinfo.panels.member[1].items.member["0"].episodes["@id"]
+console.log(season)
+var seasoninfo = new XMLHttpRequest();
+seasoninfo.addEventListener("readystatechange",function () {
+  if (this.readyState === 4) {
+var json = (JSON.parse(this.responseText))
+document.getElementById('showdata').innerHTML += '<img width="100%" src="'+json.member[0].images.logo.raw+'">'
+for(i in json.member){
+if(!json.member[i].requiresAuth && json.member[i].isFullEpisode ){
+
+document.getElementById('showdata').innerHTML += '<li><a href="'+json.member[i].videoRelease.url+'"><img width="100%" src="'+json.member[i].images.still.HD+'"><span>'+json.member[i].headline+'</span></a></li>'
+console.log(json.member[i].images)
+console.log(json.member[i].videoRelease.url)
+console.log(json.member[i].headline)
+console.log(json.member[i].description)
+console.log(json.member[i].originalAirDate)
+console.log(json.member[i].durationInSeconds)
+}
+
+
+
+}
+}
+}) 
+seasoninfo.open("GET",season);
+seasoninfo.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
+
+seasoninfo.send(null)
+
+
+
+
+  }
+});
+loadShow.open("GET", 'https://api.fox.com/fbc-content/v3/screens/series-detail/'+thing.id);
+
+loadShow.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
+loadShow.send(data)
+
+}
+
+var xhr = new XMLHttpRequest();
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    var foxshows = (JSON.parse(this.responseText).panels.member[3].items.member);
+    for (var i = foxshows.length - 1; i >= 0; i--) {
+    	document.getElementById('scroll').innerHTML += '\
+<div onclick="loadInfo(this)" id="'+foxshows[i].id+'" class="show"><img width="100%" src="'+foxshows[i].images.seriesList.FHD+'"></div>   	'
+    	console.log(foxshows[i])
+    	console.log(foxshows[i].images.seriesList.HD)
+    }
+  }
+});
+
+
+xhr.open("GET", "https://api.fox.com/fbc-content/v3/screens/find");
+
+xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
+
+
+xhr.send(data);
+</script>
+</body>
+</html>
