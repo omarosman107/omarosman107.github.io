@@ -251,8 +251,9 @@ video.src = JSON.parse(this.responseText).playURL
 
 
   });
+    hls.loadSource(JSON.parse(this.responseText).playURL)
+
 }
-hls.loadSource(JSON.parse(this.responseText).playURL)
 
   }
 }
