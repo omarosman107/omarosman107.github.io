@@ -242,16 +242,7 @@ if (video.canPlayType('application/vnd.apple.mpegURL')) {
 video.src = JSON.parse(this.responseText).playURL
 
 }else{
-hls.loadSource(JSON.parse(this.responseText).playURL)
-
-  }
-}
-});
-loadMedia.open("GET", url);
-loadMedia.send(data)
-
-
-if(Hls.isSupported()) {
+	if(Hls.isSupported()) {
     console.log(url)
     var hls = new Hls();
     hls.attachMedia(video);
@@ -261,6 +252,16 @@ if(Hls.isSupported()) {
 
   });
 }
+hls.loadSource(JSON.parse(this.responseText).playURL)
+
+  }
+}
+});
+loadMedia.open("GET", url);
+loadMedia.send(data)
+
+
+
 
 
 
