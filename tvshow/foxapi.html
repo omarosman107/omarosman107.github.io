@@ -230,19 +230,9 @@ margin: auto;
 	function loadPlayer(element){
 		element.setAttribute('onclick','')
  var video = element.querySelector('video')
-
     var url = element.getAttribute('url')
-if(Hls.isSupported()) {
-    console.log(url)
-    var hls = new Hls();
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED,function() {
-      video.play();
 
-
-  });
-
-var loadMedia = new XMLHttpRequest();
+ var loadMedia = new XMLHttpRequest();
 loadMedia.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
 hls.loadSource(JSON.parse(this.responseText).playURL)
@@ -253,7 +243,21 @@ element.querySelector('.mediacontent').style.display = 'none';
 loadMedia.open("GET", url);
 loadMedia.send(data)
 
- }
+
+if(Hls.isSupported()) {
+    console.log(url)
+    var hls = new Hls();
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+      video.play();
+
+
+  });
+}
+
+
+
+ 
 
 element.querySelector('.overlay-btn').outerHTML = '<svg class="spinner overlay-btn zoom-btn" style="margin:auto;display: block;" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">\
    <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>\
