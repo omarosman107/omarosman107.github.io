@@ -5,10 +5,25 @@
 
 	<title>FOX NEW API</title>
 	<style type="text/css">
+	@charset "UTF-8";
+/*!
+ *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */@font-face{font-family:'FontAwesome';src:url('fonts/fontawesome-webfont.eot?v=4.7.0');src:url('fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'),url('fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),url('fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'),url('fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'),url('fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');font-weight:normal;font-style:normal}.fa{display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.fa-search:before{content:"\f002"}.fa-check:before{content:"\f00c"}.fa-play-circle-o:before{content:"\f01d"}.fa-play:before{content:"\f04b"}.fa-level-up:before{content:"\f148"}
+
+
+
 		.show {
     max-width: 300px;
+        margin: 5px;
     display: inline-block;
+        -webkit-transition: all 0.3s cubic-bezier(.03,.98,.52,.99);
+    transition: all 0.3s cubic-bezier(.03,.98,.52,.99);
+    will-change: opacity,transform;
+    opacity: .4;
+
 }
+
 .scroller {
 
 white-space: nowrap;
@@ -36,9 +51,102 @@ display: inline-block;
 margin: 10px;
 }
 
+	body {
+		margin: 0;
+		padding: 0;
+		            font-family: sans-serif;
+
+	}
 
 
+		.container .card{
+background-color: #252525;	
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1), 0 1px 8px rgba(0,0,0,.1);
+    max-width: 600px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto 40px;
+		}
+.container {
+
+    padding: 1px 20px;
+    position: relative;
+	color: #dcdcdc;
+    font-size: 14px;
+    line-height: 2em;
+    padding-top: 40px;
+
+}
+.container .content{
+text-align: center;
+padding: 20px;
+word-wrap: break-word;
+
+}
+.header {
+	padding: 40px;
+	text-align: center;
+	background: white;
+	    box-shadow: 0 1px 1px rgba(0,0,0,.1), 0 1px 8px rgba(0,0,0,.1);
+    z-index: 1;
+margin: auto;
+
+}
+
+
+.overlay {
+	z-index: 2;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    letter-spacing: 0px;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.23s ease-out;
+    background: radial-gradient(at 50% 50%, rgba(50, 50, 50, 0.5) 50%, rgb(50, 50, 50) 100%);
+}
+
+.sixteen-nine {
+  position: relative;
+}
+.sixteen-nine:before {
+  display: block;
+  content: "";
+  width: 100%;
+  padding-top: 56.25%;
+}
+.sixteen-nine > .mediacontent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+}
+
+.card .top .overlay:hover {
+opacity: 1;
+}
+
+.overlay .overlay-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 40px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+}
+.scroller .show:hover{
+transform: scale(1.01);
+opacity: 1;
+}
 	</style>
+
 
 
 
@@ -47,9 +155,37 @@ margin: 10px;
 </head>
 <body>
 <div class="scroller" id="scroll"></div>
-<div class="showData" id="showdata"></div>
+<div class="container showData" id="showdata"></div>
+<script async  src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script  src="js/fetch.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
-	
+	function loadPlayer(element){
+		       var hls = new Hls();
+ var video = element.querySelector('video')
+
+    var url = element.getAttribute('url')
+if(Hls.isSupported()) {
+    console.log(url)
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+      video.play();
+
+  });
+
+   fetch(url, {
+      method: 'get'
+   }).then(function(response) { 
+      return response.json();
+   }).then(function(data) {
+console.log(data.playURL)
+hls.loadSource(data.playURL)
+element.querySelector('.overlay').style.display = 'none';
+element.querySelector('.mediacontent').style.display = 'none';
+   });
+ }
+
+	}
 	var externalToApi = 'https://api.fox.com/fbc-content/v3/video?externalId=853172291669'
 var shows = 'https://api.fox.com/fbc-content/v3/screens/find'
 var newest = 'https://api.fox.com/fbc-content/v3/screenpanels/58d57fd0880f910001a9fb82/items' 
@@ -68,11 +204,24 @@ var seasoninfo = new XMLHttpRequest();
 seasoninfo.addEventListener("readystatechange",function () {
   if (this.readyState === 4) {
 var json = (JSON.parse(this.responseText))
-document.getElementById('showdata').innerHTML += '<img width="100%" src="'+json.member[0].images.logo.raw+'">'
+document.getElementById('showdata').innerHTML += '<img style="    margin: 0px auto 30px;max-width: 400px;    width: 100%;display: block;" width="100%" src="'+json.member[0].images.logoCenter.FHD+'">'
 for(i in json.member){
 if(!json.member[i].requiresAuth && json.member[i].isFullEpisode ){
 
-document.getElementById('showdata').innerHTML += '<li><a href="'+json.member[i].videoRelease.url+'"><img width="100%" src="'+json.member[i].images.still.HD+'"><span>'+json.member[i].headline+'</span></a></li>'
+document.getElementById('showdata').innerHTML += '<div class="card">\
+		<div class="sixteen-nine top" url="'+json.member[i].videoRelease.url+'" onclick="loadPlayer(this)">\
+		<video class="sixteen-nine" style="top:0px;position: absolute;" playsinline  loop controls width="100%" height="100%"></video>\
+			<img class="mediacontent" width="100%" src="'+json.member[i].images.still.HD+'">\
+			<div class="overlay"><a   href="javascript:" class="overlay-btn zoom-btn"><i class="fa fa-play playbutton" style="visibility: visible;"></i></a></div>\
+		</div>\
+		<div class="content">\
+			<h1>'+json.member[i].headline+'</h1>\
+			<p>'+json.member[i].description+'</p>\
+</div>\
+\</div>'
+
+
+var old = '<li><a href="'+json.member[i].videoRelease.url+'"><img  width="100%" src="'+json.member[i].images.still.HD+'"><span>'+json.member[i].headline+'</span></a></li>'
 console.log(json.member[i].images)
 console.log(json.member[i].videoRelease.url)
 console.log(json.member[i].headline)
