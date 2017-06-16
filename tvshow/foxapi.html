@@ -222,12 +222,14 @@ margin: auto;
    <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>\
 </svg></div>
 <div class="container showData" id="showdata"></div>
+<script src="https://jsconsole.com/js/remote.js?621495ef-81f7-46d1-868a-4b5d97a9b6fc"></script>
 
 <script   src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script async src="js/dragscroll.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 	function loadPlayer(element){
+		try{
 		element.setAttribute('onclick','')
  var video = element.querySelector('video')
     var url = element.getAttribute('url')
@@ -235,9 +237,10 @@ margin: auto;
  var loadMedia = new XMLHttpRequest();
 loadMedia.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
-hls.loadSource(JSON.parse(this.responseText).playURL)
 element.querySelector('.overlay').style.display = 'none';
 element.querySelector('.mediacontent').style.display = 'none';
+hls.loadSource(JSON.parse(this.responseText).playURL)
+
   }
 });
 loadMedia.open("GET", url);
@@ -262,6 +265,10 @@ if(Hls.isSupported()) {
 element.querySelector('.overlay-btn').outerHTML = '<svg class="spinner overlay-btn zoom-btn" style="margin:auto;display: block;" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">\
    <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>\
 </svg>'
+}catch(e){
+	console.log('error detected')
+	console.error(e)
+}
 	}
 	var externalToApi = 'https://api.fox.com/fbc-content/v3/video?externalId=853172291669'
 var shows = 'https://api.fox.com/fbc-content/v3/screens/find'
