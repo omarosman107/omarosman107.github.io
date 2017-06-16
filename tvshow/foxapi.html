@@ -222,7 +222,6 @@ margin: auto;
    <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>\
 </svg></div>
 <div class="container showData" id="showdata"></div>
-<script src="https://jsconsole.com/js/remote.js?621495ef-81f7-46d1-868a-4b5d97a9b6fc"></script>
 
 <script   src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script async src="js/dragscroll.js" type="text/javascript"></script>
@@ -239,9 +238,14 @@ loadMedia.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
 element.querySelector('.overlay').style.display = 'none';
 element.querySelector('.mediacontent').style.display = 'none';
+if (video.canPlayType('application/vnd.apple.mpegURL')) {
+video.src = JSON.parse(this.responseText).playURL
+
+}else{
 hls.loadSource(JSON.parse(this.responseText).playURL)
 
   }
+}
 });
 loadMedia.open("GET", url);
 loadMedia.send(data)
