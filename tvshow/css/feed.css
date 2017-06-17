@@ -343,7 +343,7 @@ input[type=search] {
 
 .shows {
     white-space: nowrap;
-    overflow-x: auto;
+    overflow-x: overlay;
     overflow-y: hidden;
     width: auto;
     -webkit-overflow-scrolling: touch;
