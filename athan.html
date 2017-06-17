@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>Athan Times</title>
+	   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
 	<style type="text/css"> 
 	@import url("https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700");
 .main {
@@ -85,7 +87,20 @@ body{
 </div>
 <script type="text/javascript">
 var url = 'http://api.aladhan.com/timingsByCity?city=Lansing&country=US&method=2'
-
+function getTimeRemaining(endtime){
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor( (t/1000) % 60 );
+  var minutes = Math.floor( (t/1000/60) % 60 );
+  var hours = Math.floor( (t/(1000*60*60)) % 24 );
+  var days = Math.floor( t/(1000*60*60*24) );
+  return {
+    'total': t,
+    'days': days,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
 
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -137,6 +152,18 @@ var end = maghrib
         var hours = Math.floor((distance % _day) / _hour);
         var minutes = Math.floor((distance % _hour) / _minute);
         var seconds = Math.floor((distance % _minute) / _second);
+        if (hours < 10) {
+        	hours = '0' + hours
+        }
+           if (minutes < 10) {
+        	minutes = '0' + minutes
+        }
+           if (seconds < 10) {
+        	seconds = '0' + seconds
+        }
+
+
+
         document.getElementById('left').innerHTML = hours + ":" + minutes + ':' + seconds
 
     }
