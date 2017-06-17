@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Athan Times</title>
+	<style type="text/css"> 
+	@import url("https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700");
+.main {
+width: 90%;
+height: 700px;
+background: white;
+margin: auto;
+margin-top: 70px;
+box-shadow: #5221c7 0px 5px 20px 0px;
+
+}
+body{
+	    background: #f4f4f4;
+	    margin: 0;
+	    color: white;
+	    font-family: sans-serif;
+	        text-transform: uppercase;
+
+
+}
+.top {
+	background: black;
+	height: 75%;
+	margin: auto;
+	font-size: 11em;
+	text-align: center;
+	background:url(https://images.unsplash.com/photo-1487621167305-5d248087c724?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=6f03a691b736b1606598835c44ca417d);
+	    background-size: cover;
+}
+.prayers {
+	display: inline-block;
+	width: 19%;
+    height: 120px;
+    color: #565656;	
+        text-align: center;
+            padding-top: 2%;
+}
+.prayers span{
+	        font-size: 60px;
+	        display: block;
+
+}
+.times{
+	margin:10px;
+
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+        z-index: 2;
+	}
+	</style>
+
+
+</head>
+<body>
+<div class="main">
+	
+	<div class="top">
+	<div class="overlay">	<span style=" 
+    position: relative;
+    bottom: -80px;" id="left">1:22</span>
+</div>
+	</div>
+	<div class="times">
+		<div class="prayers">fajr<span id="fajr">1:12</span></div>
+		<div class="prayers">duhur<span id="duhur">1:12</span></div>
+		<div class="prayers">asr<span id="asr">1:12</span></div>
+		<div class="prayers">maghrib<span id="maghrib">1:12</span></div>
+		<div class="prayers">isha<span id="isha">1:12</span></div>
+
+	</div>
+</div>
+<script type="text/javascript">
+var url = 'http://api.aladhan.com/timingsByCity?city=Lansing&country=US&method=2'
+
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    	var data = JSON.parse(this.responseText)
+
+    	document.getElementById('fajr').innerHTML = data.data.timings.Fajr
+    	    	document.getElementById('duhur').innerHTML = data.data.timings.Dhuhr
+    	    	    	document.getElementById('asr').innerHTML = data.data.timings.Asr
+    	    	    	    	document.getElementById('maghrib').innerHTML = data.data.timings.Maghrib
+    	    	    	    	    	document.getElementById('isha').innerHTML = data.data.timings.Isha
+  	var date = new Date(data.data.timings.Maghrib +" "+data.data.date.readable)
+  	console.log(date)
+
+var end = date
+
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+
+    function showRemaining() {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0) {
+
+            clearInterval(timer);
+            document.getElementById('left').innerHTML = 'EXPIRED!';
+
+            return;
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor((distance % _day) / _hour);
+        var minutes = Math.floor((distance % _hour) / _minute);
+        var seconds = Math.floor((distance % _minute) / _second);
+        document.getElementById('left').innerHTML = hours + ":" + minutes + ':' + seconds
+
+    }
+
+    timer = setInterval(showRemaining, 1000);
+
+
+
+
+
+
+
+
+console.log('https://www.timeanddate.com/scripts/gocountdown.php?theme=generic&msg=Iftar&font=cursive&month='+(date.getMonth() + 1) +'&day='+date.getDate()+'&year='+date.getFullYear()+'&hour='+data.data.timings.Maghrib.split(':')[0]+'&min='+data.data.timings.Maghrib.split(':')[1]+'&sec=&p0=126&p0txt=Lansing&ud=0')
+
+    }
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+</script>
+</body>
+</html> 

@@ -444,7 +444,8 @@ document.getElementById('showdata').innerHTML += '<div class="card">\
 		<div class="sixteen-nine top" url="'+json.member[i].videoRelease.url+'" onclick="loadPlayer(this)">\
 		<video class="sixteen-nine" style="top:0px;position: absolute;"   inline  controls width="100%" height="100%"></video>\
 			<img class="mediacontent" width="100%" src="'+json.member[i].images.still.HD+'">\
-			<div class="overlay"><a   href="javascript:" class="overlay-btn zoom-btn"><i class="fa fa-play playbutton" style="visibility: visible;"></i></a></div>\
+			<div class="overlay"><a   href="javascript:" class="overlay-btn zoom-btn"><svg style="width:70px;" viewBox="0 0 24 24">\
+    <path fill="#ffffff" d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg></a></div>\
 		</div>\
 		<div class="content">\
 			<h1>'+json.member[i].headline+'</h1>\
