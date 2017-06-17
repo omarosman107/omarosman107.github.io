@@ -348,8 +348,15 @@ input[type=search] {
     width: auto;
     -webkit-overflow-scrolling: touch;
     transform: translateZ(0);
--webkit-transform: translateZ(0);
-      will-change: transform;
+    -webkit-transform: translateZ(0);
+    will-change: transform;
+    margin: 12px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.17), 0 0 8px 0 rgba(0,0,0,.12);
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    -moz-backface-visibility: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden;
 
 }
 

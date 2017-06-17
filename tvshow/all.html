@@ -655,15 +655,15 @@ function loaders(atr) {
       if (document.getElementById('watching').children.length == 0) {
         document.getElementById('wtcTxt').style.display = 'none'
       }
+
           document.getElementsByClassName('lScreen')[0].style.opacity = '0'
             document.getElementsByClassName('lScreen')[0].style.zIndex = '-99999'
       document.querySelector('.contain').style.display = 'block';
 
-      sortCards()
 
   
 console.log('done')
-lazyLoadImages()
+     
 
 if(mobilecheck()){
  function clickOrigin(e){
@@ -701,7 +701,9 @@ return false;
 
 }
 
+ sortCards()
 
+lazyLoadImages()
     }
     if (document.getElementsByClassName('spinner').length == 0) {
      // lazyLoadImages()
