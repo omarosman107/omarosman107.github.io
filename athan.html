@@ -10,7 +10,7 @@ height: 700px;
 background: white;
 margin: auto;
 margin-top: 70px;
-box-shadow: #5221c7 0px 5px 20px 0px;
+box-shadow: rgba(82, 33, 199, 0.32) 0px 2px 20px 0px;
 
 }
 body{
@@ -68,15 +68,18 @@ body{
 	<div class="top">
 	<div class="overlay">	<span style=" 
     position: relative;
-    bottom: -80px;" id="left">1:22</span>
+    bottom: -80px;" id="left"></span>
+    <span style="font-size: 40px;
+    display: block;
+    line-height: 4em;">Until iftar</span>
 </div>
 	</div>
 	<div class="times">
-		<div class="prayers">fajr<span id="fajr">1:12</span></div>
-		<div class="prayers">duhur<span id="duhur">1:12</span></div>
-		<div class="prayers">asr<span id="asr">1:12</span></div>
-		<div class="prayers">maghrib<span id="maghrib">1:12</span></div>
-		<div class="prayers">isha<span id="isha">1:12</span></div>
+		<div class="prayers">Fajr<span id="fajr"></span></div>
+		<div class="prayers">Dhuhr<span id="duhur"></span></div>
+		<div class="prayers">Asr<span id="asr"></span></div>
+		<div class="prayers">Maghrib<span id="maghrib"></span></div>
+		<div class="prayers">Isha<span id="isha"></span></div>
 
 	</div>
 </div>
@@ -88,16 +91,31 @@ var url = 'http://api.aladhan.com/timingsByCity?city=Lansing&country=US&method=2
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
     	var data = JSON.parse(this.responseText)
+  	var fajr = new Date(data.data.timings.Fajr +" "+data.data.date.readable)
+  	var duhur = new Date(data.data.timings.Dhuhr +" "+data.data.date.readable)
+  	var asr = new Date(data.data.timings.Asr +" "+data.data.date.readable)
+  	var maghrib = new Date(data.data.timings.Maghrib +" "+data.data.date.readable)
+  	var isha = new Date(data.data.timings.Isha +" "+data.data.date.readable)
+  	console.log(fajr.getHours(),fajr.getMinutes())
+function formatAMPM(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return strTime;
+}
+console.log(formatAMPM(fajr))
 
-    	document.getElementById('fajr').innerHTML = data.data.timings.Fajr
-    	    	document.getElementById('duhur').innerHTML = data.data.timings.Dhuhr
-    	    	    	document.getElementById('asr').innerHTML = data.data.timings.Asr
-    	    	    	    	document.getElementById('maghrib').innerHTML = data.data.timings.Maghrib
-    	    	    	    	    	document.getElementById('isha').innerHTML = data.data.timings.Isha
-  	var date = new Date(data.data.timings.Maghrib +" "+data.data.date.readable)
-  	console.log(date)
+    	document.getElementById('fajr').innerHTML = formatAMPM(fajr)
+    	    	document.getElementById('duhur').innerHTML = formatAMPM(duhur);
+    	    	    	document.getElementById('asr').innerHTML = formatAMPM(asr)
+    	    	    	    	document.getElementById('maghrib').innerHTML = formatAMPM(maghrib);
+    	    	    	    	    	document.getElementById('isha').innerHTML = formatAMPM(isha);
 
-var end = date
+var end = maghrib
 
     var _second = 1000;
     var _minute = _second * 60;
@@ -122,7 +140,7 @@ var end = date
         document.getElementById('left').innerHTML = hours + ":" + minutes + ':' + seconds
 
     }
-
+showRemaining()
     timer = setInterval(showRemaining, 1000);
 
 
@@ -130,9 +148,6 @@ var end = date
 
 
 
-
-
-console.log('https://www.timeanddate.com/scripts/gocountdown.php?theme=generic&msg=Iftar&font=cursive&month='+(date.getMonth() + 1) +'&day='+date.getDate()+'&year='+date.getFullYear()+'&hour='+data.data.timings.Maghrib.split(':')[0]+'&min='+data.data.timings.Maghrib.split(':')[1]+'&sec=&p0=126&p0txt=Lansing&ud=0')
 
     }
   };
