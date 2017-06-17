@@ -74,7 +74,13 @@ body{
 <div class="main">
 	
 	<div class="top">
-	<div class="overlay">	<span style=" 
+	<div class="overlay"><div id="currentTime" style="
+    position: absolute;
+    font-size: -webkit-xxx-large;
+    font-family: Ostrich Sans;
+    padding: 15px;
+"></div>
+	<span style=" 
     position: relative;
     bottom: -80px;font-weight: 700;font-size: 2em;" id="left"></span>
     <span style="font-size: 40px;
@@ -145,6 +151,7 @@ var end = maghrib
     var timer;
 
     function showRemaining() {
+    	document.getElementById('currentTime').innerHTML = formatAMPM(new Date())
         var now = new Date();
         var distance = end - now;
         if (distance < 0) {
