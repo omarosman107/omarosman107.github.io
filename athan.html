@@ -39,21 +39,23 @@ body{
 	width: 19%;
     color: #787878;
             text-align: center;
-            padding-top: 2%;
     font-family: Quicksand;
     font-weight: 600;
 }
 .prayers span{
-			font-size: 6vw !important;
+			font-size: 6vw;
 	        display: block;
 	        font-family: Ostrich Sans Rounded;
 	        font-weight: bolder;
 	            color: #565656;
 
 }
+.prayers span.ampm {
+    display: inline-block;
+    font-size: 3vw;
+}
 .times{
-	margin:10px;
-
+    margin: 35px;
 }
 
 .overlay {
@@ -154,7 +156,7 @@ function formatAMPM(date) {
   hours = hours % 12;
   hours = hours ? hours : 12; // the hour '0' should be '12'
   minutes = minutes < 10 ? '0'+minutes : minutes;
-  var strTime = hours + ':' + minutes + ' ' + ampm;
+  var strTime = hours + ':' + minutes + ' ' + '<span class="ampm">'+ampm+'</span>';
   return strTime;
 }
 console.log(formatAMPM(fajr))
