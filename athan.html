@@ -151,7 +151,10 @@ var end = maghrib
     var timer;
 
     function showRemaining() {
-    	document.getElementById('currentTime').innerHTML = formatAMPM(new Date())
+    	        console.log(getTimeRemaining(new Date('June 25 2017')).days)
+
+    	document.getElementById('currentTime').innerHTML = getTimeRemaining(new Date('June 25 2017')).days + " days left"
+
         var now = new Date();
         var distance = end - now;
         if (distance < 0) {
