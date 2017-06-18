@@ -129,16 +129,20 @@ body{
     font-size: 4vw;
     color: rgba(255, 255, 255, 0.49);
     position: relative;
-    top: 87px;
 	}
 
 	</style>
+
 
 <link async rel="stylesheet" type="text/css" href="fonts/font.css">
 </head>
 <body>
 <div class="main">
-	
+	<div style="height: 4px;
+    background: lightgreen;
+    width: 0%;
+    position: absolute;-webkit-transition: width 500ms ease-out,opacity 500ms linear;
+    transition: width 500ms ease-out,opacity 500ms linear;" id="prog"></div>
 	<div class="top">
 	<div class="overlay"><div id="currentTime" style="
     position: absolute;
@@ -166,6 +170,65 @@ body{
 	</div>
 </div>
 <script type="text/javascript">
+  // At first, let's check if we have permission for notification
+  // If not, let's ask for it
+  if (window.Notification && Notification.permission !== "granted") {
+    Notification.requestPermission(function (status) {
+      if (Notification.permission !== status) {
+        Notification.permission = status;
+      }
+    });
+  }
+
+
+    // If the user agreed to get notified
+    // Let's try to send ten notifications
+    if (window.Notification && Notification.permission === "granted") {
+      var i = 0;
+      // Using an interval cause some browsers (including Firefox) are blocking notifications if there are too much in a certain time.
+
+    }
+
+    // If the user hasn't told if he wants to be notified or not
+    // Note: because of Chrome, we are not sure the permission property
+    // is set, therefore it's unsafe to check for the "default" value.
+    else if (window.Notification && Notification.permission !== "denied") {
+      Notification.requestPermission(function (status) {
+        // If the user said okay
+        if (status === "granted") {
+          var i = 0;
+          // Using an interval cause some browsers (including Firefox) are blocking notifications if there are too much in a certain time.
+
+        }
+
+        // Otherwise, we can fallback to a regular modal alert
+        else {
+        }
+      });
+    }
+
+    // If the user refuses to get notified
+    else {
+      // We can fallback to a regular modal alert
+      alert("Hi!");
+    }
+    var notified = false
+var done = false
+function notif(a){
+if (a == 'done' && !done) {
+            var n = new Notification("It's Iftar now! ", {tag: 'soManyNotification'});
+
+done = true
+}
+if (a == 'notify' && !notified) {
+            var n = new Notification("it's almost iftar! " , {tag: 'soManyNotification'});
+
+notified = true
+}
+
+}
+
+
 var url = 'https://api.aladhan.com/timingsByCity?city=Lansing&country=US&method=2'
 function getTimeRemaining(endtime){
   var t = Date.parse(endtime) - Date.parse(new Date());
@@ -189,12 +252,23 @@ xml.onreadystatechange = function(){
     	var data = (this.responseText)
     	doc = document.createElement('body')
     	doc.innerHTML = data
+    	var whenstart = new Date(doc.querySelectorAll('.vk_ans')[0].querySelectorAll('div')[1].innerHTML + ' '+new Date().getFullYear())
+
 var whenend = new Date(doc.querySelectorAll('.vk_ans')[1].querySelectorAll('div')[1].innerHTML + ' '+new Date().getFullYear())
 whenend.setTime( whenend.getTime() + 1 * 86400000 );
-console.log(whenend)
-    	document.getElementById('currentTime').innerHTML = getTimeRemaining(whenend).days + " days left"
+whenstart.setTime( whenstart.getTime() + 1 * 86400000 );
+ var  today = new Date() 
+    var p = (((today - whenstart) / (whenend - whenstart)) * 100) + '%';
+console.log(p)
 
+console.log(whenend)
+console.log(whenstart)
+    	document.getElementById('currentTime').innerHTML = getTimeRemaining(whenend).days + " days left"
+	document.getElementById('prog').style.width = (((today - whenstart) / (whenend - whenstart)) * 100) + '%';
 setInterval(function(){
+	 var  today = new Date() 
+
+	document.getElementById('prog').style.width = (((today - whenstart) / (whenend - whenstart)) * 100) + '%';
     	document.getElementById('currentTime').innerHTML = getTimeRemaining(whenend).days + " days left"
 
 },3000)
@@ -251,13 +325,17 @@ var end = maghrib
             document.getElementById('left').innerHTML = 'Eat';
                         document.getElementById('until').innerHTML = 'Until Fajr!';
 
-
+notif('done')
             return;
+        }
+        if (distance < 600000) {
+        	notif('notify')
         }
         var days = Math.floor(distance / _day);
         var hours = Math.floor((distance % _day) / _hour);
         var minutes = Math.floor((distance % _hour) / _minute);
         var seconds = Math.floor((distance % _minute) / _second);
+
         if (hours < 10) {
         	hours = '0' + hours
         }

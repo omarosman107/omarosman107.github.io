@@ -364,6 +364,36 @@ fill-opacity:1;
 <script   src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <script type="text/javascript">
+  var hovering;
+
+function playHover(element){
+  hovering = setTimeout(function(){
+
+
+    element.setAttribute("src",element.getAttribute('alternative-src'))
+    var url = element.getAttribute('url')
+
+
+
+
+
+  },2000)
+
+
+}
+function stopHover(element){
+clearTimeout(hovering);
+    element.src = (element.getAttribute('org'))
+
+
+  }
+
+
+
+
+
+
+
 	function loadPlayer(element){
 		try{
 		element.setAttribute('onclick','')
@@ -508,7 +538,7 @@ xhr.addEventListener("readystatechange", function () {
     var foxshows = (JSON.parse(this.responseText).panels.member[3].items.member);
     for (var i = foxshows.length - 1; i >= 0; i--) {
     	document.getElementById('scroll').innerHTML += '\
-<div onclick="loadInfo(this)" id="'+foxshows[i].id+'" class="show"><img width="100%" src="'+foxshows[i].images.seriesList.FHD+'"></div>   	'
+<div onclick="loadInfo(this)" id="'+foxshows[i].id+'" class="show"><img onmouseover="playHover(this)" onmouseout="stopHover(this)" width="100%" org="'+foxshows[i].images.seriesList.FHD+'" alternative-src="'+foxshows[i].autoPlayStill.default.url+'" src="'+foxshows[i].images.seriesList.FHD+'"></div>   	'
     	console.log(foxshows[i])
     	console.log(foxshows[i].images.seriesList.HD)
     }
@@ -524,6 +554,48 @@ xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 
 
 xhr.send(data);
+
+
+
+/*
+var newestReq = new XMLHttpRequest();
+
+newestReq.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    var json = (JSON.parse(this.responseText));
+    console.log(json)
+    for (var i = json.member.length - 1; i >= 0; i--) {
+    	if (json.member[i].network == 'fox') {
+document.getElementById('showdata').innerHTML += '<div class="card">\
+		<div class="sixteen-nine top" url="'+'" onclick="loadPlayer(this)">\
+		<video class="sixteen-nine" style="top:0px;position: absolute;"   inline  controls width="100%" height="100%"></video>\
+			<img class="mediacontent" width="100%" src="'+json.member[i].autoPlayStill.default.url+'">\
+			<div class="overlay"><a   href="javascript:" class="overlay-btn zoom-btn"><svg class="play" style="width:70px;" viewBox="0 0 24 24">\
+    <path fill="#ffffff" d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg></a></div>\
+		</div>\
+		<div class="content">\
+			<h1>'+json.member[i].name+'</h1>\
+			<p>'+json.member[i].description+'</p>\
+			<div class="cardBorder"></div>\
+			<p class="details">'+formatDate(json.member[i].originalAirDate  )+' | '+json.member[i].contentRating+' | '+Math.round(json.member[i].durationInSeconds / 60) + 'm'+' | S'+json.member[i].seasonNumber+'E'+json.member[i].episodeNumber+'</p>\
+</div>\
+\</div>'
+    	}
+    	
+    }
+    document.getElementsByClassName('spin')[0].style.display = 'none'
+
+  }
+});
+
+
+newestReq.open("GET", newest);
+
+newestReq.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
+
+
+newestReq.send(data);
+*/
 </script>
 </body>
 </html>
