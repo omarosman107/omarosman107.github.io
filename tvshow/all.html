@@ -680,6 +680,7 @@ entries[i].target.setAttribute("srcset", entries[i].target.getAttribute('data-or
 entries[i].target.removeAttribute('data-original-set')
 
 entries[i].target.onload = function(element) {
+  alert('loaded')
 element.target.classList.add('loaded');
 }
 
