@@ -330,6 +330,7 @@ notif('done')
         if (distance < 600000) {
         	notif('notify')
         }
+/*
         var days = Math.floor(distance / _day);
         var hours = Math.floor((distance % _day) / _hour);
         var minutes = Math.floor((distance % _hour) / _minute);
@@ -344,10 +345,20 @@ notif('done')
            if (seconds < 10) {
         	seconds = '0' + seconds
         }
+*/
 
+var time = getTimeRemaining(end)
+   if (time.hours < 10) {
+        	time.hours = '0' + time.hours
+        }
+           if (time.minutes < 10) {
+        	time.minutes = '0' + time.minutes
+        }
+           if (time.seconds < 10) {
+        	time.seconds = '0' + time.seconds
+        }
 
-
-        document.getElementById('left').innerHTML = hours + ":" + minutes + ':' + seconds
+        document.getElementById('left').innerHTML = time.hours + ":" + time.minutes + ':' + time.seconds
 
     }
 showRemaining()
