@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>Athan Times</title>
 	   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
 	<style type="text/css"> 
-	@import url("https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700");
+	@import url("https://fonts.googleapis.com/css?family=Quicksand:500");
 .main {
 width: 90%;
-height: 84vh;
 background: white;
 margin: auto;
 margin-top: 70px;
@@ -29,7 +28,7 @@ body{
 	margin: auto;
 	font-size: 11em;
 	text-align: center;
-	background:url(https://images.unsplash.com/photo-1487621167305-5d248087c724?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=6f03a691b736b1606598835c44ca417d);
+	background:url(https://images.unsplash.com/40/whtXWmDGTTuddi1ncK5v_IMG_0097.jpg?dpr=1&auto=format&fm=webp&fit=crop&w=1920&h=1080&q=40&cs=tinysrgb&crop=&bg=);
 	    background-size: cover;
 	    font-family: Ostrich Sans Inline;
 }
@@ -76,7 +75,7 @@ body{
 
 	}
 
-	@media (max-width: 500px ){
+	@media (max-width: 1000px ){
 #left {
 	    position: relative;
     bottom: -80px;
@@ -107,7 +106,7 @@ body{
 	}
 	</style>
 
-<link rel="stylesheet" type="text/css" href="fonts/font.css">
+<link async rel="stylesheet" type="text/css" href="fonts/font.css">
 </head>
 <body>
 <div class="main">
@@ -119,7 +118,10 @@ body{
     font-family: Ostrich Sans;
     padding: 15px;
 "></div>
-<div class="timerContainer">
+<div style="
+    max-height: 100%;
+    padding: 17px;
+" class="timerContainer">
 	<span id="left"></span>
     <br>
     <span id="until" style="">Until iftar</span>
@@ -136,7 +138,7 @@ body{
 	</div>
 </div>
 <script type="text/javascript">
-var url = 'http://api.aladhan.com/timingsByCity?city=Lansing&country=US&method=2'
+var url = 'https://api.aladhan.com/timingsByCity?city=Lansing&country=US&method=2'
 function getTimeRemaining(endtime){
   var t = Date.parse(endtime) - Date.parse(new Date());
   var seconds = Math.floor( (t/1000) % 60 );
