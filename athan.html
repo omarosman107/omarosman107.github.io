@@ -83,7 +83,7 @@ body{
 	<span style=" 
     position: relative;
     bottom: -80px;font-weight: 700;font-size: 2em;" id="left"></span>
-    <span style="font-size: 40px;
+    <span id="until" style="font-size: 40px;
     display: block;
     line-height: 6em;color: rgba(255, 255, 255, 0.49);">Until iftar</span>
 </div>
@@ -157,7 +157,9 @@ var end = maghrib
         if (distance < 0) {
 
             clearInterval(timer);
-            document.getElementById('left').innerHTML = 'EXPIRED!';
+            document.getElementById('left').innerHTML = 'Eat!';
+                        document.getElementById('until').innerHTML = 'Until Fajr';
+
 
             return;
         }
