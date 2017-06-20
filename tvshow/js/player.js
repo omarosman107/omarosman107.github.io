@@ -42,12 +42,13 @@ var isDone = false
 var aswim = false
 var amcactive = false
 var diziayactive = false
-var cwurl
+var cwurl 
 
 var sitefunctions = {
   "rawFile":"raw(url)",
   "foxorgin":"foxsite(url)",
   "asdir=":"fetchaswimjson(url)",
+  "api.fox.com":"foxapi(url)",
 
 "cwtv.com":"fetchcwjson(url)",
 "diziay.com":"fetchdiziayjson(url)",

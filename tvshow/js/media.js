@@ -1172,6 +1172,44 @@ console.log(err)
 });
 }
 
+function foxapi(url){
+console.log(url)
+
+     var request = {
+        method: 'GET',
+        headers: {
+           'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+           'ApiKey': 'rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR'
+        }
+     };
+     fetch(url, request).then(function(res) {
+return res.json()
+     }).then(function(data){
+console.log(data)
+            getShowinfo(data.seriesName)
+            showname.innerHTML = data.seriesName
+            showdesc.innerHTML = data.description
+            document.getElementById('epname').innerHTML = data.name
+
+ fetch(data.videoRelease.url, {
+         method: 'get'
+      }).then(function(response) {
+         return response.json()
+      }).then(function(play) {
+
+    player.src({"type":"application/x-mpegURL", "src":play.playURL});
+resume()
+
+      });
+
+
+
+     })
+
+
+
+}
+
 
 
 
