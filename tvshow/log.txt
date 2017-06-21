@@ -7,6 +7,12 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+images now look better on any screen
+--
+fox episodes get added faster
+--
+scroll performance is better
+--
 cards go up more on hover
 --
 loader has a different background

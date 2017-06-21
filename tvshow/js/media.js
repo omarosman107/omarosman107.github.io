@@ -1186,6 +1186,8 @@ console.log(url)
 return res.json()
      }).then(function(data){
 console.log(data)
+bg(data.images.still.HD)
+
             getShowinfo(data.seriesName)
             showname.innerHTML = data.seriesName
             showdesc.innerHTML = data.description
