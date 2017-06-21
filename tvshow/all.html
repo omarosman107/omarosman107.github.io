@@ -1519,6 +1519,7 @@ var srcset = ''
 for (var z = sizes.length - 1; z >= 0; z--) {
   srcset += (image + '?fit=inside%7C' + encodeURIComponent(sizes[z]) + ' '+ sizes[z].split(':')[1] +'w,')
 }
+srcset = srcset.substr(0, srcset.length - 2)
       finalObj.push({
         img: '',
         rating: rating(json.member[i].contentRating),
