@@ -277,7 +277,7 @@ xml.onreadystatechange = function(){
     	var whenstart = new Date(doc.querySelectorAll('.vk_ans')[0].querySelectorAll('div')[1].innerHTML + ' '+new Date().getFullYear())
 
 var whenend = new Date(doc.querySelectorAll('.vk_ans')[1].querySelectorAll('div')[1].innerHTML + ' '+new Date().getFullYear())
-whenend.setTime( whenend.getTime() + 1 * 86400000 );
+whenend.setTime( whenend.getTime() + 2 * 86400000 );
 whenstart.setTime( whenstart.getTime() + 1 * 86400000 );
  var  today = new Date() 
     var p = (((today - whenstart) / (whenend - whenstart)) * 100) + '%';
