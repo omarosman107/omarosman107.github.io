@@ -1452,8 +1452,6 @@ var json = (JSON.parse(this.responseText))
 
 for(i in json.member){
 if(!json.member[i].requiresAuth && json.member[i].isFullEpisode ){
-  "https://static-media.fox.com/dcg/img/Fox_Networks_DCG_-_FOX_Broadcasting/731/137/bs-s1_ep114_0324_hires2.jpg?fit=inside%7C740:416"
-  console.log(json.member[i])
 var image = json.member[i].images.still.HD.split('?')[0]
 var sizes = [
 '208:117',
@@ -1474,7 +1472,7 @@ var srcset = ''
 for (var z = sizes.length - 1; z >= 0; z--) {
   srcset += (image + '?fit=inside%7C' + encodeURIComponent(sizes[z]) + ' '+ sizes[z].split(':')[1] +'w,')
 }
-srcset = srcset.substr(0, srcset.length - 1)
+srcset = srcset.substr(0, srcset.length - 1);
       finalObj.push({
         img: json.member[i].images.still.SD,
         rating: rating(json.member[i].contentRating),
