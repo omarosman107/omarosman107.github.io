@@ -1155,7 +1155,7 @@ fetch(show_hub, {
       } catch (e) {
         console.log(e)
       }
-      var dyn = data.videos[i].large_thumbnail + " 720w  ," + data.videos[i].medium_thumbnail + ' 210w'
+      var dyn =  data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_1920x1080.jpg 1920w, ' +data.videos[i].large_thumbnail + " 720w  ,"+ data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_640x360.jpg 640w, '+data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_609x335.jpg 609w, ' +  data.videos[i].medium_thumbnail + ' 210w, ' + data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg 144w '
       tvlist(data.videos[i].series_name)
       var episode_data = {
         img: data.videos[i].medium_thumbnail,
