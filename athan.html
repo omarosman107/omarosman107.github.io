@@ -443,7 +443,16 @@ showRemaining()
   };
 
 }
-prayers('Lansing')
+
+var ip = new XMLHttpRequest();
+ip.onreadystatechange = function(){
+console.log()
+var ipdata = JSON.parse(this.responseText)
+prayers(ipdata.city + ' , ' + ipdata.region_name +' '+ ipdata.country_name)
+
+}
+ip.open("GET",'https://freegeoip.net/json/',true);
+ip.send();
 </script>
 </body>
 </html> 
