@@ -324,7 +324,7 @@ body {
       </div><span id="results"></span>
     </div>
     <h1 id="wtcTxt">CONTINUE WATCHING</h1>
-    <div class=" fanarts-list list-unstyled list-inline shows dragscroll" id="watching" style="height: auto;"></div>
+    <div onscroll="myLazyLoad.update()" class=" fanarts-list list-unstyled list-inline shows dragscroll" id="watching" style="height: auto;"></div>
     <h1>SHOWS</h1>
     <div class="shows dragscroll" id="tvShows" ></div>
     <div class="nextContainer" style="display: none;">
@@ -353,6 +353,7 @@ body {
 
 </script>
 <script async  defer src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="js/lazyload.min.js"></script>
 
 
    <!-- <link async rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -503,7 +504,9 @@ function logIn(u, p) {
   })
 }
 window.onscroll = function() {
-  scrollFunction()
+  scrollFunction();
+  myLazyLoad.update();
+
 };
 
 function scrollFunction() {
@@ -588,7 +591,7 @@ function elementInViewport(el) {
   );
 }
 
-function lazyLoad(){
+function lazyLoadNew(){
 
 
 setTimeout(function(){
@@ -663,6 +666,7 @@ io.observe(Lazyelements[i])
 }
 }
  
+var myLazyLoad
 
 
 function addJS(url) {
@@ -693,12 +697,11 @@ function loaders(atr) {
             document.getElementsByClassName('lScreen')[0].style.zIndex = '-99999'
       document.querySelector('.contain').style.display = 'block';
  sortCards()
-lazyLoad()
-document.body.addEventListener('scroll',function(){
-    lazyLoad()
+myLazyLoad = new LazyLoad({
 
-})
+});
 
+myLazyLoad.update()
 
 console.log('done')
 
@@ -771,6 +774,7 @@ function query(q) {
 
       }
     }
+    myLazyLoad.update()
     results(num)
   }, 10)
 }
@@ -831,6 +835,7 @@ function showQuery(q, o) {
       }
     }
     scrollShows()
+    myLazyLoad.update()
     results(num)
 }
 var tvobj = {}
@@ -839,7 +844,7 @@ var tvobj = {}
 
 function tvstQ(q) {
   q = encodeURIComponent(q);
-  var query = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select all_images.poster from json where url="https://api.tozelabs.com/v2/show?limit=1&q=' + q + '"') + '&format=json&_maxage=360000';
+  var query = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="https://api.tozelabs.com/v2/show?limit=1&q=' + q + '"') + '&format=json&_maxage=360000';
   return query;
 }
 
@@ -856,7 +861,7 @@ function multiURL(urls) {
 }
 var tvdbimg = 'https://thetvdb.com/banners/posters/279121-50.jpg'
 
-function tvlist(showName) {
+function tvlist(showName,img) {
   if (showName in tvobj) {
     return 'Already In.';
   }
@@ -871,6 +876,12 @@ function tvlist(showName) {
      var url = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(finalList) +  '&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=';
     */
   tvobj[(showName)] = ''
+
+if (img != undefined) {
+    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="' + img + '"><\/a><\/div>'
+return;
+
+}
   url = tvstQ(showName)
   fetch(url, {
     method: 'get',
@@ -887,7 +898,14 @@ function tvlist(showName) {
  
      }
      */
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="' + dat.query.results.json.all_images.poster._[4] + '"><\/a><\/div>'
+fetch('http://webservice.fanart.tv/v3/tv/'+dat.query.results.json.id+'?api_key=334bde683eabd3ae55eb6a1917bd4795',{
+ method: 'get' 
+}).then(function(res){return res.json();}).then(function(data){console.log(data.tvthumb[0].url)
+
+    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="' + data.tvthumb[0].url + '"><\/a><\/div>'
+
+})
+
   }).catch(function(e) {});
 }
 
@@ -1490,7 +1508,7 @@ loadShow.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
     var showinfo = (JSON.parse(this.responseText));
 console.log(showinfo.panels.member["0"].items.member["0"].name)
-            tvlist(showinfo.panels.member["0"].items.member["0"].name)
+console.log(showinfo.panels.member)
 
 var season = null
 try{
@@ -1527,7 +1545,7 @@ var sizes = [
 ]
 var srcset = ''
 for (var z = sizes.length - 1; z >= 0; z--) {
-  srcset += (image + '?fit=inside%7C' + encodeURIComponent(sizes[z]) + ' '+ sizes[z].split(':')[1] +'w,')
+  srcset += (image + '?fit=inside%7C' + encodeURIComponent(sizes[z]) + ' '+ sizes[z].split(':')[0] +'w ' +sizes[z].split(':')[1] +'h,')
 }
 srcset = srcset.substr(0, srcset.length - 1);
       finalObj.push({
@@ -1589,8 +1607,11 @@ var xhr = new XMLHttpRequest();
 xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
     var foxshows = (JSON.parse(this.responseText).panels.member[3].items.member);
+    console.log(foxshows)
     for (var i = foxshows.length - 1; i >= 0; i--) {
 loadInfo(foxshows[i].id)
+            tvlist(foxshows[i].name,foxshows[i].images.seriesList.HD)
+
     }
 loaders('remove')
 

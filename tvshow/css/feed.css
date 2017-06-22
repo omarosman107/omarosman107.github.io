@@ -322,12 +322,12 @@ input[type=search] {
 }
 
 .tvshow {
+    width: 20vw;
     -webkit-transition: all 0.3s cubic-bezier(.03,.98,.52,.99);
     transition: all 0.3s cubic-bezier(.03,.98,.52,.99);
     will-change: opacity,transform;
     opacity: .4;
     box-shadow: 1px 0 0 1px rgba(0,0,0,.33);
-    width: 10vw;
     background-size: cover;
     border-radius: 2px;
     transform: scale(0.9);
@@ -338,12 +338,10 @@ input[type=search] {
         will-change: transform,box-shadow;
 }
 .tvshow,.tvshow img {
-    border-radius: 3px
 }
 
 .shows {
     white-space: nowrap;
-    overflow-x: overlay;
     overflow-y: hidden;
     width: auto;
     -webkit-overflow-scrolling: touch;
@@ -912,7 +910,7 @@ color: #dad6d6;
 
 @media (max-width:700px) {
     .tvshow {
-    width: 28vw;
+        width: 54vw;
     }
 
 }
