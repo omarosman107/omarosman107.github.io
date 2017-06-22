@@ -332,8 +332,8 @@ input[type=search] {
     border-radius: 2px;
     transform: scale(0.9);
     box-shadow: 0 1px 1px rgba(0,0,0,.1), 0 1px 8px rgba(0,0,0,.1);
-    margin: 0 auto 6px;
- }
+    margin: 6px -9px 6px 6px;
+}
 .initialized{
         will-change: transform,box-shadow;
 }

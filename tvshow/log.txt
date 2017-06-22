@@ -7,6 +7,8 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+progress on the top
+--
 show images are in landscape
 --
 images now look better on any screen
