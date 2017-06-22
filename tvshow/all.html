@@ -568,8 +568,61 @@ window.mobilecheck = function() {
 };
 
 
+function elementInViewport(el) {
+  var top = el.offsetTop;
+  var left = el.offsetLeft;
+  var width = el.offsetWidth;
+  var height = el.offsetHeight;
+
+  while(el.offsetParent) {
+    el = el.offsetParent;
+    top += el.offsetTop;
+    left += el.offsetLeft;
+  }
+
+  return (
+    top >= window.pageYOffset &&
+    left >= window.pageXOffset &&
+    (top + height) <= (window.pageYOffset + window.innerHeight) &&
+    (left + width) <= (window.pageXOffset + window.innerWidth)
+  );
+}
 
 function lazyLoad(){
+
+
+setTimeout(function(){
+var Lazyelements = document.querySelectorAll('.lazy')
+for(i in Lazyelements){
+Lazyelements[i].onload = function(element) {
+if (!element.target.classList.contains('loaded')) {
+element.target.classList.add('loaded');
+
+}
+}
+
+if(elementInViewport(Lazyelements[i])){
+
+  if (Lazyelements[i].hasAttribute('data-original-set')){
+Lazyelements[i].srcset =  Lazyelements[i].getAttribute('data-original-set');
+Lazyelements[i].removeAttribute('data-original-set')
+};
+  if (Lazyelements[i].hasAttribute('data-original')){
+Lazyelements[i].src = Lazyelements[i].getAttribute('data-original');
+Lazyelements[i].removeAttribute('data-original')
+};
+
+
+}
+
+
+}
+},20)
+return ;
+
+
+
+
     var io = new IntersectionObserver(
     entries => {
 for (i in entries){
@@ -641,6 +694,10 @@ function loaders(atr) {
       document.querySelector('.contain').style.display = 'block';
  sortCards()
 lazyLoad()
+document.body.addEventListener('scroll',function(){
+    lazyLoad()
+
+})
 
 
 console.log('done')
