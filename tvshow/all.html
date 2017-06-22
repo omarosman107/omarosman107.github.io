@@ -285,12 +285,24 @@ body {
 
       width: 100%;
 }
+@-webkit-keyframes barprogress{0%{background-position:0% 0}to{background-position:125% 0}}@keyframes barprogress{0%{background-position:0% 0}to{background-position:125% 0}}@-webkit-keyframes fadein{0%{opacity:0}to{opacity:1}}@keyframes fadein{0%{opacity:0}to{opacity:1}}._kvls4{height:4px;background:#27c4f5 -webkit-gradient(linear,left top,right top,from(#27c4f5),color-stop(#a307ba),color-stop(#fd8d32),color-stop(#70c050),to(#27c4f5));background:#27c4f5 -webkit-linear-gradient(left,#27c4f5,#a307ba,#fd8d32,#70c050,#27c4f5);background:#27c4f5 linear-gradient(to right,#27c4f5,#a307ba,#fd8d32,#70c050,#27c4f5);background-size:500%;-webkit-animation:2s linear infinite barprogress,.3s fadein;animation:2s linear infinite barprogress,.3s fadein;width:100%}
+
+#topprogress {
+      height: 4px;
+    background: #bacbe8;
+    -webkit-transition: all .28s ease;
+    transition: all .28s ease;
+    width: 100%;
+}
+
 
   </style>
   <title>EPISODES - We provide the best streaming site.</title>
 </head>
 <body>
 <div class="lScreen">
+<div style="height: 4px;background: #ffffff;"><div id="topprogress" class="" style="width: 100%;"></div>
+</div>
 <div id="particles-background" class="vertical-centered-box"></div>
 
 <div class="vertical-centered-box">
@@ -374,11 +386,9 @@ function playHover(element){
 
     var video = element.querySelector('video')
     element.querySelector('.playbutton').style.visibility = 'hidden'
-    console.log(video)
     var url = element.getAttribute('url')
 
       if(Hls.isSupported()) {
-    console.log(url)
     hls.attachMedia(video);
     hls.on(Hls.Events.MANIFEST_PARSED,function() {
       video.play();
@@ -677,13 +687,14 @@ function addJS(url) {
   var fs = document.getElementsByTagName('script')[0]; // Get the first script
   fs.parentNode.insertBefore(s, fs);
 };
-
+var maxnum = 0
 var num = 0
 
 function loaders(atr) {
   if (atr == 'remove') {
     num = num - 1
-    if (num - 1 == -1) {
+  document.getElementById('topprogress').style.width = ( 100 - (num/maxnum *100) ) + '%'
+    if (num == 0) {
   
 
       if (!document.getElementById('search').value == '') {
@@ -750,6 +761,11 @@ return false;
     return;
   }
   num++
+  if (num > maxnum) {
+maxnum = num
+  }
+
+  document.getElementById('topprogress').style.width = ( 100 - (num/maxnum *100) ) + '%'
 }
 
 function makeid() {
@@ -900,7 +916,7 @@ return;
      */
 fetch('http://webservice.fanart.tv/v3/tv/'+dat.query.results.json.id+'?api_key=334bde683eabd3ae55eb6a1917bd4795',{
  method: 'get' 
-}).then(function(res){return res.json();}).then(function(data){console.log(data.tvthumb[0].url)
+}).then(function(res){return res.json();}).then(function(data){
 
     document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="' + data.tvthumb[0].url + '"><\/a><\/div>'
 
@@ -1507,8 +1523,6 @@ var loadShow = new XMLHttpRequest();
 loadShow.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
     var showinfo = (JSON.parse(this.responseText));
-console.log(showinfo.panels.member["0"].items.member["0"].name)
-console.log(showinfo.panels.member)
 
 var season = null
 try{
@@ -1607,10 +1621,12 @@ var xhr = new XMLHttpRequest();
 xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
     var foxshows = (JSON.parse(this.responseText).panels.member[3].items.member);
-    console.log(foxshows)
     for (var i = foxshows.length - 1; i >= 0; i--) {
-loadInfo(foxshows[i].id)
+if(foxshows[i].seriesType != 'special'){
             tvlist(foxshows[i].name,foxshows[i].images.seriesList.HD)
+            loadInfo(foxshows[i].id)
+
+          }
 
     }
 loaders('remove')
