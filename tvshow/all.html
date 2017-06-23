@@ -1620,11 +1620,32 @@ var xhr = new XMLHttpRequest();
 
 xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
+var allshows = []
+var json = JSON.parse(this.responseText).panels.member
+console.log(json)
+/*
+for (var i = json.length - 1; i >= 0; i--) {
+  try{
+
+allshows.unshift.apply( allshows, json[i].items.member );
+
+  
+  }catch(e){
+console.log(e)
+  }
+
+}
+*/
+allshows.unshift.apply( allshows, json[3].items.member );
+// FX allshows.unshift.apply( allshows, json[4].items.member );
+
+console.log(allshows)
     var foxshows = (JSON.parse(this.responseText).panels.member[3].items.member);
-    for (var i = foxshows.length - 1; i >= 0; i--) {
-if(foxshows[i].seriesType != 'special'){
-            tvlist(foxshows[i].name,foxshows[i].images.seriesList.HD)
-            loadInfo(foxshows[i].id)
+    for (var i = allshows.length - 1; i >= 0; i--) {
+      console.log(allshows[i].seriesType)
+if(allshows[i].seriesType != 'special' || allshows[i].seriesType != 'movie'){
+            tvlist(allshows[i].name,allshows[i].images.seriesList.HD)
+            loadInfo(allshows[i].id)
 
           }
 
