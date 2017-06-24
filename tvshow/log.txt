@@ -7,6 +7,10 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+preview images for some episodes
+--
+top progress is now much smoother
+--
 progress on the top
 --
 show images are in landscape
