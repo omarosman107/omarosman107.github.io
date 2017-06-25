@@ -773,11 +773,14 @@ color: #dad6d6;
 }
 
 .image-crop .overlay,.tvshow:hover {
-    background: radial-gradient(farthest-corner at 50% 50%,rgba(50,50,50,.5) 50%,#323232 100%)
+    background: radial-gradient(farthest-corner at 50% 50%,rgba(50,50,50,.5) 50%,#323232 100%);
+}
 }
 
 .tvshow:hover {
-    transform: transale3d(0,0,0)
+    transform: transale3d(0,0,0);
+        box-shadow: 0px 0px 2px 1px rgba(0,0,0,.1);
+
 }
 
 .image-crop .overlay {
