@@ -699,9 +699,8 @@ function loaders(atr) {
     console.log( (100 - (num/maxnum *100)) - 100)
   document.getElementById('topprogress').style.transform = 'translateX(' + ((100 - (num/maxnum *100)) - 100) + '%)'
     if (num == 0) {
-  
-
-      if (!document.getElementById('search').value == '') {
+      setTimeout(function(){
+   if (!document.getElementById('search').value == '') {
         query(document.getElementById('search').value)
       }
       if (document.getElementById('watching').children.length == 0) {
@@ -757,7 +756,11 @@ return false;
     }
 };
 
-}
+      }
+  
+
+   
+},200)
 
 
     }
@@ -1529,6 +1532,11 @@ function loadInfo(id){
 
 var loadShow = new XMLHttpRequest();
 loadShow.addEventListener("readystatechange", function () {
+    if (!this.status  === 200) {
+console.log(this)
+loaders('remove')
+
+}
   if (this.readyState === 4) {
     var showinfo = (JSON.parse(this.responseText));
 
@@ -1543,6 +1551,11 @@ console.log(e)
 
 var seasoninfo = new XMLHttpRequest();
 seasoninfo.addEventListener("readystatechange",function () {
+      if (!this.status  === 200) {
+console.log(this)
+loaders('remove')
+
+}
   if (this.readyState === 4) {
 var json = (JSON.parse(this.responseText))
     var finalObj = []
@@ -1598,7 +1611,8 @@ loadMedia(finalObj)
 
 }
 
-}) 
+})
+seasoninfo.onerror 
 seasoninfo.open("GET",season);
 seasoninfo.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 
