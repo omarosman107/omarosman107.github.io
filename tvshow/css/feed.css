@@ -695,6 +695,7 @@ p {
     overflow: hidden;
     position: relative;
     background: rgba(0, 0, 0, 0.28);
+        transition: all .05s ease;
     
     
     
