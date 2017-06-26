@@ -926,7 +926,7 @@ fetch('http://webservice.fanart.tv/v3/tv/'+dat.query.results.json.id+'?api_key=3
  method: 'get' 
 }).then(function(res){return res.json();}).then(function(data){
 
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="' + data.tvthumb[0].url + '"><\/a><\/div>'
+    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="' + (data.tvthumb[0].url).split('.tv').join('.tv.rsz.io')+'?width=300' + '"><\/a><\/div>'
 
 })
 
@@ -1268,7 +1268,7 @@ fetch(show_hub, {
         length: data.videos[i].duration,
         metadata: data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration,
         type: "cw",
-        bg:''
+        bg:(data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg').split('.com').join('.com.rsz.io') + '?width=10'
       }
       finalObj.push(episode_data)
     }
