@@ -7,6 +7,8 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+removed the delay after bar reaches 100%
+--
 bug fixes and speed improvements
 --
 faster loading times
