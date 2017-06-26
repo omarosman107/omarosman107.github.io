@@ -7,6 +7,8 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+image previews have been added to all episodes
+--
 show images have been resized for better speed
 --
 removed the delay after bar reaches 100%
