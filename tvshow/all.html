@@ -696,7 +696,6 @@ var num = 0
 function loaders(atr) {
   if (atr == 'remove') {
     num = num - 1
-    console.log( (100 - (num/maxnum *100)) - 100)
   document.getElementById('topprogress').style.transform = 'translateX(' + ((100 - (num/maxnum *100)) - 100) + '%)'
     if (num == 0) {
       setTimeout(function(){
@@ -720,7 +719,6 @@ threshold:400
 
 myLazyLoad.update()
 
-console.log('done')
 
 
 if(mobilecheck()){
