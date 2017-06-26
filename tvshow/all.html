@@ -761,7 +761,7 @@ return false;
   
 
    
-},200)
+},100)
 
 
     }
@@ -1189,8 +1189,8 @@ function loadMedia(json) {
     var out = "'out'"
     template = template + '<li  aired="' + json[i].airdate + '"  ShowName="' + json[i].show + '" class="initialized  '+con+' ' + json[i].type + '  ' + json[i].id + '" data-query="' + query + '"><div  class="piece fanart-container"><div class="image-crop sixteen-nine" style=" background-image:url('+json[i].bg+');background-size:cover;" url="'+json[i].href+'" autoplay="'+json[i].autoplay+'" onmouseover="playHover(this)" onmouseout="stopHover(this)">' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '"><video class="sixteen-nine" style="top:0px;" playsinline muted loop width="100%" height="100%"></video><\/span><div class="imageBG"><\/div><img     class="cover sixteen-nine lazy"   sizes="(max-width: 600px) 70vw, 25vw"  alt="' + json[i].show + '"   data-original="'+json[i].img +'" data-original-set="' + json[i].imgdyn + '" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div  class="w3-progress-container" style=""><div class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '" class="overlay-btn zoom-btn " title="Watch ' + json[i].episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '">' + json[i].episode + '<\/a><\/h2><a onclick="showQuery(null,this)" show="' + json[i].show + '" href="javascript:" class="secondary-link show-name">' + json[i].show + '<\/a><div class="cardBorder"></div><div class=><p>' + FDate + ' | ' + json[i].rating + ' | ' + timeofPlayback + ' | ' + json[i].epiformat + '<\/p><\/div><i style="opacity:' + showCheck() + ';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"><\/i><\/div><div class="bottom"><div class="bar"><\/div><div class="bar"><\/div><div class="bar"><\/div><\/div><\/div><\/li>'
   }
-  document.getElementById('watching').innerHTML += watching
-  document.getElementById('carasoul').innerHTML += template;
+  document.getElementById('watching').insertAdjacentHTML('beforeend',watching);
+  document.getElementById('carasoul').insertAdjacentHTML('beforeend',template);
   template = '';
 }
 
@@ -1225,7 +1225,7 @@ function msToTime(duration) {
 var template = "";
 var obj = []
 var cors_show_hub = 'https://crossorigin.me/' + show_hub
-var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub + '"') + '&format=json&bust=' + (new Date()).getTime();
+var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub + '"') + '&format=json&bust='// + (new Date()).getTime();
 loaders()
 fetch(show_hub, {
   method: 'get',
@@ -1236,7 +1236,6 @@ fetch(show_hub, {
   data = data.query.results.json
   var start = new Date()
   var showsTemp = {}
-  var finalObj = []
   for (i in data.videos) {
     if (data.videos[i].fullep == 1) {
       if (!showsTemp[data.videos[i].series_name]) {
@@ -1276,7 +1275,6 @@ fetch(show_hub, {
       finalObj.push(episode_data)
     }
   }
-  loadMedia(finalObj)
   loaders('remove');
   template = ''
   var end = new Date()
@@ -1548,13 +1546,11 @@ var season = showinfo.panels.member[1].items.member["0"].episodes["@id"]
     loaders()
 
 }catch(e){
-console.log(e)
 }
 
 var seasoninfo = new XMLHttpRequest();
 seasoninfo.addEventListener("readystatechange",function () {
       if (!this.status  === 200) {
-console.log(this)
 loaders('remove')
 
 }
@@ -1612,7 +1608,6 @@ loaders('remove')
 }
 
 })
-seasoninfo.onerror 
 seasoninfo.open("GET",season);
 seasoninfo.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 
@@ -1645,7 +1640,6 @@ xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
 var allshows = []
 var json = JSON.parse(this.responseText).panels.member
-console.log(json)
 /*
 for (var i = json.length - 1; i >= 0; i--) {
   try{
@@ -1662,10 +1656,8 @@ console.log(e)
 allshows.unshift.apply( allshows, json[3].items.member );
 // FX allshows.unshift.apply( allshows, json[4].items.member );
 
-console.log(allshows)
     var foxshows = (JSON.parse(this.responseText).panels.member[3].items.member);
     for (var i = allshows.length - 1; i >= 0; i--) {
-      console.log(allshows[i].seriesType)
 if(allshows[i].seriesType != 'special' || allshows[i].seriesType != 'movie'){
             tvlist(allshows[i].name,allshows[i].images.seriesList.HD)
             loadInfo(allshows[i].id)
