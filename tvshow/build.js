@@ -323,9 +323,6 @@ function loaders(atr) {
    if (!document.getElementById('search').value == '') {
         query(document.getElementById('search').value)
       }
-      if (document.getElementById('watching').children.length != 0) {
-        document.getElementById('wtcTxt').style.display = ''
-      }
 
 var l = []
 finalObj.sort(function(x, y) {
@@ -336,6 +333,9 @@ finalObj.sort(function(x, y) {
     l.push(x)
   });
 loadMedia(l)
+      if (document.getElementById('watching').children.length === 0) {
+        document.getElementById('wtcTxt').style.display = 'none'
+      }
 
 
 
