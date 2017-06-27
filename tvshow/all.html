@@ -279,10 +279,11 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   background: #2c2d44;
+/*
   background-image: -moz-linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
   background-image: -webkit-linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
   background-image: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
-
+*/
       width: 100%;
 }
 @-webkit-keyframes barprogress{0%{background-position:0% 0}to{background-position:125% 0}}@keyframes barprogress{0%{background-position:0% 0}to{background-position:125% 0}}@-webkit-keyframes fadein{0%{opacity:0}to{opacity:1}}@keyframes fadein{0%{opacity:0}to{opacity:1}}._kvls4{height:4px;background:#27c4f5 -webkit-gradient(linear,left top,right top,from(#27c4f5),color-stop(#a307ba),color-stop(#fd8d32),color-stop(#70c050),to(#27c4f5));background:#27c4f5 -webkit-linear-gradient(left,#27c4f5,#a307ba,#fd8d32,#70c050,#27c4f5);background:#27c4f5 linear-gradient(to right,#27c4f5,#a307ba,#fd8d32,#70c050,#27c4f5);background-size:500%;-webkit-animation:2s linear infinite barprogress,.3s fadein;animation:2s linear infinite barprogress,.3s fadein;width:100%}
@@ -517,7 +518,6 @@ function logIn(u, p) {
 }
 window.onscroll = function() {
   scrollFunction();
-  myLazyLoad.update();
 
 };
 
@@ -706,6 +706,10 @@ function loaders(atr) {
         document.getElementById('wtcTxt').style.display = 'none'
       }
 loadMedia(finalObj)
+window.onscroll = function() {
+  myLazyLoad.update();
+
+};
 
           document.getElementsByClassName('lScreen')[0].style.opacity = '0'
             document.getElementsByClassName('lScreen')[0].style.zIndex = '-99999'
@@ -714,7 +718,7 @@ loadMedia(finalObj)
 
 
 myLazyLoad = new LazyLoad({
-threshold:400
+threshold:600
 });
 
 myLazyLoad.update()
@@ -1268,7 +1272,7 @@ fetch(show_hub, {
         length: data.videos[i].duration,
         metadata: data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration,
         type: "cw",
-        bg:(data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg').split('.com').join('.com.rsz.io') + '?width=10'
+        bg:(data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg').split('.com').join('.com.rsz.io') + '?width=16'
       }
       finalObj.push(episode_data)
     }
@@ -1538,13 +1542,6 @@ loaders('remove')
   if (this.readyState === 4) {
     var showinfo = (JSON.parse(this.responseText));
 
-var season = null
-try{
-var season = showinfo.panels.member[1].items.member["0"].episodes["@id"]
-    loaders()
-
-}catch(e){
-}
 
 var seasoninfo = new XMLHttpRequest();
 seasoninfo.addEventListener("readystatechange",function () {
@@ -1592,7 +1589,7 @@ srcset = srcset.substr(0, srcset.length - 1);
         type: "fox",
         imgdyn: srcset,
         autoplay:json.member[i].autoPlayVideo.default.url,
-        bg:json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('10:10')
+        bg:json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('16:9')
       })
 
 
@@ -1606,10 +1603,23 @@ loaders('remove')
 }
 
 })
+
+var season = null
+try{
+var season = showinfo.panels.member[1].items.member["0"].episodes["@id"]
+console.log(showinfo.panels.member[1].items.member["0"].episodes["@id"])
 seasoninfo.open("GET",season);
 seasoninfo.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 
 seasoninfo.send(null)
+
+    loaders()
+
+}catch(e){
+}
+
+
+
 
 
 
