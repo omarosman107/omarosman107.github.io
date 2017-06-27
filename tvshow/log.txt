@@ -7,7 +7,7 @@ PLAYER:New design
 
 
 == CHANGELOG ==
-changed to solid background for performance improvements
+changed to solid background for performance improvements while scrolling
 --
 image previews have been added to all episodes
 --
