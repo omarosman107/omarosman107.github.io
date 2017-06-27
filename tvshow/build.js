@@ -333,9 +333,12 @@ finalObj.sort(function(x, y) {
     l.push(x)
   });
 loadMedia(l)
-      if (document.getElementById('watching').children.length === 0) {
+       if (document.getElementById('watching').children.length === 0) {
         document.getElementById('wtcTxt').style.display = 'none'
-      }
+      }else{
+        document.getElementById('wtcTxt').style.display = 'block'
+
+}
 
 
 
