@@ -323,7 +323,7 @@ function loaders(atr) {
    if (!document.getElementById('search').value == '') {
         query(document.getElementById('search').value)
       }
-      if (document.getElementById('watching').children.length == 0) {
+      if (document.getElementById('watching').children.length != 0) {
         document.getElementById('wtcTxt').style.display = ''
       }
 
