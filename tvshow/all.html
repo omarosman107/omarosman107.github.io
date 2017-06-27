@@ -698,23 +698,29 @@ function loaders(atr) {
     num = num - 1
   document.getElementById('topprogress').style.transform = 'translateX(' + ((100 - (num/maxnum *100)) - 100) + '%)'
     if (num == 0) {
-      setTimeout(function(){
    if (!document.getElementById('search').value == '') {
         query(document.getElementById('search').value)
       }
       if (document.getElementById('watching').children.length == 0) {
-        document.getElementById('wtcTxt').style.display = 'none'
+        document.getElementById('wtcTxt').style.display = ''
       }
-loadMedia(finalObj)
-window.onscroll = function() {
-  myLazyLoad.update();
 
-};
+var l = []
+finalObj.sort(function(x, y) {
+   var date1 = new Date(x.airdate);
+   var date2 = new Date( y.airdate);
+    return date1 < date2 ? 1 : -1;
+  }).forEach(function(x) {
+    l.push(x)
+  });
+loadMedia(l)
+
+
+
 
           document.getElementsByClassName('lScreen')[0].style.opacity = '0'
             document.getElementsByClassName('lScreen')[0].style.zIndex = '-99999'
       document.querySelector('.contain').style.display = 'block';
- sortCards()
 
 
 myLazyLoad = new LazyLoad({
@@ -722,48 +728,16 @@ threshold:600
 });
 
 myLazyLoad.update()
+window.onscroll = function() {
+  myLazyLoad.update();
 
-
-
-if(mobilecheck()){
- function clickOrigin(e){
-    var target = e.target;
-    var tag = [];
-    tag.tagType = target.tagName.toLowerCase();
-    tag.tagClass = target.className.split(' ');
-    tag.id = target.id;
-    tag.parent = target.parentNode;
-
-    return tag;
-}
-
-var tagsToIdentify = ['a'];
-
-document.body.onclick = function(e){
-    elem = clickOrigin(e);
-return true;
-    for (i=0;i<tagsToIdentify.length;i++){
-        if (elem.tagType == tagsToIdentify[i]){
-            console.log('You\'ve clicked a monitored tag (' + elem.tagType + ', in this case).');
-            console.log(e.toElement.href.includes(window.location.hostname))
-if(e.toElement.href.includes(window.location.hostname)){
-document.getElementById('frame').style.display = 'block'
-document.getElementById('frame').querySelector('iframe').src = e.toElement.href
-}
-      
-      if(!e.toElement.href.includes(window.location.hostname)){
-return true;
-}
-return false;
-        }
-    }
 };
 
-      }
+
+
   
 
    
-},01)
 
 
     }
@@ -1607,7 +1581,6 @@ loaders('remove')
 var season = null
 try{
 var season = showinfo.panels.member[1].items.member["0"].episodes["@id"]
-console.log(showinfo.panels.member[1].items.member["0"].episodes["@id"])
 seasoninfo.open("GET",season);
 seasoninfo.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 
