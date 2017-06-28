@@ -508,7 +508,7 @@ if (img != undefined) {
     document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="' + img + '"><\/a><\/div>'
 return;
 
-}
+} 
   url = tvstQ(showName)
   fetch(url, {
     method: 'get',
@@ -529,7 +529,7 @@ fetch('http://webservice.fanart.tv/v3/tv/'+dat.query.results.json.id+'?api_key=3
  method: 'get' 
 }).then(function(res){return res.json();}).then(function(data){
 
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="' + (data.tvthumb[0].url).split('.tv').join('.tv.rsz.io')+'?width=300' + '"><\/a><\/div>'
+    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="' + (data.tvthumb[0].url).split('.tv').join('.tv.rsz.io')+'?width=320' + '"><\/a><\/div>'
 
 })
 

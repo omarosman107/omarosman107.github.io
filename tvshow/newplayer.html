@@ -4,6 +4,38 @@
 <head>
 
   <style>
+  /* a wrapper element that tracks the mouse vertically */
+.vjs-thumbnail-holder {
+  position: absolute;
+  left: -1000px;
+}
+
+/* the thumbnail image itself */
+.vjs-thumbnail {
+  position: absolute;
+  left: 0;
+  bottom: 1.3em;
+  opacity: 0;
+  transition: opacity .2s ease;
+  -webkit-transition: opacity .2s ease;
+  -moz-transition: opacity .2s ease;
+  -mz-transition: opacity .2s ease;
+}
+
+/* fade in the thumbnail when hovering over the progress bar */
+/* .fake-active is needed for Android only. It's removed on touchend/touchecancel */
+.vjs-progress-control:hover .vjs-thumbnail,
+.vjs-progress-control.fake-active .vjs-thumbnail,
+.vjs-progress-control:active .vjs-thumbnail {
+  opacity: 1;
+}
+
+/* ... but hide the thumbnail when hovering directly over it */
+.vjs-progress-control:hover .vjs-thumbnail:hover,
+.vjs-progress-control:active .vjs-thumbnail:active {
+  opacity: 0;
+}
+
   .tpPlayer .tpPlayerCard{position:absolute;color:#BEBEBE;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);text-align:left;}.tpPlayer .tpOverlayBackground{position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.6);}.tpPreviewPlayer .tpCurrentTime{left:20px;top:20px;font-size:20px;color:#BEBEBE;text-shadow:0 0 3px #383838, 0 0 3px #383838, 0 0 3px #383838;}:-webkit-full-screen .tpPlayerCard>*{zoom:2;content:"a";}:-webkit-full-screen .tpRelatedHeader{zoom:2;content:"b";}:-webkit-full-screen .tpRelatedFooter{zoom:2;content:"c";}:-webkit-full-screen .tpRelatedItems{zoom:1;}.tpLineFade{width:100%;height:12px;position:absolute;bottom:0;right:0;background:-moz-linear-gradient(top, rgba(0,0,0,0.0) 0, rgba(0,0,0,1.0) 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0,0,0,0.0)), color-stop(100%, rgba(0,0,0,1.0)));background:-webkit-linear-gradient(top, rgba(0,0,0,0.0) 0, rgba(0,0,0,1.0) 100%);background:-o-linear-gradient(top, rgba(0,0,0,0.0) 0, rgba(0,0,0,1.0) 100%);background:-ms-linear-gradient(top, rgba(0,0,0,0.0) 0, rgba(0,0,0,1.0) 100%);background:linear-gradient(to bottom, rgba(0,0,0,0.0) 0, rgba(0,0,0,1.0) 100%);filter:progid;}.tpOverlayCard{pointer-events:none !important;}.tpPlayerCard input[type="text"],.tpPlayerCard input[type="password"],.tpPlayerCard textarea,.tpPlayerCard .tpTextInput{color:#BEBEBE;border:1px solid #E0E0E0;background-color:#383838;margin:1px !important;padding:0;resize:none;-webkit-appearance:none;-webkit-border-radius:0;}.tpPlayerCard select{color:#BEBEBE;border:1px solid #E0E0E0;background-color:#383838;margin:1px !important;padding:0;resize:none;-webkit-border-radius:0;}.tpPlayer .tpPlayerCard a img{border:0;}.tpControlBackground{background:#000000;}.tpControlBorder{border-color:#E0E0E0;}.tpPlayerCard.tpMenuCard{text-align:center;background:none;}.tpPlayerCard.tpResumePlaybackCard{text-align:center;}.tpPlayerCard .tpMenuButtons{position:absolute;top:50%;width:100%;margin-top:-25px;font-size:0;}.tpMenuCard .tpMenuButtons .tpButton{width:50px;height:50px;margin-right:12px;}.tpMenuCard .tpMenuButtons .tpButton:last-child{margin-right:0;}.tpMenuCard .tpRelatedItems{position:absolute;bottom:0;left:0;}.tpMenuCard .tpMenuButtons.tpHasRelated{top:30%;}.tpRelatedItems{width:100%;height:40%;background:rgba(0,0,0,0.6);}.tpRelatedItems .tpRelatedHeader{text-align:left;height:25px;border-bottom:1px solid #E0E0E0;line-height:25px;}.tpRelatedItems .tpRelatedHeader .tpRange{float:right;margin-right:40px;}.tpRelatedItems .tpRelatedHeader .tpLabel{float:left;margin-left:39px;}.tpRelatedItems .tpRelatedPrevious{float:left;width:30px;height:30px;}.tpRelatedItems .tpRelatedNext{float:left;width:30px;height:30px;margin-left:10px;}.tpRelatedItems .tpRelatedTiles{float:left;display:inline-block;position:relative;}.tpRelatedItems .tpRelatedTiles .tpRelatedTile{display:inline-block;margin-left:10px;font-size:14px;overflow:hidden;position:relative;}.tpRelatedItems .tpRelatedTiles .tpRelatedTile img{border:1px solid #E0E0E0;}.tpRelatedTile .tpRelatedInfo{float:right;text-align:left;margin-left:4px;}.tpRelatedTile h4{margin:0;padding:0;font-size:14px;}.tpRelatedTile span{margin:0;padding:0;font-size:12px;}.tpRelatedItems .tpRelatedFooter{text-align:left;height:25px;line-height:25px;clear:both;margin-left:39px;white-space:nowrap;overflow:hidden;}a.tpButton,div.tpButton{display:inline-block;padding:0;margin:0;border:0;}.tpButton>span{display:inline-block;padding:2px 6px 2px 6px;}.tpResumePlaybackCard .tpMenuButtons .tpButton{width:100px;height:40px;}.tpInfoCard .tpCardBody{padding-bottom:26px !important;overflow:hidden;text-overflow:ellipsis;}.tpInfoCard .tpCardContent{height:100%;overflow:hidden;text-overflow:ellipsis;margin-left:4px;}.tpInfoCard .tpMediaPreview{margin-right:6px;margin-bottom:6px;}.tpInfoCard .tpMetaData>span{margin-bottom:4px;display:block;}.tpMetaData{font-size:14px;}.tpCardHeadline .tpTitle{font-size:16px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-bottom:6px;margin-top:6px;}.tpMetaData .tpTitle{font-size:16px;}.tpInfoCard .tpCardExtras{font-size:14px;text-align:left;}.tpInfoCard .tpCopyright{position:absolute;bottom:6px;left:6px;font-size:11px;}.tpRssCard .tpCardForm{width:100%;height:100%;position:relative;float:left;}.tpCopyable::selection,.tpCopyable::-moz-selection{background:rgba(0,0,0,0.75);color:#000000;}.tpPlayerCard{position:relative;}.tpPlayerCard .tpCardHeader{height:26px;padding-left:4px;padding-right:4px;padding-top:0;position:relative;}.tpPlayerCard .tpCardBody{position:absolute;top:0;bottom:0;right:0;left:0;margin-top:25px;padding:2px;background:rgba(0,0,0,0.6);}.tpPlayerCard .tpCardBody .tpCardHeadline h3{margin-top:4px;margin-bottom:8px;font-size:16px;}.tpPlayerCard .tpCardHeader .tpCardTitle{position:absolute;top:2px;left:2px;right:0;line-height:22px;font-size:15px;font-weight:bolder;}.tpPlayerCard .tpCardHeader .tpCardTitle .tpIcon{margin-left:2px;margin-right:2px;width:22px;height:22px;}.tpPlayerCard .tpCardHeader .tpCardTabs{position:absolute;padding-top:3px;top:0;bottom:0;left:0;right:0;font-size:0;text-align:center;z-index:1;}.tpPlayerCard .tpCardHeader .tpCardTabs .tpNavButton{display:inline-block;margin:0;padding:0;width:30px;height:22px;font-size:auto;}.tpPlayerCard .tpCardHeader .tpCardClose{position:absolute;top:2px;right:6px;z-index:10;}.tpMediaPreview,.tpPreview{width:50%;height:50%;float:left;position:relative;top:0;left:0;background:#000000;overflow:hidden;}.tpPreviewPlayer{border:1px solid #E0E0E0;position:absolute;top:0;left:0;bottom:0;right:0;}.tpMediaPreview .tpMediaBorder{position:absolute;top:0;left:0;right:0;bottom:0;border:1px solid white;}.tpMediaPreview img{width:100%;height:auto;padding:0;}.tpCardForm{width:50%;height:50%;position:relative;float:left;}.tpCardForm>div{position:absolute;top:0;left:4px;right:4px;bottom:0;}.tpCardForm h4{margin-left:4px;margin-right:0;margin-bottom:2px;margin-top:4px;font-size:15px;font-weight:normal;color:#BEBEBE;}.tpCardForm input[type="text"],.tpCardForm textarea{width:100%;font-family:inherit;padding:0 0 0 2px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;height:auto;font-size:13px;}.tpCardForm ul{padding:2px;list-style:none;background-color:#383838;margin-top:0;margin-bottom:0;margin-left:0;margin-right:0;border:1px solid #E0E0E0;color:#BEBEBE;overflow-x:hidden;overflow-y:hidden;top:24px;bottom:30px;left:2px;right:0;position:absolute;}.tpCardForm .tpPostSiteList{padding:8px;bottom:0;margin:4px;overflow-x:hidden;overflow-y:hidden;}.tpCardForm .tpFormActions{position:absolute;bottom:0;right:0;}.tpCardForm ul li{float:left;font-size:13px;margin-bottom:8px;width:100%;word-wrap:break-word;}.tpCardForm .tpPostSiteList li{width:50%;white-space:nowrap;overflow-x:hidden;overflow-y:hidden;}.tpCardForm ul li a{color:#BEBEBE;text-decoration:none;}.tpCardForm ul li a:hover{text-decoration:underline;}.tpCardForm ul li img{vertical-align:bottom;margin-right:8px;}.tpCardExtras{float:left;width:100%;height:50%;margin:0;font-size:14px;text-align:center;position:relative;}.tpExcerptControls{position:absolute;left:50px;right:50px;top:0;bottom:0;height:30px;margin:auto;display:inline-block;}.tpExcerptInfo{position:absolute;left:20px;right:20px;top:0;bottom:50%;height:16px;margin:auto;display:inline-block;}.tpCardTitle .tpIcon{float:left;}.PlayerLabelFont{font-family: Calibri, "Lucida Sans Unicode", "Lucida Grande", sans-serif;font-size: 12px;color: #F2F2F2;}
   .PlayerLabelFont { color : #BEBEBE; } 
   .PlayerTitleFont { color : #BEBEBE; text-shadow: 1px 1px 1px #383838; } 
@@ -345,7 +377,7 @@ html,body,div,span,h3,p,a,img,ul,li,fieldset,label,legend,footer,video{margin:0;
    <link rel="stylesheet" href="css/video-js.min.css" /></head>
 <script type="text/javascript" src="js/video.min.js"></script>
 <script type="text/javascript" src="js/videojs.hotkeys.min.js"></script>
-
+<script type="text/javascript" src="js/videojs.thumbnails.js"></script>
 
 <script src="js/videojs-contrib-hls.min.js"></script>
 

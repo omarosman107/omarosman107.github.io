@@ -147,11 +147,12 @@ document.getElementById('table').innerHTML = data
 
 
     fetch(
-'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="https://https://www.filmon.com/api-v2/channel/3734?protocol=hls"') + '&format=json').then(function(response) {
+'https://cors-anywhere.herokuapp.com/http://www.filmon.com/api-v2/channel/3734?protocol=hls').then(function(response) {
   // Convert to JSON
   return response.json();
 }).then(function(r) {
- channels.SNTV.src = (r.query.results.json.data.streams[1].url)
+  console.log(r.data.streams[1].url)
+ channels.SNTV.src = (r.data.streams[1].url)
  converttoHTML()
 }).catch(function(e){
 document.getElementById('error').innerHTML = e
@@ -159,11 +160,10 @@ document.getElementById('error').innerHTML = e
 
 
 
-    fetch('https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="https://www.filmon.com/api-v2/channel/3731?protocol=hls"') + '&format=json').then(function(response) {
+    fetch('https://cors-anywhere.herokuapp.com/http://www.filmon.com/api-v2/channel/3731?protocol=hls').then(function(response) {
   return response.json();
 }).then(function(r) {
-  console.log(r.query.results.json.data.streams[1].url)
- channels['Universal TV Somali'].src = (r.query.results.json.data.streams[1].url)
+ channels['Universal TV Somali'].src = (r.data.streams[1].url)
  converttoHTML()
 }).catch(function(e){
 document.getElementById('error').innerHTML = e

@@ -1188,11 +1188,32 @@ return res.json()
 console.log(data)
 bg(data.images.still.HD)
 
+fetch("https://feed.theplatform.com/f/fox.com/fullepisodes?form=json&range=1-1&byCustomValue={fox:freewheelId}{" + data.externalId[0] + "}", {
+      method: 'get'
+   }).then(function(response) {
+      return response.json()
+   }).then(function(data) {
+
+var a = data.entries[0].media$content[0].plfile$url  + '&format=redirect&manifest=m3u'
+document.getElementById('downloader').href = a
+
+    player.src({"type":"application/x-mpegURL", "src":a});
+   player.play();
+resume()
+
+   })
+
+
+
+
+
             getShowinfo(data.seriesName)
             showname.innerHTML = data.seriesName
             showdesc.innerHTML = data.description
             document.getElementById('epname').innerHTML = data.name
 
+
+return;
  fetch(data.videoRelease.url, {
          method: 'get'
       }).then(function(response) {
