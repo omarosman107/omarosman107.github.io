@@ -721,7 +721,7 @@ function arrayUnique(array) {
 var formatter = new Intl.DateTimeFormat({
   month: "short"
 })
-var date1 = new Date();
+var date1 = Date.now()
 
 function loadMedia(json) {
   obj = arrayUnique(obj.concat(json))
@@ -738,7 +738,7 @@ function loadMedia(json) {
       console.log('there')
       continue;
     }
-    var date2 = new Date(json[i].airdate);
+    var date2 = new Date(json[i].time);
 
     function newBanner() {
       var diff = (date2 - date1) / 1000;
