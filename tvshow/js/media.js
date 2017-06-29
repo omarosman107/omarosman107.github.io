@@ -633,7 +633,7 @@ function fetchnbcjson(value) {
             mediaurl = jsonfirst
             var videofile = mediaurl.split('?')[0] + "?manifest=m3u&mbr=true&metafile=false"
             console.log(videofile)
-
+// fetch(mediaurl.split('?')[0] + '?format=')
                                                             player.src({"type":"application/x-mpegURL", "src":videofile});
    player.play();
 resume()
@@ -1193,7 +1193,7 @@ fetch("https://feed.theplatform.com/f/fox.com/fullepisodes?form=json&range=1-1&b
    }).then(function(response) {
       return response.json()
    }).then(function(data) {
-
+ 
 var a = data.entries[0].media$content[0].plfile$url  + '&format=redirect&manifest=m3u'
 document.getElementById('downloader').href = a
 
