@@ -162,8 +162,7 @@ body {
     background-color: #fdba2c;
     opacity: 0;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    -webkit-transition-duration: 200ms;
-    transition-duration: 200ms
+
 }
 
 .bar {
@@ -231,8 +230,7 @@ body {
     color: #ffffff;
     padding-left: 45px;
     border-radius: 1000px;
-    -webkit-transition: all .55s ease;
-    transition: all .55s ease
+
 }
 .container-1 input#search:focus {
     color: #262626;
@@ -320,8 +318,8 @@ input[type=search] {
 
 .tvshow {
     width: 20vw;
-    -webkit-transition: all 0.3s cubic-bezier(.03,.98,.52,.99);
-    transition: all 0.3s cubic-bezier(.03,.98,.52,.99);
+    -webkit-transition: transform 0.3s cubic-bezier(.03,.98,.52,.99);
+    transition: transform 0.3s cubic-bezier(.03,.98,.52,.99);
     will-change: opacity,transform;
     opacity: .4;
     box-shadow: 1px 0 0 1px rgba(0,0,0,.33);
@@ -655,9 +653,12 @@ p {
     width: 25vw;
     min-width: 300px;
     box-shadow: 0 1px 1px rgba(0,0,0,.1), 0 1px 8px rgba(0,0,0,.1);
-    -webkit-transition: all 0.3s cubic-bezier(.03,.98,.52,.99);
-    transition: all 0.3s cubic-bezier(.03,.98,.52,.99);
     will-change: opacity,transform;
+    -webkit-transition: all .2s linear;
+    transition: all .2s linear;
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+    will-change: transform;
     
 }
 
@@ -693,7 +694,6 @@ p {
     overflow: hidden;
     position: relative;
     background: rgba(0, 0, 0, 0.28);
-        transition: all .05s ease;
     
     
     
@@ -793,7 +793,7 @@ color: #dad6d6;
     opacity: 0;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     -webkit-transition: all .23s ease-out;
-    transition: all .23s ease-out
+    transition: all .23s ease-out;
 }
 
 .fanarts-list>li .image-crop .overlay a:focus {
@@ -810,11 +810,7 @@ color: #dad6d6;
     text-align: center
 }
 
-.w3-progress-container {
-    -webkit-transition: all .18s ease-in-out;
-    transition: all .18s ease-in-out;
-    -moz-transition: all .18s ease-out
-}
+
 
 .image-crop:hover .w3-progress-container {
     bottom: 0px;
@@ -990,9 +986,6 @@ color: #dad6d6;
 
 }
 
-* {
-    /* transition: all 100ms ease-in-out */
-}
 
 .playbutton:hover {
     text-shadow: 0 1px 7px #fff;
