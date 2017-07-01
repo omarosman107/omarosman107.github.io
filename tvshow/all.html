@@ -37,8 +37,34 @@
   <!-- Compiled and minified JavaScript -->
 
   <style type="text/css">
+.bg {
+      z-index: 4;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    letter-spacing: 0;
+    -webkit-transition: opacity .33s linear;
+    transition: opacity .33s linear;
+          -webkit-filter: blur(8px);
+  -moz-filter: blur(8px);
+  -o-filter: blur(8px);
+  -ms-filter: blur(8px);
+  filter: blur(8px);
 
+
+}
   
+.image-crop img{
+  z-index: 5;
+  will-change:opacity,filter,blur;
+
+}
+  .loaded{
+  filter: blur(0px) !important;
+}
   @media (min-width:500px) {
      .box {
          width: 650px

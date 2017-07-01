@@ -122,20 +122,17 @@ input {
     bottom: 0;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     background: rgba(0,0,0,.27);
-    position: absolute
+    position: absolute;
+        z-index: 7;
 }
 
 .w3-progressbar {
     background-color: #e50914;
     height: 100%;
     line-height: inherit;
-    -webkit-transition: width 500ms ease-out,opacity 500ms linear;
-    transition: width 500ms ease-out,opacity 500ms linear;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
     will-change: width,opacity;
-    -webkit-transition-duration: 400ms;
-    transition-duration: 400ms
 }
 @import url('https://fonts.googleapis.com/css?family=Roboto:100');
 
@@ -785,7 +782,7 @@ color: #dad6d6;
 }
 
 .image-crop .overlay {
-    z-index: 2;
+    z-index: 20;
     position: absolute;
     top: 0;
     bottom: 0;

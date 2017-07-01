@@ -7,6 +7,10 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+image previews are blurred for a nice look
+--
+removed some small animations
+--
 changed to solid background for performance improvements while scrolling
 --
 image previews have been added to all episodes
