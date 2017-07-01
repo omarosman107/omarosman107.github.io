@@ -654,8 +654,8 @@ p {
     min-width: 300px;
     box-shadow: 0 1px 1px rgba(0,0,0,.1), 0 1px 8px rgba(0,0,0,.1);
     will-change: opacity,transform;
-    -webkit-transition: all .2s linear;
-    transition: all .2s linear;
+    -webkit-transition: transform .2s linear;
+    transition: transform .2s linear;
     -webkit-transform: translateX(0%);
     transform: translateX(0%);
     will-change: transform;
