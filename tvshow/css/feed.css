@@ -462,8 +462,9 @@ h1,h2 {
 }
 
 h1 {
-    margin: 20px 0 0px;
-    font-size: 26px
+    margin: 20px 0 -10px;
+    font-size: 22px;
+    font-family: ProximaNova;
 }
 
 h2,ul {
@@ -711,7 +712,6 @@ div:focus {
 }
 
 h1,h2 {
-    font-family: ProximaNovaSB,"Helvetica Neue",Helvetica,Arial,sans-serif
 }
 
 body a {

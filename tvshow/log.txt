@@ -7,6 +7,8 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+fonts have been shrinked
+--
 image previews are blurred for a nice look
 --
 removed some small animations
