@@ -491,10 +491,8 @@ p {
 }
 
 @font-face {
-    font-family:RedactorFont;src:url(redactor-font.eot)
+    font-family:ProximaNovaL;src:url(../fonts/proximanovalight.woff)
 }
-
-
 
 @font-face {
     font-family:ProximaNova;src:url(../fonts/ProximaNova-Reg.otf)
@@ -505,7 +503,7 @@ p {
 }
 
 @font-face {
-    font-family:ProximaNovaB;src:url(fonts/ProximaNova-Bold.otf)
+    font-family:ProximaNovaB;src:url(../fonts/ProximaNova-Bold.otf)
 }
 
 @font-face {
@@ -521,84 +519,17 @@ p {
 }
 
 @font-face {
-    font-family:ProximaNova;src:url(../fonts/ProximaNova-Reg.otf)
+    font-family:DinotL;src:url(../fonts/DINOT-Light.otf)
 }
 
 @font-face {
-    font-family:ProximaNovaSB;src:url(../fonts/ProximaNova-Sbold.otf)
+    font-family:Dinot;src:url(../fonts/DINOT-Regular.otf)
 }
 
 @font-face {
-    font-family:ProximaNovaB;src:url(../fonts/ProximaNova-Bold.otf)
+    font-family:DinotM;src:url(../fonts/DINOT-Medium.otf)
 }
 
-@font-face {
-    font-family:ProximaNovaXB;src:url(../fonts/ProximaNova-Xbold.otf)
-}
-
-@font-face {
-    font-family:DinotCB;src:url(fonts/DINOT-CondBold.otf)
-}
-
-@font-face {
-    font-family:DinotCL;src:url(/fonts/DINOT-CondLight.otf)
-}
-
-@font-face {
-    font-family:DinotL;src:url(/fonts/DINOT-Light.otf)
-}
-
-@font-face {
-    font-family:Dinot;src:url(/fonts/DINOT-Regular.otf)
-}
-
-@font-face {
-    font-family:DinotM;src:url(/fonts/DINOT-Medium.otf)
-}
-
-@font-face {
-    font-family:"Helvetica Neue Thin";src:url(/fonts/HelveticaNeueThin/HelveticaNeue-Thin.otf)
-}
-
-@font-face {
-    font-family:ProximaNova;src:url(../fonts/ProximaNova-Reg.otf)
-}
-
-@font-face {
-    font-family:ProximaNovaSB;src:url(../fonts/ProximaNova-Sbold.otf)
-}
-
-@font-face {
-    font-family:ProximaNovaB;src:url(../fonts/ProximaNova-Bold.otf)
-}
-
-@font-face {
-    font-family:ProximaNovaXB;src:url(/fonts/ProximaNova-Xbold.otf)
-}
-
-@font-face {
-    font-family:DinotCB;src:url(/fonts/DINOT-CondBold.otf)
-}
-
-@font-face {
-    font-family:DinotCL;src:url(/fonts/DINOT-CondLight.otf)
-}
-
-@font-face {
-    font-family:DinotL;src:url(/fonts/DINOT-Light.otf)
-}
-
-@font-face {
-    font-family:Dinot;src:url(/fonts/DINOT-Regular.otf)
-}
-
-@font-face {
-    font-family:DinotM;src:url(/fonts/DINOT-Medium.otf)
-}
-
-@font-face {
-    font-family:"Helvetica Neue Thin";src:url(/fonts/HelveticaNeueThin/HelveticaNeue-Thin.otf)
-}
 
 .fanarts-list {
     font-size: 0;
@@ -612,7 +543,9 @@ p {
 ::-moz-selection {
     background: #ffb7b7
 }
-
+#results{
+    font-family: ProximaNovaL;
+}
 .fanarts-list>li {
     padding: 0;
     margin: 12px;
@@ -721,10 +654,6 @@ h1,h2 {
 
 body a {
     color: #3282b6
-}
-
-body a:hover {
-    color: #373737
 }
 
 .fanarts-list>li .fanart-details {

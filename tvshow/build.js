@@ -528,8 +528,8 @@ return;
 fetch('http://webservice.fanart.tv/v3/tv/'+dat.query.results.json.id+'?api_key=334bde683eabd3ae55eb6a1917bd4795',{
  method: 'get' 
 }).then(function(res){return res.json();}).then(function(data){
-
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '"srcset="'+(data.tvthumb[0].url).split('.tv').join('.tv.rsz.io')+'?width=320'+' 320w, '+data.tvthumb[0].url+' 720w" ><\/a><\/div>'
+var proxy = (data.tvthumb[0].url).split('.tv').join('.tv.rsz.io')+'?width=320'
+    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '"src="'+data.tvthumb[0].url+'" ><\/a><\/div>'
 
 })
 
@@ -617,6 +617,7 @@ function rating(rate) {
   if (rate.includes('tv-g')) {
     return "TV-G"
   }
+  return rate.toUpperCase();
 }
 
 
@@ -984,6 +985,7 @@ function fox(range) {
           srcset += cdn + srcobj[y].src + ' ' + srcobj[y].width + 'w ,  ';
         }
         */
+        console.log(data.entries[i].media$ratings[0].rating)
       finalObj.push({
         img: '',
         rating: rating(data.entries[i].media$ratings[0].rating),
@@ -997,7 +999,7 @@ function fox(range) {
         metadata: rating(data.entries[i].media$ratings[0].rating) + formatDate(data.entries[i].media$availableDate) + data.entries[i].fox$series + data.entries[i].title + epiformat(data.entries[i].fox$season, data.entries[i].fox$episode) + fmtMSS(data.entries[i].media$content[0].plfile$duration),
         type: "fox",
         imgdyn: srcset,
-        time:Date.parse(temp)
+        time:Date.parse(date)
       })
     }
     loaders('remove');
