@@ -390,7 +390,7 @@ function query(q) {
   var num = 0
   setTimeout(function() {
     for (var i = 0, len = obj.length; i < len; i++) {
-      if (obj[i].metadata.toLowerCase().includes(q.toLowerCase())) {
+      if ((obj[i].show +' '+ obj[i].episode).toLowerCase().includes(q.toLowerCase())) {
         document.getElementsByClassName(obj[i].id)[0].style.opacity = '1'
                 document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block';
 
@@ -902,7 +902,6 @@ function nick() {
   }).then(function(json) {
     json = json.query.results.json
     var showsTemp = {}
-    var finalObj = []
     for (i in json.stream) {
       for (a in json.stream[i].items) {
         try {
@@ -919,6 +918,7 @@ function nick() {
           if (date == 'NaN-NaN-NaN') {
             date = formatDate('1/1/2017')
           }
+          var temp = json.stream[i].items[a].data.datePosted.source
           var image = json.stream[i].items[a].data.images.thumbnail['r16-9'].split('=')
           image[1] = '0.40';
           image = image.join();
@@ -935,13 +935,13 @@ function nick() {
             metadata: json.stream[i].items[a].data.seriesTitle + json.stream[i].items[a].data.shortTitle,
             type: "nick",
             imgdyn: '',
-            bg:''
+            bg:'',
+            time:Date.parse(temp)
           })
         } catch (e) {}
       }
     }
     loaders('remove');
-    loadMedia(finalObj)
   }).catch(function(e) {})
 }
 
@@ -955,7 +955,6 @@ function fox(range) {
     return response.json();
   }).then(function(data) {
     var showsTemp = {}
-    var finalObj = []
     for (i in data.entries) {
       if (!showsTemp[data.entries[i].fox$series]) {
         showsTemp[data.entries[i].fox$series] = data.entries[i].fox$series
@@ -997,12 +996,11 @@ function fox(range) {
         length: fmtMSS(data.entries[i].media$content[0].plfile$duration),
         metadata: rating(data.entries[i].media$ratings[0].rating) + formatDate(data.entries[i].media$availableDate) + data.entries[i].fox$series + data.entries[i].title + epiformat(data.entries[i].fox$season, data.entries[i].fox$episode) + fmtMSS(data.entries[i].media$content[0].plfile$duration),
         type: "fox",
-        imgdyn: srcset
+        imgdyn: srcset,
+        time:Date.parse(temp)
       })
-      tvlist(data.entries[i].fox$series)
     }
     loaders('remove');
-    loadMedia(finalObj)
   }).catch(function(err) {
     console.log(err)
   });
