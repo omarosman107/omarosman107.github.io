@@ -374,9 +374,9 @@ threshold:600
 
 myLazyLoad.update()
 window.onscroll = function() {
-    scrollFunction();
 
   myLazyLoad.update();
+    scrollFunction();
 
 };
 
