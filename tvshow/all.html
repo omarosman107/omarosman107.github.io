@@ -37,6 +37,17 @@
   <!-- Compiled and minified JavaScript -->
 
   <style type="text/css">
+  .card {
+    width: 452px;
+  }
+  @media(max-width:600px ){
+  .card {
+            width: inherit;
+            display: flex !important;
+}
+  }
+
+
 .bg {
       z-index: 4;
     position: absolute;
@@ -48,11 +59,11 @@
     letter-spacing: 0;
     -webkit-transition: opacity .33s linear;
     transition: opacity .33s linear;
-          -webkit-filter: blur(8px);
-  -moz-filter: blur(8px);
-  -o-filter: blur(8px);
-  -ms-filter: blur(8px);
-  filter: blur(8px);
+          -webkit-filter: blur(32px);
+  -moz-filter: blur(32px);
+  -o-filter: blur(32px);
+  -ms-filter: blur(32px);
+  filter: blur(32px);
 
 
 }

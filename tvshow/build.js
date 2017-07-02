@@ -529,7 +529,7 @@ fetch('http://webservice.fanart.tv/v3/tv/'+dat.query.results.json.id+'?api_key=3
  method: 'get' 
 }).then(function(res){return res.json();}).then(function(data){
 
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="' + (data.tvthumb[0].url).split('.tv').join('.tv.rsz.io')+'?width=320' + '"><\/a><\/div>'
+    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '"srcset="'+(data.tvthumb[0].url).split('.tv').join('.tv.rsz.io')+'?width=320'+' 320w, '+data.tvthumb[0].url+' 720w" ><\/a><\/div>'
 
 })
 
@@ -782,7 +782,7 @@ if (!json[i].time > 0) {
     if (!done && perc > 0.4) {
       if (document.getElementsByClassName(json[i].href).length == 0) {
         //  document.getElementById('watching').innerHTML += '<div tabindex="1" class="wtc '+json[i].href+'"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"><\/div><\/div><br> <span>'+json[i].show+'<\/span><\/a><\/div>'
-        watching += '<li style="width: 280px;margin: 11px;" class=" card  ' + json[i].href + '"><a href="#"><div style="    height: 280px;" class="piece fanart-container"><div class="image-crop sixteen-nine" >' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '"><\/span><div class="bg"  style=" background-image:url('+json[i].bg+');background-size:cover;" ></div><div class="imageBG"><\/div><img    class="cover sixteen-nine lazy "    sizes="300px"    alt="' + json[i].episode + '" data-original-set="' + json[i].imgdyn + '" class"" class="cover" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '" class="overlay-btn zoom-btn "  title="Watch ' + json[i].episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '">' + json[i].episode + '<\/a><\/h2><a onclick="showQuery(null,this)"  show="' + json[i].show + '" href="javascript:" class="secondary-link show-name">' + json[i].show + '<\/a><a href="javascript:"><i style="    /* opacity: ' + showCheck() + '; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"><\/i><\/a><\/div><div class="bottom"><\/div><\/div><\/a><\/li>'
+        watching += '<li style="margin: 11px;" class=" card  ' + json[i].href + '"><a href="#"><div style="   " class="piece fanart-container"><div class="image-crop sixteen-nine" >' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '"><\/span><div class="bg"  style=" background-image:url('+json[i].bg+');background-size:cover;" ></div><div class="imageBG"><\/div><img    class="cover sixteen-nine lazy "    sizes="(max-width: 600px) 70vw, 300px"    alt="' + json[i].episode + '" data-original-set="' + json[i].imgdyn + '" class"" class="cover" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '" class="overlay-btn zoom-btn "  title="Watch ' + json[i].episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '">' + json[i].episode + '<\/a><\/h2><a onclick="showQuery(null,this)"  show="' + json[i].show + '" href="javascript:" class="secondary-link show-name">' + json[i].show + '<\/a><a href="javascript:"><i style="    /* opacity: ' + showCheck() + '; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"><\/i><\/a><\/div><div class="bottom"><\/div><\/div><\/a><\/li>'
       }
     }
     var query = (json[i].metadata + " " + json[i].episode).toLowerCase();
@@ -880,7 +880,7 @@ fetch(show_hub, {
         length: data.videos[i].duration,
         metadata: data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration,
         type: "cw",
-        bg:(data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg').split('.com').join('.com.rsz.io') + '?width=16',
+        bg:(data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg').split('.com').join('.com.rsz.io') + '?width=10',
         time:Date.parse(data.videos[i].airdate)
 
       }
@@ -1202,7 +1202,7 @@ temp.setDate(temp.getDate()-1);
         type: "fox",
         imgdyn: srcset,
         autoplay:json.member[i].autoPlayVideo.default.url,
-        bg:json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('16:9'),
+        bg:json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('10:5'),
         time:Date.parse(temp)
 
               })
