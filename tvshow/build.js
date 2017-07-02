@@ -138,10 +138,7 @@ function logIn(u, p) {
     }
   })
 }
-window.onscroll = function() {
-  scrollFunction();
 
-};
 
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -204,6 +201,27 @@ window.mobilecheck = function() {
   return check;
 };
 
+function doScrolling(elementY, duration) { 
+  var startingY = window.pageYOffset  
+  var diff = elementY - startingY  
+  var start
+
+  // Bootstrap our animation - it will get called right before next frame shall be rendered.
+  window.requestAnimationFrame(function step(timestamp) {
+    if (!start) start = timestamp
+    // Elapsed miliseconds since start of scrolling.
+    var time = timestamp - start
+    // Get percent of completion in range [0, 1].
+    var percent = Math.min(time / duration, 1)
+
+    window.scrollTo(0, startingY + diff * percent)
+
+    // Proceed with animation as long as we wanted it to.
+    if (time < duration) {
+      window.requestAnimationFrame(step)
+    }
+  })
+}
 
 function elementInViewport(el) {
   var top = el.offsetTop;
@@ -354,6 +372,8 @@ threshold:600
 
 myLazyLoad.update()
 window.onscroll = function() {
+    scrollFunction();
+
   myLazyLoad.update();
 
 };
@@ -437,8 +457,10 @@ function scrollShows() {
     return (top < (window.pageYOffset + window.innerHeight) && left < (window.pageXOffset + window.innerWidth) && (top + height) > window.pageYOffset && (left + width) > window.pageXOffset);
   }
   if (!elementInViewport2(element)) {
-    element = document.getElementById("carasoul")
-    element.scrollIntoView(true);
+    doScrolling(element.offsetTop,350)
+
+  //  element = document.getElementById("carasoul")
+    // element.scrollIntoView(true);
   }
 }
 
@@ -525,12 +547,17 @@ return;
  
      }
      */
-fetch('http://webservice.fanart.tv/v3/tv/'+dat.query.results.json.id+'?api_key=334bde683eabd3ae55eb6a1917bd4795',{
+     var endp = 'http://webservice.fanart.tv/v3/tv/'+dat.query.results.json.id+'?api_key=334bde683eabd3ae55eb6a1917bd4795'
+     var yqlendpoint = 'https://query.yahooapis.com/v1/public/yql?q=select%20tvthumb.url%20from%20json%20where%20url%3D%22http%3A%2F%2Fwebservice.fanart.tv%2Fv3%2Ftv%2F'+dat.query.results.json.id+'%3Fapi_key%3D334bde683eabd3ae55eb6a1917bd4795%22%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=' 
+fetch(yqlendpoint,{
  method: 'get' 
 }).then(function(res){return res.json();}).then(function(data){
-var proxy = (data.tvthumb[0].url).split('.tv').join('.tv.rsz.io')+'?width=320'
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '"src="'+data.tvthumb[0].url+'" ><\/a><\/div>'
-
+  try{
+    console.log(data.query.results.json[0].tvthumb.url)
+// var proxy = (data.tvthumb[0].url).split('.tv').join('.tv.rsz.io')+'?width=320'
+    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '"src="'+data.query.results.json[0].tvthumb.url+'" ><\/a><\/div>'
+}catch(e){
+}
 })
 
   }).catch(function(e) {});
