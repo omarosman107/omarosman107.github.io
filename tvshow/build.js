@@ -555,7 +555,7 @@ fetch(yqlendpoint,{
  method: 'get' 
 }).then(function(res){return res.json();}).then(function(data){
   try{
- var proxy = (data.query.results.json[0].tvthumb.url).split('.tv').join('.tv.rsz.io')+'?width=320&format=webp&quality=30'
+ var proxy = (data.query.results.json[0].tvthumb.url).split('.tv').join('.tv.rsz.io')+'?width=320&quality=30'
     document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '"src="'+proxy+'" ><\/a><\/div>'
 }catch(e){
 }
@@ -1293,7 +1293,7 @@ allshows.unshift.apply( allshows, json[3].items.member );
     for (var i = allshows.length - 1; i >= 0; i--) {
 if(allshows[i].seriesType != 'special' || allshows[i].seriesType != 'movie'){
 
-            tvlist(allshows[i].name,allshows[i].images.seriesList.HD + '&output-format=webp')
+            tvlist(allshows[i].name,allshows[i].images.seriesList.HD )
             loadInfo(allshows[i].id)
 
           }
