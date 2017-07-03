@@ -411,15 +411,15 @@ function makeid() {
 function query(q) {
   var num = 0
   setTimeout(function() {
-    for (var i = 0, len = obj.length; i < len; i++) {
-      if ((obj[i].show +' '+ obj[i].episode).toLowerCase().includes(q.toLowerCase())) {
-        document.getElementsByClassName(obj[i].id)[0].style.opacity = '1'
-                document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block';
+    for (var i = 0, len = finalObj.length; i < len; i++) {
+      if ((finalObj[i].show +' '+ finalObj[i].episode).toLowerCase().includes(q.toLowerCase())) {
+        document.getElementsByClassName(finalObj[i].id)[0].style.opacity = '1'
+                document.getElementsByClassName(finalObj[i].id)[0].style.display = 'inline-block';
 
         num = num + 1
       } else {
-        document.getElementsByClassName(obj[i].id)[0].style.opacity = '0'
-                        document.getElementsByClassName(obj[i].id)[0].style.display = 'none';
+        document.getElementsByClassName(finalObj[i].id)[0].style.opacity = '0'
+                        document.getElementsByClassName(finalObj[i].id)[0].style.display = 'none';
 
       }
     }
@@ -432,9 +432,9 @@ function showAll(q){
 
   var num = 0
   setTimeout(function() {
-    for (var i = 0, len = obj.length; i < len; i++) {
-        document.getElementsByClassName(obj[i].id)[0].style.opacity = '1'
-                        document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block'
+    for (var i = 0, len = finalObj.length; i < len; i++) {
+        document.getElementsByClassName(finalObj[i].id)[0].style.opacity = '1'
+                        document.getElementsByClassName(finalObj[i].id)[0].style.display = 'inline-block'
 
         num = num + 1
       }
@@ -473,15 +473,15 @@ function showQuery(q, o) {
   };
   document.getElementById('search').value = q
   var num = 0
-    for (var i = 0, len = obj.length; i < len; i++) {
-      if (obj[i].show.toLowerCase() == (q.toLowerCase())) {
-        document.getElementsByClassName(obj[i].id)[0].style.opacity = '1'
-                        document.getElementsByClassName(obj[i].id)[0].style.display = 'inline-block';
+    for (var i = 0, len = finalObj.length; i < len; i++) {
+      if (finalObj[i].show.toLowerCase() == (q.toLowerCase())) {
+        document.getElementsByClassName(finalObj[i].id)[0].style.opacity = '1'
+                        document.getElementsByClassName(finalObj[i].id)[0].style.display = 'inline-block';
 
         num = num + 1
       } else {
-        document.getElementsByClassName(obj[i].id)[0].style.opacity = '0'
-                document.getElementsByClassName(obj[i].id)[0].style.display = 'none';
+        document.getElementsByClassName(finalObj[i].id)[0].style.opacity = '0'
+                document.getElementsByClassName(finalObj[i].id)[0].style.display = 'none';
 
       }
     }
@@ -555,9 +555,8 @@ fetch(yqlendpoint,{
  method: 'get' 
 }).then(function(res){return res.json();}).then(function(data){
   try{
-    console.log(data.query.results.json[0].tvthumb.url)
-// var proxy = (data.tvthumb[0].url).split('.tv').join('.tv.rsz.io')+'?width=320'
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '"src="'+data.query.results.json[0].tvthumb.url+'" ><\/a><\/div>'
+ var proxy = (data.query.results.json[0].tvthumb.url).split('.tv').join('.tv.rsz.io')+'?width=320&format=webp'
+    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '"src="'+proxy+'" ><\/a><\/div>'
 }catch(e){
 }
 })
@@ -739,37 +738,25 @@ function loadQuick(json) {
   <\/span><img alt="' + json.show + '"  ' + img + ' data-original-set="' + json.imgdyn + '" class"lazy" ><\/a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"><\/span><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '" class="overlay-btn zoom-btn " title="Watch ' + json.episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '">' + json.episode + '<\/a><\/h2><a onclick="query(null,this)" show="' + json.show + '" href="javascript:" class="secondary-link show-name">' + json.show + '<\/a><div class=more-infos><\/div><p>' + FDate + ' | ' + json.rating + ' | ' + timeofPlayback + ' | ' + json.epiformat + '<\/p><i style="opacity:' + showCheck() + ';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"><\/i><\/div><div class="bottom"><div class="bar"><\/div><div class="bar"><\/div><div class="bar"><\/div><\/div><\/div>'
 }
 
-function arrayUnique(array) {
-  var a = array.concat();
-  for (var i = 0; i < a.length; ++i) {
-    for (var j = i + 1; j < a.length; ++j) {
-      if (a[i] === a[j]) a.splice(j--, 1);
-    }
-  }
-  return a;
-}
+
 var formatter = new Intl.DateTimeFormat({
   month: "short"
 })
 var date1 = Date.now()
 
 function loadMedia(json) {
-  obj = arrayUnique(obj.concat(json))
-  json = json.sort(function(a, b) {
-    a = new Date(a.airdate);
-    b = new Date(b.airdate);
-    return a > b ? -1 : a < b ? 1 : 0;
-  })
+
   var template = ''
   var watching = ''
   for (i in json) {
     var con = (json[i].show +''+ json[i].episode).toLowerCase().split(' ').join('').replace(/[^a-zA-Z ]/g, "")
+    /*
     if (document.body.querySelector('.'+con)) {
       console.log('there')
       continue;
     }
+    */
     var time = json[i].time
-    console.log(time)
 if (!json[i].time > 0) {
   time = 140000000
 }
@@ -818,9 +805,6 @@ if (!json[i].time > 0) {
     var query = (json[i].metadata + " " + json[i].episode).toLowerCase();
     timeofPlayback = json[i].length.split(':')[0] + 'm'
     
-    if (json[i].airdate == 'NaN-NaN-NaN') {
-      json[i].airdate = '2017-01-01'
-    }
 
     date2.setDate(date2.getDate() );
     var month2 = formatter.format(date2);
@@ -865,7 +849,7 @@ function msToTime(duration) {
 var template = "";
 var obj = []
 var cors_show_hub = 'https://crossorigin.me/' + show_hub
-var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub + '"') + '&format=json&bust='// + (new Date()).getTime();
+var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub + '"') + '&format=json&bust='+Date.now();
 loaders()
 fetch(show_hub, {
   method: 'get',
@@ -878,9 +862,7 @@ fetch(show_hub, {
   var showsTemp = {}
   for (i in data.videos) {
     if (data.videos[i].fullep == 1) {
-      if (!showsTemp[data.videos[i].series_name]) {
-        showsTemp[data.videos[i].series_name] = data.videos[i].series_name
-      }
+
 
       function millisToMinutesAndSeconds(millis) {
         var minutes = Math.floor(millis / 60000 * 60);
@@ -895,6 +877,10 @@ fetch(show_hub, {
       } catch (e) {
         console.log(e)
       }
+      var airdate =  data.videos[i].airdate
+      if (airdate == '') {
+        airdate = (data.videos[i].start_time)
+      }
       var dyn =  data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_1920x1080.jpg 1920w, ' +data.videos[i].large_thumbnail + " 720w  ,"+ data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_640x360.jpg 640w, '+data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_609x335.jpg 609w, ' +  data.videos[i].medium_thumbnail + ' 210w, ' + data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg 144w '
       tvlist(data.videos[i].series_name)
       var episode_data = {
@@ -903,15 +889,14 @@ fetch(show_hub, {
         imgdyn: dyn,
         id: makeid(),
         href: data.videos[i].share_url,
-        airdate: data.videos[i].airdate,
         show: data.videos[i].series_name,
         episode: data.videos[i].title,
         epiformat: epiformat(s, e),
         length: data.videos[i].duration,
         metadata: data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration,
         type: "cw",
-        bg:(data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg').split('.com').join('.com.rsz.io') + '?width=8',
-        time:Date.parse(data.videos[i].airdate)
+        bg:(data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg').split('.com').join('.com.rsz.io') + '?width=8&format=webp&quality=0',
+        time:Date.parse(airdate)
 
       }
       finalObj.push(episode_data)
@@ -957,7 +942,6 @@ function nick() {
             rating: 'TV-14',
             href: 'nick.com' + json.stream[i].items[a].data.url,
             id: makeid(),
-            airdate: formatDate(json.stream[i].items[a].data.datePosted.source),
             show: json.stream[i].items[a].data.seriesTitle,
             episode: json.stream[i].items[a].data.shortTitle,
             epiformat: json.stream[i].items[a].data.episode,
@@ -1019,7 +1003,6 @@ function fox(range) {
         img: '',
         rating: rating(data.entries[i].media$ratings[0].rating),
         href: data.entries[i].media$content[0].plfile$url,
-        airdate: formatDate(date.getTime()),
         show: data.entries[i].fox$series,
         episode: data.entries[i].title,
         id: makeid(),
@@ -1053,7 +1036,6 @@ function procABC(showepi) {
       img: thumb,
       rating: (showepi.videos.video[a].tvrating.rating),
       href: "abc.go.com/vidcode=" + showepi.videos.video[a]['@id'],
-      airdate: airdate,
       show: showepi.videos.video[a].show.title,
       episode: showepi.videos.video[a].title,
       id: makeid(),
@@ -1184,7 +1166,7 @@ loaders('remove')
 
 var seasoninfo = new XMLHttpRequest();
 seasoninfo.addEventListener("readystatechange",function () {
-      if (!this.status  === 200) {
+      if (!this.status  == 200) {
 loaders('remove')
 
 }
@@ -1221,7 +1203,6 @@ temp.setDate(temp.getDate()-1);
         img: json.member[i].images.still.SD,
         rating: rating(json.member[i].contentRating),
         href: json.member[i]['@id'],
-        airdate: formatDate(temp),
         show: json.member[i].seriesName,
         episode: json.member[i].name,
         id: makeid(),
@@ -1231,7 +1212,7 @@ temp.setDate(temp.getDate()-1);
         type: "fox",
         imgdyn: srcset,
         autoplay:json.member[i].autoPlayVideo.default.url,
-        bg:json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('8:4'),
+        bg:json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('8:4')+'&output-format=webp',
         time:Date.parse(temp)
 
               })
@@ -1311,7 +1292,8 @@ allshows.unshift.apply( allshows, json[3].items.member );
     var foxshows = (JSON.parse(this.responseText).panels.member[3].items.member);
     for (var i = allshows.length - 1; i >= 0; i--) {
 if(allshows[i].seriesType != 'special' || allshows[i].seriesType != 'movie'){
-            tvlist(allshows[i].name,allshows[i].images.seriesList.HD)
+
+            tvlist(allshows[i].name,allshows[i].images.seriesList.HD + '&output-format=webp')
             loadInfo(allshows[i].id)
 
           }

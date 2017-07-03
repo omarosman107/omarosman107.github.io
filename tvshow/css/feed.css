@@ -292,8 +292,12 @@ body {
 
 .image-crop {
     border-radius: 2px 2px 0 0;
+-webkit-transform: translate3d(0,0,0)
 
     width: 100%;
+}
+.initialized {
+-webkit-transform: translate3d(0,0,0)
 }
 
 .piece:hover a.episode-name,.piece:hover a.secondary-link {
