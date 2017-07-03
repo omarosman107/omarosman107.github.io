@@ -354,7 +354,6 @@ loadMedia(l)
    if (!document.getElementById('search').value == '') {
         query(document.getElementById('search').value)
       }
-      
        if (document.getElementById('watching').children.length === 0) {
         document.getElementById('wtcTxt').style.display = 'none'
       }else{
@@ -897,7 +896,7 @@ fetch(show_hub, {
         length: data.videos[i].duration,
         metadata: data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration,
         type: "cw",
-        bg:(data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg').split('.com').join('.com.rsz.io') + '?width=8&format=webp&quality=0',
+        bg:(data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg').split('.com').join('.com.rsz.io') + '?width=8&format=jpeg&quality=0',
         time:Date.parse(airdate)
 
       }
@@ -1214,7 +1213,7 @@ temp.setDate(temp.getDate()-1);
         type: "fox",
         imgdyn: srcset,
         autoplay:json.member[i].autoPlayVideo.default.url,
-        bg:json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('8:4')+'&output-format=webp',
+        bg:json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('8:4')+'',
         time:Date.parse(temp)
 
               })
