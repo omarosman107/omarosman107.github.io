@@ -299,6 +299,9 @@ body {
 .initialized {
 -webkit-transform: translate3d(0,0,0)
 }
+*:not(html) {
+    -webkit-transform: translate3d(0, 0, 0);
+}
 
 .piece:hover a.episode-name,.piece:hover a.secondary-link {
     color: #dad6d6!important
