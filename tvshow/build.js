@@ -569,6 +569,10 @@ fetch(yqlendpoint,{
 }).then(function(res){return res.json();}).then(function(data){
   try{
  var proxy = (data.query.results.json[0].tvthumb.url).split('.tv').join('.tv.rsz.io')+'?width=320&quality=30'
+ var goog = encodeURIComponent(data.query.results.json[0].tvthumb.url)
+    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="'+       'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url='+goog+'&container=focus&resize_w=350&refresh=31536000" ><\/a><\/div>'
+return;
+
    fetch(si(data.query.results.json[0].tvthumb.url)).then(function(res){return res.json();}).then(function(data){
     document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="'+'https://im.ages.io/'+data.response.id+'?width=350&q=80'+'" ><\/a><\/div>'
 
@@ -913,7 +917,7 @@ fetch(show_hub + '?bust=' + Date.now() , {
         length: data.videos[i].duration,
         metadata: data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration,
         type: "cw",
-        bg:(data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg').split('.com').join('.com.rsz.io') + '?width=8&format=jpeg&quality=0',
+        bg:      'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url='+data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg'+'&container=focus&resize_w=8&refresh=31536000',
         time:Date.parse(airdate)
 
       }
@@ -1019,7 +1023,6 @@ function fox(range) {
           srcset += cdn + srcobj[y].src + ' ' + srcobj[y].width + 'w ,  ';
         }
         */
-        console.log(data.entries[i].media$ratings[0].rating)
       finalObj.push({
         img: '',
         rating: rating(data.entries[i].media$ratings[0].rating),
@@ -1034,6 +1037,8 @@ function fox(range) {
         imgdyn: srcset,
         time:Date.parse(date)
       })
+            tvlist(data.entries[i].fox$series)
+
     }
     loaders('remove');
   }).catch(function(err) {
