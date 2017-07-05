@@ -492,11 +492,23 @@ function showQuery(q, o) {
 }
 var tvobj = {}
 
-
+function si(image){
+  var request = new Request('https://api.imageresizer.io/images?url=' + image, {
+  headers: new Headers({
+    'x-api-key': 'a3e2aafcd6b43320725811cb3654f2733b05ab9c'
+  })
+});
+  return request
+}
+function showImage(e){
+  fetch(si(e.getAttribute('data-src'))).then(function(res){return res.json();}).then(function(data){
+    e.src = 'https://im.ages.io/'+data.response.id+'?width=350&q=80'
+  })
+}
 
 function tvstQ(q) {
   q = encodeURIComponent(q);
-  var query = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="https://api.tozelabs.com/v2/show?limit=1&q=' + q + '"') + '&format=json&_maxage=360000';
+  var query = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="https://api.tozelabs.com/v2/show?limit=1&q=' + q + '"') + '&format=json&_maxage=36000000';
   return query;
 }
 
@@ -557,7 +569,11 @@ fetch(yqlendpoint,{
 }).then(function(res){return res.json();}).then(function(data){
   try{
  var proxy = (data.query.results.json[0].tvthumb.url).split('.tv').join('.tv.rsz.io')+'?width=320&quality=30'
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '"src="'+proxy+'" ><\/a><\/div>'
+   fetch(si(data.query.results.json[0].tvthumb.url)).then(function(res){return res.json();}).then(function(data){
+    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="'+'https://im.ages.io/'+data.response.id+'?width=350&q=80'+'" ><\/a><\/div>'
+
+  })
+
 }catch(e){
 }
 })
@@ -746,7 +762,8 @@ var formatter = new Intl.DateTimeFormat({
 var date1 = Date.now()
 
 function loadMedia(json) {
-
+var w = document.createDocumentFragment()
+var t = document.createDocumentFragment()
   var template = ''
   var watching = ''
   for (i in json) {
@@ -850,15 +867,15 @@ function msToTime(duration) {
 var template = "";
 var obj = []
 var cors_show_hub = 'https://crossorigin.me/' + show_hub
-var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub + '"') + '&format=json&bust='+Date.now();
+// var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub + '"') + '&format=json&bust='+Date.now();
 loaders()
-fetch(show_hub, {
+fetch(show_hub + '?bust=' + Date.now() , {
   method: 'get',
   cache: "no-store"
 }).then(function(response) {
   return response.json();
 }).then(function(data) {
-  data = data.query.results.json
+
   var start = new Date()
   var showsTemp = {}
   for (i in data.videos) {
@@ -900,6 +917,9 @@ fetch(show_hub, {
         time:Date.parse(airdate)
 
       }
+      var image = new Image()
+image.src = episode_data.bg
+
       finalObj.push(episode_data)
     }
   }
@@ -1213,10 +1233,12 @@ temp.setDate(temp.getDate()-1);
         type: "fox",
         imgdyn: srcset,
         autoplay:json.member[i].autoPlayVideo.default.url,
-        bg:json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('8:4')+'',
+        bg:json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('8:4'),
         time:Date.parse(temp)
 
               })
+      var image = new Image()
+image.src = json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('8:4')
 
 
 }
@@ -1271,6 +1293,10 @@ var xhr = new XMLHttpRequest();
 
 xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
+          if (!this.status  === 200) {
+loaders('remove')
+return;
+}
 var allshows = []
 var json = JSON.parse(this.responseText).panels.member
 /*
