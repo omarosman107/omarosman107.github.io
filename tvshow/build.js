@@ -1309,13 +1309,14 @@ loadShow.send(data)
     loaders()
 
 var xhr = new XMLHttpRequest();
-
-xhr.addEventListener("readystatechange", function () {
-  if (this.readyState === 4) {
-          if (!this.status  === 200) {
+xhr.onerror = function() {
 loaders('remove')
 return;
-}
+ };
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4 ) {
+if (this.status === 200) {
 var allshows = []
 var json = JSON.parse(this.responseText).panels.member
 /*
@@ -1346,6 +1347,11 @@ if(allshows[i].seriesType != 'special' || allshows[i].seriesType != 'movie'){
 
     }
 loaders('remove')
+}else{
+  loaders('remove')
+  return;
+}
+
 
   }
 });
