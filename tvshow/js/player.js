@@ -250,6 +250,13 @@ console.log(data)
 document.getElementsByClassName('showImg')[0].href = "https://www.tvtime.com/en/show/" + data.query.results.json.id
 document.getElementsByClassName('showImg')[0].innerHTML = '<img width="100%" src="'+ data.query.results.json.all_images.poster._[3]   +'">'
 document.getElementById('showname').href =  "https://www.tvtime.com/en/show/" + data.query.results.json.id
+if (document.getElementById('showname').querySelectorAll('img').length === 0) {
+fetch('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22http%3A%2F%2Fwebservice.fanart.tv%2Fv3%2Ftv%2F'+data.query.results.json.id+'%3Fapi_key%3D334bde683eabd3ae55eb6a1917bd4795%22%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=&_maxage=360000').then(function(res){return res.json();}).then(function(data){
+ console.log(data.query.results.json)
+  document.getElementById('showname').innerHTML = '<img style="    margin-bottom:-5px;width: 6.0em;display:inline-block;" src="' + (data.query.results.json.hdtvlogo["0"].url) + '" width="100%">'
+})
+}
+
 //+ '<br><span class="rating">Rating: '+data.query.results.json.mean_rate*2+' / 10</span>'
 
 

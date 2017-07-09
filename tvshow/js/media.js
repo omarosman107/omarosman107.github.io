@@ -1185,7 +1185,8 @@ console.log(url)
      fetch(url, request).then(function(res) {
 return res.json()
      }).then(function(data){
-console.log(data)
+console.log(data.images.logo.FHD)
+
 bg(data.images.still.HD)
 
 fetch("https://feed.theplatform.com/f/fox.com/fullepisodes?form=json&range=1-1&byCustomValue={fox:freewheelId}{" + data.externalId[0] + "}", {
@@ -1207,8 +1208,11 @@ resume()
 
 
 
-            getShowinfo(data.seriesName)
             showname.innerHTML = data.seriesName
+
+              document.getElementById('showname').innerHTML = '<img style="    margin-bottom:-5px;width: 6.0em;display:inline-block;" src="' + (data.images.logo.FHD) + '" width="100%">'
+                        getShowinfo(data.seriesName)
+
             showdesc.innerHTML = data.description
             document.getElementById('epname').innerHTML = data.name
 
