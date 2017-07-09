@@ -151,13 +151,7 @@
                 color: rgba(255, 255, 255, 0.49);
                 position: relative;
             }
-            #prog {
-            	height: 4px;
-    background: lightgreen;
-    width: 0%;
- 	-webkit-transition: width 500ms ease-out,opacity 500ms linear;
-    transition: width 500ms ease-out,opacity 500ms linear;
-            }
+         
     </style>
     <noscript id="deferred-styles">
 
@@ -168,7 +162,11 @@
 
 <body>
     <div class="main">
-        <div id="prog"></div>
+        <div style="height: 4px;
+    background: lightgreen;
+    width: 0%;
+ 	-webkit-transition: width 500ms ease-out,opacity 500ms linear;
+    transition: width 500ms ease-out,opacity 500ms linear;" id="prog"></div>
         <div class="top">
             <div class="overlay">
 
