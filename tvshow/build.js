@@ -1195,12 +1195,9 @@ function loadInfo(id){
 
 var loadShow = new XMLHttpRequest();
 loadShow.addEventListener("readystatechange", function () {
-    if (!this.status  === 200) {
-console.log(this)
-loaders('remove')
 
-}
   if (this.readyState === 4) {
+        if (this.status  === 200) {
     var showinfo = (JSON.parse(this.responseText));
 
 
@@ -1211,6 +1208,8 @@ loaders('remove')
 
 }
   if (this.readyState === 4) {
+    if (this.status === 200) {
+
 var json = (JSON.parse(this.responseText))
 
 for(i in json.member){
@@ -1267,6 +1266,12 @@ loaders('remove')
 
 
 
+    }else{
+      loaders('remove')
+      return;
+    }
+
+
 }
 
 })
@@ -1292,6 +1297,12 @@ seasoninfo.send(null)
 
 
 loaders('remove')
+
+
+}else{
+loaders('remove')
+return;
+}
 
   }
 });

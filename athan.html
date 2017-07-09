@@ -308,9 +308,20 @@ whenstart.setTime( whenstart.getTime() + 1 * 86400000 );
 
     	document.getElementById('currentTime').innerHTML = getTimeRemaining(whenend).days + " days left"
 	document.getElementById('prog').style.width = (((today - whenstart) / (whenend - whenstart)) * 100) + '%';
+
+	if (getTimeRemaining(whenend).days < 0) {
+	document.getElementById('prog').style.width = '100%';
+    	document.getElementById('currentTime').innerHTML = "RAMADAN FINISHED"
+    	return;
+}
+
 setInterval(function(){
 	 var  today = new Date() 
-
+if (getTimeRemaining(whenend).days < 0) {
+	document.getElementById('prog').style.width = '100%';
+    	document.getElementById('currentTime').innerHTML = "RAMADAN FINISHED"
+    	return;
+}
 	document.getElementById('prog').style.width = (((today - whenstart) / (whenend - whenstart)) * 100) + '%';
     	document.getElementById('currentTime').innerHTML = getTimeRemaining(whenend).days + " days left"
 
@@ -325,36 +336,9 @@ setInterval(function(){
 
 	var timer
 
-function prayers(place){
+function prayers(place,type){
             clearInterval(timer);
 
-loc = new XMLHttpRequest();
-loc.onreadystatechange = function(){
-	if (this.readyState == 4 && this.status == 200) {
-		var data = JSON.parse(this.responseText).results[0]
-			document.getElementById('until').innerHTML = (data.formatted_address) +' - left until iftar' 
-		console.log(data.geometry.location.lat,data.geometry.location.lng)
- 		var url = 'http://api.aladhan.com/timings?latitude='+data.geometry.location.lat+'5&longitude='+data.geometry.location.lng+'&timezonestring='+Intl.DateTimeFormat().resolvedOptions().timeZone
-+'&method=2'
-		  xhttp.open("GET", url, true);
-  xhttp.send();
-
-
-		for (var i = data.address_components.length - 1; i >= 0; i--) {
-			console.log(data.address_components[i])
-			 if (data.address_components[i].types[0] == "locality"){ 
-        console.log(data.address_components[i].long_name); 
-       
-	
-        return false; 
-    }
-		}
-
-
-	}
-}
-  loc.open("GET", 'https://maps.googleapis.com/maps/api/geocode/json?address='+ place, true);
-  loc.send();
 
 
   var xhttp = new XMLHttpRequest();
@@ -449,8 +433,59 @@ showRemaining()
     }
   };
 
+if (type == 'coords') {
+
+loc = new XMLHttpRequest();
+loc.onreadystatechange = function(){
+	if (this.readyState == 4 && this.status == 200) {
+		var data = JSON.parse(this.responseText).results[0]
+			document.getElementById('until').innerHTML = (data.formatted_address) +' - left until iftar' 
+	
+	}
+}
+  loc.open("GET", 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+ place.latitude + ',' + place.longitude, true);
+  loc.send();
+
+
+
+	var url = 'http://api.aladhan.com/timings?latitude='+place.latitude+'&longitude='+place.longitude+'&timezonestring='+Intl.DateTimeFormat().resolvedOptions().timeZone
+			  xhttp.open("GET", url, true);
+  xhttp.send();
+  return;
+}else{
+loc = new XMLHttpRequest();
+loc.onreadystatechange = function(){
+	if (this.readyState == 4 && this.status == 200) {
+		var data = JSON.parse(this.responseText).results[0]
+			document.getElementById('until').innerHTML = (data.formatted_address) +' - left until iftar' 
+		console.log(data.geometry.location.lat,data.geometry.location.lng)
+ 		var url = 'http://api.aladhan.com/timings?latitude='+data.geometry.location.lat+'&longitude='+data.geometry.location.lng+'&timezonestring='+Intl.DateTimeFormat().resolvedOptions().timeZone
++'&method=2'
+		  xhttp.open("GET", url, true);
+  xhttp.send();
+
+
+		for (var i = data.address_components.length - 1; i >= 0; i--) {
+			console.log(data.address_components[i])
+			 if (data.address_components[i].types[0] == "locality"){ 
+        console.log(data.address_components[i].long_name); 
+       
+	
+        return false; 
+    }
+		}
+
+
+	}
+}
+  loc.open("GET", 'https://maps.googleapis.com/maps/api/geocode/json?address='+ place, true);
+  loc.send();
+
 }
 
+
+}
+/*
 var ip = new XMLHttpRequest();
 ip.onreadystatechange = function(){
 		if (this.readyState == 4 && this.status == 200) {
@@ -460,6 +495,42 @@ prayers(ipdata.city + ' , ' + ipdata.region_name +' '+ ipdata.country_name)
 }
 ip.open("GET",'https://freegeoip.net/json/',true);
 ip.send();
+*/
+
+
+
+
+function do_something(coords) {
+  console.log(coords)
+         var coords = {
+            latitude: coords.latitude,
+            longitude: coords.longitude
+        };
+  prayers(coords,'coords')
+
+}
+
+navigator.geolocation.getCurrentPosition(function(position) {
+
+  prayers(position.coords,'coords')
+
+
+    },
+    function(failure) {
+
+    	var ip = new XMLHttpRequest();
+ip.onreadystatechange = function(){
+		if (this.readyState == 4 && this.status == 200) {
+var response = JSON.parse(this.responseText)
+
+        prayers(response.city + ', ' + response.region + ' , ' +response.postal + ' , '+ response.country )
+}
+}
+ip.open("GET",'https://ipinfo.io/geo',true);
+ip.send();
+
+    
+});
 </script>
 </body>
 </html> 
