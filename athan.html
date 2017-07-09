@@ -20,7 +20,6 @@
             background: #f4f4f4;
             margin: 0;
             color: white;
-            text-transform: uppercase;
         }
 
         .top {
@@ -160,9 +159,11 @@
     transition: width 500ms ease-out,opacity 500ms linear;
             }
     </style>
+    <noscript id="deferred-styles">
 
 <link async href="https://fonts.googleapis.com/css?family=Quicksand:500|Montserrat:400" rel="stylesheet">
     <link async rel="stylesheet" type="text/css" href="fonts/font.css">
+    </noscript>
 </head>
 
 <body>
@@ -240,7 +241,17 @@
             },
 
         ]
-
+ var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("deferred-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        document.body.appendChild(replacement)
+        addStylesNode.parentElement.removeChild(addStylesNode);
+      };
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+          webkitRequestAnimationFrame || msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+      else window.addEventListener('load', loadDeferredStyles);
         function city() {
             var txt;
             var place = prompt("Please enter your location:", "");
