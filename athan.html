@@ -33,7 +33,7 @@ body{
 	margin: auto;
 	font-size: 11em;
 	text-align: center;
-	background:url(https://images.unsplash.com/40/whtXWmDGTTuddi1ncK5v_IMG_0097.jpg?dpr=1&auto=format&fm=png&fit=crop&w=1920&h=1080&q=40&cs=tinysrgb&crop=&bg=);
+	background:url(https://images.unsplash.com/40/whtXWmDGTTuddi1ncK5v_IMG_0097.jpg?dpr=1&auto=format&fm=jpeg&w=1920&h=1080&q=30);
 	    background-size: cover;
 	    font-family: Ostrich Sans Inline;
 }
@@ -87,7 +87,6 @@ body{
     right: 0;
     bottom: 0;
         z-index: 2;
-    background: url(http://i.imgur.com/P0Kkvuv.png);
        background-repeat: no-repeat;
     background-attachment: fixed; 
 	}
@@ -205,6 +204,39 @@ body{
 	</div>
 </div>
 <script type="text/javascript">
+var ramadanTimes = [
+{
+	year:2017,
+	start:"May 27",
+	end:"June 25"
+},
+{
+	year:2018,
+	start:"May 16",
+	end:"June 14"
+},
+{
+	year:2019,
+	start:"May 6",
+	end:"June 4"
+},
+{
+	year:2020,
+	start:"April 24",
+	end:"May 23"
+},
+{
+	year:2021,
+	start:"April 13",
+	end:"May 12"
+},
+{
+	year:2022,
+	start:"April 3",
+	end:"May 2"
+},
+
+]
 function city() {
     var txt;
     var place = prompt("Please enter your location:", "");
@@ -331,9 +363,46 @@ if (getTimeRemaining(whenend).days < 0) {
 
 	}
 }
-  xml.open("GET", 'https://cors-anywhere.herokuapp.com/https://www.google.com/search?q=ramadan+' + new Date().getFullYear(), true);
-  xml.send();
+//  xml.open("GET", 'https://cors-anywhere.herokuapp.com/https://www.google.com/search?q=ramadan+' + new Date().getFullYear(), true);
+ // xml.send();
+window.onload = function(){
+	var currYear = new Date().getFullYear()
 
+function handleTime(time){
+console.log(time)
+var whenstart = new Date(time.start + ' '+currYear)
+var whenend = new Date(time.end + ' '+currYear)
+ var  today = new Date() 
+    var p = (((today - whenstart) / (whenend - whenstart)) * 100) + '%';
+    console.log(p)
+
+    	document.getElementById('currentTime').innerHTML = getTimeRemaining(whenend).days + " days left"
+	document.getElementById('prog').style.width = (((today - whenstart) / (whenend - whenstart)) * 100) + '%';
+		if (getTimeRemaining(whenend).days < 0) {
+	document.getElementById('prog').style.width = '100%';
+    	document.getElementById('currentTime').innerHTML = "RAMADAN FINISHED"
+    	return;
+}
+setInterval(function(){
+	 var  today = new Date() 
+if (getTimeRemaining(whenend).days < 0) {
+	document.getElementById('prog').style.width = '100%';
+    	document.getElementById('currentTime').innerHTML = "RAMADAN FINISHED"
+    	return;
+}
+	document.getElementById('prog').style.width = (((today - whenstart) / (whenend - whenstart)) * 100) + '%';
+    	document.getElementById('currentTime').innerHTML = getTimeRemaining(whenend).days + " days left"
+
+},3000)
+
+}
+for (var i = ramadanTimes.length - 1; i >= 0; i--) {
+	if(currYear == ramadanTimes[i].year){
+		handleTime(ramadanTimes[i])
+		break;
+	}
+}
+}
 
 
 	var timer
