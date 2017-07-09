@@ -171,13 +171,13 @@ body{
 	<div class="top">
 	<div class="overlay">
 
-<i onclick="city()" style="
+<i onclick="city()" id="location" style="
     position: relative;
     font-size: -webkit-xxx-large;
     padding: 15px;
     float: right;
     cursor: pointer;
-    " class="material-icons">my_location</i>
+    " class="material-icons">location_searching</i>
 
 	<div id="currentTime" style="
     position: absolute;
@@ -213,6 +213,8 @@ return;
     } else {
         txt = place;
     }
+    document.getElementById('location').innerHTML = 'location_searching'
+
     prayers(place)
 
 }
@@ -511,7 +513,7 @@ function do_something(coords) {
 }
 
 navigator.geolocation.getCurrentPosition(function(position) {
-
+document.getElementById('location').innerHTML = 'my_location'
   prayers(position.coords,'coords')
 
 
@@ -522,6 +524,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
 ip.onreadystatechange = function(){
 		if (this.readyState == 4 && this.status == 200) {
 var response = JSON.parse(this.responseText)
+document.getElementById('location').innerHTML = 'my_location'
 
         prayers(response.city + ', ' + response.region + ' , ' +response.postal + ' , '+ response.country )
 }
