@@ -237,6 +237,7 @@ function tvstQ(q){
 return query;
 }
 
+
  function getShowinfo(name) {
 
 

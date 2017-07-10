@@ -229,7 +229,10 @@ function fetchcwjson(value) {
 
       console.log(finalurl)
       getShowinfo(data.assetFields.seriesName)
+
       showname.innerHTML = data.assetFields.seriesName 
+ document.getElementById('showname').innerHTML = '<img style="    margin-bottom:-5px;width: 6.0em;display:inline-block;" src="http://images.cwtv.com/images/cw/show-logo-horz/'+data.assetFields.showSlug+'.png" width="100%">'
+
       showdesc.innerHTML = data.assetFields.description
       document.title = data.assetFields.seriesName + " - " + data.assetFields.title
       document.getElementById('progress').style.width = "60%"
@@ -242,7 +245,7 @@ function fetchcwjson(value) {
 
       bg( data.images.cwtv1920x1080.uri)
 
-      player.src({"type":"application/x-mpegURL", "src":finalurl});
+      player.src({"src":data.assetFields.smoothStreamingUrl + '(format=mpd-time-csf)',"type":"application/dash+xml"},{"type":"application/x-mpegURL", "src":finalurl});
    player.play();
 
 

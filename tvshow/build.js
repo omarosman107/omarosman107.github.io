@@ -555,7 +555,7 @@ function tvlist(showName,img) {
   tvobj[(showName)] = ''
 
 if (img != undefined) {
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="' + img + '"><\/a><\/div>'
+    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><div class="overlay"></div><img width="100%" alt="' + showName + '" src="' + img + '"><\/a><\/div>'
 return;
 
 } 
@@ -583,13 +583,8 @@ fetch(yqlendpoint,{
   try{
  var proxy = (data.query.results.json[0].tvthumb.url).split('.tv').join('.tv.rsz.io')+'?width=320&quality=30'
  var goog = encodeURIComponent(data.query.results.json[0].tvthumb.url)
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="'+       'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url='+goog+'&container=focus&resize_w=350&refresh=31536000" ><\/a><\/div>'
-return;
+    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><div class="overlay"></div><img width="100%" alt="' + showName + '" src="'+       'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url='+goog+'&container=focus&resize_w=350&refresh=31536000" ><\/a><\/div>'
 
-   fetch(si(data.query.results.json[0].tvthumb.url)).then(function(res){return res.json();}).then(function(data){
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><img width="100%" alt="' + showName + '" src="'+'https://im.ages.io/'+data.response.id+'?width=350&q=80'+'" ><\/a><\/div>'
-
-  })
 
 }catch(e){
 }
@@ -928,7 +923,7 @@ fetch(show_hub + '?bust=' + Date.now() , {
         episode: data.videos[i].title,
         epiformat: epiformat(s, e),
         length: data.videos[i].duration,
-        metadata: data.videos[i].rating + data.videos[i].airdate + data.videos[i].series_name + data.videos[i].title + epinum + data.videos[i].duration,
+        metadata: data.videos[i].series_name + ' '+data.videos[i].title,
         type: "cw",
         bg:      'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url='+data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg'+'&container=focus&resize_w=8&refresh=31536000',
         time:Date.parse(airdate)
@@ -1255,6 +1250,8 @@ temp.setDate(temp.getDate()-1);
         time:Date.parse(temp)
 
               })
+                  tvlist(json.member[i].seriesName,json.member[i].images.seriesList.HD )
+
       var image = new Image()
 image.src = json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('8:4')
 
@@ -1348,15 +1345,18 @@ allshows.unshift.apply( allshows, json[3].items.member );
 // FX allshows.unshift.apply( allshows, json[4].items.member );
 
     var foxshows = (JSON.parse(this.responseText).panels.member[3].items.member);
+    var json = []
     for (var i = allshows.length - 1; i >= 0; i--) {
+      console.log(allshows[i])
+      json.push({name:allshows[i].name,image:allshows[i].images.seriesList.HD})
 if(allshows[i].seriesType != 'special' || allshows[i].seriesType != 'movie'){
 
-            tvlist(allshows[i].name,allshows[i].images.seriesList.HD )
             loadInfo(allshows[i].id)
 
           }
 
     }
+    console.log(json)
 loaders('remove')
 }else{
   loaders('remove')
