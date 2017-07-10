@@ -245,7 +245,7 @@ function fetchcwjson(value) {
 
       bg( data.images.cwtv1920x1080.uri)
 
-      player.src({"src":data.assetFields.smoothStreamingUrl + '(format=mpd-time-csf)',"type":"application/dash+xml"},{"type":"application/x-mpegURL", "src":finalurl});
+      player.src([{"src":data.assetFields.smoothStreamingUrl + '(format=mpd-time-csf)',"type":"application/dash+xml"},{"type":"application/x-mpegURL", "src":finalurl}]);
    player.play();
 
 
