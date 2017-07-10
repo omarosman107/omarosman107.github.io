@@ -242,7 +242,7 @@ function fetchcwjson(value) {
          "type": "application/x-mpegURL",
          "src": finalurl 
       }); */
-
+ 
       bg( data.images.cwtv1920x1080.uri)
 
       player.src([{"src":data.assetFields.smoothStreamingUrl + '(format=m3u8-aapl)',"type":"application/x-mpegURL"},{"src":finalurl,"type":"application/x-mpegURL"},{"src":data.assetFields.smoothStreamingUrl + '(format=mpd-time-csf)',"type":"application/dash+xml"}]);
