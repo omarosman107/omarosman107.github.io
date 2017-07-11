@@ -146,37 +146,39 @@ document.getElementById('table').innerHTML = data
 }
 
 
-    fetch(
-'https://cors-anywhere.herokuapp.com/http://www.filmon.com/api-v2/channel/3734?protocol=hls').then(function(response) {
-  // Convert to JSON
+   
+var headers = new Headers({
+  'Accept': 'application/json',
+});
+    fetch('https://www.filmon.com/search?from=channels&term=somali&max_results=80',{headers:headers}).then(function(response) {
   return response.json();
 }).then(function(r) {
-  console.log(r.data.streams[1].url)
- channels.SNTV.src = (r.data.streams[1].url)
+  console.log(r)
+  for (var i = r.searchResults.channels.matches.length - 1; i >= 0; i--) {
+    console.log(r.searchResults.channels.matches[i].id)
+        fetch('https://www.filmon.com/channel/'+r.searchResults.channels.matches[i].alias+'?protocol=hls',{headers:headers}).then(function(response) {
+  return response.json();
+}).then(function(a) {
+
+    channels.push({working:true,name:a.title,quality:'HD',src:a.streams[0].url})
+
+console.log(a.streams[0].url)
  converttoHTML()
+}).catch(function(e){
+document.getElementById('error').innerHTML = e
+});
+  }
+  
+
 }).catch(function(e){
 document.getElementById('error').innerHTML = e
 });
 
 
 
-    fetch('https://cors-anywhere.herokuapp.com/http://www.filmon.com/api-v2/channel/3731?protocol=hls').then(function(response) {
-  return response.json();
-}).then(function(r) {
- channels['Universal TV Somali'].src = (r.data.streams[1].url)
- converttoHTML()
-}).catch(function(e){
-document.getElementById('error').innerHTML = e
-});
 
-    fetch('').then(function(response) {
-  return response.json();
-}).then(function(r) {
- channels['The CW'].src = "http://tmg.ustreamix.com/tmg.m3u8?stream=the-cw-tv&token=" + (r.data.streams[1].url)
- converttoHTML()
-}).catch(function(e){
-document.getElementById('error').innerHTML = e
-});
+
+
 
 
 
@@ -208,82 +210,13 @@ return (response.json())
 
 
 
-var channels = {
-  "FX":{
-  "working":true,
-  "src":"",
-  "quality":"HD"
-},
-
-"CBSN":{
-  "working":true,
-  "src":"http://cbsnews-linear.mdialog.com/video_assets/cbsnews.m3u8?api_key=563b80c1ae4ce359830f572d2496a947",
-  "quality":"HD"
-},
-"ABC":{
-  "working":true,
-  "src":"http://abclive.abcnews.com/i/abc_live4@136330/index_1200_av-b.m3u8",
-  "quality":"HD"
-},
-"PBS":{
-  "working":true,
-  "src":"http://192.95.33.51/live/47HyqwF0IZtYQrsxYoODrA/1488061476/fe22365235b496368609515523bfb971.m3u8",
-  "quality":"HD"
-},
-"The CW":{
-"working":true,
-"src":"",
-"quality":"HD"
-},
-"NBC SPORTS":{
-"working":true,
-"src":"http://sprtott6-i.akamaihd.net/hls/live/222324/NBC-Sports0225074715/OTT6/OTT6_VIDEO_0_7064000.m3u8",
-"quality":"HD"
-},
-"MSNBC":{
-  "working":true,
-  "src":"http://tvemsnbc-lh.akamaihd.net/i/nbcmsnbc_1@122532/master.m3u8",
-  "quality":"HD"
-},
-"Al-Jazeera":{
-  "working":true,
-  "src":"http://aljazeera-eng-hd-live.hls.adaptive.level3.net/aljazeera/english2/index.m3u8",
-  "quality":"HD"
-},
-"Bloomberg":{
-  "working":true,
-  "src":"http://cdn3.videos.bloomberg.com/btv/us/master.m3u8",
-  "quality":"HD"
-},
-"Weather Channel":{
-  "working":true,
-  "src":"http://cdnapi.kaltura.com/p/931702/sp/93170200/playManifest/entryId/1_oorxcge2/format/applehttp/protocol/http/uiConfId/28428751/a.m3u8",
-  "quality":"HD"
-},
-"Somali Cable":{
-  "working":true,
-  "src":"http://cdn01.iqbroadcast.tv:8081/g1/somcblehb9/playlist.m3u8?nimblesessionid=",
-  "quality":"HD"
-},
-"SNTV":{
-  "working":true,
-  "src":"",
-  "quality":"HD"
-},
-"Universal TV Somali":{
-  "working":true,
-  "src":"",
-  "quality":"HD"
-}
-
-
-}
-
+var channels = [{"working":true,"name":"FX","quality":"HD","src":""},{"working":true,"name":"CBSN","quality":"HD","src":"http://cbsnews-linear.mdialog.com/video_assets/cbsnews.m3u8?api_key=563b80c1ae4ce359830f572d2496a947"},{"working":true,"name":"ABC","quality":"HD","src":"http://abclive.abcnews.com/i/abc_live4@136330/index_1200_av-b.m3u8"},{"working":true,"name":"PBS","quality":"HD","src":"http://192.95.33.51/live/47HyqwF0IZtYQrsxYoODrA/1488061476/fe22365235b496368609515523bfb971.m3u8"},{"working":true,"name":"NBC SPORTS","quality":"HD","src":"http://sprtott6-i.akamaihd.net/hls/live/222324/NBC-Sports0225074715/OTT6/OTT6_VIDEO_0_7064000.m3u8"},{"working":true,"name":"MSNBC","quality":"HD","src":"http://tvemsnbc-lh.akamaihd.net/i/nbcmsnbc_1@122532/master.m3u8"},{"working":true,"name":"Al-Jazeera","quality":"HD","src":"http://aljazeera-eng-hd-live.hls.adaptive.level3.net/aljazeera/english2/index.m3u8"},{"working":true,"name":"Bloomberg","quality":"HD","src":"http://cdn3.videos.bloomberg.com/btv/us/master.m3u8"},{"working":true,"name":"Weather Channel","quality":"HD","src":"http://cdnapi.kaltura.com/p/931702/sp/93170200/playManifest/entryId/1_oorxcge2/format/applehttp/protocol/http/uiConfId/28428751/a.m3u8"},{"working":true,"name":"Somali Cable","quality":"HD","src":"http://cdn01.iqbroadcast.tv:8081/g1/somcblehb9/playlist.m3u8?nimblesessionid="}].reverse()
 
 function converttoHTML(){
+
   try{
-for(channelName in channels){
-  cname = (channelName)
+    for (var channelName = channels.length - 1; channelName >= 0; channelName--) {
+        cname = (channels[channelName].name)
   qual = (channels[channelName].quality)
   isworking = (working)
   if (channels[channelName].working == false){
@@ -292,7 +225,8 @@ for(channelName in channels){
   vidurl = ('urls/dynplayer.html?json=') + encodeURIComponent('{"title":"'+cname +'","play":"' + channels[channelName].src + '"}')
    template += '<tr><th scope=row><a href="'+vidurl+'">'+ cname+'</a></th><td>' + qual +'</td><td>'+ isworking + "<i class='material-icons'>check_circle</i><td><a class='btn btn-success' href='"+vidurl+"' aria-label=Delete><i class='material-icons'>play_circle_filled</i></tr></a>";
 
-}
+    }
+
   insertData(template)
   template = '';
   
@@ -301,6 +235,8 @@ for(channelName in channels){
   alert(e)
 }
 }
+converttoHTML()
+ 
 
 
 
