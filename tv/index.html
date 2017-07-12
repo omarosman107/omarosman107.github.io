@@ -90,49 +90,10 @@ body{text-align:center}</style>
 <tbody id="table" class=searchable>
 </tbody>
 </table>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
 <script type="text/javascript">
 
 
-
-if (!window.JSON) {
-  window.JSON = {
-    parse: function(sJSON) { return eval('(' + sJSON + ')'); },
-    stringify: (function () {
-      var toString = Object.prototype.toString;
-      var isArray = Array.isArray || function (a) { return toString.call(a) === '[object Array]'; };
-      var escMap = {'"': '\\"', '\\': '\\\\', '\b': '\\b', '\f': '\\f', '\n': '\\n', '\r': '\\r', '\t': '\\t'};
-      var escFunc = function (m) { return escMap[m] || '\\u' + (m.charCodeAt(0) + 0x10000).toString(16).substr(1); };
-      var escRE = /[\\"\u0000-\u001F\u2028\u2029]/g;
-      return function stringify(value) {
-        if (value == null) {
-          return 'null';
-        } else if (typeof value === 'number') {
-          return isFinite(value) ? value.toString() : 'null';
-        } else if (typeof value === 'boolean') {
-          return value.toString();
-        } else if (typeof value === 'object') {
-          if (typeof value.toJSON === 'function') {
-            return stringify(value.toJSON());
-          } else if (isArray(value)) {
-            var res = '[';
-            for (var i = 0; i < value.length; i++)
-              res += (i ? ', ' : '') + stringify(value[i]);
-            return res + ']';
-          } else if (toString.call(value) === '[object Object]') {
-            var tmp = [];
-            for (var k in value) {
-              if (value.hasOwnProperty(k))
-                tmp.push(stringify(k) + ': ' + stringify(value[k]));
-            }
-            return '{' + tmp.join(', ') + '}';
-          }
-        }
-        return '"' + value.toString().replace(escRE, escFunc) + '"';
-      };
-    })()
-  };
-}
 
 
 
@@ -156,13 +117,12 @@ var headers = new Headers({
   console.log(r)
   for (var i = r.searchResults.channels.matches.length - 1; i >= 0; i--) {
     console.log(r.searchResults.channels.matches[i].id)
-        fetch('https://www.filmon.com/channel/'+r.searchResults.channels.matches[i].alias+'?protocol=hls',{headers:headers}).then(function(response) {
+        fetch('https://cors-anywhere.herokuapp.com/http://www.filmon.com/api-v2/channel/'+r.searchResults.channels.matches[i].id+'?protocol=hls',{headers:headers}).then(function(response) {
   return response.json();
 }).then(function(a) {
 
-    channels.push({working:true,name:a.title,quality:'HD',src:a.streams[0].url})
+    channels.push({working:true,name:a.data.title,quality:'HD',src:a.data.streams[0].url})
 
-console.log(a.streams[0].url)
  converttoHTML()
 }).catch(function(e){
 document.getElementById('error').innerHTML = e
@@ -210,7 +170,62 @@ return (response.json())
 
 
 
-var channels = [{"working":true,"name":"FX","quality":"HD","src":""},{"working":true,"name":"CBSN","quality":"HD","src":"http://cbsnews-linear.mdialog.com/video_assets/cbsnews.m3u8?api_key=563b80c1ae4ce359830f572d2496a947"},{"working":true,"name":"ABC","quality":"HD","src":"http://abclive.abcnews.com/i/abc_live4@136330/index_1200_av-b.m3u8"},{"working":true,"name":"PBS","quality":"HD","src":"http://192.95.33.51/live/47HyqwF0IZtYQrsxYoODrA/1488061476/fe22365235b496368609515523bfb971.m3u8"},{"working":true,"name":"NBC SPORTS","quality":"HD","src":"http://sprtott6-i.akamaihd.net/hls/live/222324/NBC-Sports0225074715/OTT6/OTT6_VIDEO_0_7064000.m3u8"},{"working":true,"name":"MSNBC","quality":"HD","src":"http://tvemsnbc-lh.akamaihd.net/i/nbcmsnbc_1@122532/master.m3u8"},{"working":true,"name":"Al-Jazeera","quality":"HD","src":"http://aljazeera-eng-hd-live.hls.adaptive.level3.net/aljazeera/english2/index.m3u8"},{"working":true,"name":"Bloomberg","quality":"HD","src":"http://cdn3.videos.bloomberg.com/btv/us/master.m3u8"},{"working":true,"name":"Weather Channel","quality":"HD","src":"http://cdnapi.kaltura.com/p/931702/sp/93170200/playManifest/entryId/1_oorxcge2/format/applehttp/protocol/http/uiConfId/28428751/a.m3u8"},{"working":true,"name":"Somali Cable","quality":"HD","src":"http://cdn01.iqbroadcast.tv:8081/g1/somcblehb9/playlist.m3u8?nimblesessionid="}].reverse()
+var channels = [
+   {
+      "working":true,
+      "name":"CBSN",
+      "quality":"HD",
+      "src":"http://cbsnews-linear.mdialog.com/video_assets/cbsnews.m3u8?api_key=563b80c1ae4ce359830f572d2496a947"
+   },
+   {
+      "working":true,
+      "name":"ABC",
+      "quality":"HD",
+      "src":"http://abclive.abcnews.com/i/abc_live4@136330/index_1200_av-b.m3u8"
+   },
+   {
+      "working":true,
+      "name":"PBS",
+      "quality":"HD",
+      "src":"http://192.95.33.51/live/47HyqwF0IZtYQrsxYoODrA/1488061476/fe22365235b496368609515523bfb971.m3u8"
+   },
+   {
+      "working":true,
+      "name":"NBC SPORTS",
+      "quality":"HD",
+      "src":"http://sprtott6-i.akamaihd.net/hls/live/222324/NBC-Sports0225074715/OTT6/OTT6_VIDEO_0_7064000.m3u8"
+   },
+   {
+      "working":true,
+      "name":"MSNBC",
+      "quality":"HD",
+      "src":"http://tvemsnbc-lh.akamaihd.net/i/nbcmsnbc_1@122532/master.m3u8"
+   },
+   {
+      "working":true,
+      "name":"Al-Jazeera",
+      "quality":"HD",
+      "src":"http://aljazeera-eng-hd-live.hls.adaptive.level3.net/aljazeera/english2/index.m3u8"
+   },
+   {
+      "working":true,
+      "name":"Bloomberg",
+      "quality":"HD",
+      "src":"http://cdn3.videos.bloomberg.com/btv/us/master.m3u8"
+   },
+   {
+      "working":true,
+      "name":"Weather Channel",
+      "quality":"HD",
+      "src":"http://cdnapi.kaltura.com/p/931702/sp/93170200/playManifest/entryId/1_oorxcge2/format/applehttp/protocol/http/uiConfId/28428751/a.m3u8"
+   },
+   {
+      "working":true,
+      "name":"Somali Cable",
+      "quality":"HD",
+      "src":"http://cdn01.iqbroadcast.tv:8081/g1/somcblehb9/playlist.m3u8?nimblesessionid="
+   }
+].reverse()
 
 function converttoHTML(){
 
