@@ -537,7 +537,9 @@ function multiURL(urls) {
   return query;
 }
 var tvdbimg = 'https://thetvdb.com/banners/posters/279121-50.jpg'
-
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
+}
 function tvlist(showName,img) {
   if (showName in tvobj) {
     return 'Already In.';
@@ -559,7 +561,14 @@ if (img != undefined) {
 return;
 
 } 
-  url = tvstQ(showName)
+fetch('https://query.yahooapis.com/v1/public/yql?q=select%20data.serp_promo.offsite_show.thumbnail_url%20from%20json%20where%20url%3D%22http%3A%2F%2Fwww.hulu.com%2Fsapi%2Fsearch%2Fpromo%3Fquery%3D'+encodeURIComponent(replaceAll(showName," ","+"))+'%22%20&format=json',{
+  method: 'get',
+  cache: "force-cache"
+}).then(function(res){
+  return res.json();
+}).then(function(data){
+  if (data.query.count == 0) {
+ url = tvstQ(showName)
   fetch(url, {
     method: 'get',
     cache: "force-cache"
@@ -581,16 +590,22 @@ fetch(yqlendpoint,{
  method: 'get' 
 }).then(function(res){return res.json();}).then(function(data){
   try{
- var proxy = (data.query.results.json[0].tvthumb.url).split('.tv').join('.tv.rsz.io')+'?width=320&quality=30'
  var goog = encodeURIComponent(data.query.results.json[0].tvthumb.url)
     document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><div class="overlay"></div><img width="100%" alt="' + showName + '" src="'+       'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url='+goog+'&container=focus&resize_w=350&refresh=31536000" ><\/a><\/div>'
-
-
 }catch(e){
 }
 })
 
   }).catch(function(e) {});
+    return;
+  }
+  console.log(data.query.results.json.data.serp_promo.offsite_show.thumbnail_url)
+      document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><div class="overlay"></div><img width="100%" alt="' + showName + '" src="'+  data.query.results.json.data.serp_promo.offsite_show.thumbnail_url    +'" ><\/a><\/div>'
+}).catch(function(e){
+
+})
+
+ 
 }
 
 function search(val) {

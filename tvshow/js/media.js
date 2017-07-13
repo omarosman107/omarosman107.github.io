@@ -9,7 +9,18 @@ player.ready(function() {
 });
 
 
+const secondsToTimeCode = function(timeInSeconds) {
 
+  const zeropad = function(number) {
+      return (number <= 9) ? `0`+number: number;
+  }
+
+  const hours = Math.floor(timeInSeconds / 3600)
+  const minutes = Math.floor((timeInSeconds - (hours * 3600)) / 60) % 60;
+  const seconds = timeInSeconds % 60;
+
+  return `${zeropad(hours)}:${zeropad(minutes)}:${zeropad(seconds)}`;
+};
 
 
 //jwplayer.defaults.preload = "auto"
@@ -143,7 +154,7 @@ window.onunload = function() {
 
 function on_progress( event ) {
     console.log( 'buffered',(player.bufferedEnd() / player.duration() *100) + "%" );
-    document.getElementById('progressplayer').style.width = (player.bufferedEnd() / player.duration() *100) + "%" 
+    document.getElementById('progressplayer').style.width = player.currentTime() / player.duration() * 100 + "%" 
     // it will log always 0
 }
 
@@ -218,6 +229,15 @@ function fetchcwjson(value) {
    // HLS = 154 | 206
    // MP4 = 213
    var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/206?format=json"
+   fetch(`http://api.digitalsmiths.tv/metaframe/65e6ee99/asset/${stripped}/filter?track=Closed%20Captioning`).then(function(res){
+  return res.json();
+}).then(function(cap){
+  track = player.addTextTrack("captions", "English", "en")
+  for (i = 0, len = cap.length; i < len; ++i) {
+    track.addCue(new VTTCue(cap[i].startTime, cap[i].endTime, cap[i].metadata.Text)); 
+}
+  
+})
    fetch(url, {
       method: 'get'
    }).then(function(response) { 
@@ -241,7 +261,7 @@ function fetchcwjson(value) {
     /*  player.src({
          "type": "application/x-mpegURL",
          "src": finalurl 
-      }); */
+      }); */ 
  
       bg( data.images.cwtv1920x1080.uri)
 
