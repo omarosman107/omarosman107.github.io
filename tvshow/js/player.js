@@ -45,27 +45,26 @@ var diziayactive = false
 var cwurl 
 
 var sitefunctions = {
-  "rawFile":"raw(url)",
-  "foxorgin":"foxsite(url)",
-  "asdir=":"fetchaswimjson(url)",
-  "api.fox.com":"foxapi(url)",
+  "rawFile":raw,
+  "foxorgin":foxsite,
+  "asdir=":fetchaswimjson,
+  "api.fox.com":foxapi,
 
-"cwtv.com":"fetchcwjson(url)",
-"diziay.com":"fetchdiziayjson(url)",
-"adultswim.com":"fetchaswimjson(url)",
-"cwseed.com":"fetchcwjson(url)",
-"nick.com":"fetchnickjson(url)",
-"abc.go.com":"fetchabcjson(url)",
-"southpark.cc.com":"fetchsouthpjson(url)",
-"amc.com":"fetchamcjson(url)",
-"cbs.com":"fetchcbsjson(url)",
-"nbc.com":"fetchnbcjson(url)",
-"cartoonnetwork.com":"fetchcartoonnjson(url)",
-"fox.com":"fetchfoxjson(url)",
-
-"link.theplatform.com":"fetchlplatjson(url)",
-"fxnetworks.com":"fetchfxjson(url)",
-"tvzion.pro":"tvzion(url)"
+"cwtv.com":fetchcwjson,
+"diziay.com":fetchdiziayjson,
+"adultswim.com":fetchaswimjson,
+"cwseed.com":fetchcwjson,
+"nick.com":fetchnickjson,
+"abc.go.com":fetchabcjson,
+"southpark.cc.com":fetchsouthpjson,
+"amc.com":fetchamcjson,
+"cbs.com":fetchcbsjson,
+"nbc.com":fetchnbcjson,
+"cartoonnetwork.com":fetchcartoonnjson,
+"fox.com":fetchfoxjson,
+"link.theplatform.com":fetchlplatjson,
+"fxnetworks.com":fetchfxjson,
+"tvzion.pro":tvzion
 
 
 
@@ -101,24 +100,29 @@ var url
 function findName(){
 
 document.getElementById('progress').style.width = "0%"
+console.time()
 for (tv in sitefunctions) {
-  console.log(currenturl)
-  console.log(currenturl.includes(tv))
+
 
 
 		if (currenturl.includes(tv)) {
-console.log(tv + " "+"Detected")
+console.log(tv + " detected")
 url = currenturl
-             eval(sitefunctions[tv]);
-             isDone = true
-             break;
+sitefunctions[tv](url)
+
+     //        eval(sitefunctions[tv]);
+             isDone = true;
+console.timeEnd()
+              return;
 
 
 	}
 
 
 
+
 }
+
  
 } 
 document.getElementById('progress').style.width = "15%"
@@ -131,7 +135,7 @@ document.getElementById('progress').style.width = "15%"
           googlejson = JSON.parse(this.responseText);
           googleurl = googlejson.results[0].unescapedUrl;
                        	foxurl = googlejson.results[0].unescapedUrl
-
+console.time()
           for (var i = 0; i < googlejson.results.length; i++) {
 
 
@@ -194,9 +198,9 @@ if (tv == "abc.go.com") {
 document.getElementById('orginVisit').innerHTML = url
 document.getElementById('orginVisit').href = url
 console.log(url)
-     
-             eval(sitefunctions[tv]);
+     sitefunctions[tv](url)
              isDone = true
+             console.timeEnd()
              break;
 
 }
