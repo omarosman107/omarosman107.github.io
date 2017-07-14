@@ -7,6 +7,7 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+
 captions added for cw shows
 --
 cw player using way better servers and better quality
