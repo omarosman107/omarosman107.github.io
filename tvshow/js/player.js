@@ -226,13 +226,6 @@ xhttp.send();
 }
 
 
-$(window).on('hashchange', function() {
-  console.log(location.hash)
-  window.location.reload()
-  findName();
-
-
-});
 function tvstQ(q){
   q = encodeURIComponent(q);
  var query = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="https://api.tozelabs.com/v2/show?limit=1&q=' +q + '"') + '&format=json&_maxage=360000';

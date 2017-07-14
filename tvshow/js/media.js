@@ -246,6 +246,9 @@ function fetchcwjson(value) {
       document.getElementById('progress').style.width = "50%"
      // finalurl = data.videos.hls5128.uri;
         finalurl = data.videos.variantplaylist.uri;
+      player.src([{"src":data.assetFields.smoothStreamingUrl + '(format=mpd-time-csf).mpd',"type":"application/dash+xml"},{"src":data.assetFields.smoothStreamingUrl + '(format=m3u8-aapl).m3u8',"type":"application/x-mpegURL"},{"src":finalurl,"type":"application/x-mpegURL"}]);
+   player.play();
+resume()
 
       console.log(finalurl)
       getShowinfo(data.assetFields.seriesName)
@@ -265,11 +268,8 @@ function fetchcwjson(value) {
  
       bg( data.images.cwtv1920x1080.uri)
 
-      player.src([{"src":data.assetFields.smoothStreamingUrl + '(format=mpd-time-csf).mpd',"type":"application/dash+xml"},{"src":data.assetFields.smoothStreamingUrl + '(format=m3u8-aapl).m3u8',"type":"application/x-mpegURL"},{"src":finalurl,"type":"application/x-mpegURL"}]);
-   player.play();
 
 
-resume()
 document.getElementById('epname').innerHTML =  data.assetFields.title
       document.getElementById('progress').style.width = "100%"
       $('#projpar').hide()
