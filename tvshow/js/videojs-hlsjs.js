@@ -88,7 +88,10 @@ var  hls = new Hls(config);
       this.hls_.loadSource(src);
     },
     onError: function (event, data) {
+      if (data.fatal) {
         error(event,data)
+
+      }
       if (data.fatal) {
         switch (data.type) {
           case Hls.ErrorTypes.NETWORK_ERROR:
