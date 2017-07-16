@@ -113,7 +113,45 @@ var vid = document.getElementById(player.el().children[0].id);
 vid.onerror = function(e) {
   error(e)
 }
+vid.addEventListener('loadeddata', function() {
+  document.getElementById('LS').style.opacity = 1
+//  document.getElementsByClassName('video-duration')[0].innerHTML = "( " + Math.round(vid.duration / 60) + " min )"
+  document.getElementById('blockLoader').style.opacity = "0"
+  document.getElementById('blockLoader').style.display='absolute';
+    document.getElementById('blockLoader').style.zIndex ='-99999';
 
+  var played = true;
+resumePlayback()
+player.play()
+  endTime()
+
+setInterval(function(){
+    endTime()
+
+  localStorage[window.location.search]  = player.currentTime()
+  localStorage[window.location.search + '_perc']  = player.currentTime() / player.duration() * 100;
+  if (player.currentTime() == player.duration()) {
+    localStorage[window.location.search + '_perc']  = 0;
+    localStorage.removeItem(window.location.search + '_perc')
+        localStorage.removeItem(window.location.search )
+  }
+
+
+},
+2000)
+
+document.body.onunload = function(){
+  localStorage[window.location.search]  = player.currentTime()
+
+};
+
+window.onunload = function() {
+  localStorage[window.location.search]  = player.currentTime()
+}
+
+}, false);
+
+return;
 vid.oncanplay = function() {
   document.getElementById('LS').style.opacity = 1
 //  document.getElementsByClassName('video-duration')[0].innerHTML = "( " + Math.round(vid.duration / 60) + " min )"
