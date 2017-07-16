@@ -258,6 +258,17 @@ function toTitleCase(str)
 {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
+function raw(url){
+  console.log(url)
+url = url.split('_=')[1]
+console.log(url)
+      showname.innerHTML = url;
+               document.getElementById('downloader').href = url
+
+    player.src({"type":"application/x-mpegURL", "src":url});
+   player.play();
+resume()
+}
 // CWTV Fetch 
 function fetchcwjson(value) {
 	console.log(value)
@@ -1075,17 +1086,7 @@ resume()
 
 
 }
-function raw(url){
-  console.log(url)
-url = url.split('_=')[1]
-console.log(url)
-      showname.innerHTML = url;
-               document.getElementById('downloader').href = url
 
-    player.src({"type":"application/x-mpegURL", "src":url});
-   player.play();
-resume()
-}
 
 
 function foxsite(url){
