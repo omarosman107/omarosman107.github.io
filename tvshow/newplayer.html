@@ -433,11 +433,26 @@ html,body,div,span,h3,p,a,img,ul,li,fieldset,label,legend,footer,video{margin:0;
   </div>
 <script type="text/javascript" src="js/video.min.js"></script>
 <script  type="text/javascript" src="js/videojs.hotkeys.min.js"></script>
-<script  type="text/javascript" src="js/videojs.thumbnails.js"></script>
-<script  type="text/javascript" src="js/dash.all.min.js"></script>
-<script  type="text/javascript" src="js/videojs-dash.min.js"></script>
-<script  src="js/hls.min.js"></script>
-<script type="text/javascript" src="js/videojs-hlsjs.js"></script>
+<script type="text/javascript">
+function addJS(url) {
+   var s = document.createElement('script'); // Create a script element
+   s.type = "text/javascript"; // optional in html5
+   s.async = false; // asynchronous? true/false
+   s.src = url;
+   var fs = document.getElementsByTagName('script')[0]; // Get the first script
+   fs.parentNode.insertBefore(s, fs);
+};
+
+
+    var vtag = document.createElement("video"); var hlsSupported = !!vtag.canPlayType && !!vtag.canPlayType("application/x-mpegurl");
+    if (!hlsSupported) {
+        addJS('js/dash.all.min.js')
+        addJS('js/videojs-dash.min.js')
+        addJS('js/hls.min.js')
+        addJS('js/videojs-hlsjs.js')
+    }
+</script>
+
 
 <script type="text/javascript">
   function error(e,d){
