@@ -855,8 +855,6 @@ fetch(show_hub + '?bust=' + Date.now() , {
       }
             finalObj.push(episode_data)
 
-      var image = new Image()
-image.src = episode_data.bg
 
     }
   }
@@ -1177,8 +1175,6 @@ temp.setDate(temp.getDate()-1);
               })
                   tvlist(json.member[i].seriesName,json.member[i].images.seriesList.HD )
 
-      var image = new Image()
-image.src = json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('8:4')
 
 
 }
