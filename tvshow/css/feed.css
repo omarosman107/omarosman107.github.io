@@ -231,6 +231,9 @@ body {
     padding-left: 45px;
     border-radius: 1000px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    font-family: ProximaNovaB;
+    transition: background .5s ease,color .3s ease;
+    will-change: background,color;
 
 }
 .container-1 input#search:focus {
@@ -636,8 +639,7 @@ background-color: #bb2828;
 
 .fanarts-list>li .image-crop {
     width: 100%;
-    overflow: hidden;
-    position: relative;
+    position: sticky;
     background: rgba(0, 0, 0, 0.28);
     
     
@@ -765,8 +767,8 @@ color: #dad6d6;
 .image-crop:hover img{
 }
 .image-crop:hover .overlay {
-    -webkit-transform: scale(1.5);
-    transform: scale(1.5);
+    -webkit-transform: scale(1);
+    transform: scale(1);
     display: block;
     opacity: 1;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100)

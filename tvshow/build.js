@@ -45,8 +45,10 @@ var stripped = url.split('?')[1].split('=')[1]
    }).then(function(response) { 
       return response.json();
    }).then(function(data) {
-        finalurl = data.videos.variantplaylist.uri;
-    hls.loadSource(finalurl);
+        finalurl = data.assetFields.smoothStreamingUrl + '(format=m3u8-aapl).m3u8';
+        var parser = document.createElement('a');
+    parser.href = finalurl
+    hls.loadSource(parser.href);
 
 
    })
@@ -63,7 +65,7 @@ if (url.includes('api.fox.com')) {
 
 
 
-  },2000)
+  },700)
 
 
 }
@@ -78,24 +80,6 @@ clearTimeout(hovering);
 
   }
 var textInput = document.getElementById('search');
-
-// Init a timeout variable to be used below
-var timeout = null;
-
-// Listen for keystroke events
-textInput.onkeyup = function (e) {
-
-    // Clear the timeout if it has already been set.
-    // This will prevent the previous task from executing
-    // if it has been less than <MILLISECONDS>
-    clearTimeout(timeout);
-
-    // Make a new timeout set to go off in 800ms
-    timeout = setTimeout(function () {
-      query(textInput.value)
-    }, 200);
-};
-
 
 function addJS(url) {
   var s = document.createElement('script'); // Create a script element
@@ -324,7 +308,6 @@ for(i in Lazyelements){
 Lazyelements[i].onload = function(element) {
 if (!element.target.classList.contains('loaded')) {
 element.target.classList.add('loaded');
-console.log(element.target.parent)
 
 }
 }
@@ -379,6 +362,7 @@ loadMedia(l)
 
           document.getElementsByClassName('lScreen')[0].style.opacity = '0'
             document.getElementsByClassName('lScreen')[0].style.zIndex = '-99999'
+                        document.getElementsByClassName('lScreen')[0].style.visibility = 'none'
       document.querySelector('.contain').style.display = 'block';
 
 
@@ -421,10 +405,11 @@ function makeid() {
   for (var i = 0; i < 96; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
 }
-
+var qtime
 function query(q) {
+  clearTimeout(qtime)
   var num = 0
-  setTimeout(function() {
+ qtime = setTimeout(function() {
     for (var i = 0, len = finalObj.length; i < len; i++) {
       if ((finalObj[i].show +' '+ finalObj[i].episode).toLowerCase().includes(q.toLowerCase())) {
         document.getElementsByClassName(finalObj[i].id)[0].style.opacity = '1'
@@ -439,7 +424,7 @@ function query(q) {
     }
     myLazyLoad.update()
     results(num)
-  }, 10)
+  }, 100)
 }
 function showAll(q){
     document.getElementById('search').value = '';
@@ -599,7 +584,6 @@ fetch(yqlendpoint,{
   }).catch(function(e) {});
     return;
   }
-  console.log(data.query.results.json.data.serp_promo.offsite_show.thumbnail_url)
       document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><div class="overlay"></div><img width="100%" alt="' + showName + '" src="'+  data.query.results.json.data.serp_promo.offsite_show.thumbnail_url    +'" ><\/a><\/div>'
 }).catch(function(e){
 
@@ -699,89 +683,6 @@ function loadPlayer(url) {
   link = url.href
   return false;
  }
-/*
-
-   $('#tvShows').scroll( function() {
-       var $width = $('#tvShows').outerWidth()
-       var $scrollWidth = $('#tvShows')[0].scrollWidth; 
-       var $scrollLeft = $('#tvShows').scrollLeft();
-           $('#right-buttontv').css({opacity: 100})
-
-       if ($scrollWidth - $width === $scrollLeft){
-           console.log('right end');
-           $('#right-buttontv').fadeTo('fast',0 )
-       }
-                       $('#left-buttontv').css({opacity: 100})
-
-       if ($scrollLeft===0){
-           console.log('left end');
-                       $('#left-buttontv').fadeTo('fast',0 )
-
-       }
-   });
-   */
-function loadQuick(json) {
-  var temp = ''
-
-  function newBanner() {
-    var date1 = new Date();
-    var date2 = new Date(json.airdate);
-    //Customise date2 for your required future time
-    var diff = (date2 - date1) / 1000;
-    var diff = Math.abs(Math.floor(diff));
-    var days = Math.floor(diff / (24 * 60 * 60));
-    var leftSec = diff - days * 24 * 60 * 60;
-    var hrs = Math.floor(leftSec / (60 * 60));
-    var leftSec = leftSec - hrs * 60 * 60;
-    var min = Math.floor(leftSec / (60));
-    var leftSec = leftSec - min * 60;
-    if (days <= 1) {
-      return '<div class="new-label"> New<\/div>'
-    } else {
-      return ''
-    }
-  }
-  var perc = 0;
-  if (localStorage["?" + json.href]) {
-    perc = localStorage["?" + json.href + "_perc"]
-    if (perc == "NaN") {
-      perc = 0
-    }
-    if (perc == undefined) {
-      perc = 0
-    }
-  }
-
-  function showCheck() {
-    if (parseInt(perc) > 99) {
-      return 1;
-    }
-    return 0;
-  }
-  if (!perc == 0) {
-    if (document.getElementsByClassName(json.href).length == 0) {
-      document.getElementById('watching').innerHTML += '<li style="width: 280px;margin: 11px;" class=" card initialized ' + json.href + '"><a href="#"><div class="piece fanart-container"><div class="image-crop">' + newBanner() + '<a onclick="loadPlayer(this)" href="player.html?' + json.href + '"><\/span><img  src="' + json.img + '" alt="' + json.episode + '" data-original-set="' + json.imgdyn + '" class"lazy" class="loaded" ><\/a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"><\/span><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '" class="overlay-btn zoom-btn "  title="Watch ' + json.episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2><a class="episode-name" onclick="loadPlayer(this)" href="player.html?' + json.href + '">' + json.episode + '<\/a><\/h2><a onclick="loadPlayer(this)" href="" class="secondary-link show-name">' + json.show + '<\/a><a href="javascript:"><i style="    /* opacity: ' + showCheck() + '; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"><\/i><\/a><\/div><div class="bottom"><\/div><\/div><\/a><\/li>'
-    }
-  }
-  var query = (json.metadata + " " + json.episode).toLowerCase();
-  timeofPlayback = json.length.split(':')[0] + 'm'
-  var img = ''
-  if (json.imgdyn == '') {
-    img = 'data-original="' + json.img + '"'
-  }
-  var formatter = new Intl.DateTimeFormat("en", {
-    month: "short"
-  })
-  var date = new Date(json.airdate)
-  var month2 = formatter.format(date);
-  var FDate = month2 + ' ' + date.getUTCDate() + ' ' + date.getUTCFullYear()
-  document.getElementById('carasoul').innerHTML += '<li  aired="' + json.airdate + '" class="initialized ' + json.type + '" data-query="' + query + '">\
-  <div  class="piece fanart-container">\
-  <div class=image-crop>' + newBanner() + '\
-  <a onclick="loadPlayer(this)" href="player.html?' + json.href + '">\
-  <\/span><img alt="' + json.show + '"  ' + img + ' data-original-set="' + json.imgdyn + '" class"lazy" ><\/a><div id="projpar" class="w3-progress-container" style=""><span class="episode-gradient"><\/span><div id="progress" class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '" class="overlay-btn zoom-btn " title="Watch ' + json.episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '">' + json.episode + '<\/a><\/h2><a onclick="query(null,this)" show="' + json.show + '" href="javascript:" class="secondary-link show-name">' + json.show + '<\/a><div class=more-infos><\/div><p>' + FDate + ' | ' + json.rating + ' | ' + timeofPlayback + ' | ' + json.epiformat + '<\/p><i style="opacity:' + showCheck() + ';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"><\/i><\/div><div class="bottom"><div class="bar"><\/div><div class="bar"><\/div><div class="bar"><\/div><\/div><\/div>'
-}
-
 
 var formatter = new Intl.DateTimeFormat({
   month: "short"
@@ -789,6 +690,7 @@ var formatter = new Intl.DateTimeFormat({
 var date1 = Date.now()
 
 function loadMedia(json) {
+  console.time()
 var w = document.createDocumentFragment()
 var t = document.createDocumentFragment()
   var template = ''
@@ -860,6 +762,7 @@ if (!json[i].time > 0) {
   }
   document.getElementById('watching').insertAdjacentHTML('beforeend',watching);
   document.getElementById('carasoul').insertAdjacentHTML('beforeend',template);
+  console.timeEnd()
   template = '';
 }
 
@@ -1208,6 +1111,7 @@ loadShow.addEventListener("readystatechange", function () {
 
   if (this.readyState === 4) {
         if (this.status  === 200) {
+
     var showinfo = (JSON.parse(this.responseText));
 
 
@@ -1219,7 +1123,7 @@ loaders('remove')
 }
   if (this.readyState === 4) {
     if (this.status === 200) {
-
+console.time()
 var json = (JSON.parse(this.responseText))
 
 for(i in json.member){
@@ -1273,6 +1177,7 @@ image.src = json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + en
 
 }
 }
+console.timeEnd()
 loaders('remove')
 
 
@@ -1362,7 +1267,6 @@ allshows.unshift.apply( allshows, json[3].items.member );
     var foxshows = (JSON.parse(this.responseText).panels.member[3].items.member);
     var json = []
     for (var i = allshows.length - 1; i >= 0; i--) {
-      console.log(allshows[i])
       json.push({name:allshows[i].name,image:allshows[i].images.seriesList.HD})
 if(allshows[i].seriesType != 'special' || allshows[i].seriesType != 'movie'){
 
@@ -1371,7 +1275,6 @@ if(allshows[i].seriesType != 'special' || allshows[i].seriesType != 'movie'){
           }
 
     }
-    console.log(json)
 loaders('remove')
 }else{
   loaders('remove')

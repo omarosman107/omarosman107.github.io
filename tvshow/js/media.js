@@ -1,4 +1,3 @@
-
 // var x2js = new X2JS();
 var player = videojs('LS');
 player.ready(function () {
@@ -229,6 +228,7 @@ function raw(url) {
    player.play();
    resume();
 }
+
 // CWTV Fetch 
 function fetchcwjson(value) {
    console.log(value);
