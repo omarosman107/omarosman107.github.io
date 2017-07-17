@@ -191,7 +191,7 @@ function getShowinfo(name) {
           return res.json();
         }).then(function (data) {
           console.log(data.query.results.json);
-          document.getElementById('showname').innerHTML = '<img style="    margin-bottom:-5px;width: 6.0em;display:inline-block;" src="' + data.query.results.json.hdtvlogo["0"].url + '" width="100%">';
+          document.getElementById('showname').innerHTML = '<img style="    margin-bottom:-5px;width: 6.0em;display:inline-block;" src="' + data.query.results.json.hdtvlogo.url + '" width="100%">';
         });
       }
 
