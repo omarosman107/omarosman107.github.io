@@ -62,10 +62,7 @@
     }
 }
 
-* {
--webkit-user-select: none;
--webkit-tap-highlight-color: rgba(0,0,0,0);
-}
+
 input {
 -webkit-user-select: auto;
 }
@@ -316,9 +313,7 @@ body {
     transform: scale(1)
 }
 
-input[type=search] {
-    font-size: 16px
-}
+
 
 .tvshow {
 
@@ -365,12 +360,6 @@ input[type=search] {
 
 }
 
-* {
-    -webkit-user-select: text;
-    -moz-user-select: moz-text;
-    -ms-user-select: text;
-    user-select: text
-}
 
 ::-webkit-scrollbar {
     background-color: transparent;
@@ -444,10 +433,6 @@ a:active,a:hover {
 img {
     border: 0;
     vertical-align: middle
-}
-
-*,:after,:before {
-    box-sizing: border-box
 }
 
 a:focus,a:hover {
@@ -639,7 +624,8 @@ background-color: #bb2828;
 
 .fanarts-list>li .image-crop {
     width: 100%;
-    position: sticky;
+    position: relative;
+    overflow: visible
     background: rgba(0, 0, 0, 0.28);
     
     
@@ -966,6 +952,7 @@ transition: all 1s cubic-bezier(0.12, 0.49, 0.9, 3.59);
     transform: scale(.998)
 }
    .new-label {
+      z-index: 100;
       position: absolute;
       top: 24px;
       left: -24px;
@@ -988,7 +975,6 @@ transition: all 1s cubic-bezier(0.12, 0.49, 0.9, 3.59);
       -o-transform-origin: 0 0;
       padding-top: 16px;
       text-align: center;
-           z-index: 1;
    }
 
 
