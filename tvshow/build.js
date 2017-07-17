@@ -21,7 +21,7 @@ window.addEventListener('scroll', function() {
 function playHover(element){
   hovering = setTimeout(function(){
 
-
+ 
 
 
     var video = element.querySelector('video')
