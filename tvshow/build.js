@@ -16,13 +16,23 @@ window.addEventListener('scroll', function() {
 */
 
   var hovering;
+        var hls = new Hls();
 
 function playHover(element){
   hovering = setTimeout(function(){
-        var hls = new Hls();
+
+
 
 
     var video = element.querySelector('video')
+video.addEventListener("timeupdate", function(e){
+if(video.currentTime >= 30)
+{
+  hls.detachMedia();
+  element.querySelector('.playbutton').style.visibility = 'visible';
+  element.querySelector('.cover').style.display = 'block';
+}
+});
     element.querySelector('.playbutton').style.visibility = 'hidden'
     var url = element.getAttribute('url')
 
@@ -70,13 +80,12 @@ if (url.includes('api.fox.com')) {
 
 }
 function stopHover(element){
+  hls.detachMedia()
 clearTimeout(hovering);
     element.querySelector('.playbutton').style.visibility = 'visible'
 
     element.querySelector('.cover').style.display = 'block';
-    var video = element.querySelector('video')
-    video.src ="";
-    video.load();
+
 
   }
 var textInput = document.getElementById('search');
