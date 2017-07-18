@@ -49,7 +49,6 @@
     background-color: #141414!important;
 }
 * {
-        text-shadow: 0 1px 5px rgb(0, 0, 0) !important;
 }
  .nf-loading-spinner {
     position: absolute;
@@ -449,8 +448,7 @@ function addJS(url) {
     if (!hlsSupported) {
         addJS('js/dash.all.min.js')
         addJS('js/videojs-dash.min.js')
-        addJS('js/hls.min.js')
-        addJS('js/videojs-hlsjs.js')
+        addJS('js/videojs-contrib-hls.min.js')
     }
 </script>
 

@@ -1,4 +1,3 @@
-
 var attachVideojsStreamrootProvider = function (window, videojs, Hls) {
     function StreamrootProviderHLS (source, tech) {
         tech.name_ = 'streamrootHLS';
@@ -40,7 +39,7 @@ var attachVideojsStreamrootProvider = function (window, videojs, Hls) {
 
             _hls.attachMedia(_video);
 
-            _video.addEventListener('waiting', _onWaitingForData);            
+            _video.addEventListener('waiting', _onWaitingForData);
         }
 
         this.duration = function () {
@@ -187,9 +186,10 @@ var attachVideojsStreamrootProvider = function (window, videojs, Hls) {
         }, 0);
 
     } else {
-        console.error("Hls.js is not supported in this browser!");
+        console.warn("Hls.js is not supported in this browser!");
     }
 
     videojs.StreamrootProviderHLS = StreamrootProviderHLS;
 };
 
+module.exports = attachVideojsStreamrootProvider;

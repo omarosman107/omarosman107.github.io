@@ -2,25 +2,73 @@
 <html>
 <head>
 	<title>Instagram Followers</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<style type="text/css">
+		#profile {
+			width: 100%;
+			background-color:#ffffff;
+			margin: auto;
+			padding: 45px;
+			margin-top:45px; 
+			border-bottom: 1px solid #efefef;
+			max-width: 650px;
+			display: none;
+			        box-sizing: border-box;
+			            line-height: 20px;
+			                padding: 14px 16px 10px 16px;
+			    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+
+
+		}
+		#profile img,#profile h3 {
+			display: inline-block;
+		}
+		#profile img {
+			border-radius: 5px;
+		}
+
+		body {
+			margin:0;
+			    background-color: #fafafa;
+			    font-family: helvetica;
+		}
+		.following,.followers {
+			display: inline-block;
+			padding-top: 40px;
+			margin: auto;
+			text-align: center;
+		}
+
+	</style>
 </head>
 <body>
 <div><a id="connect">Connect To Instagram</a></div>
-
+<div id="profile"></div>
 
 <script type="text/javascript">
+
+function addJS(url) {
+  var s = document.createElement('script'); // Create a script element
+  s.type = "text/javascript"; // optional in html5
+  s.async = true; // asynchronous? true/false
+  s.src = url;
+  var fs = document.getElementsByTagName('script')[0]; // Get the first script
+  fs.parentNode.insertBefore(s, fs);
+};
+
+
 document.getElementById('connect').href = 'https://api.instagram.com/oauth/authorize/?client_id=d7d75da6ab404ad89818990b4c49db48&redirect_uri='+location.href.split('#')[0]+'&response_type=token&scope=basic+follower_list+public_content'
+function myAccount(json){
+	console.log(json)
+	document.getElementById('profile').innerHTML = `<img src="`+json.data.profile_picture+`"><h3>`+json.data.username+`</h3><div class="following">following `+json.data.counts.follows+`  </div><div class="followers">followers `+json.data.counts.followed_by+`</div></div>`
+	document.getElementById('profile').style.display = 'block'
+}
 if (window.location.hash.includes('access_token')) {
-var url = 'https://api.instagram.com/v1/users/self/follows?access_token=' + location.href.split('#access_token')[1]
-fetch(url, {
-	method: 'get'
-}).then(function(response) {
-	return response.json();
-}).then(function(json){
-console.log(json)
-}).catch(function(err) {
-	// Error :(
-});
- 
+var url = 'https://api.instagram.com/v1/users/self?access_token=' + location.href.split('#access_token=')[1] + '&callback=myAccount'
+addJS(url)
+
 
 	document.getElementById('connect').style.display = 'none'
 }
