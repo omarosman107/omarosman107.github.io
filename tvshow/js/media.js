@@ -703,7 +703,6 @@ function fetchaswimjson(value) {
                      if (returnedValue.query.results.json.data.stream.assets[i].mime_type == "application/x-mpegURL") {
                         console.log(returnedValue.query.results.json.data.stream.assets[i].url);
                         videofile = returnedValue.query.results.json.data.stream.assets[i].url;
-                        document.getElementById('downloader').href = videofile;
                         player.src({ "type": "application/x-mpegURL", "src": videofile });
                         player.play();
                         resume();
