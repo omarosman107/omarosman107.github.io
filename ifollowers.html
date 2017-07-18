@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Instagram Followers</title>
+</head>
+<body>
+<div><a id="connect">Connect To Instagram</a></div>
+
+
+<script type="text/javascript">
+document.getElementById('connect').href = 'https://api.instagram.com/oauth/authorize/?client_id=d7d75da6ab404ad89818990b4c49db48&redirect_uri='+location.href.split('#')[0]+'&response_type=token&scope=basic+follower_list+public_content'
+if (window.location.hash.includes('access_token')) {
+var url = 'https://api.instagram.com/v1/users/self/follows?access_token=' + location.href.split('#access_token')[1]
+fetch(url, {
+	method: 'get'
+}).then(function(response) {
+	return response.json();
+}).then(function(json){
+console.log(json)
+}).catch(function(err) {
+	// Error :(
+});
+ 
+
+	document.getElementById('connect').style.display = 'none'
+}
+	
+
+
+
+</script>
+</body>
+</html>
