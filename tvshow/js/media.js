@@ -1061,6 +1061,15 @@ function foxapi(url) {
    fetch(url, request).then(function (res) {
       return res.json();
    }).then(function (data) {
+    for (var i = data.documentReleases.length - 1; i >= 0; i--) {
+      if(data.documentReleases[i].format === 'SCC'){
+        console.log(data.documentReleases[i].url)
+        fetch(data.documentReleases[i].url).then(function(res){return res.text();}).then(function(captions){
+          console.log(captions)
+        })
+        break;
+      }
+    }
       console.log(data.images.logo.FHD);
 
       bg(data.images.still.HD);
