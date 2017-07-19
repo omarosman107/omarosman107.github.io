@@ -1073,7 +1073,6 @@ function foxapi(url) {
       }).then(function (data) {
               fetch(data.entries[0].media$content[0].plfile$url + '&format=script').then(function(res){return res.json();}).then(function(captions){
 var track = player.addRemoteTextTrack({src:captions.captions["0"].src,kind:"captions",label:"English",srclang: "en"})
-console.log(track)
 
       /*
   fetch(captions.captions["2"].src).then(function(res){return res.text();}).then(function(cap){
