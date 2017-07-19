@@ -1061,15 +1061,7 @@ function foxapi(url) {
    fetch(url, request).then(function (res) {
       return res.json();
    }).then(function (data) {
-    for (var i = data.documentReleases.length - 1; i >= 0; i--) {
-      if(data.documentReleases[i].format === 'SCC'){
-        console.log(data.documentReleases[i].url)
-        fetch(data.documentReleases[i].url).then(function(res){return res.text();}).then(function(captions){
-          console.log(captions)
-        })
-        break;
-      }
-    }
+
       console.log(data.images.logo.FHD);
 
       bg(data.images.still.HD);
@@ -1079,7 +1071,38 @@ function foxapi(url) {
       }).then(function (response) {
          return response.json();
       }).then(function (data) {
+              fetch(data.entries[0].media$content[0].plfile$url + '&format=script').then(function(res){return res.json();}).then(function(captions){
+var track = player.addRemoteTextTrack({src:captions.captions["0"].src,kind:"captions",label:"English",srclang: "en"})
+console.log(track)
 
+      /*
+  fetch(captions.captions["2"].src).then(function(res){return res.text();}).then(function(cap){
+    parser = new DOMParser();
+xmlDoc = parser.parseFromString(cap,"text/xml");
+      track = player.addTextTrack("captions", "English", "en");
+      track.src = captions.captions["0"].src
+
+var texts = xmlDoc.querySelector('div').children
+console.log(texts)
+var convertTime = function timeString2ms(a,b){
+ return a=a.split('.'),
+  b=a[1]*1||0,
+  a=a[0].split(':'),
+  b+(a[2]?a[0]*3600+a[1]*60+a[2]*1:a[1]?a[0]*60+a[1]*1:a[0]*1)*1e3/1000
+};
+for (var i = texts.length - 1; i >= 0; i--) {
+var b = convertTime(texts[i].getAttribute('begin'))
+var e = convertTime(texts[i].getAttribute('end'))
+
+console.log(texts[i].textContent)
+           track.addCue(new VTTCue(b, e, (texts[i].textContent)));
+}
+
+
+  })
+  */
+     
+        })
          var a = data.entries[0].media$content[0].plfile$url + '&format=redirect&manifest=m3u';
          document.getElementById('downloader').href = a;
 
