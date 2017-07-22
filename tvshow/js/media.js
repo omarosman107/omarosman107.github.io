@@ -46,6 +46,16 @@ function loadURL(url, type) {
 var played = false;
 
 function resumePlayback(state) {
+  if (state == true) {
+        if (localStorage[window.location.search]) {
+
+         player.currentTime(localStorage[window.location.search]);
+         played = true;
+      }
+      return;
+
+  }
+
    if (played == false) {
 
       document.getElementsByClassName('resume')[0].style.display = 'none';
@@ -216,6 +226,18 @@ function toTitleCase(str) {
    return str.replace(/\w\S*/g, function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
    });
+}
+downloader.onclick = function(){
+player.src({src:downloader.href + '#t=' + localStorage[window.location.search],type:'video/mp4'})
+   var vid = document.getElementById(player.el().children[0].id);
+
+   vid.addEventListener('oncanplay', function () {
+
+    player.currentTime(localStorage[window.location.search]);
+    localStorage[window.location.search] = player.currentTime()
+
+   }, false);
+return false;
 }
 function raw(url) {
    console.log(url);
@@ -1065,12 +1087,24 @@ function foxapi(url) {
       console.log(data.images.logo.FHD);
 
       bg(data.images.still.HD);
+function play(){
+     fetch(data.videoRelease.url, {
+         method: 'get'
+      }).then(function (response) {
+         return response.json();
+      }).then(function (play) {
 
+         player.src({ "type": "application/x-mpegURL", "src": play.playURL });
+         resume();
+      });
+}
       fetch("https://feed.theplatform.com/f/fox.com/fullepisodes?form=json&range=1-1&byCustomValue={fox:freewheelId}{" + data.externalId[0] + "}", {
          method: 'get'
       }).then(function (response) {
          return response.json();
       }).then(function (data) {
+        if (!data.entries.length == 0) {
+
               fetch(data.entries[0].media$content[0].plfile$url + '&format=script').then(function(res){return res.json();}).then(function(captions){
                 for (var i = captions.captions.length - 1; i >= 0; i--) {
                   if(captions.captions[i].type == "text/vtt"){
@@ -1079,41 +1113,16 @@ break;
 
                   }
                 }
-
-      /*
-  fetch(captions.captions["2"].src).then(function(res){return res.text();}).then(function(cap){
-    parser = new DOMParser();
-xmlDoc = parser.parseFromString(cap,"text/xml");
-      track = player.addTextTrack("captions", "English", "en");
-      track.src = captions.captions["0"].src
-
-var texts = xmlDoc.querySelector('div').children
-console.log(texts)
-var convertTime = function timeString2ms(a,b){
- return a=a.split('.'),
-  b=a[1]*1||0,
-  a=a[0].split(':'),
-  b+(a[2]?a[0]*3600+a[1]*60+a[2]*1:a[1]?a[0]*60+a[1]*1:a[0]*1)*1e3/1000
-};
-for (var i = texts.length - 1; i >= 0; i--) {
-var b = convertTime(texts[i].getAttribute('begin'))
-var e = convertTime(texts[i].getAttribute('end'))
-
-console.log(texts[i].textContent)
-           track.addCue(new VTTCue(b, e, (texts[i].textContent)));
-}
-
-
-  })
-  */
-     
-        })
+ })
          var a = data.entries[0].media$content[0].plfile$url + '&format=redirect&manifest=m3u';
          document.getElementById('downloader').href = a;
 
          player.src({ "type": "application/x-mpegURL", "src": a });
          player.play();
          resume();
+       }else{
+play()
+       }
       });
 
       showname.innerHTML = data.seriesName;
@@ -1124,16 +1133,7 @@ console.log(texts[i].textContent)
       showdesc.innerHTML = data.description;
       document.getElementById('epname').innerHTML = data.name;
 
-      return;
-      fetch(data.videoRelease.url, {
-         method: 'get'
-      }).then(function (response) {
-         return response.json();
-      }).then(function (play) {
-
-         player.src({ "type": "application/x-mpegURL", "src": play.playURL });
-         resume();
-      });
+   
    });
 }
 

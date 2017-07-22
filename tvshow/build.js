@@ -766,7 +766,7 @@ if (!json[i].time > 0) {
       }
     }
     var query = (json[i].metadata + " " + json[i].episode).toLowerCase();
-    timeofPlayback = json[i].length.split(':')[0] + 'm'
+    timeofPlayback = Math.floor(json[i].length / 60) + 'm'
     
 
     date2.setDate(date2.getDate() );
@@ -776,13 +776,16 @@ if (!json[i].time > 0) {
     var out = "'out'"
     var wrapper= document.createElement('div');
     wrapper.innerHTML = '<li  aired="' + json[i].time + '"  ShowName="' + json[i].show + '" class="initialized  '+con+' ' + json[i].type + '  ' + json[i].id + '" data-query="' + query + '"><div  class="piece fanart-container"><div class="image-crop sixteen-nine"url="'+json[i].href+'" autoplay="'+json[i].autoplay+'" onmouseover="playHover(this)" onmouseout="stopHover(this)">' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '"><div class="bg"  style=" background-image:url('+json[i].bg+');background-size:cover;" ></div><video class="sixteen-nine" style="top:0px;" playsinline muted loop width="100%" height="100%"></video><\/span><div class="imageBG"><\/div><img     class="cover sixteen-nine lazy"   sizes="(max-width: 600px) 70vw, 25vw"  alt="' + json[i].show + '"   data-original="'+json[i].img +'" data-original-set="' + json[i].imgdyn + '" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div  class="w3-progress-container" style=""><div class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '" class="overlay-btn zoom-btn " title="Watch ' + json[i].episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json[i].href + '">' + json[i].episode + '<\/a><\/h2><a onclick="showQuery(null,this)" show="' + json[i].show + '" href="javascript:" class="secondary-link show-name">' + json[i].show + '<\/a><div class="cardBorder"></div><div class=><p>' + FDate + ' | ' + json[i].rating + ' | ' + timeofPlayback + ' | ' + json[i].epiformat + '<\/p><\/div><i style="opacity:' + showCheck() + ';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"><\/i><\/div><div class="bottom"><div class="bar"><\/div><div class="bar"><\/div><div class="bar"><\/div><\/div><\/div><\/li>'
+     
       t.appendChild(wrapper.firstChild)
 
   }
+
   document.getElementById('watching').appendChild(w)
   document.getElementById('carasoul').appendChild(t)
   console.timeEnd()
   template = '';
+  return t.firstChild;
 }
 
 function epiformat(s, e) {
@@ -859,8 +862,7 @@ fetch(show_hub + '?bust=' + Date.now() , {
         show: data.videos[i].series_name,
         episode: data.videos[i].title,
         epiformat: epiformat(s, e),
-        length: data.videos[i].duration,
-        metadata: data.videos[i].series_name + ' '+data.videos[i].title,
+        length: data.videos[i].duration_secs,
         type: "cw",
         bg:      'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url='+data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg'+'&container=focus&resize_w=8&refresh=31536000',
         time:Date.parse(airdate)
@@ -877,56 +879,7 @@ fetch(show_hub + '?bust=' + Date.now() , {
 }).catch(function(err) {
   console.log(err)
 });
-var nickAPI = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="http://www.nick.com/data/episodes.json?apiKey=jukebox.nick.com"') + '&format=json&bust=' + (new Date()).getTime();
 
-function nick() {
-  loaders();
-  fetch(nickAPI, {}).then(function(response) {
-    return response.json();
-  }).then(function(json) {
-    json = json.query.results.json
-    var showsTemp = {}
-    for (i in json.stream) {
-      for (a in json.stream[i].items) {
-        try {
-          if (!showsTemp[json.stream[i].items[a].data.seriesTitle]) {
-            showsTemp[json.stream[i].items[a].data.seriesTitle] = json.stream[i].items[a].data.seriesTitle
-          }
-          var S = json.stream[i].items[a].data.duration;
-          var times = S.split(":");
-          var minutes = times[0];
-          var seconds = times[1];
-          seconds = parseInt(seconds, 10) + (parseInt(minutes, 10) * 60);
-          tvlist(json.stream[i].items[a].data.seriesTitle)
-          var date = formatDate(json.stream[i].items[a].data.datePosted.source)
-          if (date == 'NaN-NaN-NaN') {
-            date = formatDate('1/1/2017')
-          }
-          var temp = json.stream[i].items[a].data.datePosted.source
-          var image = json.stream[i].items[a].data.images.thumbnail['r16-9'].split('=')
-          image[1] = '0.40';
-          image = image.join();
-          finalObj.push({
-            img: image,
-            rating: 'TV-14',
-            href: 'nick.com' + json.stream[i].items[a].data.url,
-            id: makeid(),
-            show: json.stream[i].items[a].data.seriesTitle,
-            episode: json.stream[i].items[a].data.shortTitle,
-            epiformat: json.stream[i].items[a].data.episode,
-            length: fmtMSS(seconds),
-            metadata: json.stream[i].items[a].data.seriesTitle + json.stream[i].items[a].data.shortTitle,
-            type: "nick",
-            imgdyn: '',
-            bg:'',
-            time:Date.parse(temp)
-          })
-        } catch (e) {}
-      }
-    }
-    loaders('remove');
-  }).catch(function(e) {})
-}
 
 function fox(range) {
   loaders()
@@ -976,7 +929,6 @@ function fox(range) {
         id: makeid(),
         epiformat: epiformat(data.entries[i].fox$season, data.entries[i].fox$episode),
         length: fmtMSS(data.entries[i].media$content[0].plfile$duration),
-        metadata: rating(data.entries[i].media$ratings[0].rating) + formatDate(data.entries[i].media$availableDate) + data.entries[i].fox$series + data.entries[i].title + epiformat(data.entries[i].fox$season, data.entries[i].fox$episode) + fmtMSS(data.entries[i].media$content[0].plfile$duration),
         type: "fox",
         imgdyn: srcset,
         time:Date.parse(date) + 86400000
@@ -1011,7 +963,6 @@ function procABC(showepi) {
       id: makeid(),
       epiformat: epiformat(showepi.videos.video[a].season.trackcode.generic.cseason, showepi.videos.video[a].number),
       length: msToTime(showepi.videos.video[a].duration['$']),
-      metadata: (showepi.videos.video[a].tvrating.rating) + airdate + showepi.videos.video[a].show.title + showepi.videos.video[a].show.title + epiformat(showepi.videos.video[a].season.trackcode.generic.cseason, showepi.videos.video[a].number) + msToTime(showepi.videos.video[a].duration['$']),
       type: "abc"
     });
   }
@@ -1166,8 +1117,8 @@ for (var z = sizes.length - 1; z >= 0; z--) {
   srcset += (image + '?fit=inside%7C' + encodeURIComponent(sizes[z]) + ' '+ sizes[z].split(':')[0] +'w ' +sizes[z].split(':')[1] +'h,')
 }
 srcset = srcset.substr(0, srcset.length - 1);
-var temp = new Date(json.member[i].available);
-temp.setDate(temp.getDate()-1);
+var temp = new Date(json.member[i].originalAirDate);
+console.log(temp)
 
       finalObj.push({
         img: json.member[i].images.still.SD,
@@ -1177,8 +1128,7 @@ temp.setDate(temp.getDate()-1);
         episode: json.member[i].name,
         id: makeid(),
         epiformat: epiformat(json.member[i].seasonNumber, json.member[i].episodeNumber),
-        length: fmtMSS(json.member[i].durationInSeconds),
-        metadata:  json.member[i].alternativeHeadline + " " +json.member[i].headline ,
+        length: json.member[i].durationInSeconds,
         type: "fox",
         imgdyn: srcset,
         autoplay:json.member[i].autoPlayVideo.default.url,
