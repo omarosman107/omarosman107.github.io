@@ -228,6 +228,9 @@ function toTitleCase(str) {
    });
 }
 downloader.onclick = function(){
+  if (downloader.href == '') {
+    return;
+  }
 player.src({src:downloader.href + '#t=' + localStorage[window.location.search],type:'video/mp4'})
    var vid = document.getElementById(player.el().children[0].id);
 
@@ -1115,7 +1118,12 @@ break;
                 }
  })
          var a = data.entries[0].media$content[0].plfile$url + '&format=redirect&manifest=m3u';
-         document.getElementById('downloader').href = a;
+         fetch(data.entries[0].media$content[0].plfile$url.split('?')[0] + '?&switch=http&mbr=true').then(function(res){return res.text();}).then(function(download){
+          parser = new DOMParser();
+xmlDoc = parser.parseFromString(download,"text/xml");
+console.log( xmlDoc.querySelector('video').getAttribute('src'))
+                document.getElementById('downloader').href =  xmlDoc.querySelector('video').getAttribute('src');
+         })
 
          player.src({ "type": "application/x-mpegURL", "src": a });
          player.play();
