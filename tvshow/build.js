@@ -736,7 +736,7 @@ if (!time > 0) {
     }
     var perc = 0;
     if (localStorage["?" + json.href]) {
-      perc = localStorage["?" + json.href + "_perc"]
+      perc = localStorage["?" + json.href] / json.length * 100;
       if (perc == "NaN") {
         perc = 0
       }

@@ -67,9 +67,7 @@ function resumePlayback(state) {
 
       if (localStorage[window.location.search]) {
 
-         if (parseInt(localStorage[window.location.search + "_perc" == 100])) {
-            console.log('finished');
-         }
+  
 
          player.currentTime(localStorage[window.location.search]);
          played = true;
@@ -122,10 +120,7 @@ function resume() {
          endTime();
 
          localStorage[window.location.search] = player.currentTime();
-         localStorage[window.location.search + '_perc'] = player.currentTime() / player.duration() * 100;
          if (player.currentTime() == player.duration()) {
-            localStorage[window.location.search + '_perc'] = 0;
-            localStorage.removeItem(window.location.search + '_perc');
             localStorage.removeItem(window.location.search);
          }
       }, 2000);
@@ -156,10 +151,7 @@ function resume() {
          endTime();
 
          localStorage[window.location.search] = player.currentTime();
-         localStorage[window.location.search + '_perc'] = player.currentTime() / player.duration() * 100;
          if (player.currentTime() == player.duration()) {
-            localStorage[window.location.search + '_perc'] = 0;
-            localStorage.removeItem(window.location.search + '_perc');
             localStorage.removeItem(window.location.search);
          }
       }, 2000);
