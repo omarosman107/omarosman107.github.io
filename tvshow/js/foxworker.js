@@ -1,4 +1,4 @@
-	
+	self.postMessage('loaded')
 function rating(rate) {
   if (rate == undefined){
     return "UNRATED"

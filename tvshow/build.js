@@ -1263,10 +1263,15 @@ xhr.send(data);
 
 }
 if (typeof(Worker) !== "undefined") {
+  loaders();
    var worker = new Worker('js/foxworker.js');
 
 
 worker.addEventListener('message', function(e) {
+  if (e.data == 'loaded') {
+    loaders('remove')
+    return;
+  }
   if (e.data == 'remove') {
     loaders('remove')
     return;
