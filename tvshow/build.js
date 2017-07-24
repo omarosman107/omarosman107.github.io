@@ -424,12 +424,10 @@ function query(q) {
  qtime = setTimeout(function() {
     for (var i = 0, len = finalObj.length; i < len; i++) {
       if ((finalObj[i].show +' '+ finalObj[i].episode).toLowerCase().includes(q.toLowerCase())) {
-        document.getElementsByClassName(finalObj[i].id)[0].style.opacity = '1'
                 document.getElementsByClassName(finalObj[i].id)[0].style.display = 'inline-block';
 
         num = num + 1
       } else {
-        document.getElementsByClassName(finalObj[i].id)[0].style.opacity = '0'
                         document.getElementsByClassName(finalObj[i].id)[0].style.display = 'none';
 
       }
@@ -444,7 +442,6 @@ function showAll(q){
   var num = 0
   setTimeout(function() {
     for (var i = 0, len = finalObj.length; i < len; i++) {
-        document.getElementsByClassName(finalObj[i].id)[0].style.opacity = '1'
                         document.getElementsByClassName(finalObj[i].id)[0].style.display = 'inline-block'
 
         num = num + 1
@@ -486,12 +483,10 @@ function showQuery(q, o) {
   var num = 0
     for (var i = 0, len = finalObj.length; i < len; i++) {
       if (finalObj[i].show.toLowerCase() == (q.toLowerCase())) {
-        document.getElementsByClassName(finalObj[i].id)[0].style.opacity = '1'
                         document.getElementsByClassName(finalObj[i].id)[0].style.display = 'inline-block';
 
         num = num + 1
       } else {
-        document.getElementsByClassName(finalObj[i].id)[0].style.opacity = '0'
                 document.getElementsByClassName(finalObj[i].id)[0].style.display = 'none';
 
       }
