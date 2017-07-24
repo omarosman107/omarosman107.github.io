@@ -1259,4 +1259,29 @@ xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 xhr.send(data);
 
 }
-newfox()
+if (typeof(Worker) !== "undefined") {
+   var worker = new Worker('js/foxworker.js');
+
+
+worker.addEventListener('message', function(e) {
+  if (e.data == 'remove') {
+    loaders('remove')
+    return;
+  }
+  if (e.data == 'add') {
+    loaders()
+    return;
+  }
+
+   if ('loadshow' in e.data) {
+    tvlist(e.data.loadshow,e.data.img)
+    return;
+  }
+  if ('show' in e.data) {
+    finalObj.push(e.data)
+  }
+}, false);
+
+  }else{
+    newfox()
+  }
