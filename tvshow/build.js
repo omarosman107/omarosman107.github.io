@@ -536,30 +536,10 @@ function tvlist(showName,img) {
   if (showName in tvobj) {
     return 'Already In.';
   }
-  var finalList = ''
-    /*  for(i in showName){
 
-       finalList += multiURL(showName[i])
-     }
-     showName = 
-    finalList = ('select * from yql.query.multi where queries="'+finalList + '"')
-
-     var url = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(finalList) +  '&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=';
-    */
   tvobj[(showName)] = ''
 
-if (img != undefined) {
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><div class="overlay"></div><img class="loaded" width="100%" alt="' + showName + '" src="' + img + '"><\/a><\/div>'
-return;
 
-} 
-fetch('https://query.yahooapis.com/v1/public/yql?q=select%20data.serp_promo.offsite_show.thumbnail_url%20from%20json%20where%20url%3D%22http%3A%2F%2Fwww.hulu.com%2Fsapi%2Fsearch%2Fpromo%3Fquery%3D'+encodeURIComponent(replaceAll(showName," ","+"))+'%22%20&format=json',{
-  method: 'get',
-  cache: "force-cache"
-}).then(function(res){
-  return res.json();
-}).then(function(data){
-  if (data.query.count == 0) {
  url = tvstQ(showName)
   fetch(url, {
     method: 'get',
@@ -567,37 +547,27 @@ fetch('https://query.yahooapis.com/v1/public/yql?q=select%20data.serp_promo.offs
   }).then(function(response) {
     return response.json();
   }).then(function(dat) {
-    /*  for (var i = dat.query.results.results.length - 1; i >= 0; i--) {
-       try{
-       document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+dat.query.results.results[i].json.stripped_name+'" bg="" show="' + dat.query.results.results[i].json.stripped_name +'" onclick="query(null,this)" ><img width="100%" alt="'+dat.query.results.results[i].json.stripped_name+'" src="'+dat.query.results.results[i].json.all_images.poster._[3]+'"><\/a><\/div>'
-    }catch(e){
-     console.log(e)
-    }
- 
-     }
-     */
-     var endp = 'http://webservice.fanart.tv/v3/tv/'+dat.query.results.json.id+'?api_key=334bde683eabd3ae55eb6a1917bd4795'
-     var yqlendpoint = 'https://query.yahooapis.com/v1/public/yql?q=select%20tvthumb.url%20from%20json%20where%20url%3D%22http%3A%2F%2Fwebservice.fanart.tv%2Fv3%2Ftv%2F'+dat.query.results.json.id+'%3Fapi_key%3D334bde683eabd3ae55eb6a1917bd4795%22%20&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=&_maxage=360000' 
-fetch(yqlendpoint,{
- method: 'get' 
-}).then(function(res){return res.json();}).then(function(data){
-  try{
- var goog = encodeURIComponent(data.query.results.json[0].tvthumb.url)
-    document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><div class="overlay"></div><img class="loaded" width="100%" alt="' + showName + '" src="'+       'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url='+goog+'&container=focus&resize_w=350&refresh=31536000" ><\/a><\/div>'
-}catch(e){
+    var fanart = (dat.query.results.json.all_images.fanart._[3])
+        var poster = (dat.query.results.json.all_images.poster._[3])
+        if (img != undefined) {
+fanart = img
 }
-})
+document.getElementById('tvShows').innerHTML += `<div show="${showName}" onclick="showQuery(null,this)"  class="show">
+  <div  class="background" style="background:url(${fanart});background-repeat: no-repeat;    background-size: 100% 100%;"></div>
+  <div class="poster"><img  width="100%" src="${poster}"></div>
+</div>
+`;
+return;
 
-  }).catch(function(e) {});
-    return;
+       document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="showQuery(null,this)"><div class="overlay"></div><img class="loaded" width="100%" alt="'+showName+'" src="'+dat.query.results.json.all_images.fanart._[3]+'"><\/a><\/div>'
+}).catch(function(e) {
+console.log(e)
+});
+
   }
-      document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow js-tilt" data-tilt>  <a href="javascript:"  title="' + showName + '" bg="" show="' + showName + '" onclick="showQuery(null,this)" ><div class="overlay"></div><img class="loaded" width="100%" alt="' + showName + '" src="'+  data.query.results.json.data.serp_promo.offsite_show.thumbnail_url    +'" ><\/a><\/div>'
-}).catch(function(e){
-
-})
 
  
-}
+
 
 function search(val) {
   function filter(a) {

@@ -392,6 +392,45 @@ box-sizing:border-box;
 
 
 }
+.show {
+  width: 336px;
+    height: 189px;
+  background-color:black;
+  border-radius:5px;
+  display:inline-block;
+  z-index:5;
+  margin: 10px;
+  cursor: pointer;
+}
+.show .background {
+  border-radius:5px;
+  z-index: 4;
+  width:100%;
+  height:100%;
+    overflow: hidden;
+    letter-spacing: 0;
+    -webkit-transition: opacity .33s linear;
+    transition: opacity .33s linear;
+    background-repeat: no-repeat;
+ background-size: cover;
+}
+.show .poster {
+        z-index: 6;
+    position: relative;
+    top: -179px;
+        left: 21px;
+    width: 114px;
+}
+.show h1 {
+  position:relative;
+  top:-300px;
+  color:white;
+  left:140px;
+  font-family:helvetica;
+}
+.poster:hover {
+    transform: scale(1.02);
+}
   </style>
   <title>EPISODES - We provide the best streaming site.</title>
 </head>

@@ -1,4 +1,3 @@
-	self.postMessage('loaded')
 function rating(rate) {
   if (rate == undefined){
     return "UNRATED"
@@ -109,7 +108,7 @@ var temp = new Date(json.member[i].originalAirDate);
 
               });
 self.postMessage({loadshow:json.member[i].seriesName,
-	img:json.member[i].images.seriesList.HD})
+	img:json.member[i].images.seriesStill.SD})
 
 
 
@@ -173,6 +172,7 @@ loadShow.send(data)
 
 
   self.postMessage('add');
+	self.postMessage('loaded')
 
 var xhr = new XMLHttpRequest();
 xhr.onerror = function() {
