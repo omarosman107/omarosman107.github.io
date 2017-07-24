@@ -363,6 +363,28 @@ body {
 .tvshow:hover .overlay{
     opacity: .5;
 }
+.finished .lScreen{
+opacity: 0;
+z-index: -99999;
+visibility: none;
+}
+.finished .contain {
+  display: block;
+}
+.loading {
+  filter: blur(2vw);
+  transform: scale(1.05);
+}
+.loaded {
+
+  will-change: transform, opacity;
+  animation: reveal .5s ease-out;
+}
+
+@keyframes reveal {
+  0% {transform: scale(1.05); opacity: 0;}
+  100% {transform: scale(1); opacity: 1;}
+}
   </style>
   <title>EPISODES - We provide the best streaming site.</title>
 </head>
@@ -431,7 +453,7 @@ body {
   <script defer async src="js/dragscroll.js" type="text/javascript">
 
 </script>
-<script async defer src="js/lazyload.min.js"></script>
+ <script async defer src="js/lazyload.min.js"></script>
 
 
    <!-- <link async rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
