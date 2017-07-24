@@ -331,6 +331,7 @@ io.observe(Lazyelements[i])
 }
  
 var myLazyLoad
+myLazyLoad = new LazyLoad();
 
 
 function addJS(url) {
@@ -349,7 +350,6 @@ function loaders(atr) {
     num = num - 1
   document.getElementById('topprogress').style.transform = 'translateX(' + ((100 - (num/maxnum *100)) - 100) + '%)'
     if (num == 0) {
-
 
 var l = []
 finalObj.sort(function(x, y) {
@@ -378,12 +378,11 @@ loadMedia(l)
                         document.getElementsByClassName('lScreen')[0].style.visibility = 'none'
       document.querySelector('.contain').style.display = 'block';
 
-
-myLazyLoad = new LazyLoad({
-threshold:600
-});
+ console.time('organize');
+     console.timeEnd('organize')
 
 myLazyLoad.update()
+
 window.onscroll = function() {
 myLazyLoad.update()
 
@@ -395,7 +394,7 @@ myLazyLoad.update()
 
   
 
-   
+
 
 
     }
