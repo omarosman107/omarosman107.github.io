@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class=''>
+<html lang="en" class=''>
 <head>
   <!--
 <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
@@ -378,11 +378,11 @@ visibility: none;
 .loaded {
 
   will-change: transform, opacity;
-  animation: reveal .5s ease-out;
+  animation: reveal .2s ease-out;
 }
 
 @keyframes reveal {
-  0% {transform: scale(1.05); opacity: 0;}
+  0% {transform: scale(1.01); opacity: 0;}
   100% {transform: scale(1); opacity: 1;}
 }
 * {
@@ -427,7 +427,7 @@ box-sizing:border-box;
     <button id="myBtn" onclick="topFunction()" style="z-index: 1;" title="Go to top"><i aria-hidden="true" class="fa fa-level-up"></i></button>
     <div class="box">
       <div class="container-1">
-        <label for="search"><span class="icon"><i class="fa fa-search"></i></span></label> <input oninput="query(this.value)" id="search" placeholder="Search..." type="search">
+        <label for="search"><span class="icon"><i class="fa fa-search"></i></span></label> <input label="Search" oninput="query(this.value)" id="search" placeholder="Search..." type="search">
       </div><span id="results"></span>
     </div>
     <h1 id="wtcTxt">Continue Watching</h1>
