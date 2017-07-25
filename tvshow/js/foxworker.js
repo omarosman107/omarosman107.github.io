@@ -132,8 +132,12 @@ console.timeEnd()
 
 var season = null
 try{
-var season = showinfo.panels.member[1].items.member["0"].episodes["@id"]
-seasoninfo.open("GET",season);
+	if ( showinfo.panels.member["0"].items.member["0"].latestEpisode.seasonNumber < 10) {
+		 showinfo.panels.member["0"].items.member["0"].latestEpisode.seasonNumber = '0'+ showinfo.panels.member["0"].items.member["0"].latestEpisode.seasonNumber
+	}
+	console.log(showinfo.panels.member["0"].items.member["0"])
+var season = 'https://api.fox.com/fbc-content/v3/seasons/' + showinfo.panels.member["0"].items.member["0"].id +'_'+ showinfo.panels.member["0"].items.member["0"].latestEpisode.seasonNumber + '/episodes' 
+seasoninfo.open("GET",season+'?itemsPerPage=6');
 seasoninfo.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 
 seasoninfo.send(null)
@@ -160,7 +164,7 @@ return;
 
   }
 });
-loadShow.open("GET", 'https://api.fox.com/fbc-content/v3/screens/series-detail/'+id);
+loadShow.open("GET", 'https://api.fox.com/fbc-content/v3/screens/series-detail/'+id + '?itemsPerPage=1');
 
 loadShow.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 loadShow.send(data)

@@ -554,7 +554,7 @@ fanart = img
 }
 document.getElementById('tvShows').innerHTML += `<div show="${showName}" onclick="showQuery(null,this)"  class="show">
   <div  class="background" style="background:url(${fanart});background-repeat: no-repeat;    background-size: 100% 100%;"></div>
-  <div class="poster"><img  width="100%" src="${poster}"></div>
+  <div class="poster"><img  class="loaded" width="100%" src="${poster}"></div>
 </div>
 `;
 return;
@@ -675,7 +675,6 @@ try{
   console.time()
   for (i in episodes) {
     var json = episodes[i]
-    console.log(json)
     var con = (json.show +''+ json.episode).toLowerCase().split(' ').join('').replace(/[^a-zA-Z ]/g, "")
     /*
     if (document.body.querySelector('.'+con)) {
@@ -749,7 +748,7 @@ if (!time > 0) {
   }
   console.timeEnd()
 }catch(e){
-
+console.log(e)
 }
 
   document.getElementById('watching').appendChild(w)

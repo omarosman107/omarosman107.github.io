@@ -386,21 +386,22 @@ visibility: none;
   100% {transform: scale(1); opacity: 1;}
 }
 * {
-box-shadow:initial !important;
-filter:initial !important;
+
 box-sizing:border-box;
 
 
 }
+
 .show {
-  width: 336px;
-    height: 189px;
+ width: 272px;
+    height: 153px;
   background-color:black;
   border-radius:5px;
   display:inline-block;
   z-index:5;
   margin: 10px;
   cursor: pointer;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,.17), 0 0 8px 0 rgba(0,0,0,.12);
 }
 .show .background {
   border-radius:5px;
@@ -415,11 +416,12 @@ box-sizing:border-box;
  background-size: cover;
 }
 .show .poster {
-        z-index: 6;
+       z-index: 6;
     position: relative;
-    top: -179px;
-        left: 21px;
-    width: 114px;
+    top: -150px;
+    left: 16px;
+    width: 99px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,.17), 0 0 8px 0 rgba(0,0,0,.12);
 }
 .show h1 {
   position:relative;
@@ -430,6 +432,19 @@ box-sizing:border-box;
 }
 .poster:hover {
     transform: scale(1.02);
+}
+@media(max-width: 400px ){
+  .show{
+    width: 208px;
+    height: 117px;
+  }
+  .show .poster {
+        top: -109px;
+    left: 12px;
+    width: 67px;
+
+
+  }
 }
   </style>
   <title>EPISODES - We provide the best streaming site.</title>

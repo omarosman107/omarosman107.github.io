@@ -254,7 +254,7 @@ function fetchcwjson(value) {
    console.log(stripped
    // HLS = 154 | 206
    // MP4 = 213
-   );var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/206?format=json";
+   );var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/217?format=json";
    fetch('http://api.digitalsmiths.tv/metaframe/65e6ee99/asset/' + stripped + '/filter?track=Closed%20Captioning').then(function (res) {
       return res.json();
    }).then(function (cap) {
@@ -270,9 +270,9 @@ function fetchcwjson(value) {
    }).then(function (data) {
       document.getElementById('progress').style.width = "50%";
       // finalurl = data.videos.hls5128.uri;
-      finalurl = data.videos.variantplaylist.uri;
- 
-      player.src([{ "src": data.assetFields.smoothStreamingUrl + '(format=mpd-time-csf).mpd', "type": "application/dash+xml" }, { "src": data.assetFields.smoothStreamingUrl + '(format=m3u8-aapl).m3u8', "type": "application/x-mpegURL" }, { "src": finalurl, "type": "application/x-mpegURL" },{"src":  'http://cwtv-mrss-akamai.cwtv.com/'+ finalurl.split('videos/')[1].split('.m3u8')[0] + '_3596kbps.mp4',"type":"video/mp4"}]);
+      finalurl = data.videos.variantplaylist_dai.uri;
+ // { "src": data.assetFields.smoothStreamingUrl + '(format=mpd-time-csf).mpd', "type": "application/dash+xml" }, { "src": data.assetFields.smoothStreamingUrl + '(format=m3u8-aapl).m3u8', "type": "application/x-mpegURL" }, { "src": finalurl, "type": "application/x-mpegURL" },
+      player.src([ { "src": finalurl, "type": "application/x-mpegURL" },{ "src": data.videos.variantplaylist.uri, "type": "application/x-mpegURL" },{"src":  'http://cwtv-mrss-akamai.cwtv.com/'+ finalurl.split('videos/')[1].split('.m3u8')[0] + '_3596kbps.mp4',"type":"video/mp4"}]);
       player.play();
       resume();
 
@@ -286,7 +286,7 @@ function fetchcwjson(value) {
       
       document.title = data.assetFields.seriesName + " - " + data.assetFields.title;
       document.getElementById('progress').style.width = "60%";
-      document.getElementById('downloader').href = 'http://cwtv-mrss-akamai.cwtv.com/'+ finalurl.split('videos/')[1].split('.m3u8')[0] + '_5128kbps.mp4';
+      document.getElementById('downloader').href = 'http://cwtv-mrss-akamai.cwtv.com/'+ data.videos.variantplaylist.uri.split('videos/')[1].split('.m3u8')[0] + '_5128kbps.mp4';
 
       /*  player.src({
            "type": "application/x-mpegURL",
@@ -900,17 +900,18 @@ function fetchfxjson(value) {
          return response.text();
       }).then(function (final) {
 
-         final = JSON.parse(tohtml(final).getElementById('seo-data').innerHTML);
+         final = (tohtml(final));
+         console.log(final.querySelector("[property='video:series']").content)
          document.getElementById('progress').style.width = "90%";
-         showname.innerHTML = final.name;
-         console.log(final);
-         document.title = final.name;
+         getShowinfo(final.querySelector("[property='video:series']").content)
+         showname.innerHTML = final.querySelector("[property='video:series']").content;
+         document.title = final.querySelector("[property='video:series']").content;
 
-         showdesc.innerHTML = final.description;
-         console.log(final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].split('?')[0]);
-         document.getElementById('downloader').href = final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false";
+         showdesc.innerHTML = final.querySelector("[property='og:description']").content;
+         document.getElementById('epname').innerHTML = final.querySelector(".episodeTitle").value;
+         document.getElementById('downloader').href = final.querySelector("[property='twitter:player:stream']").content.split('releaseURL=')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false";
 
-         player.src({ "type": "application/x-mpegURL", "src": final.mainEntityOfPage.video.contentUrl.split('&releaseURL=')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false" });
+         player.src({ "type": "application/x-mpegURL", "src": final.querySelector("[property='twitter:player:stream']").content.split('releaseURL=')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false" });
          player.play();
          resume();
          document.getElementById('progress').style.width = "100%";
