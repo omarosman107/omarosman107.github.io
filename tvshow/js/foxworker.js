@@ -136,7 +136,7 @@ try{
 		 showinfo.panels.member["0"].items.member["0"].latestEpisode.seasonNumber = '0'+ showinfo.panels.member["0"].items.member["0"].latestEpisode.seasonNumber
 	}
 	console.log(showinfo.panels.member["0"].items.member["0"])
-var season = 'https://api.fox.com/fbc-content/v3/seasons/' + showinfo.panels.member["0"].items.member["0"].id +'_'+ showinfo.panels.member["0"].items.member["0"].latestEpisode.seasonNumber + '/episodes' 
+var season = 'https://api.fox.com/fbc-content/v3_blue/seasons/' + showinfo.panels.member["0"].items.member["0"].id +'_'+ showinfo.panels.member["0"].items.member["0"].latestEpisode.seasonNumber + '/episodes' 
 seasoninfo.open("GET",season+'?itemsPerPage=6');
 seasoninfo.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 
@@ -164,7 +164,7 @@ return;
 
   }
 });
-loadShow.open("GET", 'https://api.fox.com/fbc-content/v3/screens/series-detail/'+id + '?itemsPerPage=1');
+loadShow.open("GET", 'https://api.fox.com/fbc-content/v3_blue/screens/series-detail/'+id + '?itemsPerPage=1');
 
 loadShow.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 loadShow.send(data)
@@ -229,7 +229,7 @@ if(allshows[i].seriesType != 'special' || allshows[i].seriesType != 'movie'){
 });
 
 
-xhr.open("GET", "https://api.fox.com/fbc-content/v3/screens/find");
+xhr.open("GET", "https://api.fox.com/fbc-content/v3_blue/screens/find");
 
 xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 
