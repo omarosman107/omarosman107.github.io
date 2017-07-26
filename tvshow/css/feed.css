@@ -663,7 +663,7 @@ body a {
 .fanarts-list>li .fanart-details h2 {
     color: #444;
     font-size: 16px;
-    font-family: ProximaNovaB;
+    font-family: ProximaNovaB,serif;
     max-width: 100%
 }
 

@@ -538,7 +538,13 @@ function tvlist(showName,img) {
   }
 
   tvobj[(showName)] = ''
-
+if (img != undefined) {
+  document.getElementById('tvShows').innerHTML += `<div show="${showName}" onclick="showQuery(null,this)"  class="show">
+  <div  class="background" style="background:url(${img});background-repeat: no-repeat;    background-size: 100% 100%;"></div>
+</div>
+`;
+return;
+}
 
  url = tvstQ(showName)
   fetch(url, {
@@ -548,13 +554,8 @@ function tvlist(showName,img) {
     return response.json();
   }).then(function(dat) {
     var fanart = (dat.query.results.json.all_images.fanart._[3])
-        var poster = (dat.query.results.json.all_images.poster._[3])
-        if (img != undefined) {
-fanart = img
-}
 document.getElementById('tvShows').innerHTML += `<div show="${showName}" onclick="showQuery(null,this)"  class="show">
   <div  class="background" style="background:url(${fanart});background-repeat: no-repeat;    background-size: 100% 100%;"></div>
-  <div class="poster"><img  class="loaded" width="100%" src="${poster}"></div>
 </div>
 `;
 return;
@@ -871,7 +872,7 @@ fetch(show_hub + '?bust=' + Date.now() , {
         airdate = (data.videos[i].start_time)
       }
       var dyn =  data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_1920x1080.jpg 1920w, ' +data.videos[i].large_thumbnail + " 720w  ,"+ data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_640x360.jpg 640w, '+data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_609x335.jpg 609w, ' +  data.videos[i].medium_thumbnail + ' 210w, ' + data.videos[i].large_thumbnail.split('tv_')[0] + 'tv_141x79.jpg 144w '
-      tvlist(data.videos[i].series_name)
+      tvlist(data.videos[i].series_name,'http://images.cwtv.com/thecw/img/s_mobile.i_show_thumbnail.show_'+data.videos[i].show_slug+'.v_7.w_385.jpg')
       var episode_data = {
         img: data.videos[i].medium_thumbnail,
         rating: (data.videos[i].rating),
