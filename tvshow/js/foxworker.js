@@ -105,12 +105,12 @@ var temp = moment(json.member[i].originalAirDate).subtract(4, 'hours')
         type: "fox",
         imgdyn: srcset,
         autoplay:json.member[i].autoPlayVideo.default.url,
-        bg:json.member[i].images.still.HD.split('?')[0] + '?fit=inside%7C' + encodeURIComponent('8:4'),
+        bg:json.member[i].images.still.HD.replace('http://','https://').split('?')[0] + '?fit=inside%7C' + encodeURIComponent('8:4'),
         time:Date.parse(temp)
 
               });
 self.postMessage({loadshow:json.member[i].seriesName,
-	img:json.member[i].images.seriesList.SD})
+	img:json.member[i].images.seriesList.SD.replace('http://','https://')})
 
 
 
