@@ -7,7 +7,10 @@ PLAYER:New design
 
 
 == CHANGELOG ==
-
+new show layout in shows section
+--
+cw player 3x better quality and 2x faster
+--
 captions added for cw shows
 --
 cw player using way better servers and better quality
