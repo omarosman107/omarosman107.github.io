@@ -667,8 +667,7 @@ var formatter = new Intl.DateTimeFormat({
 var date1 = Date.now()
 
 function loadMedia(episodes) {
-var w = document.createDocumentFragment()
-var t = document.createDocumentFragment()
+
   var template = ''
   var watching = ''
 try{
