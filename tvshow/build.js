@@ -799,12 +799,13 @@ if (!time > 0) {
 
   }
   console.timeEnd()
-}catch(e){
+
+
+  document.getElementById('watching').innerHTML += watching;
+  document.getElementById('carasoul').innerHTML += template;
+  }catch(e){
 console.log(e)
 }
-
-  document.getElementById('watching').innerHTML += watching
-  document.getElementById('carasoul').innerHTML += template
 }
 
 function epiformat(s, e) {

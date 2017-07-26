@@ -90,7 +90,7 @@ for (var z = sizes.length - 1; z >= 0; z--) {
   srcset += (image + '?fit=inside%7C' + encodeURIComponent(sizes[z]) + ' '+ sizes[z].split(':')[0] +'w ' +sizes[z].split(':')[1] +'h,')
 }
 srcset = srcset.substr(0, srcset.length - 1);
-var temp = new Date(json.member[i].originalAirDate);
+var temp = new Date(json.member[i].originalAirDate,'Europe/London');
   self.postMessage({
         img: json.member[i].images.still.SD,
         rating: rating(json.member[i].contentRating),
