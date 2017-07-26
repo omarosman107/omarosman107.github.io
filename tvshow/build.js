@@ -724,6 +724,7 @@ if (!time > 0) {
     }
     var done = perc > 99
     if (!done && perc > 0.4) {
+      //          <span class="episode-gradient"></span>
         //  document.getElementById('watching').innerHTML += '<div tabindex="1" class="wtc '+json[i].href+'"><a onclick="loadPlayer(this)" href="player.html?'+json[i].href+'" ><img width="100%" src="'+json[i].img+'"><div id="projpar" class="w3-progress-container" style=""><div id="progress" class="w3-progressbar" style="width: '+perc+'%;"><\/div><\/div><br> <span>'+json[i].show+'<\/span><\/a><\/div>'
         watching += `<li style="margin: 11px;" class=" card  ${json.href}">
    <a href="#"></a>
@@ -733,18 +734,16 @@ if (!time > 0) {
          <a href="#"></a>
          <a onclick="loadPlayer(this)" href="newplayer.html?${json.href}">
             <div class="bg" style=" background-image:url(${json.bg});background-size:cover;"></div>
-            <div class="imageBG"></div>
-            <img class="cover sixteen-nine lazy" sizes="(max-width: 600px) 80vw, 460px" alt="${json.episode}" data-original="${json.img}" data-original-set="${json.imgdyn}"><i class="fa fa-play-circle-o" aria-hidden="true"></i>
+            <img class="cover sixteen-nine lazy" sizes="(max-width: 600px) 80vw, 460px" alt="${json.episode}" data-original="${json.img}" data-original-set="${json.imgdyn}">
          </a>
-         <span class="episode-gradient"></span>
          <div id="projpar" class="w3-progress-container">
             <div id="progress" class="w3-progressbar" style="width: ${perc}%;"></div>
          </div>
          <div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?${json.href}" class="overlay-btn zoom-btn " title="Watch ${json.episode}"><i class="fa fa-play playbutton"></i></a></div>
       </div>
-      <div class="episode-details fanart-details">
+      <div class="fanart-details">
          <h2><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?${json.href}">${json.episode}</a></h2>
-         <a onclick="showQuery(null,this)" show="${json.show}" href="javascript:" class="secondary-link show-name">${json.show}</a><a href="javascript:"><i style="    /* opacity: 0; */color: rgb(127, 218, 99);position: absolute;right: 10px;bottom: 10px;display:none;" class="visited fa fa-check" aria-hidden="true"></i></a>
+         <a onclick="showQuery(null,this)" show="${json.show}" href="javascript:" class="secondary-link show-name">${json.show}</a><a href="javascript:"></a>
       </div>
       <div class="bottom"></div>
    </div>
@@ -770,28 +769,20 @@ if (!time > 0) {
          ${newBanner()}
             <div class="bg" style=" background-image:url(${json.bg});background-size:cover;"></div>
             <video class="sixteen-nine" style="top:0px;" playsinline="" muted="" loop="" width="100%" height="100%"></video>
-            <img class="cover sixteen-nine lazy loaded" sizes="(max-width: 600px) 70vw, 25vw" alt="${json.show}" data-original="${json.img}" data-original-set="${json.imgdyn}" style="display: block;"><i class="fa fa-play-circle-o" aria-hidden="true"></i>
+            <img class="cover sixteen-nine lazy loaded" sizes="(max-width: 600px) 70vw, 25vw" alt="${json.show}" data-original="${json.img}" data-original-set="${json.imgdyn}" style="display: block;">
          </a>
-         <span class="episode-gradient"></span>
          <div class="w3-progress-container">
             <div class="w3-progressbar" style="width: ${perc}%;"></div>
          </div>
          <div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?${json.href}" class="overlay-btn zoom-btn " title="Watch ${json.episode}"><i class="fa fa-play playbutton" style="visibility: visible;"></i></a></div>
       </div>
-      <div class="episode-details fanart-details">
+      <div class="fanart-details">
          <h2><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?${json.href}">${json.episode}</a></h2>
          <a onclick="showQuery(null,this)" show="${json.show}" href="javascript:" class="secondary-link show-name">${json.show}</a>
          <div class="cardBorder"></div>
-         <div class="">
             <p>${FDate} | ${json.rating} | ${timeofPlayback} | ${json.epiformat}</p>
-         </div>
-         <i style="opacity:${showCheck()};color:rgb(127, 218, 99);" class="visited fa fa-check" aria-hidden="true"></i>
-      </div>
-      <div class="bottom">
-         <div class="bar"></div>
-         <div class="bar"></div>
-         <div class="bar"></div>
-      </div>
+        </div>
+      <div class="bottom"></div>
    </div>
 </li>`
  //   wrapper.innerHTML = '<li  aired="' + json.time + '"  ShowName="' + json.show + '" class="initialized  '+con+' ' + json.type + '  ' + json.id + '" data-query="' + query + '"><div  class="piece fanart-container"><div class="image-crop sixteen-nine"url="'+json.href+'" autoplay="'+json.autoplay+'" onmouseover="playHover(this)" onmouseout="stopHover(this)">' + newBanner() + '<a onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '"><div class="bg"  style=" background-image:url('+json.bg+');background-size:cover;" ></div><video class="sixteen-nine" style="top:0px;" playsinline muted loop width="100%" height="100%"></video><\/span><div class="imageBG"><\/div><img     class="cover sixteen-nine lazy"   sizes="(max-width: 600px) 70vw, 25vw"  alt="' + json.show + '"   data-original="'+json.img +'" data-original-set="' + json.imgdyn + '" ><i class="fa fa-play-circle-o" aria-hidden="true"><\/i><\/a><span class="episode-gradient"><\/span><div  class="w3-progress-container" style=""><div class="w3-progressbar" style="width: ' + perc + '%;"><\/div><\/div><div class="overlay"><a onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '" class="overlay-btn zoom-btn " title="Watch ' + json.episode + '"><i class="fa fa-play playbutton"><\/i><\/a><\/div><\/div><div class="episode-details fanart-details"><h2 ><a class="episode-name" onclick="loadPlayer(this)" href="newplayer.html?' + json.href + '">' + json.episode + '<\/a><\/h2><a onclick="showQuery(null,this)" show="' + json.show + '" href="javascript:" class="secondary-link show-name">' + json.show + '<\/a><div class="cardBorder"></div><div class=><p>' + FDate + ' | ' + json.rating + ' | ' + timeofPlayback + ' | ' + json.epiformat + '<\/p><\/div><i style="opacity:' + showCheck() + ';color:rgb(127, 218, 99);"class="visited fa fa-check" aria-hidden="true"><\/i><\/div><div class="bottom"><div class="bar"><\/div><div class="bar"><\/div><div class="bar"><\/div><\/div><\/div><\/li>'

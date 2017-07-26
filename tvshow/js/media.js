@@ -281,7 +281,6 @@ function fetchcwjson(value) {
 
       showname.innerHTML = data.assetFields.seriesName;
       document.getElementById('showname').innerHTML = '<img style="    margin-bottom:-5px;width: 6.0em;display:inline-block;" src="http://images.cwtv.com/images/cw/show-logo-horz/' + data.assetFields.showSlug + '.png" width="100%">';
-      document.getElementsByClassName('showImg')[0].innerHTML = '<img width="100%" src="http://images.cwtv.com/images/branch/'+ data.adInfo.seriesSymbol.toLowerCase()+'.jpg' + '">';
       showdesc.innerHTML = data.assetFields.description;
       
       document.title = data.assetFields.seriesName + " - " + data.assetFields.title;
