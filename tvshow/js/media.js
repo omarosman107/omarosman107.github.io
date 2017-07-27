@@ -104,6 +104,8 @@ function resume() {
    vid.onerror = function (e) {
       error(e);
    };
+         resumePlayback();
+
    vid.addEventListener('loadeddata', function () {
       document.getElementById('LS').style.opacity = 1;
       //  document.getElementsByClassName('video-duration')[0].innerHTML = "( " + Math.round(vid.duration / 60) + " min )"
