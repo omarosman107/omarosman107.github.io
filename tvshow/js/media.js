@@ -104,7 +104,6 @@ function resume() {
    vid.onerror = function (e) {
       error(e);
    };
-         resumePlayback();
 
    vid.addEventListener('loadeddata', function () {
       document.getElementById('LS').style.opacity = 1;
