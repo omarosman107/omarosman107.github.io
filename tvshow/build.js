@@ -51,13 +51,13 @@ if (url.includes('cwtv.com') | url.includes('cwseed.com')) {
 var stripped = url.split('?')[1].split('=')[1]
    // HLS = 154 | 206
    // MP4 = 213
-   var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/206?format=json"
+   var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/217?format=json"
    fetch(url, {
       method: 'get'
    }).then(function(response) { 
       return response.json();
    }).then(function(data) {
-        finalurl = data.assetFields.smoothStreamingUrl + '(format=m3u8-aapl).m3u8';
+        finalurl = data.videos.variantplaylist_dai.uri;
         var parser = document.createElement('a');
     parser.href = finalurl
     hls.loadSource(parser.href);
@@ -393,7 +393,6 @@ window.onscroll = function() {
 
 
   
-
 
 
 
@@ -736,6 +735,7 @@ if (!time > 0) {
             <div class="bg" style=" background-image:url(${json.bg});background-size:cover;"></div>
             <img class="cover sixteen-nine lazy" sizes="(max-width: 600px) 80vw, 460px" alt="${json.episode}" data-original="${json.img}" data-original-set="${json.imgdyn}">
          </a>
+         <span class="episode-gradient"></span>
          <div id="projpar" class="w3-progress-container">
             <div id="progress" class="w3-progressbar" style="width: ${perc}%;"></div>
          </div>
@@ -771,6 +771,7 @@ if (!time > 0) {
             <video class="sixteen-nine" style="top:0px;" playsinline="" muted="" loop="" width="100%" height="100%"></video>
             <img class="cover sixteen-nine lazy loaded" sizes="(max-width: 600px) 70vw, 25vw" alt="${json.show}" data-original="${json.img}" data-original-set="${json.imgdyn}" style="display: block;">
          </a>
+         <span class="episode-gradient"></span>
          <div class="w3-progress-container">
             <div class="w3-progressbar" style="width: ${perc}%;"></div>
          </div>
@@ -794,6 +795,7 @@ if (!time > 0) {
 
   document.getElementById('watching').innerHTML += watching;
   document.getElementById('carasoul').innerHTML += template;
+
   }catch(e){
 console.log(e)
 }
@@ -832,7 +834,7 @@ var obj = []
 var cors_show_hub = 'https://crossorigin.me/' + show_hub
 // var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub + '"') + '&format=json&bust='+Date.now();
 loaders()
-fetch(show_hub + '?bust=' + Date.now() , {
+fetch(show_hub + '?bust=' + Date.now()  , {
   method: 'get',
   cache: "no-store"
 }).then(function(response) {
