@@ -1086,7 +1086,7 @@ function play(){
      fetch(data.videoRelease.url, {
          method: 'get'
       }).then(function (response) {
-         return response.json();
+           return response.json();
       }).then(function (play) {
 
          player.src({ "type": "application/x-mpegURL", "src": play.playURL });
@@ -1116,11 +1116,10 @@ xmlDoc = parser.parseFromString(download,"text/xml");
 console.log( xmlDoc.querySelector('video').getAttribute('src'))
                 document.getElementById('downloader').href =  xmlDoc.querySelector('video').getAttribute('src');
          })
-play()
-/*
+
          player.src({ "type": "application/x-mpegURL", "src": a });
          player.play();
-         */
+         
          resume();
        }else{
 play()
