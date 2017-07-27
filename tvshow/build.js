@@ -1204,7 +1204,7 @@ return;
 loadShow.open("GET", 'https://api.fox.com/fbc-content/v3_blue/screens/series-detail/'+id);
 
 loadShow.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
-loadShow.send(data)
+loadShow.send(null)
 
 }
 
@@ -1264,7 +1264,7 @@ loaders('remove')
 
 xhr.open("GET", "https://api.fox.com/fbc-content/v3_blue/screenpanels/57d16a373721cfe22013eb83/items");
 xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
-xhr.send(data);
+xhr.send(null);
 
 }
     newfox()
