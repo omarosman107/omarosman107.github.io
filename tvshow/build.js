@@ -637,19 +637,19 @@ function rating(rate) {
   }
 
   if (rate.includes('tv-14')) {
-    return "TV-14"
+    return "TV-14";
   }
   if (rate.includes('tv-pg')) {
-    return "TV-PG"
+    return "TV-PG";
   }
   if (rate.includes('tv-y7')) {
-    return "TV-Y7"
+    return "TV-Y7";
   }
   if (rate.includes('tv-y')) {
-    return "TV-Y"
+    return "TV-Y";
   }
   if (rate.includes('tv-g')) {
-    return "TV-G"
+    return "TV-G";
   }
   return rate.toUpperCase();
 }
@@ -658,7 +658,7 @@ function rating(rate) {
 
 function loadPlayer(url) {
   return '';
-  link = url.href
+  link = url.href;
   return false;
  }
 
@@ -1263,10 +1263,7 @@ loaders('remove')
 
 
 xhr.open("GET", "https://api.fox.com/fbc-content/v3_blue/screenpanels/57d16a373721cfe22013eb83/items");
-
 xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
-
-
 xhr.send(data);
 
 }
