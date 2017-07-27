@@ -272,7 +272,7 @@ function fetchcwjson(value) {
       // finalurl = data.videos.hls5128.uri;
       finalurl = data.videos.variantplaylist_dai.uri;
  // { "src": data.assetFields.smoothStreamingUrl + '(format=mpd-time-csf).mpd', "type": "application/dash+xml" }, { "src": data.assetFields.smoothStreamingUrl + '(format=m3u8-aapl).m3u8', "type": "application/x-mpegURL" }, { "src": finalurl, "type": "application/x-mpegURL" },
-      player.src([ { "src": finalurl, "type": "application/x-mpegURL" },{ "src": data.videos.variantplaylist.uri, "type": "application/x-mpegURL" },{"src":  'http://cwtv-mrss-akamai.cwtv.com/'+ finalurl.split('videos/')[1].split('.m3u8')[0] + '_3596kbps.mp4',"type":"video/mp4"}]);
+      player.src([{ "src": finalurl, "type": "application/vnd.apple.mpegurl" },{ "src": data.videos.variantplaylist.uri, "type": "application/x-mpegURL" },{"src":  'http://cwtv-mrss-akamai.cwtv.com/'+ finalurl.split('videos/')[1].split('.m3u8')[0] + '_3596kbps.mp4',"type":"video/mp4"}]);
       player.play();
       resume();
 
