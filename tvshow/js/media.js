@@ -292,7 +292,7 @@ function fetchcwjson(value) {
            "src": finalurl 
         }); */
 
-      bg(data.images.cwtv1920x1080.uri);
+      bg(data.images.cwtv720x400.uri);
 
       document.getElementById('epname').innerHTML = data.assetFields.title;
       document.getElementById('progress').style.width = "100%";
@@ -1116,9 +1116,11 @@ xmlDoc = parser.parseFromString(download,"text/xml");
 console.log( xmlDoc.querySelector('video').getAttribute('src'))
                 document.getElementById('downloader').href =  xmlDoc.querySelector('video').getAttribute('src');
          })
-
+play()
+/*
          player.src({ "type": "application/x-mpegURL", "src": a });
          player.play();
+         */
          resume();
        }else{
 play()
