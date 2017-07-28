@@ -1064,7 +1064,7 @@ function tvzion(value) {
    }).catch(function (err) {
       console.log(err);
    });
-}
+} 
 
 function foxapi(url) {
    console.log(url);
