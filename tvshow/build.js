@@ -351,9 +351,10 @@ var num = 0
 function loaders(atr) {
   if (atr == 'remove') {
 
-    num = num - 1
+    num--
   document.getElementById('topprogress').style.transform = 'translateX(' + ((100 - (num/maxnum *100)) - 100) + '%)'
     if (num == 0) {
+document.body.classList = 'finished';
 
 var l = []
 finalObj.sort(function(x, y) {
@@ -376,7 +377,6 @@ loadMedia(l)
 
 
 
-document.body.classList = 'finished'
 
 
      console.time('organize');
@@ -834,6 +834,7 @@ var template = "";
 var obj = []
 var cors_show_hub = 'https://crossorigin.me/' + show_hub
 // var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub + '"') + '&format=json&bust='+Date.now();
+function cw(){
 loaders()
 fetch(show_hub + '?bust=' + Date.now()  , {
   method: 'get',
@@ -893,7 +894,7 @@ fetch(show_hub + '?bust=' + Date.now()  , {
 }).catch(function(err) {
   console.log(err)
 });
-
+}
 
 function fox(range) {
   loaders()
@@ -1267,7 +1268,16 @@ xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 xhr.send(null);
 
 }
-    newfox()
+
+    if (!window.location.search == '' || window.location.search == '?') {
+      for (var i = window.location.search.split('?')[1].split(',').length - 1; i >= 0; i--) {
+        eval(window.location.search.split('?')[1].split(',')[i] + '()')
+      }
+    window.location.search.split('?')[1]
+    }else{
+      cw()
+      newfox()
+    }
 /*
 if (typeof(Worker) !== "undefined") {
   loaders();
