@@ -104,8 +104,8 @@ function resume() {
    vid.onerror = function (e) {
       error(e);
    };
-
-   vid.addEventListener('loadeddata', function () {
+// loaddata
+   vid.addEventListener('loadstart', function () {
       document.getElementById('LS').style.opacity = 1;
       //  document.getElementsByClassName('video-duration')[0].innerHTML = "( " + Math.round(vid.duration / 60) + " min )"
       document.getElementById('blockLoader').style.opacity = "0";
@@ -273,7 +273,7 @@ function fetchcwjson(value) {
       // finalurl = data.videos.hls5128.uri;
       finalurl = data.videos.variantplaylist_dai.uri;
  // { "src": data.assetFields.smoothStreamingUrl + '(format=mpd-time-csf).mpd', "type": "application/dash+xml" }, { "src": data.assetFields.smoothStreamingUrl + '(format=m3u8-aapl).m3u8', "type": "application/x-mpegURL" }, { "src": finalurl, "type": "application/x-mpegURL" },
-      player.src([{ "src": finalurl, "type": "application/vnd.apple.mpegurl" },{ "src": data.videos.variantplaylist.uri, "type": "application/x-mpegURL" },{"src":  'http://cwtv-mrss-akamai.cwtv.com/'+ finalurl.split('videos/')[1].split('.m3u8')[0] + '_3596kbps.mp4',"type":"video/mp4"}]);
+      player.src([{ "src": finalurl, "type": "application/vnd.apple.mpegurl" },{ "src": data.videos.variantplaylist.uri, "type": "application/x-mpegURL" },{"src":  'http://cwtv-mrss-akamai.cwtv.com/'+ data.videos.variantplaylist.uri.split('videos/')[1].split('.m3u8')[0] + '_3596kbps.mp4',"type":"video/mp4"}]);
       player.play();
       resume();
 
@@ -329,7 +329,6 @@ function om(data) {
       console.log(videourl);
 
       player.src({ "type": "application/x-mpegURL", "src": videourl });
-      player.play();
       resume();
       document.getElementById('epname').innerHTML = data.video[0].title;
 
@@ -388,7 +387,6 @@ function fetchfoxjson(value) {
       document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false";
 
       player.src({ "type": "application/x-mpegURL", "src": value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false" });
-      player.play();
 
       resume();
       document.getElementById('progress').style.width = "90%";
@@ -422,7 +420,6 @@ function fetchfoxjson(value) {
             document.getElementById('downloader').href = mediaurl.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false";
 
             player.src({ "type": "application/x-mpegURL", "src": mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false" });
-            player.play();
             resume();
 
             document.getElementById('epname').innerHTML = data.entries["0"].title;
@@ -463,7 +460,6 @@ function fetchcbsjson(value) {
       document.getElementById('downloader').href = videourl;
 
       player.src({ "type": "application/x-mpegURL", "src": videourl });
-      player.play();
       resume();
       document.getElementById('progress').style.width = "100%";
       $('#projpar').hide();
@@ -641,7 +637,6 @@ function fetchnbcjson(value) {
             console.log(videofile
             // fetch(mediaurl.split('?')[0] + '?format=')
             );player.src({ "type": "application/x-mpegURL", "src": videofile });
-            player.play();
             resume();
             document.getElementById('progress').style.width = "100%";
             $('#projpar').hide();
@@ -675,7 +670,6 @@ function fetchaswimjson(value) {
                videofile = returnedValue.query.results.json.data.stream.assets[i].url;
                document.getElementById('downloader').href = videofile;
                player.src({ "type": "application/x-mpegURL", "src": videofile });
-               player.play();
                resume();
                document.getElementById('downloader').href = videofile;
 
@@ -721,7 +715,6 @@ function fetchaswimjson(value) {
                         console.log(returnedValue.query.results.json.data.stream.assets[i].url);
                         videofile = returnedValue.query.results.json.data.stream.assets[i].url;
                         player.src({ "type": "application/x-mpegURL", "src": videofile });
-                        player.play();
                         resume();
                         document.getElementById('downloader').href = videofile;
 
@@ -755,7 +748,6 @@ function fetchamcjson(value) {
       document.getElementById('downloader').href = "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false';
 
       player.src({ "type": "application/x-mpegURL", "src": "https://link.theplatform.com/s/M_UwQC/media/" + data.query.results.div['data-video-id'] + '?mbr=true&manifest=m3u&metafile=false' });
-      player.play();
 
       resume();
       document.getElementById('progress').style.width = "100%";
@@ -842,7 +834,6 @@ function fetchcartoonnjson(value) {
                      console.log(result.querySelector('token').innerHTML);
 
                      player.src({ "type": "application/x-mpegURL", "src": 'http://androidhls-secure.cdn.turner.com/toon/big' + tohtml(apidat, 'xml').querySelector('file[bitrate="androidphone"]').innerHTML + '?hdnea=' + result.querySelector('token').innerHTML });
-                     player.play();
                      resume();
                   }
                });
@@ -885,7 +876,6 @@ function fetchfxjson(value) {
       document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false";
 
       player.src({ "type": "application/x-mpegURL", "src": value.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false" });
-      player.play();
       resume();
       document.getElementById('progress').style.width = "90%";
       $('#projpar').hide();
@@ -912,7 +902,6 @@ function fetchfxjson(value) {
          document.getElementById('downloader').href = final.querySelector("[property='twitter:player:stream']").content.split('releaseURL=')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false";
 
          player.src({ "type": "application/x-mpegURL", "src": final.querySelector("[property='twitter:player:stream']").content.split('releaseURL=')[1].split('?')[0] + "?mbr=true&manifest=m3u&metafile=false" });
-         player.play();
          resume();
          document.getElementById('progress').style.width = "100%";
          $('#projpar').hide();
@@ -941,7 +930,6 @@ function fetchlplatjson(value) {
    document.getElementById('downloader').href = value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect";
 
    player.src({ "type": "application/x-mpegURL", "src": value.split('?')[0] + "?mbr=true&manifest=m3u&format=redirect" });
-   player.play();
    resume();
    $('#projpar').hide();
 }
@@ -1015,7 +1003,6 @@ function foxsite(url) {
                   document.getElementById('downloader').href = a
    
        player.src({"type":"application/x-mpegURL", "src":a});
-      player.play();
    resume()
    
    
@@ -1119,7 +1106,6 @@ console.log( xmlDoc.querySelector('video').getAttribute('src'))
          })
 
          player.src({ "type": "application/x-mpegURL", "src": a });
-         player.play();
          
          resume();
        }else{
