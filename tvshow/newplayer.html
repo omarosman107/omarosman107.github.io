@@ -1708,6 +1708,7 @@ text-shadow:0 0 .1em #000
 
 <script type="text/javascript" src="js/video.min.js"></script>
 <script  type="text/javascript" src="js/videojs.hotkeys.min.js"></script>
+<script type="text/javascript" src="js/videojs-contrib-hls.min.js"></script>
 <script type="text/javascript">
 function addJS(url) {
    var s = document.createElement('script'); // Create a script element
@@ -1720,7 +1721,6 @@ function addJS(url) {
 
 
     var vtag = document.createElement("video"); var hlsSupported = !!vtag.canPlayType && !!vtag.canPlayType("application/x-mpegurl");
-        addJS('js/videojs-contrib-hls.min.js')
     
 </script>
 

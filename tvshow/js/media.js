@@ -419,7 +419,7 @@ function fetchfoxjson(value) {
             console.log(mediaurl);
             document.getElementById('downloader').href = mediaurl.split('?')[0] + "?mbr=true&auto=true&manifest=m3u&metafile=false";
 
-            player.src({ "type": "application/x-mpegURL", "src": mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false" });
+            player.src({ "type": "application/vnd.apple.mpegurl", "src": mediaurl.split('?')[0] + "?mbr=true&manifest=m3u&metafile=false" });
             resume();
 
             document.getElementById('epname').innerHTML = data.entries["0"].title;
