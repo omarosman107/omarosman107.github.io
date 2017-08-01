@@ -546,21 +546,20 @@ if (img != undefined) {
 return;
 }
 
- url = tvstQ(showName)
+ url = `http://api.tvmaze.com/search/shows?q=${showName}`
   fetch(url, {
     method: 'get',
     cache: "force-cache"
   }).then(function(response) {
     return response.json();
   }).then(function(dat) {
-    var fanart = (dat.query.results.json.all_images.fanart._[3])
-document.getElementById('tvShows').innerHTML += `<div show="${showName}" onclick="showQuery(null,this)"  class="show">
-  <div  class="background" style="background:url(${fanart});background-repeat: no-repeat;    background-size: 100% 100%;"></div>
-</div>
-`;
-return;
+    fetch(`http://webservice.fanart.tv/v3/tv/${dat["0"].show.externals.thetvdb}?api_key=334bde683eabd3ae55eb6a1917bd4795`).then(function(res){return res.json()
+    }).then(function(fan){
+      if ('status' in fan) {return;}
+      var fanart = (fan.tvthumb[0].url)
+       document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="showQuery(null,this)"><div class="overlay"></div><img class="loaded" width="100%" alt="'+showName+'" src="'+fanart+'"><\/a><\/div>'
 
-       document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="showQuery(null,this)"><div class="overlay"></div><img class="loaded" width="100%" alt="'+showName+'" src="'+dat.query.results.json.all_images.fanart._[3]+'"><\/a><\/div>'
+          })      
 }).catch(function(e) {
 console.log(e)
 });
