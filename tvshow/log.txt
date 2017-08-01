@@ -7,6 +7,8 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+fox shows have a faster loading time
+--
 new show layout in shows section
 --
 cw player 3x better quality and 2x faster
