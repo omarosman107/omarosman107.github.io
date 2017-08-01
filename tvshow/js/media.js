@@ -1052,7 +1052,11 @@ function tvzion(value) {
       console.log(err);
    });
 } 
-
+Number.prototype.between = function(a, b) {
+  var min = Math.min.apply(Math, [a, b]),
+    max = Math.max.apply(Math, [a, b]);
+  return this > min && this < max;
+};
 function foxapi(url) {
    console.log(url);
 
@@ -1070,6 +1074,13 @@ function foxapi(url) {
       console.log(data.images.logo.FHD);
 
       bg(data.images.still.HD);
+            showname.innerHTML = data.seriesName;
+
+      document.getElementById('showname').innerHTML = '<img style="    margin-bottom:-5px;width: 6.0em;display:inline-block;" src="' + data.images.logo.FHD + '" width="100%">';
+      getShowinfo(data.seriesName);
+
+      showdesc.innerHTML = data.description;
+      document.getElementById('epname').innerHTML = data.name;
 function play(){
      fetch(data.videoRelease.url, {
          method: 'get'
@@ -1077,10 +1088,39 @@ function play(){
            return response.json();
       }).then(function (play) {
 
+fetch(play.interstitialURL).then(function(res){return res.text()
+}).then(function(ads){
+  parser = new DOMParser();
+xmlDoc = parser.parseFromString(ads,"text/xml");
+var adTimes = xmlDoc.querySelector('interstitialGroup').children
+var ads = []
+for (var i = adTimes.length - 1; i >= 0; i--) {
+  ads.push({start:adTimes[i].querySelector('start').innerHTML,end:adTimes[i].querySelector('end').innerHTML})
+}
+function adsHandle(time){
+for (var i = ads.length - 1; i >= 0; i--) {
+  if(time.between(ads[i].start,ads[i].end)){
+return ads[i].end;
+}
+}
+return false;
+}
+player.on('timeupdate', function () {
+  if (adsHandle(this.currentTime()) > 0) {
+          this.currentTime(adsHandle(this.currentTime()));
+
+  }
+    })
+   
+})
+
+
          player.src({ "type": "application/x-mpegURL", "src": play.playURL });
          resume();
       });
 }
+play()
+return;
       fetch("https://feed.theplatform.com/f/fox.com/fullepisodes?form=json&range=1-1&byCustomValue={fox:freewheelId}{" + data.externalId[0] + "}", {
          method: 'get'
       }).then(function (response) {
@@ -1113,13 +1153,7 @@ play()
        }
       });
 
-      showname.innerHTML = data.seriesName;
 
-      document.getElementById('showname').innerHTML = '<img style="    margin-bottom:-5px;width: 6.0em;display:inline-block;" src="' + data.images.logo.FHD + '" width="100%">';
-      getShowinfo(data.seriesName);
-
-      showdesc.innerHTML = data.description;
-      document.getElementById('epname').innerHTML = data.name;
 
    
    });
