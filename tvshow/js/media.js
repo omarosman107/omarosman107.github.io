@@ -1063,14 +1063,14 @@ function foxapi(url) {
    var request = {
       method: 'GET',
       headers: {
-         'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+         'Content-Type': 'application/json',
          'ApiKey': 'rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR'
       }
    };
    fetch(url, request).then(function (res) {
       return res.json();
    }).then(function (data) {
-
+player.duration(data.durationInSeconds)
       console.log(data.images.logo.FHD);
 
       bg(data.images.still.HD);
@@ -1082,6 +1082,7 @@ function foxapi(url) {
       showdesc.innerHTML = data.description;
       document.getElementById('epname').innerHTML = data.name;
 function play(){
+
      fetch(data.videoRelease.url, {
          method: 'get'
       }).then(function (response) {
@@ -1100,24 +1101,26 @@ for (var i = adTimes.length - 1; i >= 0; i--) {
 function adsHandle(time){
 for (var i = ads.length - 1; i >= 0; i--) {
   if(time.between(ads[i].start,ads[i].end)){
-return ads[i].end;
+return {playing:true,end:ads[i].end};
 }
 }
-return false;
+return {playing:false};
 }
 player.on('timeupdate', function () {
-  if (adsHandle(this.currentTime()) > 0) {
-          this.currentTime(adsHandle(this.currentTime()));
+  if (adsHandle(this.currentTime()).playing) {
+          this.currentTime(adsHandle(this.currentTime()).end);
 
   }
     })
    
-})
 
 
          player.src({ "type": "application/x-mpegURL", "src": play.playURL });
          resume();
       });
+
+  })
+
 }
 play()
 return;
