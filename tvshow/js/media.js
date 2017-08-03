@@ -1083,7 +1083,7 @@ player.duration(data.durationInSeconds)
       document.getElementById('epname').innerHTML = data.name;
 function play(){
 
-     fetch(data.videoRelease.url, {
+     fetch(data.videoRelease.url.split('?')[0] + '?mbr=true&formats=m3u&sitesection=app.dcg-foxnow%2Fiphone%2Ffxn%2Flive&assetTypes=uplynk-clean%3Auplynk-ivod-west%3Auplynk-ivod-mountain%3Auplynk-ivod-east%3Auplynk-ivod', {
          method: 'get'
       }).then(function (response) {
            return response.json();

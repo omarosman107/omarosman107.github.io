@@ -1215,11 +1215,12 @@ loadShow.send(null)
     loaders()
 
 var xhr = new XMLHttpRequest();
+/*
 xhr.onerror = function() {
 loaders('remove')
 return;
  };
-
+*/
 xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4 ) {
 if (this.status === 200) {
