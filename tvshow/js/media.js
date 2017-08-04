@@ -1161,6 +1161,30 @@ play()
    
    });
 }
+function funimation(url){
+  console.log(url)
+  fetch('https://cors-anywhere.herokuapp.com/' + url).then(function(res){
+    return res.text();
+  }).then(function(data){
+    parser = new DOMParser();
+xmlDoc = parser.parseFromString(data,"text/html");
+fetch(`https://prod-api-funimationnow.dadcdigital.com/api/source/catalog/video/${xmlDoc.querySelector('meta[property="al:web:url"]').content.replace('/player/','')}/signed/`).then(function(res){return res.json()}).then(function(media){
+  for (var i = media.items.length - 1; i >= 0; i--) {
+    if(media.items[i].videoType == 'm3u8'){
+      player.src({"src":media.items[i].src,"type":'application/x-mpegURL'})
+      resume()
+      break;
+
+    }
+  }
+})
+bg(xmlDoc.querySelector('meta[property="og:image"]').content.replace('c_fill,q_60,h_630,w_1290',''))
+document.getElementById('showname').innerHTML = xmlDoc.querySelector('input[name="showTitle"]').value
+document.getElementById('epname').innerHTML = xmlDoc.querySelector('.content-episode').getAttribute('data-title')
+console.log( xmlDoc.querySelector('.content-episode').getAttribute('data-title'))
+getShowinfo(xmlDoc.querySelector('input[name="showTitle"]').value)
+  })
+}
 
 var stringConstructor = "test".constructor;
 var arrayConstructor = [].constructor;

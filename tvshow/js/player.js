@@ -32,7 +32,7 @@ var sitefunctions = {
   "foxorgin": foxsite,
   "asdir=": fetchaswimjson,
   "api.fox.com": foxapi,
-
+  "funimation.com": funimation,
   "cwtv.com": fetchcwjson,
   "diziay.com": fetchdiziayjson,
   "adultswim.com": fetchaswimjson,
