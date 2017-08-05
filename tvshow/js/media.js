@@ -1020,89 +1020,21 @@ console.log(json)
 }
 function foxsite(url) {
    url = url.split('_=')[1];
-   var fox = document.referrer;
-   document.getElementById('orginVisit').href = fox;
-   document.getElementById('orginVisit').innerHTML = fox;
-
-   console.log(fox.split('watch/')[1].split("/")[0]);
-   console.log(url.split('&auth=')[1]);
-   var externalToApi = 'https://api.fox.com/fbc-content/v3/video?externalId=' + fox.split('watch/')[1].split("/")[0];
-
-   var xhr = new XMLHttpRequest();
-
-   xhr.addEventListener("readystatechange", function () {
-      if (this.readyState === 4) {
-         var json = JSON.parse(this.responseText);
-         console.log(json.member["0"].videoRelease.url + '&auth=' + url.split('&auth=')[1]);
-         console.log(json);
-         bg(json.member["0"].images.still.HD);
+     fetch('https://api.fox.com/fbc-content/v3_blue/video?externalId=' + document.referrer.split('watch/')[1].split("/")[0],{
+    headers: new Headers({
+    'apikey': 'rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR'
+  })
+  }).then(function(res){return res.json();}).then(function(json){
+console.log(json)
+  bg(json.member["0"].images.still.HD);
          getShowinfo(json.member["0"].alternativeHeadline);
          showname.innerHTML = json.member["0"].alternativeHeadline;
          showdesc.innerHTML = json.member["0"].description;
          document.getElementById('epname').innerHTML = json.member["0"].name;
 
          document.title = json.member["0"].alternativeHeadline + " - " + json.member["0"].name;
-
-                   play(json.member["0"].videoRelease.url + '&auth=' + url.split('&auth=')[1])
-
-      }
-   });
-
-   xhr.open("GET", externalToApi);
-
-   xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
-
-   xhr.send(null);
-
-   /* fetch("https://feed.theplatform.com/f/fox.com/fullepisodes?form=json&range=1-1&byCustomValue={fox:freewheelId}{" + fox.split('watch/')[1].split("/")[0] + "}", {
-         method: 'get'
-      }).then(function(response) {
-         return response.json()
-      }).then(function(data) {
-       console.log(data.entryCount)
-       if (data.entryCount == 0) {
-               showname.innerHTML = "THIS VIDEO IS NOT AVALIABLE"
-                        document.getElementById('progress').style.width = "100%"
-   }else{
-         document.getElementById('progress').style.width = "50%"
-   if(url.split('&auth=').length == 1){
-   
-   }
-   var a = data.entries[0].media$content[0].plfile$url + '&auth=' + url.split('&auth=')[1] + '&format=redirect&manifest=m3u'
-   
-   if(url.split('&auth=')[1] == undefined){
-     alert('not able to play')
-     var a = data.entries[0].media$content[0].plfile$url + '&format=redirect&manifest=m3u'
-   
-   }
-     console.log(a )
-   
-                  document.getElementById('downloader').href = a
-   
-       player.src({"type":"application/x-mpegURL", "src":a});
-   resume()
-   
-   
-         epiname = (data.entries["0"].title)
-         showname.innerHTML = data.entries["0"].fox$series 
-                                 document.title = data.entries["0"].fox$series + " - " + (data.entries["0"].title)
-         bg(data.entries["0"].media$thumbnails[0].plfile$url)
-   
-         getShowinfo(data.entries["0"].fox$series)
-         showdesc.innerHTML = data.entries["0"].description
-   
-   
-                                          document.getElementById('epname').innerHTML = (data.entries["0"].title)
-   
-          
-            document.getElementById('progress').style.width = "100%"
-         $('#projpar').hide()
-                                      isDone = true
-   
-   
-     }
-      })
-      */
+          play(json.member["0"].videoRelease.url + '&auth=' + url.split('&auth=')[1])
+  })
 }
 
 function tvzion(value) {
