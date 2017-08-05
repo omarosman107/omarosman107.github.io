@@ -553,13 +553,19 @@ return;
   }).then(function(response) {
     return response.json();
   }).then(function(dat) {
-    fetch(`http://webservice.fanart.tv/v3/tv/${dat["0"].show.externals.thetvdb}?api_key=334bde683eabd3ae55eb6a1917bd4795`).then(function(res){return res.json()
+    console.log()
+    if (!dat.length == 0) {
+  fetch(`http://webservice.fanart.tv/v3/tv/${dat["0"].show.externals.thetvdb}?api_key=334bde683eabd3ae55eb6a1917bd4795`).then(function(res){return res.json()
     }).then(function(fan){
-      if ('status' in fan) {return;}
+      if ('status' in fan || !'tvthumb' in fan) {return;}else{
       var fanart = (fan.tvthumb[0].url)
+
+      }
        document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="showQuery(null,this)"><div class="overlay"></div><img class="loaded" width="100%" alt="'+showName+'" src="'+fanart+'"><\/a><\/div>'
 
-          })      
+          }).catch(function(e){})      
+    }
+  
 }).catch(function(e) {
 console.log(e)
 });
@@ -831,6 +837,8 @@ function msToTime(duration) {
 }
 var template = "";
 var obj = []
+    var finalObj = []
+
 var cors_show_hub = 'https://crossorigin.me/' + show_hub
 // var show_hub = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from json where url="' + show_hub + '"') + '&format=json&bust='+Date.now();
 function cw(){
@@ -1005,77 +1013,63 @@ function fancyTimeFormat(time) {
   ret += "" + secs;
   return ret;
 }
-/*
-fetch(proxy + 'http://www.adultswim.com/videos/api/v2/videos?fields=title,season_number,collection_title,episode_number,episode,auth,duration,tv_rating,launch_date,type,images,episode,images,title&limit=80&offset=0&sortByDate=DESC&filterByEpisodeType=EPI,TVE&filterByAuthType=true&filterByPlatform=mobile&q=type:episode', {
+function aswim(){
+  loaders()
+fetch(proxy + 'http://www.adultswim.com/videos/api/v2/videos?fields=title,season_number,collection_title,episode_number,episode,auth,duration,tv_rating,launch_date,type,images,episode,images,title&q=type:episode&size=130&from=0', {
    method: 'get',
    cache: "no-store"
 }).then(function(response) {
    return response.json(); 
 }).then(function(data){
-     var showsTemp = {}
 
 var start = new Date()
 
 for(i in data.data){
-
-if (!showsTemp[data.data[i].collection_title]) {
-
-showsTemp[data.data[i].collection_title] = data.data[i].collection_title
-
-}
-
-    function millisToMinutesAndSeconds(millis) {
- var minutes = Math.floor(millis / 60000 * 60);
- var seconds = ((millis % 60000) / 1000).toFixed(0);
- return minutes;
-}
-
-var epinum 
-try{
-epinum = "S" +data.data[i].season_number +"E" +data.data[i].episode_number
-
-}catch(e){
-console.log(e) 
-}
+if (data.data[i].type == 'episode' && 'images' in data.data[i] && data.data[i].auth == false) {
 
 
 
- loadQuick({img:data.data[i].images[0].url,
+
+
+var epinum = "S" +data.data[i].season_number +"E" +data.data[i].episode_number
+
+
+if (data.data[i].images.length != 0 && data.data[i].collection_title != undefined ) {
+
+
+ finalObj.push({img:data.data[i].images[0].url,
    rating:(data.data[i].tv_rating),
+   imgdyn:'',
    href: "asdir=" +data.data[i].id,
-   airdate:formatDate(data.data[i].launch_date),
    show:data.data[i].collection_title,
    episode:data.data[i].title,
    epiformat:epinum,
-   length:fancyTimeFormat(data.data[i].duration),
-   metadata:data.data[i].tv_rating + data.data[i].launch_date + data.data[i].collection_title + data.data[i].title + epinum + data.data[i].duration,
-   type:"adultswim"
+   length:(data.data[i].duration),
+   type:"adultswim",
+   id: makeid(),
+   time:(data.data[i].launch_date)
  })
 
-
+tvlist(data.data[i].collection_title)
+}
   }
+}
 loaders('remove');
-tvlist(showsTemp)
-sortCards()
 
-     lazyLoadImages();
 
   var end = new Date()
 
 
 
 }).catch(function(err) {
-console.log(err.message)
+console.log(err)
 });
 
+}
 
-
-
-*/
 // fox('0-200')
  
 
-    var finalObj = []
 
 
 function newfox(){
@@ -1277,6 +1271,10 @@ xhr.send(null);
     }else{
       cw()
       newfox()
+          var vtag = document.createElement("video"); var hlsSupported = !!vtag.canPlayType && !!vtag.canPlayType("application/x-mpegurl");
+if (hlsSupported) {
+  aswim()
+}
     }
 /*
 if (typeof(Worker) !== "undefined") {

@@ -30,6 +30,7 @@ var cwurl;
 var sitefunctions = {
   "rawFile": raw,
   "foxorgin": foxsite,
+  "fx_=": fxsite,
   "asdir=": fetchaswimjson,
   "api.fox.com": foxapi,
   "funimation.com": funimation,

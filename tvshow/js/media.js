@@ -656,7 +656,10 @@ function fetchaswimjson(value) {
          return response.json();
       }).then(function (returnedValue) {
          document.getElementById('progress').style.width = "75%";
-         showname.innerHTML = returnedValue.query.results.json.data.collection_title + "- " + returnedValue.query.results.json.data.title;
+         showname.innerHTML = returnedValue.query.results.json.data.collection_title;
+         getShowinfo(returnedValue.query.results.json.data.collection_title)
+         document.getElementById('epname').innerHTML = returnedValue.query.results.json.data.title;
+         bg(returnedValue.query.results.json.data.images[returnedValue.query.results.json.data.images.length -1].url)
          document.title = returnedValue.query.results.json.data.collection_title + "- " + returnedValue.query.results.json.data.title;
 
          //    showdesc.innerHTML = returnedValue.query.results.video.description
@@ -665,7 +668,11 @@ function fetchaswimjson(value) {
          for (var i = 0; i < returnedValue.query.results.json.data.stream.assets.length; i++) {
             console.log(returnedValue.query.results.json.data.stream.assets[i]);
 
-            if (returnedValue.query.results.json.data.stream.assets[i].mime_type == "application/x-mpegURL") {
+            if (returnedValue.query.results.json.data.stream.assets[i].mime_type == "application/x-mpegURL" && returnedValue.query.results.json.data.stream.assets[i].url.includes('_full')) {
+               if (!hlsSupported) 
+               {
+                continue;
+               }
                console.log(returnedValue.query.results.json.data.stream.assets[i].url);
                videofile = returnedValue.query.results.json.data.stream.assets[i].url;
                document.getElementById('downloader').href = videofile;
@@ -677,7 +684,21 @@ function fetchaswimjson(value) {
                $('#projpar').hide();
 
                return;
-            }
+            }else{
+       if (returnedValue.query.results.json.data.stream.assets[i].mime_type == "video/mp4") {
+                videofile = returnedValue.query.results.json.data.stream.assets[i].url;
+               document.getElementById('downloader').href = videofile;
+               player.src({ "type": "application/x-mpegURL", "src": videofile });
+               resume();
+               document.getElementById('downloader').href = videofile;
+
+               document.getElementById('progress').style.width = "100%";
+               $('#projpar').hide();
+return;
+
+          }
+   
+         }
          }
 
          // ...
@@ -712,6 +733,9 @@ function fetchaswimjson(value) {
                      console.log(returnedValue.query.results.json.data.stream.assets[i]);
 
                      if (returnedValue.query.results.json.data.stream.assets[i].mime_type == "application/x-mpegURL") {
+                      if (!hlsSupported) {
+                        continue;
+                      }
                         console.log(returnedValue.query.results.json.data.stream.assets[i].url);
                         videofile = returnedValue.query.results.json.data.stream.assets[i].url;
                         player.src({ "type": "application/x-mpegURL", "src": videofile });
@@ -933,7 +957,67 @@ function fetchlplatjson(value) {
    resume();
    $('#projpar').hide();
 }
+function play(url){
 
+     fetch(url.split('?')[0] + '?mbr=true&formats=m3u&sitesection=app.dcg-foxnow%2Fiphone%2Ffxn%2Flive&assetTypes=uplynk-clean%3Auplynk-ivod-west%3Auplynk-ivod-mountain%3Auplynk-ivod-east%3Auplynk-ivod', {
+         method: 'get'
+      }).then(function (response) {
+           return response.json();
+      }).then(function (play) {
+
+fetch(play.interstitialURL).then(function(res){return res.text()
+}).then(function(ads){
+  parser = new DOMParser();
+xmlDoc = parser.parseFromString(ads,"text/xml");
+var adTimes = xmlDoc.querySelector('interstitialGroup').children
+var ads = []
+for (var i = adTimes.length - 1; i >= 0; i--) {
+  ads.push({start:adTimes[i].querySelector('start').innerHTML,end:adTimes[i].querySelector('end').innerHTML})
+}
+function adsHandle(time){
+for (var i = ads.length - 1; i >= 0; i--) {
+  if(time.between(ads[i].start,ads[i].end)){
+return {playing:true,end:ads[i].end};
+}
+}
+return {playing:false};
+}
+player.on('timeupdate', function () {
+  if (adsHandle(this.currentTime()).playing) {
+          this.currentTime(adsHandle(this.currentTime()).end);
+
+  }
+    })
+   
+
+
+         player.src({ "type": "application/x-mpegURL", "src": play.playURL });
+         resume();
+      });
+
+  })
+
+}
+
+
+function fxsite(url){
+  url = url.split('_=')[1];
+  fetch('https://api.fox.com/fbc-content/v3_blue/video?externalId=' + document.referrer.split('video/')[1],{
+    headers: new Headers({
+    'apikey': 'rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR'
+  })
+  }).then(function(res){return res.json();}).then(function(json){
+console.log(json)
+  bg(json.member["0"].images.still.HD);
+         getShowinfo(json.member["0"].alternativeHeadline);
+         showname.innerHTML = json.member["0"].alternativeHeadline;
+         showdesc.innerHTML = json.member["0"].description;
+         document.getElementById('epname').innerHTML = json.member["0"].name;
+
+         document.title = json.member["0"].alternativeHeadline + " - " + json.member["0"].name;
+          play(json.member["0"].videoRelease.url + '&auth=' + url.split('&auth=')[1])
+  })
+}
 function foxsite(url) {
    url = url.split('_=')[1];
    var fox = document.referrer;
@@ -959,15 +1043,8 @@ function foxsite(url) {
 
          document.title = json.member["0"].alternativeHeadline + " - " + json.member["0"].name;
 
-         fetch(json.member["0"].videoRelease.url + '&auth=' + url.split('&auth=')[1], {
-            method: 'get'
-         }).then(function (response) {
-            return response.json();
-         }).then(function (data) {
+                   play(json.member["0"].videoRelease.url + '&auth=' + url.split('&auth=')[1])
 
-            player.src({ "type": "application/x-mpegURL", "src": data.playURL });
-            resume();
-         });
       }
    });
 
@@ -1081,48 +1158,8 @@ player.duration(data.durationInSeconds)
 
       showdesc.innerHTML = data.description;
       document.getElementById('epname').innerHTML = data.name;
-function play(){
 
-     fetch(data.videoRelease.url.split('?')[0] + '?mbr=true&formats=m3u&sitesection=app.dcg-foxnow%2Fiphone%2Ffxn%2Flive&assetTypes=uplynk-clean%3Auplynk-ivod-west%3Auplynk-ivod-mountain%3Auplynk-ivod-east%3Auplynk-ivod', {
-         method: 'get'
-      }).then(function (response) {
-           return response.json();
-      }).then(function (play) {
-
-fetch(play.interstitialURL).then(function(res){return res.text()
-}).then(function(ads){
-  parser = new DOMParser();
-xmlDoc = parser.parseFromString(ads,"text/xml");
-var adTimes = xmlDoc.querySelector('interstitialGroup').children
-var ads = []
-for (var i = adTimes.length - 1; i >= 0; i--) {
-  ads.push({start:adTimes[i].querySelector('start').innerHTML,end:adTimes[i].querySelector('end').innerHTML})
-}
-function adsHandle(time){
-for (var i = ads.length - 1; i >= 0; i--) {
-  if(time.between(ads[i].start,ads[i].end)){
-return {playing:true,end:ads[i].end};
-}
-}
-return {playing:false};
-}
-player.on('timeupdate', function () {
-  if (adsHandle(this.currentTime()).playing) {
-          this.currentTime(adsHandle(this.currentTime()).end);
-
-  }
-    })
-   
-
-
-         player.src({ "type": "application/x-mpegURL", "src": play.playURL });
-         resume();
-      });
-
-  })
-
-}
-play()
+play(data.videoRelease.url)
 return;
       fetch("https://feed.theplatform.com/f/fox.com/fullepisodes?form=json&range=1-1&byCustomValue={fox:freewheelId}{" + data.externalId[0] + "}", {
          method: 'get'
