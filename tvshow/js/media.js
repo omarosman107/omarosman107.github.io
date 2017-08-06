@@ -959,11 +959,21 @@ function fetchlplatjson(value) {
 }
 function play(url,auth){
 
-     fetch(url.split('?')[0] + '?mbr=true&formats=m3u&format=redirect&sitesection=app.dcg-foxnow%2Fiphone%2Ffxn%2Flive&assetTypes=uplynk-clean%3Auplynk-ivod-west%3Auplynk-ivod-mountain%3Auplynk-ivod-east%3Auplynk-ivod&auth=' + auth , {
+     fetch(url.split('?')[0] + '?mbr=true&formats=m3u&format=smil&sitesection=app.dcg-foxnow%2Fiphone%2Ffxn%2Flive&assetTypes=uplynk-clean%3Auplynk-ivod-west%3Auplynk-ivod-mountain%3Auplynk-ivod-east%3Auplynk-ivod&auth=' + auth , {
          method: 'get'
       }).then(function (response) {
-           return response.json();
+           return response.text();
       }).then(function (play) {
+
+parser = new DOMParser();
+xmlDoc = parser.parseFromString(play,"text/xml");
+console.log(xmlDoc.querySelector('param[name="testPlayerUrl"]').getAttribute('value'))
+fetch(xmlDoc.querySelector('param[name="testPlayerUrl"]').getAttribute('value')).then(function(res){return res.text();
+}).then(function(m3u8){
+  player.src({ "type": "application/x-mpegURL", "src": parser.parseFromString(m3u8,"text/html").body.querySelector('script').innerHTML.split("';")[0].split("'")[1] });
+         resume();
+})
+return;
 
 fetch(play.interstitialURL).then(function(res){return res.text()
 }).then(function(ads){
