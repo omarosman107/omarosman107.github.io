@@ -959,7 +959,7 @@ function fetchlplatjson(value) {
 }
 function play(url,auth){
 
-     fetch(url.split('?')[0] + '?mbr=true&formats=m3u&sitesection=app.dcg-foxnow%2Fiphone%2Ffxn%2Flive&assetTypes=uplynk-clean%3Auplynk-ivod-west%3Auplynk-ivod-mountain%3Auplynk-ivod-east%3Auplynk-ivod&auth=' + auth , {
+     fetch(url.split('?')[0] + '?mbr=true&formats=m3u&format=redirect&sitesection=app.dcg-foxnow%2Fiphone%2Ffxn%2Flive&assetTypes=uplynk-clean%3Auplynk-ivod-west%3Auplynk-ivod-mountain%3Auplynk-ivod-east%3Auplynk-ivod&auth=' + auth , {
          method: 'get'
       }).then(function (response) {
            return response.json();
