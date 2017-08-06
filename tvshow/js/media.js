@@ -1014,8 +1014,11 @@ console.log(json)
          showdesc.innerHTML = json.member["0"].description;
          document.getElementById('epname').innerHTML = json.member["0"].name;
 
+
          document.title = json.member["0"].alternativeHeadline + " - " + json.member["0"].name;
           play(json.member["0"].videoRelease.url,url.split('&auth=')[1])
+                  document.getElementById('showname').innerHTML = '<img style="    margin-bottom:-5px;width: 6.0em;display:inline-block;" src="' + json.member["0"].images.logo.FHD + '" width="100%">';
+
   })
 }
 function foxsite(url) {
@@ -1034,6 +1037,8 @@ console.log(json)
 
          document.title = json.member["0"].alternativeHeadline + " - " + json.member["0"].name;
           play(json.member["0"].videoRelease.url,url.split('&auth=')[1])
+                            document.getElementById('showname').innerHTML = '<img style="    margin-bottom:-5px;width: 6.0em;display:inline-block;" src="' + json.member["0"].images.logo.FHD + '" width="100%">';
+
   })
 }
 
