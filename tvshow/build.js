@@ -555,7 +555,7 @@ return;
   }).then(function(dat) {
     console.log()
     if (!dat.length == 0) {
-  fetch(`http://webservice.fanart.tv/v3/tv/${dat["0"].show.externals.thetvdb}?api_key=334bde683eabd3ae55eb6a1917bd4795`).then(function(res){return res.json()
+  fetch('http://webservice.fanart.tv/v3/tv/'+dat["0"].show.externals.thetvdb+'?api_key=334bde683eabd3ae55eb6a1917bd4795').then(function(res){return res.json()
     }).then(function(fan){
       if ('status' in fan || !'tvthumb' in fan) {return;}else{
       var fanart = (fan.tvthumb[0].url)
