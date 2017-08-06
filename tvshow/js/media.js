@@ -968,7 +968,7 @@ function play(url,auth){
 parser = new DOMParser();
 xmlDoc = parser.parseFromString(play,"text/xml");
 console.log(xmlDoc.querySelector('param[name="testPlayerUrl"]').getAttribute('value'))
-fetch(xmlDoc.querySelector('param[name="testPlayerUrl"]').getAttribute('value')).then(function(res){return res.text();
+fetch(xmlDoc.querySelector('param[name="testPlayerUrl"]').getAttribute('value').replace('http://','https://')).then(function(res){return res.text();
 }).then(function(m3u8){
   console.log(parser.parseFromString(m3u8,"text/html").body.querySelector('script').innerHTML.split("';")[0].split("'")[1].replace('.m3u8','.mp4') )
   player.src({ "type": "application/x-mpegURL", "src": parser.parseFromString(m3u8,"text/html").body.querySelector('script').innerHTML.split("';")[0].split("'")[1] });
