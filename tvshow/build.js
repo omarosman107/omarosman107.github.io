@@ -1144,7 +1144,7 @@ var temp = moment(json.member[i].originalAirDate).subtract(4, 'hours')
         time:Date.parse(temp)
 
               });
-                  tvlist(json.member[i].seriesName,json.member[i].images.seriesList.SD )
+                  tvlist(json.member[i].seriesName,json.member[i].images.seriesList.SD.replace('http://','https://').split('?')[0] + '?fit=inside%7C320%3A*' )
 
 
 
