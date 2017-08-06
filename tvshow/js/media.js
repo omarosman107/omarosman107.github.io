@@ -957,9 +957,9 @@ function fetchlplatjson(value) {
    resume();
    $('#projpar').hide();
 }
-function play(url){
+function play(url,auth){
 
-     fetch(url.split('?')[0] + '?mbr=true&formats=m3u&sitesection=app.dcg-foxnow%2Fiphone%2Ffxn%2Flive&assetTypes=uplynk-clean%3Auplynk-ivod-west%3Auplynk-ivod-mountain%3Auplynk-ivod-east%3Auplynk-ivod', {
+     fetch(url.split('?')[0] + '?mbr=true&formats=m3u&sitesection=app.dcg-foxnow%2Fiphone%2Ffxn%2Flive&assetTypes=uplynk-clean%3Auplynk-ivod-west%3Auplynk-ivod-mountain%3Auplynk-ivod-east%3Auplynk-ivod&auth=' + auth , {
          method: 'get'
       }).then(function (response) {
            return response.json();
@@ -1015,7 +1015,7 @@ console.log(json)
          document.getElementById('epname').innerHTML = json.member["0"].name;
 
          document.title = json.member["0"].alternativeHeadline + " - " + json.member["0"].name;
-          play(json.member["0"].videoRelease.url + '&auth=' + url.split('&auth=')[1])
+          play(json.member["0"].videoRelease.url,url.split('&auth=')[1])
   })
 }
 function foxsite(url) {
@@ -1033,7 +1033,7 @@ console.log(json)
          document.getElementById('epname').innerHTML = json.member["0"].name;
 
          document.title = json.member["0"].alternativeHeadline + " - " + json.member["0"].name;
-          play(json.member["0"].videoRelease.url + '&auth=' + url.split('&auth=')[1])
+          play(json.member["0"].videoRelease.url,url.split('&auth=')[1])
   })
 }
 
