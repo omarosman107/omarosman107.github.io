@@ -926,6 +926,10 @@ video {
         background: #eee;
     }
 }
+* {
+      outline: none;
+
+}
 body {
     background: #1b1b1b;
     font-family: "Gotham SSm A", "Gotham SSm B", Tahoma, Geneva, sans-serif;
