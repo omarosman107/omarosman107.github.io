@@ -7,6 +7,10 @@ PLAYER:New design
 
 
 == CHANGELOG ==
+new loader for videos
+--
+removed ads fully from fox videos!
+--
 fox shows have a faster loading time
 --
 new show layout in shows section
