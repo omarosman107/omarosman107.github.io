@@ -742,7 +742,7 @@ if (!time > 0) {
       <div class="image-crop sixteen-nine">
          <a href="#"></a>
          <a onclick="loadPlayer(this)" href="newplayer.html?${json.href}">
-            <div class="bg" style=" background-image:url(${json.bg});background-size:cover;"></div>
+            <div class="bg" data-style=" background-image:url(${json.bg});background-size:cover;"></div>
             <img class="cover sixteen-nine lazy" sizes="(max-width: 600px) 80vw, 460px" alt="${json.episode}" data-original="${json.img}" data-original-set="${json.imgdyn}">
          </a>
          <span class="episode-gradient"></span>
@@ -777,9 +777,9 @@ if (!time > 0) {
       <div class="image-crop sixteen-nine" url="${json.href}" autoplay="${json.autoplay}" onmouseover="playHover(this)" onmouseout="stopHover(this)">
          <a onclick="loadPlayer(this)" href="newplayer.html?${json.href}">
          ${newBanner()}
-            <div class="bg" style=" background-image:url(${json.bg});background-size:cover;"></div>
+            <div class="bg" data-style=" background-image:url(${json.bg});background-size:cover;"></div>
             <video class="sixteen-nine" style="top:0px;" playsinline="" muted="" loop="" width="100%" height="100%"></video>
-            <img class="cover sixteen-nine lazy loaded" sizes="(max-width: 600px) 70vw, 25vw" alt="${json.show}" data-original="${json.img}" data-original-set="${json.imgdyn}" style="display: block;">
+            <img class="cover sixteen-nine lazy" sizes="(max-width: 600px) 70vw, 25vw" alt="${json.show}" data-original="${json.img}" data-original-set="${json.imgdyn}" style="display: block;">
          </a>
          <span class="episode-gradient"></span>
          <div class="w3-progress-container">

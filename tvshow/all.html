@@ -83,9 +83,10 @@
   will-change:opacity,filter,blur;
 
 }
-  .loaded{
-  filter: blur(0px) !important;
+.loading {
+  opacity: 0;
 }
+
   @media (min-width:500px) {
      .box {
          width: 650px
@@ -373,20 +374,8 @@ visibility: none;
 .finished .contain {
   display: block;
 }
-.loading {
-  filter: blur(2vw);
-  transform: scale(1.05);
-}
-.loaded {
 
-  will-change: transform, opacity;
-  animation: reveal .2s ease-out;
-}
 
-@keyframes reveal {
-  0% {transform: scale(1.01); opacity: 0;}
-  100% {transform: scale(1); opacity: 1;}
-}
 * {
 
 box-sizing:border-box;

@@ -751,9 +751,9 @@ color: #dad6d6;
     opacity: 0;
 }
 .image-crop img{
--webkit-transition: all .1s ease-in-out;
-    -moz-transition: all .1s ease-in-out;
-    transition: all .1s ease-in-out
+-webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    transition: all .2s ease;
 }
 .image-crop:hover img{
 }
@@ -794,8 +794,6 @@ color: #dad6d6;
     background-size: cover!important;
     background-position: 50%;
     opacity: 0;
-    -webkit-transition: opacity .2s ease;
-    transition: opacity .2s ease;
         will-change: opacity;
 }
 
