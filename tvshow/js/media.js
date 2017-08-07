@@ -1022,13 +1022,13 @@ function fxsite(url){
   }).then(function(res){return res.json();}).then(function(json){
 console.log(json)
   bg(json.member["0"].images.still.HD);
-         getShowinfo(json.member["0"].alternativeHeadline);
-         showname.innerHTML = json.member["0"].alternativeHeadline;
+         getShowinfo(json.member["0"].seriesName);
+         showname.innerHTML = json.member["0"].seriesName;
          showdesc.innerHTML = json.member["0"].description;
          document.getElementById('epname').innerHTML = json.member["0"].name;
 
 
-         document.title = json.member["0"].alternativeHeadline + " - " + json.member["0"].name;
+         document.title = json.member["0"].seriesName + " - " + json.member["0"].name;
           play(json.member["0"].videoRelease.url,url.split('&auth=')[1])
                   document.getElementById('showname').innerHTML = '<img style="    margin-bottom:-5px;width: 6.0em;display:inline-block;" src="' + json.member["0"].images.logo.FHD + '" width="100%">';
 
@@ -1043,12 +1043,12 @@ function foxsite(url) {
   }).then(function(res){return res.json();}).then(function(json){
 console.log(json)
   bg(json.member["0"].images.still.HD);
-         getShowinfo(json.member["0"].alternativeHeadline);
-         showname.innerHTML = json.member["0"].alternativeHeadline;
+         getShowinfo(json.member["0"].seriesName);
+         showname.innerHTML = json.member["0"].seriesName;
          showdesc.innerHTML = json.member["0"].description;
          document.getElementById('epname').innerHTML = json.member["0"].name;
 
-         document.title = json.member["0"].alternativeHeadline + " - " + json.member["0"].name;
+         document.title = json.member["0"].seriesName + " - " + json.member["0"].name;
           play(json.member["0"].videoRelease.url,url.split('&auth=')[1])
                             document.getElementById('showname').innerHTML = '<img style="    margin-bottom:-5px;width: 6.0em;display:inline-block;" src="' + json.member["0"].images.logo.FHD + '" width="100%">';
 
