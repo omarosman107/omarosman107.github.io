@@ -1176,6 +1176,7 @@ try{
 var season = showinfo.panels.member[1].items.member["0"].episodes["@id"]
 seasoninfo.open("GET",season);
 seasoninfo.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
+seasoninfo.setRequestHeader("Content-Type","text/plain")
 
 seasoninfo.send(null)
 
@@ -1204,6 +1205,7 @@ return;
 loadShow.open("GET", 'https://api.fox.com/fbc-content/v3_blue/screens/series-detail/'+id);
 
 loadShow.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
+loadShow.setRequestHeader("Content-Type","text/plain")
 loadShow.send(null)
 
 }
@@ -1265,6 +1267,7 @@ loaders('remove')
 
 xhr.open("GET", 'https://api.fox.com/fbc-content/v3_blue/screenpanels/57d16a373721cfe22013eb83/items');
 xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
+xhr.setRequestHeader("Content-Type","text/plain")
 xhr.send(null);
 
 }
