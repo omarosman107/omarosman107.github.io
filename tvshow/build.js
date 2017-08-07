@@ -354,7 +354,7 @@ function loaders(atr) {
     num--
   document.getElementById('topprogress').style.transform = 'translateX(' + ((100 - (num/maxnum *100)) - 100) + '%)'
     if (num == 0) {
-document.body.classList = 'finished';
+document.body.setAttribute('class','finished');
 
 var l = []
 finalObj.sort(function(x, y) {
@@ -559,9 +559,12 @@ return;
     }).then(function(fan){
       if ('status' in fan || !'tvthumb' in fan) {return;}else{
       var fanart = (fan.tvthumb[0].url)
-
+  document.getElementById('tvShows').innerHTML += `<div show="${showName}" onclick="showQuery(null,this)"  class="show">
+  <div  class="background" style="background:black;background:url(${fanart});background-repeat: no-repeat;    background-size: 100% 100%;"></div>
+</div>
+`;
       }
-       document.getElementById('tvShows').innerHTML += '<div tabindex="1" class="tvshow">  <a href="javascript:"  title="'+showName+'" bg="" show="' + showName +'" onclick="showQuery(null,this)"><div class="overlay"></div><img class="loaded" width="100%" alt="'+showName+'" src="'+fanart+'"><\/a><\/div>'
+
 
           }).catch(function(e){})      
     }

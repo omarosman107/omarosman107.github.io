@@ -256,7 +256,8 @@ function fetchcwjson(value) {
    // HLS = 154 | 206
    // MP4 = 213
    );var url = "http://metaframe.digitalsmiths.tv/v2/CWtv/assets/" + stripped + "/partner/217?format=json";
-   fetch('http://api.digitalsmiths.tv/metaframe/65e6ee99/asset/' + stripped + '/filter?track=Closed%20Captioning').then(function (res) {
+   
+ fetch('http://api.digitalsmiths.tv/metaframe/65e6ee99/asset/' + stripped + '/filter?track=Closed%20Captioning').then(function (res) {
       return res.json();
    }).then(function (cap) {
       track = player.addTextTrack("captions", "English", "en");
@@ -264,6 +265,7 @@ function fetchcwjson(value) {
          track.addCue(new VTTCue(cap[i].startTime, cap[i].endTime, cap[i].metadata.Text));
       }
    });
+   
    fetch(url, {
       method: 'get'
    }).then(function (response) {
