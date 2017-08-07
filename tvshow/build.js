@@ -904,6 +904,8 @@ fetch(show_hub + '?bust=' + Date.now()  , {
   var end = new Date()
 }).catch(function(err) {
   console.log(err)
+    loaders('remove');
+
 });
 }
 
