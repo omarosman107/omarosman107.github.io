@@ -612,20 +612,6 @@ background-color: #bb2828;
 
 
 
-
-@keyframes fadein {
-    from {width:0%;}
-   
-}
-
-
-#progress {
-        animation-name: fadein;
-    animation-duration: .3s;
-}
-
-
-
 .fanarts-list>li .image-crop {
     width: 100%;
     position: relative;
