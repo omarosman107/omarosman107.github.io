@@ -39,6 +39,35 @@
   <!-- Compiled and minified JavaScript -->
 
   <style type="text/css">
+
+.initialized {
+  transition: all 0.2s ease-in-out;
+  transform-orgin: center;
+  animation-name: popin;
+  animation-duration: 0.3s;
+  animation-timing-function: easeout;
+  will-change:transform;
+  
+}
+
+
+@keyframes popin {
+  0% {
+    transform: scale(0.2);
+  }
+  75% {
+    transform: scale(1.03);
+    animation-timing-function: easeout;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
+
+
   html {
   touch-action: manipulation;
 }
