@@ -1149,7 +1149,7 @@ var temp = moment(json.member[i].originalAirDate).subtract(4, 'hours')
         time:Date.parse(temp)
 
               });
-                  tvlist(json.member[i].seriesName,json.member[i].images.seriesList.SD.replace('http://','https://').split('?')[0] + '?fit=inside%7C320%3A*' )
+                  tvlist(json.member[i].seriesName,json.member[i].images.seriesList.SD.replace('http://','https://').split('?')[0] + '?downsize=320.0px:*' )
 
 
 
@@ -1176,7 +1176,7 @@ try{
 var season = showinfo.panels.member[1].items.member["0"].episodes["@id"]
 seasoninfo.open("GET",season);
 seasoninfo.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
-seasoninfo.setRequestHeader("Content-Type","text/plain")
+seasoninfo.setRequestHeader("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhVzl6UVVJMFEwUkdNVVF0TVRFMU9TMDBNRE0xTFRrek5UQXROamczTURORE5UY3dRMEZCIiwiYWNjb3VudFR5cGUiOiJhbm9ueW1vdXMiLCJ1c2VyVHlwZSI6ImRldmljZUlkIiwiZGV2aWNlSWQiOiJBQjRDREYxRC0xMTU5LTQwMzUtOTM1MC02ODcwM0M1NzBDQUEiLCJkZXZpY2UiOiJpb3MiLCJ2ZXJzaW9uIjowLCJpYXQiOjE1MDIxNDY5NjMsImV4cCI6MTUwOTkyMjk2M30.IH4rdAQz4nsB-CWxWpg_YHIOimd_-_Lu3hoMXEaYgog")
 
 seasoninfo.send(null)
 
@@ -1205,7 +1205,8 @@ return;
 loadShow.open("GET", 'https://api.fox.com/fbc-content/v3_blue/screens/series-detail/'+id);
 
 loadShow.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
-loadShow.setRequestHeader("Content-Type","text/plain")
+loadShow.setRequestHeader("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhVzl6UVVJMFEwUkdNVVF0TVRFMU9TMDBNRE0xTFRrek5UQXROamczTURORE5UY3dRMEZCIiwiYWNjb3VudFR5cGUiOiJhbm9ueW1vdXMiLCJ1c2VyVHlwZSI6ImRldmljZUlkIiwiZGV2aWNlSWQiOiJBQjRDREYxRC0xMTU5LTQwMzUtOTM1MC02ODcwM0M1NzBDQUEiLCJkZXZpY2UiOiJpb3MiLCJ2ZXJzaW9uIjowLCJpYXQiOjE1MDIxNDY5NjMsImV4cCI6MTUwOTkyMjk2M30.IH4rdAQz4nsB-CWxWpg_YHIOimd_-_Lu3hoMXEaYgog")
+
 loadShow.send(null)
 
 }
@@ -1265,9 +1266,10 @@ loaders('remove')
 });
 
 
-xhr.open("GET", 'https://api.fox.com/fbc-content/v3_blue/screenpanels/57d16a373721cfe22013eb83/items');
+xhr.open("GET", 'https://api.fox.com/fbc-content/v3_blue/screenpanels/58daf2a54672070001df1404/items?itemsPerPage=60');
 xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
-xhr.setRequestHeader("Content-Type","text/plain")
+xhr.setRequestHeader("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhVzl6UVVJMFEwUkdNVVF0TVRFMU9TMDBNRE0xTFRrek5UQXROamczTURORE5UY3dRMEZCIiwiYWNjb3VudFR5cGUiOiJhbm9ueW1vdXMiLCJ1c2VyVHlwZSI6ImRldmljZUlkIiwiZGV2aWNlSWQiOiJBQjRDREYxRC0xMTU5LTQwMzUtOTM1MC02ODcwM0M1NzBDQUEiLCJkZXZpY2UiOiJpb3MiLCJ2ZXJzaW9uIjowLCJpYXQiOjE1MDIxNDY5NjMsImV4cCI6MTUwOTkyMjk2M30.IH4rdAQz4nsB-CWxWpg_YHIOimd_-_Lu3hoMXEaYgog")
+
 xhr.send(null);
 
 }
