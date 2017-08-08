@@ -1112,23 +1112,23 @@ for(i in json.member){
 if(!json.member[i].requiresAuth && json.member[i].isFullEpisode ){
 var image = json.member[i].images.still.HD.split('?')[0]
 var sizes = [
-'208:117',
-'240:135',
-'304:171',
-'384:216',
-'400:225',
-'432:243',
-'576:324',
-'720:405',
-'768:432',
-'896:504',
-'1024:576',
-'1280:720',
-'1920:1080'
+'208:*',
+'240:*',
+'304:*',
+'384:*',
+'400:*',
+'432:*',
+'576:*',
+'720:*',
+'768:*',
+'896:*',
+'1024:*',
+'1280:*',
+'1920:*'
 ]
 var srcset = ''
 for (var z = sizes.length - 1; z >= 0; z--) {
-  srcset += (image + '?fit=inside%7C' + encodeURIComponent(sizes[z]) + ' '+ sizes[z].split(':')[0] +'w ' +sizes[z].split(':')[1] +'h,')
+  srcset += (image + '?downsize=' + encodeURIComponent(sizes[z])  + ' '+ sizes[z].split(':')[0] +'w ,')
 }
 srcset = srcset.substr(0, srcset.length - 1);
 var temp = moment(json.member[i].originalAirDate).subtract(4, 'hours')
