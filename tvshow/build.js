@@ -912,7 +912,7 @@ fetch(show_hub + '?bust=' + Date.now()  , {
 function fox(range) {
   loaders()
 
-  fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}&range=0-75', {
+  fetch('https://feed.theplatform.com/f/fox-mobile/fullepisodes?count=true&form=json&byCustomValue={requiresAuth}{false}&range=0-100', {
     method: 'get',
     cache: "no-store"
   }).then(function(response) {
@@ -922,6 +922,15 @@ function fox(range) {
     for (i in data.entries) {
       if (!showsTemp[data.entries[i].fox$series]) {
         showsTemp[data.entries[i].fox$series] = data.entries[i].fox$series
+        fetch('https://api.fox.com/fbc-content/v3_blue/video?externalId=' + data.entries[i].fox$freewheelId,{
+    headers: new Headers({
+    'apikey': 'rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR'
+  })
+  }).then(function(res){return res.json();}).then(function(json){
+console.log(json)
+console.log(data.entries[i].title, json.member[0].name)
+tvlist(json.member[0].seriesName,json.member["0"].images.seriesList.SD.replace('http://','https://').split('?')[0] + '?downsize=320.0px:*' )
+})
       }
       var date = new Date(data.entries[i].pubDate)
       date.setDate(date.getDate() - 1);
@@ -956,12 +965,11 @@ function fox(range) {
         episode: data.entries[i].title,
         id: makeid(),
         epiformat: epiformat(data.entries[i].fox$season, data.entries[i].fox$episode),
-        length: fmtMSS(data.entries[i].media$content[0].plfile$duration),
+        length: (data.entries[i].media$content[0].plfile$duration),
         type: "fox",
         imgdyn: srcset,
         time:Date.parse(date) + 86400000
       })
-            tvlist(data.entries[i].fox$series)
 
     }
     loaders('remove');
@@ -1117,7 +1125,6 @@ var sizes = [
 '304:*',
 '384:*',
 '400:*',
-'432:*',
 '576:*',
 '720:*',
 '768:*',
@@ -1173,9 +1180,11 @@ loaders('remove')
 
 var season = null
 try{
+  console.log(showinfo.panels.member[1].items.member["0"].hasParts)
+
 var season = showinfo.panels.member[1].items.member["0"].episodes["@id"]
 seasoninfo.open("GET",season);
-seasoninfo.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
+seasoninfo.setRequestHeader("ApiKey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 seasoninfo.setRequestHeader("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhVzl6UVVJMFEwUkdNVVF0TVRFMU9TMDBNRE0xTFRrek5UQXROamczTURORE5UY3dRMEZCIiwiYWNjb3VudFR5cGUiOiJhbm9ueW1vdXMiLCJ1c2VyVHlwZSI6ImRldmljZUlkIiwiZGV2aWNlSWQiOiJBQjRDREYxRC0xMTU5LTQwMzUtOTM1MC02ODcwM0M1NzBDQUEiLCJkZXZpY2UiOiJpb3MiLCJ2ZXJzaW9uIjowLCJpYXQiOjE1MDIxNDY5NjMsImV4cCI6MTUwOTkyMjk2M30.IH4rdAQz4nsB-CWxWpg_YHIOimd_-_Lu3hoMXEaYgog")
 
 seasoninfo.send(null)
@@ -1204,7 +1213,7 @@ return;
 });
 loadShow.open("GET", 'https://api.fox.com/fbc-content/v3_blue/screens/series-detail/'+id);
 
-loadShow.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
+loadShow.setRequestHeader("ApiKey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 loadShow.setRequestHeader("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhVzl6UVVJMFEwUkdNVVF0TVRFMU9TMDBNRE0xTFRrek5UQXROamczTURORE5UY3dRMEZCIiwiYWNjb3VudFR5cGUiOiJhbm9ueW1vdXMiLCJ1c2VyVHlwZSI6ImRldmljZUlkIiwiZGV2aWNlSWQiOiJBQjRDREYxRC0xMTU5LTQwMzUtOTM1MC02ODcwM0M1NzBDQUEiLCJkZXZpY2UiOiJpb3MiLCJ2ZXJzaW9uIjowLCJpYXQiOjE1MDIxNDY5NjMsImV4cCI6MTUwOTkyMjk2M30.IH4rdAQz4nsB-CWxWpg_YHIOimd_-_Lu3hoMXEaYgog")
 
 loadShow.send(null)
@@ -1267,7 +1276,7 @@ loaders('remove')
 
 
 xhr.open("GET", 'https://api.fox.com/fbc-content/v3_blue/screenpanels/58daf2a54672070001df1404/items?itemsPerPage=60');
-xhr.setRequestHeader("apikey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
+xhr.setRequestHeader("ApiKey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
 xhr.setRequestHeader("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhVzl6UVVJMFEwUkdNVVF0TVRFMU9TMDBNRE0xTFRrek5UQXROamczTURORE5UY3dRMEZCIiwiYWNjb3VudFR5cGUiOiJhbm9ueW1vdXMiLCJ1c2VyVHlwZSI6ImRldmljZUlkIiwiZGV2aWNlSWQiOiJBQjRDREYxRC0xMTU5LTQwMzUtOTM1MC02ODcwM0M1NzBDQUEiLCJkZXZpY2UiOiJpb3MiLCJ2ZXJzaW9uIjowLCJpYXQiOjE1MDIxNDY5NjMsImV4cCI6MTUwOTkyMjk2M30.IH4rdAQz4nsB-CWxWpg_YHIOimd_-_Lu3hoMXEaYgog")
 
 xhr.send(null);
