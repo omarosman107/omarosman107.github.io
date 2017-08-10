@@ -1092,31 +1092,29 @@ var externalToApi = 'https://api.fox.com/fbc-content/v3/video?externalId=8531722
 var shows = 'https://api.fox.com/fbc-content/v3/screens/find'
 var newest = 'https://api.fox.com/fbc-content/v3/screenpanels/58d57fd0880f910001a9fb82/items' 
 var data = null;
+var foxheaders = new Headers({
+  'ApiKey':"rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR",
+  'Authorization':"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhVzl6UVVJMFEwUkdNVVF0TVRFMU9TMDBNRE0xTFRrek5UQXROamczTURORE5UY3dRMEZCIiwiYWNjb3VudFR5cGUiOiJhbm9ueW1vdXMiLCJ1c2VyVHlwZSI6ImRldmljZUlkIiwiZGV2aWNlSWQiOiJBQjRDREYxRC0xMTU5LTQwMzUtOTM1MC02ODcwM0M1NzBDQUEiLCJkZXZpY2UiOiJpb3MiLCJ2ZXJzaW9uIjowLCJpYXQiOjE1MDIxNDY5NjMsImV4cCI6MTUwOTkyMjk2M30.IH4rdAQz4nsB-CWxWpg_YHIOimd_-_Lu3hoMXEaYgog"
+})
+loaders()
+fetch("https://api.fox.com/fbc-content/v3_blue/screenpanels/58daf2a54672070001df1404/items?itemsPerPage=60",{headers:foxheaders}).then(function(res){return res.json();}).then(function(shows){
+  var allshows = []
+allshows.unshift.apply( allshows, shows.member );
+    var json = []
+    for (var i = allshows.length - 1; i >= 0; i--) {
+      json.push({name:allshows[i].name,image:allshows[i].images.seriesList.HD})
+if(allshows[i].seriesType != 'special' || allshows[i].seriesType != 'movie'){
+  loaders()
+            fetch('https://api.fox.com/fbc-content/v3_blue/screens/series-detail/'+allshows[i].id,{headers:foxheaders}).then(function(res){return res.json()}).then(function(showdata){
+              loaders()
+              if (showdata.panels.member.length != 1) {
 
-function loadInfo(id){
-    loaders()
-
-var loadShow = new XMLHttpRequest();
-loadShow.addEventListener("readystatechange", function () {
-
-  if (this.readyState === 4) {
-        if (this.status  === 200) {
-
-    var showinfo = (JSON.parse(this.responseText));
-
-
-var seasoninfo = new XMLHttpRequest();
-seasoninfo.addEventListener("readystatechange",function () {
-      if (!this.status  == 200) {
-loaders('remove')
-
-}
-  if (this.readyState === 4) {
-    if (this.status === 200) {
-console.time()
-var json = (JSON.parse(this.responseText))
-
+     if ('episodes' in showdata.panels.member[1].items.member["0"]) {
+fetch(showdata.panels.member[1].items.member["0"].episodes["@id"],{headers:foxheaders}).then(function(res){return res.json()}).then(function(episodes){
+var json =  episodes
+console.log(json.member)
 for(i in json.member){
+
   // !json.member[i].requiresAuth &&
 if(!json.member[i].hideVideo && json.member[i].isFullEpisode ){
 var image = json.member[i].images.still.HD.split('?')[0]
@@ -1159,128 +1157,36 @@ var temp = moment(json.member[i].originalAirDate).subtract(4, 'hours')
               });
                   tvlist(json.member[i].seriesName,json.member[i].images.seriesList.SD.replace('http://','https://').split('?')[0] + '?downsize=320.0px:*' )
 
-
-
 }
 }
-console.timeEnd()
 loaders('remove')
-
-
-
-
-    }else{
-      loaders('remove')
-      return;
-    }
-
-
-}
-
 })
-
-var season = null
-try{
-  console.log(showinfo.panels.member[1].items.member["0"].hasParts)
-
-var season = showinfo.panels.member[1].items.member["0"].episodes["@id"]
-seasoninfo.open("GET",season);
-seasoninfo.setRequestHeader("ApiKey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
-seasoninfo.setRequestHeader("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhVzl6UVVJMFEwUkdNVVF0TVRFMU9TMDBNRE0xTFRrek5UQXROamczTURORE5UY3dRMEZCIiwiYWNjb3VudFR5cGUiOiJhbm9ueW1vdXMiLCJ1c2VyVHlwZSI6ImRldmljZUlkIiwiZGV2aWNlSWQiOiJBQjRDREYxRC0xMTU5LTQwMzUtOTM1MC02ODcwM0M1NzBDQUEiLCJkZXZpY2UiOiJpb3MiLCJ2ZXJzaW9uIjowLCJpYXQiOjE1MDIxNDY5NjMsImV4cCI6MTUwOTkyMjk2M30.IH4rdAQz4nsB-CWxWpg_YHIOimd_-_Lu3hoMXEaYgog")
-
-seasoninfo.send(null)
-
-    loaders()
-
-}catch(e){
-}
-
-
-
-
-
-
-
-
-loaders('remove')
-
-
-}else{
-loaders('remove')
-return;
-}
-
-  }
-});
-loadShow.open("GET", 'https://api.fox.com/fbc-content/v3_blue/screens/series-detail/'+id);
-
-loadShow.setRequestHeader("ApiKey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
-loadShow.setRequestHeader("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhVzl6UVVJMFEwUkdNVVF0TVRFMU9TMDBNRE0xTFRrek5UQXROamczTURORE5UY3dRMEZCIiwiYWNjb3VudFR5cGUiOiJhbm9ueW1vdXMiLCJ1c2VyVHlwZSI6ImRldmljZUlkIiwiZGV2aWNlSWQiOiJBQjRDREYxRC0xMTU5LTQwMzUtOTM1MC02ODcwM0M1NzBDQUEiLCJkZXZpY2UiOiJpb3MiLCJ2ZXJzaW9uIjowLCJpYXQiOjE1MDIxNDY5NjMsImV4cCI6MTUwOTkyMjk2M30.IH4rdAQz4nsB-CWxWpg_YHIOimd_-_Lu3hoMXEaYgog")
-
-loadShow.send(null)
-
-}
-
-
-
-
-
-    loaders()
-
-var xhr = new XMLHttpRequest();
-/*
-xhr.onerror = function() {
-loaders('remove')
-return;
- };
-*/
-xhr.addEventListener("readystatechange", function () {
-  if (this.readyState === 4 ) {
-if (this.status === 200) {
-var allshows = []
-var json = JSON.parse(this.responseText)
-/*
-for (var i = json.length - 1; i >= 0; i--) {
-  try{
-
-allshows.unshift.apply( allshows, json[i].items.member );
-
-  
-  }catch(e){
-console.log(e)
-  }
-
-}
-*/
-allshows.unshift.apply( allshows, json.member );
-
-// FX allshows.unshift.apply( allshows, json[4].items.member );
-    var json = []
-    for (var i = allshows.length - 1; i >= 0; i--) {
-      json.push({name:allshows[i].name,image:allshows[i].images.seriesList.HD})
-if(allshows[i].seriesType != 'special' || allshows[i].seriesType != 'movie'){
-
-            loadInfo(allshows[i].id)
-
-          }
-
-    }
-loaders('remove')
 }else{
   loaders('remove')
-  return;
 }
 
 
-  }
-});
+              }else{
+                loaders('remove')
+              }
+         
 
 
-xhr.open("GET", 'https://api.fox.com/fbc-content/v3_blue/screenpanels/58daf2a54672070001df1404/items?itemsPerPage=60');
-xhr.setRequestHeader("ApiKey", "rm7dzFLzucfbXAVkZi8e1P34PWEN4GoR");
-xhr.setRequestHeader("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhVzl6UVVJMFEwUkdNVVF0TVRFMU9TMDBNRE0xTFRrek5UQXROamczTURORE5UY3dRMEZCIiwiYWNjb3VudFR5cGUiOiJhbm9ueW1vdXMiLCJ1c2VyVHlwZSI6ImRldmljZUlkIiwiZGV2aWNlSWQiOiJBQjRDREYxRC0xMTU5LTQwMzUtOTM1MC02ODcwM0M1NzBDQUEiLCJkZXZpY2UiOiJpb3MiLCJ2ZXJzaW9uIjowLCJpYXQiOjE1MDIxNDY5NjMsImV4cCI6MTUwOTkyMjk2M30.IH4rdAQz4nsB-CWxWpg_YHIOimd_-_Lu3hoMXEaYgog")
 
-xhr.send(null);
+
+loaders('remove')
+
+            }).catch(function(e){
+              loaders('remove')
+              console.log(e)
+            })
+          }
+    }
+loaders('remove')
+}).catch(function(e){
+  console.log(e)
+  loaders('remove')
+})
 
 }
 
@@ -1297,6 +1203,12 @@ if (hlsSupported) {
   aswim()
 }
     }
+
+
+
+
+
+
 /*
 if (typeof(Worker) !== "undefined") {
   loaders();
