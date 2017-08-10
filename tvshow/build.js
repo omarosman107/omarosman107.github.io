@@ -1117,7 +1117,8 @@ console.time()
 var json = (JSON.parse(this.responseText))
 
 for(i in json.member){
-if(!json.member[i].requiresAuth && json.member[i].isFullEpisode ){
+  // !json.member[i].requiresAuth &&
+if(!json.member[i].hideVideo && json.member[i].isFullEpisode ){
 var image = json.member[i].images.still.HD.split('?')[0]
 var sizes = [
 '208:*',

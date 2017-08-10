@@ -6,6 +6,7 @@ player.ready(function () {
       seekStep: 5,
       enableModifiersForNumbers: false
    });
+   console.log(player.hls)
 });
 
 var secondsToTimeCode = function secondsToTimeCode(timeInSeconds) {
@@ -960,17 +961,19 @@ function fetchlplatjson(value) {
    $('#projpar').hide();
 }
 function play(url,auth){
-
-     fetch(url.split('?')[0] + '?mbr=true&formats=m3u&format=smil&sitesection=app.dcg-foxnow%2Fiphone%2Ffxn%2Flive&assetTypes=uplynk-clean%3Auplynk-ivod-west%3Auplynk-ivod-mountain%3Auplynk-ivod-east%3Auplynk-ivod&auth=' + auth , {
+// '?mbr=true&formats=m3u&format=smil&sitesection=app.dcg-foxnow%2Fiphone%2Ffxn%2Flive&assetTypes=uplynk-clean%3Auplynk-ivod-west%3Auplynk-ivod-mountain%3Auplynk-ivod-east%3Auplynk-ivod&auth=' + auth 
+// ?mbr=true&format=script
+     fetch(url.split('?')[0] + '?mbr=true&format=script', {
          method: 'get'
       }).then(function (response) {
-           return response.text();
+           return response.json();
       }).then(function (play) {
-
+/*
 parser = new DOMParser();
 xmlDoc = parser.parseFromString(play,"text/xml");
-console.log(xmlDoc.querySelector('param[name="testPlayerUrl"]').getAttribute('value'))
-fetch(xmlDoc.querySelector('param[name="testPlayerUrl"]').getAttribute('value').replace('http://','https://')).then(function(res){return res.text();
+*/
+// param[name="testPlayerUrl"]
+fetch(play.uplynk$testPlayerUrl.replace('http://','https://')).then(function(res){return res.text();
 }).then(function(m3u8){
   console.log(parser.parseFromString(m3u8,"text/html").body.querySelector('script').innerHTML.split("';")[0].split("'")[1].replace('.m3u8','.mp4') )
   player.src({ "type": "application/x-mpegURL", "src": parser.parseFromString(m3u8,"text/html").body.querySelector('script').innerHTML.split("';")[0].split("'")[1] });
