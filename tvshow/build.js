@@ -1097,7 +1097,9 @@ var foxheaders = new Headers({
   'Authorization':"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJhVzl6UVVJMFEwUkdNVVF0TVRFMU9TMDBNRE0xTFRrek5UQXROamczTURORE5UY3dRMEZCIiwiYWNjb3VudFR5cGUiOiJhbm9ueW1vdXMiLCJ1c2VyVHlwZSI6ImRldmljZUlkIiwiZGV2aWNlSWQiOiJBQjRDREYxRC0xMTU5LTQwMzUtOTM1MC02ODcwM0M1NzBDQUEiLCJkZXZpY2UiOiJpb3MiLCJ2ZXJzaW9uIjowLCJpYXQiOjE1MDIxNDY5NjMsImV4cCI6MTUwOTkyMjk2M30.IH4rdAQz4nsB-CWxWpg_YHIOimd_-_Lu3hoMXEaYgog"
 })
 loaders()
-fetch("https://api.fox.com/fbc-content/v3_blue/screenpanels/58daf2a54672070001df1404/items?itemsPerPage=60",{headers:foxheaders}).then(function(res){return res.json();}).then(function(shows){
+// https://api.fox.com/fbc-content/v3_blue/screenpanels/57d15aaa3721cfe22013ead4/items?itemsPerPage=100
+// "https://api.fox.com/fbc-content/v3_blue/screenpanels/58daf2a54672070001df1404/items?itemsPerPage=60"
+fetch("https://api.fox.com/fbc-content/v3_blue/screenpanels/57d15aaa3721cfe22013ead4/items?itemsPerPage=100",{headers:foxheaders}).then(function(res){return res.json();}).then(function(shows){
   var allshows = []
 allshows.unshift.apply( allshows, shows.member );
     var json = []
@@ -1160,6 +1162,9 @@ var temp = moment(json.member[i].originalAirDate).subtract(4, 'hours')
 }
 }
 loaders('remove')
+}).catch(function(e){
+  console.log(e)
+  loaders('remove')
 })
 }else{
   loaders('remove')
