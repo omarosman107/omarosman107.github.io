@@ -155,7 +155,7 @@ fetch('https://link.theplatform.com/s/fng-fx/rHlh_JpCqlLt?mbr=true&format=redire
 return (response.json())
 
 }).then(function(data){
-  console.log(data)
+  console.log(data.playURL)
    channels['FX'].src = (data.playURL)
    channels['FX'].working = true
    channels['FX'].quality = "HD"
