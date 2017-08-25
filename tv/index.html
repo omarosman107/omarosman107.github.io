@@ -156,7 +156,7 @@ return (response.json())
 
 }).then(function(data){
   console.log(data)
-   channels['FX'].src = (data.play)
+   channels['FX'].src = (data.playURL)
    channels['FX'].working = true
    channels['FX'].quality = "HD"
  converttoHTML()
