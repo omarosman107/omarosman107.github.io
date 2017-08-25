@@ -151,12 +151,12 @@ var request = new Request('https://live-fx.mdialog.com/video_assets/fx-east/stre
 });
 
 // Now use it!
-fetch(request).then(function(response) { 
+fetch('https://link.theplatform.com/s/fng-fx/rHlh_JpCqlLt?mbr=true&format=redirect&formats=Text&policy=93849329&affiliate=FX&&sitesection=app.dcg-foxnow%2Fios%2Ffxn%2Flive').then(function(response) { 
 return (response.json())
 
 }).then(function(data){
   console.log(data)
-   channels['FX'].src = (data.manifest.href)
+   channels['FX'].src = (data.play)
    channels['FX'].working = true
    channels['FX'].quality = "HD"
  converttoHTML()
