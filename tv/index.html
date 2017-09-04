@@ -162,7 +162,17 @@ return (response.json())
 
 });
 
+              fetch('https://cors-anywhere.herokuapp.com/https://player-api.new.livestream.com/accounts/7334053/events/2797146/stream_info',{headers:headers}).then(function(response) {
+  return response.json();
+}).then(function(a) {
 
+    channels.push({working:true,name:'WLNS',quality:'HD',src:a.secure_m3u8_url})
+
+ converttoHTML()
+}).catch(function(e){
+document.getElementById('error').innerHTML = e
+});
+            
 
 
 
